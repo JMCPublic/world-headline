@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Europe Press Today — World Headline</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f5f3ee; color: #1a1a1a; min-height: 100vh; }
+
+  header {
+    background: #1a1a1a; color: #f5f3ee;
+    padding: 18px 32px; display: flex; align-items: baseline; gap: 16px;
+  }
+  header h1 { font-size: 1.4rem; letter-spacing: 0.08em; font-weight: 700; }
+  header .date { font-size: 0.8rem; color: #999; font-family: sans-serif; }
+  header .subtitle { font-size: 0.75rem; color: #888; font-family: sans-serif; margin-left: auto; }
+
+  .region-nav {
+    background: #2c2c2c; padding: 8px 32px; display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .region-nav a {
+    color: #ccc; text-decoration: none; font-size: 0.72rem;
+    font-family: sans-serif; padding: 4px 10px; border-radius: 3px; transition: background 0.15s;
+  }
+  .region-nav a:hover { background: #444; color: #fff; }
+  .region-nav a.active { background: #c0392b; color: #fff; }
+
+  .spectrum-bar { display: flex; height: 4px; background: linear-gradient(to right, #2980b9, #27ae60, #c0392b); }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+
+  /* Pan-European stories */
+  .pan-europe {
+    background: #2c3e50; color: #f5f3ee;
+    border-radius: 4px; padding: 18px 22px; margin-bottom: 28px;
+  }
+  .pan-europe h3 {
+    font-size: 0.68rem; font-family: sans-serif;
+    text-transform: uppercase; letter-spacing: 0.12em; color: #3498db; margin-bottom: 12px;
+  }
+  .pan-stories { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  .pan-story { }
+  .pan-story-num { font-size: 0.6rem; font-family: sans-serif; color: #7fb3d3; margin-bottom: 3px; }
+  .pan-story-head { font-size: 0.82rem; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+  .pan-story-desc { font-size: 0.7rem; color: #aac4d8; font-family: sans-serif; line-height: 1.4; }
+
+  /* Country tabs */
+  .country-tabs {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .country-tab {
+    padding: 7px 14px; border-radius: 3px; cursor: pointer;
+    font-family: sans-serif; font-size: 0.75rem; font-weight: 700;
+    border: 2px solid #ddd; background: #fff; color: #555; transition: all 0.15s;
+  }
+  .country-tab:hover { border-color: #999; color: #1a1a1a; }
+  .country-tab.active { border-color: #1a1a1a; background: #1a1a1a; color: #f5f3ee; }
+
+  /* Country panel */
+  .country-panel { display: none; }
+  .country-panel.active { display: block; }
+
+  .edition-tag { font-family: sans-serif; font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  h2.section-title { font-size: 1.1rem; font-weight: 700; color: #1a1a1a; margin-bottom: 18px; padding-bottom: 8px; border-bottom: 2px solid #1a1a1a; }
+
+  .papers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 28px; }
+
+  .paper-card { background: #fff; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); display: flex; flex-direction: column; }
+  .paper-header { padding: 14px 16px 10px; border-bottom: 1px solid #eee; }
+  .paper-lean { font-size: 0.65rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 4px; }
+  .lean-left { color: #2980b9; }
+  .lean-centre { color: #27ae60; }
+  .lean-right { color: #c0392b; }
+  .paper-name { font-size: 0.95rem; font-weight: 700; color: #1a1a1a; }
+  .paper-meta { font-size: 0.62rem; color: #999; font-family: sans-serif; margin-top: 3px; line-height: 1.4; }
+  .paper-tone { display: inline-block; font-size: 0.6rem; font-family: sans-serif; padding: 2px 6px; border-radius: 2px; margin-top: 5px; background: #f0f0f0; color: #555; }
+
+  .stories { padding: 10px 14px; flex: 1; }
+  .story { padding: 8px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+  .story:last-child { border-bottom: none; }
+  .story-rank { font-size: 0.6rem; font-family: sans-serif; color: #bbb; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+  .story-headline { font-size: 0.78rem; font-weight: 700; color: #1a1a1a; line-height: 1.3; margin-bottom: 3px; }
+  .story-tease { font-size: 0.72rem; color: #666; font-style: italic; line-height: 1.4; }
+  .story-detail { display: none; font-size: 0.72rem; color: #444; line-height: 1.5; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #e0e0e0; }
+  .story.open .story-detail { display: block; }
+  .story-url { display: block; font-size: 0.58rem; color: #bbb; font-family: sans-serif; margin-top: 4px; text-decoration: none; word-break: break-all; }
+  .story-url:hover { color: #888; }
+
+  .expand-hint { font-size: 0.62rem; font-family: sans-serif; color: #ccc; text-align: right; padding: 5px 14px 9px; font-style: italic; }
+
+  .trackers { border-top: 1px solid #eee; padding: 10px 14px 12px; }
+  .tracker-block { margin-bottom: 10px; }
+  .tracker-block:last-child { margin-bottom: 0; }
+  .tracker-label { font-size: 0.6rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 6px; }
+  .tracker-row { display: flex; align-items: center; gap: 5px; margin-bottom: 4px; }
+  .tracker-topic { font-size: 0.62rem; font-family: sans-serif; color: #555; flex: 1; line-height: 1.2; }
+  .dots { display: flex; gap: 3px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid #ddd; background: #fff; }
+  .dot.hobby-filled { background: #e67e22; border-color: #e67e22; }
+  .dot.person-filled { background: #8e44ad; border-color: #8e44ad; }
+  .dot-count { font-size: 0.57rem; font-family: sans-serif; color: #bbb; min-width: 22px; }
+  .person-row { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+  .person-avatar { width: 20px; height: 20px; border-radius: 50%; background: #8e44ad; color: #fff; font-size: 0.5rem; font-family: sans-serif; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; letter-spacing: -0.5px; }
+  .person-info { flex: 1; }
+  .person-name { font-size: 0.62rem; font-family: sans-serif; color: #444; font-weight: 700; line-height: 1.2; }
+  .person-role { font-size: 0.56rem; font-family: sans-serif; color: #aaa; line-height: 1.2; }
+
+  .blind-spot { background: #1a1a1a; color: #f5f3ee; border-radius: 4px; padding: 18px 22px; margin-top: 8px; }
+  .blind-spot h3 { font-size: 0.68rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.12em; color: #e67e22; margin-bottom: 10px; }
+  .blind-items { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+  .blind-item-title { font-size: 0.78rem; font-weight: 700; margin-bottom: 3px; }
+  .blind-item-desc { font-size: 0.68rem; color: #aaa; line-height: 1.4; font-family: sans-serif; }
+
+  @media (max-width: 760px) {
+    .papers-grid { grid-template-columns: 1fr; }
+    .pan-stories { grid-template-columns: 1fr; }
+    .blind-items { grid-template-columns: 1fr; }
+    header { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌍 WORLD HEADLINE</h1>
+  <span class="date" id="dateDisplay"></span>
+  <span class="subtitle">What the world is reading — across the spectrum</span>
+</header>
+
+<nav class="region-nav">
+  <a href="uk_press_today.html">🇬🇧 UK</a>
+  <a href="europe_press_today.html" class="active">🌍 Europe</a>
+  <span style="color:#555; font-size:0.7rem; font-family:sans-serif; padding:4px 6px;">Coming soon:</span>
+  <a href="#">🇺🇸 USA</a>
+  <a href="#">🌎 Americas</a>
+  <a href="#">🌏 Asia-Pacific</a>
+  <a href="#">🌐 Middle East</a>
+</nav>
+
+<div class="spectrum-bar"></div>
+
+<div class="container">
+
+  <!-- Pan-European stories -->
+  <div class="pan-europe">
+    <h3>🌍 Pan-European — what most of Europe is talking about this week</h3>
+    <div class="pan-stories">
+      <div class="pan-story">
+        <div class="pan-story-num">① Top Story</div>
+        <div class="pan-story-head">Ukraine: Zelensky presses Europe as US wavers on military aid</div>
+        <div class="pan-story-desc">With Washington's commitment uncertain under Trump, European capitals are debating how much more they can absorb. Germany and France lead a push for a coordinated EU defence package.</div>
+      </div>
+      <div class="pan-story">
+        <div class="pan-story-num">② Second Story</div>
+        <div class="pan-story-head">Far-right gains reshape EU politics ahead of national elections</div>
+        <div class="pan-story-desc">From France's Rassemblement National to Italy's Fratelli and Germany's AfD — the European right is consolidating, and centrist governments across the continent are recalibrating immigration and spending policy in response.</div>
+      </div>
+      <div class="pan-story">
+        <div class="pan-story-num">③ Third Story</div>
+        <div class="pan-story-head">ECB signals rate cut cycle — but warns of inflation "second wave" risk</div>
+        <div class="pan-story-desc">The European Central Bank cut rates for the fourth time, but issued a hawkish warning: energy price shocks and wage pressure could revive inflation before the year is out. Markets reacted cautiously.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Country tabs -->
+  <div class="country-tabs">
+    <div class="country-tab active" onclick="showCountry('france', this)">🇫🇷 France</div>
+    <div class="country-tab" onclick="showCountry('germany', this)">🇩🇪 Germany</div>
+    <div class="country-tab" onclick="showCountry('italy', this)">🇮🇹 Italy</div>
+    <div class="country-tab" onclick="showCountry('spain', this)">🇪🇸 Spain</div>
+    <div class="country-tab" onclick="showCountry('poland', this)">🇵🇱 Poland</div>
+  </div>
+
+  <!-- ======================== FRANCE ======================== -->
+  <div id="country-france" class="country-panel active">
+    <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+    <h2 class="section-title">🇫🇷 France — La Presse Aujourd'hui</h2>
+    <div class="papers-grid">
+
+      <!-- Libération (Left) -->
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-left">◀ Left-leaning</div>
+          <div class="paper-name">Libération</div>
+          <div class="paper-meta">Circ. ~75,000 · Urban, intellectual, under-45<br>Post-1968 progressive tradition</div>
+          <div class="paper-tone">Critical · Investigative · Anti-far-right</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Le Pen's shadow over Macron's final months</div>
+            <div class="story-tease">Can the centre hold until 2027?</div>
+            <div class="story-detail">With Macron constitutionally barred from a third term, Libération examines whether the left can consolidate behind a single candidate before Marine Le Pen — or her replacement — takes the Elysée. The NFP coalition remains fractured, and time is running out.</div>
+            <a class="story-url" href="https://www.liberation.fr" target="_blank" onclick="event.stopPropagation()">liberation.fr</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Housing crisis hits young French workers hardest</div>
+            <div class="story-tease">A generation priced out of their own cities.</div>
+            <div class="story-detail">Rents in Paris, Lyon, and Bordeaux have risen 22% in three years while wages stagnated. Libération profiles a generation of workers forced into three-hour commutes or flat-sharing into their mid-thirties.</div>
+            <a class="story-url" href="https://www.liberation.fr" target="_blank" onclick="event.stopPropagation()">liberation.fr</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">Ukraine: French arms makers profit as diplomacy stalls</div>
+            <div class="story-tease">War is good for the defence industry — less so for peace.</div>
+            <div class="story-detail">A Libération investigation finds French defence contractors have significantly expanded production and exports since 2022, raising questions about whether the military-industrial complex now has a vested interest in prolonged conflict.</div>
+            <a class="story-url" href="https://www.liberation.fr" target="_blank" onclick="event.stopPropagation()">liberation.fr</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Far-right threat / RN</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Social inequality</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Ukraine &amp; defence</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">ML</div><div class="person-info"><div class="person-name">Marine Le Pen</div><div class="person-role">RN Leader (as threat)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">JLM</div><div class="person-info"><div class="person-name">Jean-Luc Mélenchon</div><div class="person-role">LFI, NFP</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+            <div class="person-row"><div class="person-avatar">EM</div><div class="person-info"><div class="person-name">Emmanuel Macron</div><div class="person-role">President (lame duck)</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Le Monde (Centre) -->
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-centre">● Centre / Centre-left</div>
+          <div class="paper-name">Le Monde</div>
+          <div class="paper-meta">Circ. ~340,000 · National elite, policy class<br>France's paper of record since 1944</div>
+          <div class="paper-tone">Authoritative · European · Liberal-internationalist</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">2027: the race no one has officially started — but everyone is running</div>
+            <div class="story-tease">France's next presidential election is already being fought in private.</div>
+            <div class="story-detail">Le Monde maps the field ahead of the 2027 French presidential election: Marine Le Pen (if legally eligible), Édouard Philippe as the centrist hope, and a fractured left still unable to agree on a candidate. The paper's analysis suggests the RN is currently the only party with a coherent strategy.</div>
+            <a class="story-url" href="https://www.lemonde.fr" target="_blank" onclick="event.stopPropagation()">lemonde.fr</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">ECB rate cut: relief for borrowers, anxiety for savers</div>
+            <div class="story-tease">Lower rates help French homeowners — but the inflation risk is real.</div>
+            <div class="story-detail">Le Monde's economics desk analyses the ECB's fourth rate cut and its implications for France: cheaper mortgages, modest stimulus, but a risk of reigniting price pressure if energy costs spike. Le Monde notes French consumers remain among Europe's most pessimistic.</div>
+            <a class="story-url" href="https://www.lemonde.fr" target="_blank" onclick="event.stopPropagation()">lemonde.fr</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">France–Germany relations: an alliance under quiet strain</div>
+            <div class="story-tease">The EU's engine is misfiring.</div>
+            <div class="story-detail">A Le Monde investigation finds that French and German positions are diverging on defence spending timelines, AI regulation, and trade policy toward China. The Franco-German motor — historically the EU's driving force — is described as running "out of sync."</div>
+            <a class="story-url" href="https://www.lemonde.fr" target="_blank" onclick="event.stopPropagation()">lemonde.fr</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">2027 election &amp; democracy</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Europe &amp; EU policy</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Economy &amp; ECB</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">EP</div><div class="person-info"><div class="person-name">Édouard Philippe</div><div class="person-role">Former PM, presidential hopeful</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">EM</div><div class="person-info"><div class="person-name">Emmanuel Macron</div><div class="person-role">President</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">ML</div><div class="person-info"><div class="person-name">Marine Le Pen</div><div class="person-role">RN Leader</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Le Figaro (Right) -->
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-right">▶ Right / Centre-right</div>
+          <div class="paper-name">Le Figaro</div>
+          <div class="paper-meta">Circ. ~320,000 · Established conservatives, over-55<br>France's oldest daily, Gaullist tradition</div>
+          <div class="paper-tone">Conservative · National · Pro-business</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Philippe: "France needs a strong right to save itself from the extremes"</div>
+            <div class="story-tease">The centrist right makes its pitch.</div>
+            <div class="story-detail">Le Figaro gives Édouard Philippe prime front-page real estate ahead of an expected presidential run. The paper endorses his thesis that only a credible, fiscally disciplined centre-right can prevent France being forced to choose between Macronism and Le Pen in 2027.</div>
+            <a class="story-url" href="https://www.lefigaro.fr" target="_blank" onclick="event.stopPropagation()">lefigaro.fr</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Immigration: the numbers Paris won't publish</div>
+            <div class="story-tease">Le Figaro says France is hiding the true scale.</div>
+            <div class="story-detail">A Le Figaro investigation claims the French interior ministry is suppressing quarterly immigration statistics that would show a significant rise in irregular arrivals. The paper calls for full transparency and tighter border enforcement with EU partners.</div>
+            <a class="story-url" href="https://www.lefigaro.fr" target="_blank" onclick="event.stopPropagation()">lefigaro.fr</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">France's declining competitiveness: a crisis in slow motion</div>
+            <div class="story-tease">While Germany restructures, France hesitates.</div>
+            <div class="story-detail">Le Figaro's economics editor argues that France's labour costs, regulatory burden, and energy policy are making it progressively less competitive against Germany, Spain, and Poland within the EU single market. The paper calls for supply-side reform.</div>
+            <a class="story-url" href="https://www.lefigaro.fr" target="_blank" onclick="event.stopPropagation()">lefigaro.fr</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Immigration &amp; identity</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Economic competitiveness</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Centre-right presidential bid</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">EP</div><div class="person-info"><div class="person-name">Édouard Philippe</div><div class="person-role">Former PM, presidential hopeful</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">ML</div><div class="person-info"><div class="person-name">Marine Le Pen</div><div class="person-role">RN Leader</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+            <div class="person-row"><div class="person-avatar">JB</div><div class="person-info"><div class="person-name">Jordan Bardella</div><div class="person-role">RN President</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blind-spot">
+      <h3>🔭 What France's Press Sees That The World Misses</h3>
+      <div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The 2027 succession anxiety</div><div class="blind-item-desc">France is gripped by who comes after Macron. Internationally this is barely covered — from outside, France looks stable. Inside, it feels like a slow-motion constitutional crisis.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The NFP's internal collapse</div><div class="blind-item-desc">The left-wing coalition that performed surprisingly well in 2024 is fragmenting. Every French paper covers this daily. Almost no foreign outlet has noticed.</div></div>
+        <div class="blind-item"><div class="blind-item-title">La France périphérique</div><div class="blind-item-desc">The revolt of provincial, post-industrial France that gave birth to the gilets jaunes is still simmering. This isn't a Paris story — and so international media miss it entirely.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Corsican independence</div><div class="blind-item-desc">Negotiations over Corsican autonomy have reached a critical stage. Huge domestic story. Zero international coverage.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== GERMANY ======================== -->
+  <div id="country-germany" class="country-panel">
+    <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+    <h2 class="section-title">🇩🇪 Germany — Die Presse Heute</h2>
+    <div class="papers-grid">
+
+      <!-- Süddeutsche Zeitung (Left/Centre) -->
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-left">◀ Centre-left</div>
+          <div class="paper-name">Süddeutsche Zeitung</div>
+          <div class="paper-meta">Circ. ~380,000 · Liberal professional, Bavaria + national<br>Germany's most-read quality daily</div>
+          <div class="paper-tone">Liberal · Pro-European · Investigative</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Merz's coalition: 100 days in, the honeymoon is over</div>
+            <div class="story-tease">The new Chancellor is governing — but not leading.</div>
+            <div class="story-detail">Friedrich Merz's CDU/SPD grand coalition has passed its first budget but is already showing fault lines: the SPD is resisting pension cuts, the CDU's right flank wants faster deportations, and Merz's approval ratings have dipped to 38%. The SZ's political desk asks whether the coalition can last four years.</div>
+            <a class="story-url" href="https://www.sueddeutsche.de" target="_blank" onclick="event.stopPropagation()">sueddeutsche.de</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">AfD at 22%: what does Germany do with its second-largest party?</div>
+            <div class="story-tease">The firewall holds — but for how long?</div>
+            <div class="story-detail">The AfD has stabilised at around 22% in national polls despite being placed under intelligence surveillance. The SZ explores the political and constitutional challenge of a major party that no other party will govern with — and asks whether the cordon sanitaire can hold into the next election.</div>
+            <a class="story-url" href="https://www.sueddeutsche.de" target="_blank" onclick="event.stopPropagation()">sueddeutsche.de</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">German industry: the deindustrialisation that dare not speak its name</div>
+            <div class="story-tease">BMW, Volkswagen, BASF — all quietly shrinking at home.</div>
+            <div class="story-detail">A major SZ investigation documents the hollowing out of Germany's industrial base: rising energy costs post-Ukraine, Chinese competition in electric vehicles, and US protectionism have combined to accelerate the shift of production abroad. Germany's politicians are reluctant to name it plainly.</div>
+            <a class="story-url" href="https://www.sueddeutsche.de" target="_blank" onclick="event.stopPropagation()">sueddeutsche.de</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">AfD &amp; democratic resilience</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">German industrial decline</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Coalition politics</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">FM</div><div class="person-info"><div class="person-name">Friedrich Merz</div><div class="person-role">Chancellor, CDU</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">AW</div><div class="person-info"><div class="person-name">Alice Weidel</div><div class="person-role">AfD Leader</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">OS</div><div class="person-info"><div class="person-name">Olaf Scholz</div><div class="person-role">Former Chancellor (SPD)</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frankfurter Allgemeine (Centre-right) -->
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-centre">● Centre-right</div>
+          <div class="paper-name">Frankfurter Allgemeine</div>
+          <div class="paper-meta">Circ. ~270,000 · Business, legal, academic class<br>Germany's establishment paper of record</div>
+          <div class="paper-tone">Ordoliberal · Pro-EU · Fiscal conservative</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Merz must reform or be consumed by coalition arithmetic</div>
+            <div class="story-tease">The FAZ gives the Chancellor a to-do list.</div>
+            <div class="story-detail">The FAZ's lead editorial argues that Merz's first 100 days have been managerially competent but strategically weak. The paper calls for urgent supply-side reform — deregulation, investment incentives, and energy policy overhaul — before Germany's window to restructure closes.</div>
+            <a class="story-url" href="https://www.faz.net" target="_blank" onclick="event.stopPropagation()">faz.net</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">ECB cuts again — but Germany's savers pay the price</div>
+            <div class="story-tease">Cheap money helps debtors. Germany has always been a creditor nation.</div>
+            <div class="story-detail">The FAZ's economics team takes a characteristically hawkish line on the ECB rate cut — welcoming the signal on inflation but warning that persistently low rates distort German capital markets, punish savers, and create moral hazard for fiscally looser southern European states.</div>
+            <a class="story-url" href="https://www.faz.net" target="_blank" onclick="event.stopPropagation()">faz.net</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">Germany's Ukraine policy: generosity without strategy</div>
+            <div class="story-tease">Berlin sends weapons but still hasn't answered the big question.</div>
+            <div class="story-detail">An FAZ analysis argues that Germany has been a reliable arms supplier to Ukraine but has failed to articulate a coherent end-state for the conflict. The paper calls for a clearer German foreign policy voice as US commitment wavers under Trump's second term.</div>
+            <a class="story-url" href="https://www.faz.net" target="_blank" onclick="event.stopPropagation()">faz.net</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Economic reform urgency</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Fiscal discipline / ECB</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Ukraine &amp; German foreign policy</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">FM</div><div class="person-info"><div class="person-name">Friedrich Merz</div><div class="person-role">Chancellor, CDU</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">CB</div><div class="person-info"><div class="person-name">Christine Lagarde</div><div class="person-role">ECB President</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">VZ</div><div class="person-info"><div class="person-name">Volodymyr Zelensky</div><div class="person-role">Ukrainian President</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bild (Right/Populist) -->
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-right">▶ Right / Populist</div>
+          <div class="paper-name">Bild</div>
+          <div class="paper-meta">Circ. ~1.1m · Mass market, working class, nationwide<br>Europe's largest-selling newspaper</div>
+          <div class="paper-tone">Populist · Sensationalist · Nationalist-lite</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Your energy bills are going up AGAIN — and Berlin knew</div>
+            <div class="story-tease">Bild says the government hid the bad news until after the election.</div>
+            <div class="story-detail">Bild leads with a populist scoop claiming the Merz government was aware of planned energy tariff increases before the federal election but delayed the announcement. The paper leads with an angry front page and calls for a parliamentary investigation. Tone: furious, tabloid-accusatory.</div>
+            <a class="story-url" href="https://www.bild.de" target="_blank" onclick="event.stopPropagation()">bild.de</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Migrant crime wave — the stats the government won't show you</div>
+            <div class="story-tease">Bild publishes the numbers others won't.</div>
+            <div class="story-detail">Bild's second lead is a crime statistics story focusing on offences committed by recent migrants, presented without broader contextualisation. The paper frames this as a suppressed truth and calls for tougher deportation policy — a recurring Bild formula with a reliable readership response.</div>
+            <a class="story-url" href="https://www.bild.de" target="_blank" onclick="event.stopPropagation()">bild.de</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">Merz promised to fix Germany. 100 days later — has he?</div>
+            <div class="story-tease">Bild's verdict: B minus.</div>
+            <div class="story-detail">Bild runs a populist 100-day scorecard on Merz using reader polling. He scores well on "getting rid of the Greens" and poorly on energy costs and migration. The paper's tone is critical-but-not-hostile — Bild supported Merz over the SPD but is keeping him honest for its readers.</div>
+            <a class="story-url" href="https://www.bild.de" target="_blank" onclick="event.stopPropagation()">bild.de</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Energy costs &amp; cost of living</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Migration &amp; crime</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Government accountability</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">FM</div><div class="person-info"><div class="person-name">Friedrich Merz</div><div class="person-role">Chancellor, CDU</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">AW</div><div class="person-info"><div class="person-name">Alice Weidel</div><div class="person-role">AfD Leader</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+            <div class="person-row"><div class="person-avatar">EB</div><div class="person-info"><div class="person-name">Elon Musk</div><div class="person-role">AfD supporter / tech billionaire</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blind-spot">
+      <h3>🔭 What Germany's Press Sees That The World Misses</h3>
+      <div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The industrial hollowing-out</div><div class="blind-item-desc">Germany is quietly deindustrialising — factories moving to the US, Eastern Europe, or closing. This is the biggest structural story in European economics and almost no foreign press covers it with the urgency German papers do.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The AfD cordon sanitaire</div><div class="blind-item-desc">How long can every other German party refuse to govern with the AfD when it represents 20%+ of voters? The constitutional tension here is enormous and barely understood abroad.</div></div>
+        <div class="blind-item"><div class="blind-item-title">East vs West Germany</div><div class="blind-item-desc">35 years after reunification the economic, cultural and political gap between Ost and West remains stark. The AfD's strength in the East is a symptom. The disease is still being debated.</div></div>
+        <div class="blind-item"><div class="blind-item-title">German memory culture</div><div class="blind-item-desc">Debates about Holocaust remembrance, Erinnerungskultur, and what Germany "owes" are constant and intense domestically. Internationally this is seen as settled. It isn't.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== ITALY ======================== -->
+  <div id="country-italy" class="country-panel">
+    <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+    <h2 class="section-title">🇮🇹 Italy — La Stampa Oggi</h2>
+    <div class="papers-grid">
+
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-left">◀ Centre-left</div>
+          <div class="paper-name">La Repubblica</div>
+          <div class="paper-meta">Circ. ~140,000 · Urban, progressive, northern Italy<br>Founded 1976, anti-Berlusconi tradition</div>
+          <div class="paper-tone">Progressive · Anti-far-right · Pro-EU</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Meloni's Italy: the EU's awkward partner</div>
+            <div class="story-tease">She governs like a moderate but votes like a nationalist.</div>
+            <div class="story-detail">La Repubblica's analysis of Giorgia Meloni's government after nearly three years in power finds a pattern: pragmatic domestic governance combined with persistent resistance to EU climate, migration, and rule-of-law measures. The paper asks whether Italy is slowly drifting toward the Orbán model.</div>
+            <a class="story-url" href="https://www.repubblica.it" target="_blank" onclick="event.stopPropagation()">repubblica.it</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Italy's south is being left behind — again</div>
+            <div class="story-tease">The Mezzogiorno problem has no solution and no political will.</div>
+            <div class="story-detail">New economic data shows the gap between northern and southern Italy widening for the third consecutive year. La Repubblica reports that youth unemployment in Calabria and Sicily exceeds 38%, and emigration to northern Europe is accelerating — a brain drain with no end in sight.</div>
+            <a class="story-url" href="https://www.repubblica.it" target="_blank" onclick="event.stopPropagation()">repubblica.it</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">Migrants in the Mediterranean: Italy's deal with Libya is failing</div>
+            <div class="story-tease">The boats keep coming. The deal keeps crumbling.</div>
+            <div class="story-detail">La Repubblica reports that Italy's deal with Libya to stem Mediterranean crossings is breaking down, with arrivals up 34% year-on-year. The paper is critical of Meloni's approach, contrasting the government's tough rhetoric with the worsening reality on Lampedusa.</div>
+            <a class="story-url" href="https://www.repubblica.it" target="_blank" onclick="event.stopPropagation()">repubblica.it</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Meloni &amp; democratic erosion</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">North-South inequality</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Mediterranean migration</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">GM</div><div class="person-info"><div class="person-name">Giorgia Meloni</div><div class="person-role">Prime Minister, FdI</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">ES</div><div class="person-info"><div class="person-name">Elly Schlein</div><div class="person-role">PD Leader (opposition)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">MS</div><div class="person-info"><div class="person-name">Matteo Salvini</div><div class="person-role">Deputy PM, Lega</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-centre">● Centre</div>
+          <div class="paper-name">Corriere della Sera</div>
+          <div class="paper-meta">Circ. ~230,000 · National establishment, business class<br>Italy's oldest and most prestigious daily since 1876</div>
+          <div class="paper-tone">Establishment · Moderate · Pro-business</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Italy's economy grows — but only for some</div>
+            <div class="story-tease">GDP is up. Wages are not. Something doesn't add up.</div>
+            <div class="story-detail">Italy's GDP grew 1.1% in Q1, beating expectations. The Corriere della Sera's economics editor explores the paradox: growth is concentrated in tourism, luxury goods, and the north, while real wages remain below 2019 levels and household purchasing power is being eroded by persistent inflation in food and utilities.</div>
+            <a class="story-url" href="https://www.corriere.it" target="_blank" onclick="event.stopPropagation()">corriere.it</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Meloni and Macron: frenemies at the EU table</div>
+            <div class="story-tease">Italy and France are too big to ignore and too different to agree.</div>
+            <div class="story-detail">The Corriere analyses the tense Franco-Italian relationship within the EU — two Mediterranean powers with overlapping interests in Africa and the Middle East but clashing views on migration, budget rules, and the future of the Eurozone. Their competition for influence shapes EU policy in ways Brussels rarely acknowledges.</div>
+            <a class="story-url" href="https://www.corriere.it" target="_blank" onclick="event.stopPropagation()">corriere.it</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">RAI independence row: who controls Italy's public broadcaster?</div>
+            <div class="story-tease">A very Italian argument about television and power.</div>
+            <div class="story-detail">Italy's public broadcaster RAI is under fire after a series of perceived editorial interventions favouring the governing coalition. The Corriere covers this with measured concern — noting the pattern is not new in Italian politics but has accelerated under Meloni's government.</div>
+            <a class="story-url" href="https://www.corriere.it" target="_blank" onclick="event.stopPropagation()">corriere.it</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Italian economy &amp; growth</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">EU politics &amp; diplomacy</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Media &amp; press freedom</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">GM</div><div class="person-info"><div class="person-name">Giorgia Meloni</div><div class="person-role">Prime Minister</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">EM</div><div class="person-info"><div class="person-name">Emmanuel Macron</div><div class="person-role">French President</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">SC</div><div class="person-info"><div class="person-name">Sergio Mattarella</div><div class="person-role">President of Italy</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-right">▶ Right / Far-right sympathetic</div>
+          <div class="paper-name">Il Giornale</div>
+          <div class="paper-meta">Circ. ~90,000 · Conservative, Berlusconi-aligned<br>Founded by Indro Montanelli, later drifted right</div>
+          <div class="paper-tone">Nationalist · Anti-immigration · Pro-Meloni</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Meloni is delivering — the left won't admit it</div>
+            <div class="story-tease">GDP up, borders (relatively) controlled, Europe listening.</div>
+            <div class="story-detail">Il Giornale's front page celebrates the GDP figures as vindication of Meloni's economic approach, dismissing centre-left criticism as ideologically motivated. The paper argues that the combination of fiscal caution and nationalist firmness is proving more effective than the EU establishment expected.</div>
+            <a class="story-url" href="https://www.ilgiornale.it" target="_blank" onclick="event.stopPropagation()">ilgiornale.it</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Immigration: the invasion the left calls compassion</div>
+            <div class="story-tease">Il Giornale does not use understated language.</div>
+            <div class="story-detail">Il Giornale leads its second story with heavy coverage of Mediterranean arrivals, framing the crisis in explicitly civilisational terms. The paper criticises NGO rescue vessels and calls for EU-wide deportation agreements — positioning Meloni's deal-making as too soft rather than too tough.</div>
+            <a class="story-url" href="https://www.ilgiornale.it" target="_blank" onclick="event.stopPropagation()">ilgiornale.it</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">The radical left is trying to destroy RAI — and call it democracy</div>
+            <div class="story-tease">Il Giornale sees the RAI row very differently.</div>
+            <div class="story-detail">Where La Repubblica and Corriere see editorial interference by the government at RAI, Il Giornale sees left-wing journalists resisting legitimate democratic oversight. The paper argues that decades of left-wing dominance of public broadcasting are finally being corrected.</div>
+            <a class="story-url" href="https://www.ilgiornale.it" target="_blank" onclick="event.stopPropagation()">ilgiornale.it</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Pro-Meloni / government defence</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Immigration as threat</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Anti-left media narrative</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">GM</div><div class="person-info"><div class="person-name">Giorgia Meloni</div><div class="person-role">Prime Minister (champion)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">MS</div><div class="person-info"><div class="person-name">Matteo Salvini</div><div class="person-role">Deputy PM, Lega</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">VB</div><div class="person-info"><div class="person-name">Viktor Orbán</div><div class="person-role">Hungarian PM (model?)</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blind-spot">
+      <h3>🔭 What Italy's Press Sees That The World Misses</h3>
+      <div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The Mezzogiorno as Europe's forgotten crisis</div><div class="blind-item-desc">Southern Italy's youth unemployment, emigration, and economic stagnation is a chronic EU failure story that gets almost no international coverage. It's as large a structural problem as anything in Greece.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Meloni as a pragmatist</div><div class="blind-item-desc">The international image of Meloni as a dangerous far-right leader doesn't match her actual governing record. Italian centre papers cover a far more complicated picture. This gap between image and reality is a blind spot in foreign reporting.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The RAI culture war</div><div class="blind-item-desc">Italy's public broadcaster has become a proxy battleground for control of national culture. This is treated as domestic trivia abroad. Italians understand it as fundamental to democratic health.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Organised crime's business model</div><div class="blind-item-desc">The Mafia (and 'Ndrangheta, Camorra) remain major actors in the Italian and European economy. Italian papers cover this seriously and regularly. International media treats it as almost picturesque.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== SPAIN ======================== -->
+  <div id="country-spain" class="country-panel">
+    <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+    <h2 class="section-title">🇪🇸 Spain — La Prensa Hoy</h2>
+    <div class="papers-grid">
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-left">◀ Centre-left</div>
+          <div class="paper-name">El País</div>
+          <div class="paper-meta">Circ. ~120,000 print + 2m digital · National quality readership<br>Founded post-Franco, Spain's paper of record</div>
+          <div class="paper-tone">Liberal · Pro-EU · Social democratic</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Sánchez survives again — but Spain's government is governing on borrowed time</div>
+            <div class="story-tease">A minority government that keeps defying the odds.</div>
+            <div class="story-detail">Pedro Sánchez's minority PSOE government passed a key infrastructure bill with Catalan and Basque nationalist support, further cementing a complex web of regional alliances. El País supports the government's direction but questions whether the constant deal-making is sustainable as a governing model.</div>
+            <a class="story-url" href="https://www.elpais.com" target="_blank" onclick="event.stopPropagation()">elpais.com</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Spain's housing emergency: the generation that cannot afford to leave home</div>
+            <div class="story-tease">Rents up 40% in four years. Wages flat. Something has to give.</div>
+            <div class="story-detail">A major El País investigation documents Spain's housing catastrophe: average rents in Madrid and Barcelona have risen 40% in four years, yet average wages have grown less than 8%. The under-35s are the hardest hit, with 60% still living with parents or renting far from their workplaces.</div>
+            <a class="story-url" href="https://www.elpais.com" target="_blank" onclick="event.stopPropagation()">elpais.com</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">Vox's slow implosion: the far-right fractures</div>
+            <div class="story-tease">Spain's populist right is eating itself.</div>
+            <div class="story-detail">Internal divisions within Vox have intensified after poor regional election results, with factions arguing over whether the party should moderate or radicalise. El País covers this with undisguised satisfaction — but also warns that PP could absorb Vox's voters and become more dangerous to the left.</div>
+            <a class="story-url" href="https://www.elpais.com" target="_blank" onclick="event.stopPropagation()">elpais.com</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Sánchez coalition survival</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Housing &amp; generational inequality</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Far-right / Vox politics</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">PS</div><div class="person-info"><div class="person-name">Pedro Sánchez</div><div class="person-role">Prime Minister, PSOE</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">YD</div><div class="person-info"><div class="person-name">Yolanda Díaz</div><div class="person-role">Deputy PM, Sumar</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">AF</div><div class="person-info"><div class="person-name">Alberto Núñez Feijóo</div><div class="person-role">PP Leader (opposition)</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-centre">● Centre-right</div>
+          <div class="paper-name">El Mundo</div>
+          <div class="paper-meta">Circ. ~80,000 print · National, business and political class<br>Founded 1989, traditionally anti-PSOE</div>
+          <div class="paper-tone">Conservative · Anti-Sánchez · Pro-PP</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Spain's "rotten coalition" gives separatists everything they want</div>
+            <div class="story-tease">El Mundo's verdict on Sánchez's deal-making.</div>
+            <div class="story-detail">El Mundo condemns the infrastructure bill's passage as yet another concession to Catalan and Basque nationalists that undermines Spanish territorial integrity. The paper calls for a new general election, arguing Sánchez's government has forfeited its right to govern by trading sovereignty for survival.</div>
+            <a class="story-url" href="https://www.elmundo.es" target="_blank" onclick="event.stopPropagation()">elmundo.es</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Housing crisis: why rent control doesn't work — and Sánchez won't admit it</div>
+            <div class="story-tease">Government intervention is making the problem worse.</div>
+            <div class="story-detail">El Mundo's economics team argues that Sánchez's rent control measures have reduced housing supply by discouraging landlords, worsening the very crisis they were meant to solve. The paper calls for supply-side solutions — liberalising planning rules and incentivising construction.</div>
+            <a class="story-url" href="https://www.elmundo.es" target="_blank" onclick="event.stopPropagation()">elmundo.es</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">Feijóo: "We are ready to govern from day one of a new election"</div>
+            <div class="story-tease">The PP positions itself for an early vote it hopes is coming.</div>
+            <div class="story-detail">El Mundo gives PP leader Feijóo a platform to argue that his party has a ready-made government programme and is merely waiting for Sánchez's coalition to collapse. The paper treats this as credible and the election as likely — a framing El País would dispute.</div>
+            <a class="story-url" href="https://www.elmundo.es" target="_blank" onclick="event.stopPropagation()">elmundo.es</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Anti-Sánchez / government attack</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Separatism &amp; Spain's unity</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">PP as alternative government</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">AF</div><div class="person-info"><div class="person-name">Alberto Núñez Feijóo</div><div class="person-role">PP Leader</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">PS</div><div class="person-info"><div class="person-name">Pedro Sánchez</div><div class="person-role">PM (as villain)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">CP</div><div class="person-info"><div class="person-name">Carles Puigdemont</div><div class="person-role">Catalan independence leader</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-right">▶ Right / Conservative Catholic</div>
+          <div class="paper-name">ABC</div>
+          <div class="paper-meta">Circ. ~70,000 · Traditional conservative, Castilian<br>Founded 1903, monarchist and Catholic</div>
+          <div class="paper-tone">Monarchist · Traditionalist · Socially conservative</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Sánchez humiliates the Crown with his Catalan concessions</div>
+            <div class="story-tease">ABC sees separatism as an attack on Spain's very nature.</div>
+            <div class="story-detail">ABC frames the coalition deal through a monarchist and constitutional lens: the concessions to Catalan nationalists are not just bad politics but an assault on Spain's constitutional unity and the dignity of the Crown. The paper calls on the King to make a public statement in defence of national cohesion.</div>
+            <a class="story-url" href="https://www.abc.es" target="_blank" onclick="event.stopPropagation()">abc.es</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">The Church speaks: Spain is losing its moral compass</div>
+            <div class="story-tease">An editorial voice that most European papers no longer carry.</div>
+            <div class="story-detail">ABC gives prominent space to the Spanish Bishops' Conference's critique of Sánchez government policies on euthanasia, sex education, and family law — framing these as an attack on traditional Spanish values. This coverage would be almost unimaginable in a French or German quality paper in 2026.</div>
+            <a class="story-url" href="https://www.abc.es" target="_blank" onclick="event.stopPropagation()">abc.es</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">The real cost of the housing crisis: family breakdown and demographic decline</div>
+            <div class="story-tease">ABC sees a social crisis, not just an economic one.</div>
+            <div class="story-detail">Where other papers cover Spain's housing crisis as an economic or generational story, ABC frames it through a social-conservative lens: young people unable to form families means fewer children, moral decline, and demographic collapse. The solution, ABC argues, is family-friendly tax policy, not rent controls.</div>
+            <a class="story-url" href="https://www.abc.es" target="_blank" onclick="event.stopPropagation()">abc.es</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">National unity / anti-separatism</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Church &amp; traditional values</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Demographic &amp; family decline</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">KF</div><div class="person-info"><div class="person-name">King Felipe VI</div><div class="person-role">King of Spain</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">AF</div><div class="person-info"><div class="person-name">Alberto Núñez Feijóo</div><div class="person-role">PP Leader</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">PS</div><div class="person-info"><div class="person-name">Pedro Sánchez</div><div class="person-role">PM (as villain)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blind-spot">
+      <h3>🔭 What Spain's Press Sees That The World Misses</h3>
+      <div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Catalan independence — still unresolved</div><div class="blind-item-desc">The world moved on from the 2017 independence crisis. Spanish papers never did. The constitutional status of Catalonia remains genuinely unresolved and shapes every coalition negotiation in Madrid.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Spain's housing emergency</div><div class="blind-item-desc">Spain's rental crisis is worse than France or Germany's on several metrics, but receives a fraction of the international coverage. The under-35s' inability to leave home is reshaping society — foreign press has barely noticed.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The water wars</div><div class="blind-item-desc">Spain's internal politics around water allocation — between Valencia, Murcia, and Castile — are becoming a flashpoint as climate change reduces supply. A preview of what much of southern Europe faces. Ignored internationally.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Morocco as Spain's existential neighbour</div><div class="blind-item-desc">Spain's relationship with Morocco — over migration, Ceuta and Melilla, fisheries, and Saharan sovereignty — is more complex and consequential than most Europeans realise. Spanish papers treat it as a top foreign policy concern. Abroad it's barely a footnote.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== POLAND ======================== -->
+  <div id="country-poland" class="country-panel">
+    <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+    <h2 class="section-title">🇵🇱 Poland — Dzisiejsza Prasa</h2>
+    <div class="papers-grid">
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-left">◀ Liberal / Centre-left</div>
+          <div class="paper-name">Gazeta Wyborcza</div>
+          <div class="paper-meta">Circ. ~130,000 · Urban, educated, pro-EU<br>Founded in Solidarity movement, 1989</div>
+          <div class="paper-tone">Pro-democracy · Anti-PiS · Liberal</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Tusk's government is restoring democracy — but running out of time</div>
+            <div class="story-tease">The rule-of-law repair is real but incomplete.</div>
+            <div class="story-detail">Gazeta Wyborcza documents the Tusk government's achievements in restoring judicial independence and reversing PiS-era media capture — but warns that the Constitutional Tribunal, still packed with PiS loyalists, remains a blocking mechanism. The presidential election is the next critical test.</div>
+            <a class="story-url" href="https://wyborcza.pl" target="_blank" onclick="event.stopPropagation()">wyborcza.pl</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Ukraine's survival is Poland's survival — Tusk makes the case</div>
+            <div class="story-tease">Poland's existential stake in the war next door.</div>
+            <div class="story-detail">PM Tusk addressed parliament with an unusually direct argument: if Russia wins in Ukraine, Poland is next. Gazeta Wyborcza covers this with approval, noting Poland has spent more per capita on Ukraine support than any other EU state, and is lobbying hard for permanent NATO infrastructure on Polish soil.</div>
+            <a class="story-url" href="https://wyborcza.pl" target="_blank" onclick="event.stopPropagation()">wyborcza.pl</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">Poland's abortion law: a year of promises, no results</div>
+            <div class="story-tease">Women voted for Tusk to fix this. He hasn't.</div>
+            <div class="story-detail">A year after Tusk's election win — where abortion rights were a key campaign issue — Polish law remains among Europe's most restrictive. Gazeta Wyborcza criticises the coalition's failure to pass reform, noting that coalition partners from the conservatives have blocked every attempt.</div>
+            <a class="story-url" href="https://wyborcza.pl" target="_blank" onclick="event.stopPropagation()">wyborcza.pl</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Rule of law &amp; democracy</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Ukraine &amp; Russian threat</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Abortion &amp; women's rights</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Tusk</div><div class="person-role">Prime Minister, KO</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">JK</div><div class="person-info"><div class="person-name">Jarosław Kaczyński</div><div class="person-role">PiS Leader (opposition)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">VZ</div><div class="person-info"><div class="person-name">Volodymyr Zelensky</div><div class="person-role">Ukrainian President</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-centre">● Centre / Liberal-conservative</div>
+          <div class="paper-name">Rzeczpospolita</div>
+          <div class="paper-meta">Circ. ~80,000 · Business, legal, political class<br>Poland's financial and political paper of record</div>
+          <div class="paper-tone">Pragmatic · Business-focused · Centrist</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Poland's economy: the star of the EU — but for how long?</div>
+            <div class="story-tease">Growth is strong. Structural risks are mounting.</div>
+            <div class="story-detail">Rzeczpospolita's economics team celebrates Poland's 3.8% GDP growth — the EU's strongest major economy — but warns of structural vulnerabilities: dependence on EU funds (which may reduce post-2027), labour market tightening, and energy transition costs. The boom could slow faster than expected.</div>
+            <a class="story-url" href="https://www.rp.pl" target="_blank" onclick="event.stopPropagation()">rp.pl</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Defence spending at 4% of GDP: is Poland building an army or a political statement?</div>
+            <div class="story-tease">Europe's most ambitious rearmament programme needs analysis, not just applause.</div>
+            <div class="story-detail">Rzeczpospolita's defence correspondent examines Poland's massive military build-up — the largest in European NATO — asking hard questions: is procurement being done efficiently? Are there corruption risks? Is the army being built for genuine deterrence or as political theatre for domestic consumption?</div>
+            <a class="story-url" href="https://www.rp.pl" target="_blank" onclick="event.stopPropagation()">rp.pl</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">Coalition tensions: can Tusk hold three parties together for four years?</div>
+            <div class="story-tease">A pragmatic look at the coalition's sustainability.</div>
+            <div class="story-detail">Rzeczpospolita examines the structural tensions within Tusk's three-party coalition — KO, Trzecia Droga, and Lewica — noting that on abortion, church-state relations, and economic policy, the partners have fundamentally different constituencies. The paper asks whether a split before 2027 is inevitable.</div>
+            <a class="story-url" href="https://www.rp.pl" target="_blank" onclick="event.stopPropagation()">rp.pl</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Polish economic strength</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Defence &amp; NATO</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Coalition sustainability</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Tusk</div><div class="person-role">Prime Minister</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">AD</div><div class="person-info"><div class="person-name">Andrzej Duda</div><div class="person-role">President (PiS-aligned, blocking)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">JK</div><div class="person-info"><div class="person-name">Jarosław Kaczyński</div><div class="person-role">PiS Leader</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <div class="paper-header">
+          <div class="paper-lean lean-right">▶ Right / National-conservative</div>
+          <div class="paper-name">Sieci / Do Rzeczy</div>
+          <div class="paper-meta">Circ. ~70,000 combined · Catholic, patriotic, rural/suburban<br>PiS-aligned weeklies, largest right-wing press</div>
+          <div class="paper-tone">Nationalist · Catholic · Anti-EU bureaucracy</div>
+        </div>
+        <div class="stories">
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Lead</div>
+            <div class="story-headline">Tusk is selling Poland to Brussels — and calling it reform</div>
+            <div class="story-tease">The national-conservative case against the coalition.</div>
+            <div class="story-detail">Sieci argues that Tusk's government is using "rule of law" restoration as a cover for submitting to EU ideological demands on gender policy, migration, and sovereignty. The paper frames the judiciary reforms as politicised revenge on PiS rather than genuine legal repair.</div>
+            <a class="story-url" href="https://www.wsieciprawdy.pl" target="_blank" onclick="event.stopPropagation()">wsieciprawdy.pl</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Second</div>
+            <div class="story-headline">Poland's Catholic identity is under attack — from within</div>
+            <div class="story-tease">The right sees Tusk's social liberalism as an existential threat.</div>
+            <div class="story-detail">Do Rzeczy leads with the abortion rights debate, framing any liberalisation as an attack on Poland's Catholic national identity and a betrayal of the conservative voters who built modern Polish democracy. The paper argues the Church is the moral guardian of the Polish nation — not the EU.</div>
+            <a class="story-url" href="https://dorzeczy.pl" target="_blank" onclick="event.stopPropagation()">dorzeczy.pl</a>
+          </div>
+          <div class="story" onclick="toggleStory(this)">
+            <div class="story-rank">Third</div>
+            <div class="story-headline">Russia is winning time — and the West is helping</div>
+            <div class="story-tease">The Polish right is hawkish on Ukraine — but suspicious of Western intentions.</div>
+            <div class="story-detail">Unlike Western right-wing papers which show some sympathy for Trump's Ukraine scepticism, Sieci is staunchly pro-Ukraine but deeply suspicious of Western diplomatic manoeuvring. The paper argues that any ceasefire that leaves Russian forces in Ukrainian territory is a defeat for Poland too.</div>
+            <a class="story-url" href="https://www.wsieciprawdy.pl" target="_blank" onclick="event.stopPropagation()">wsieciprawdy.pl</a>
+          </div>
+        </div>
+        <div class="expand-hint">↕ tap story to expand</div>
+        <div class="trackers">
+          <div class="tracker-block">
+            <div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+            <div class="tracker-row"><div class="tracker-topic">Anti-EU sovereignty / Tusk</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Catholic &amp; national identity</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="tracker-row"><div class="tracker-topic">Russia &amp; Ukraine (hawkish)</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+          <div class="tracker-block">
+            <div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+            <div class="person-row"><div class="person-avatar">JK</div><div class="person-info"><div class="person-name">Jarosław Kaczyński</div><div class="person-role">PiS Leader</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Tusk</div><div class="person-role">PM (as threat)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            <div class="person-row"><div class="person-avatar">AD</div><div class="person-info"><div class="person-name">Andrzej Duda</div><div class="person-role">President (ally)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blind-spot">
+      <h3>🔭 What Poland's Press Sees That The World Misses</h3>
+      <div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Poland's existential Russia anxiety</div><div class="blind-item-desc">No Western European paper covers Ukraine with Poland's raw fear. For Poland, Russia's war isn't a geopolitical story — it's a personal memory of invasion, occupation, and genocide. The emotional register is entirely different.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Poland's democratic recovery</div><div class="blind-item-desc">The reversal of PiS-era judicial capture is one of the most important stories in European democratic history. The rest of Europe has largely stopped paying attention. Poland lives it daily.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Poland's economic miracle</div><div class="blind-item-desc">Poland has had the fastest sustained economic growth of any large EU member for three decades. This is barely covered internationally, which still mostly stereotypes Poland through a post-communist lens.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The abortion debate's constitutional dimension</div><div class="blind-item-desc">Poland's abortion impasse isn't just a political story — it's a constitutional crisis about what courts can do, what coalition politics allows, and whether elected majorities can override entrenched judicial decisions. Far more complex than international coverage suggests.</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  const d = new Date();
+  document.getElementById('dateDisplay').textContent = d.toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+
+  function toggleStory(el) {
+    el.classList.toggle('open');
+  }
+
+  function showCountry(id, tabEl) {
+    document.querySelectorAll('.country-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.country-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('country-' + id).classList.add('active');
+    tabEl.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

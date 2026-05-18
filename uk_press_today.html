@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Press Today — World Headline</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f5f3ee; color: #1a1a1a; min-height: 100vh; }
+
+  header {
+    background: #1a1a1a;
+    color: #f5f3ee;
+    padding: 18px 32px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  header h1 { font-size: 1.4rem; letter-spacing: 0.08em; font-weight: 700; }
+  header .date { font-size: 0.8rem; color: #999; font-family: sans-serif; }
+  header .subtitle { font-size: 0.75rem; color: #888; font-family: sans-serif; margin-left: auto; }
+
+  .region-nav {
+    background: #2c2c2c;
+    padding: 8px 32px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .region-nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-family: sans-serif;
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: background 0.15s;
+  }
+  .region-nav a:hover { background: #444; color: #fff; }
+  .region-nav a.active { background: #c0392b; color: #fff; }
+
+  .spectrum-bar {
+    display: flex;
+    height: 4px;
+    background: linear-gradient(to right, #2980b9, #27ae60, #c0392b);
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+
+  .edition-tag {
+    font-family: sans-serif;
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  h2.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #1a1a1a;
+  }
+
+  /* Paper grid */
+  .papers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+
+  .paper-card {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .paper-header {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid #eee;
+  }
+  .paper-lean {
+    font-size: 0.65rem;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .lean-left { color: #2980b9; }
+  .lean-centre { color: #27ae60; }
+  .lean-right { color: #c0392b; }
+
+  .paper-name { font-size: 1rem; font-weight: 700; color: #1a1a1a; }
+  .paper-meta {
+    font-size: 0.65rem;
+    color: #999;
+    font-family: sans-serif;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .paper-tone {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-family: sans-serif;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-top: 5px;
+    background: #f0f0f0;
+    color: #555;
+  }
+
+  /* Stories */
+  .stories { padding: 12px 16px; flex: 1; }
+  .story {
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+  }
+  .story:last-child { border-bottom: none; }
+  .story-rank {
+    font-size: 0.6rem;
+    font-family: sans-serif;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+  .story-headline {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+  .story-tease {
+    font-size: 0.75rem;
+    color: #666;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .story-detail {
+    display: none;
+    font-size: 0.75rem;
+    color: #444;
+    line-height: 1.5;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed #e0e0e0;
+  }
+  .story.open .story-detail { display: block; }
+  .story-url {
+    display: block;
+    font-size: 0.6rem;
+    color: #bbb;
+    font-family: sans-serif;
+    margin-top: 5px;
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .story-url:hover { color: #888; }
+
+  .expand-hint {
+    font-size: 0.62rem;
+    font-family: sans-serif;
+    color: #ccc;
+    text-align: right;
+    padding: 6px 16px 10px;
+    font-style: italic;
+  }
+
+  /* Trackers */
+  .trackers { border-top: 1px solid #eee; padding: 12px 16px 14px; }
+
+  .tracker-block { margin-bottom: 12px; }
+  .tracker-block:last-child { margin-bottom: 0; }
+  .tracker-label {
+    font-size: 0.62rem;
+    font-family: sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+    margin-bottom: 7px;
+  }
+
+  .tracker-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 5px;
+  }
+  .tracker-topic {
+    font-size: 0.65rem;
+    font-family: sans-serif;
+    color: #555;
+    flex: 1;
+    line-height: 1.2;
+  }
+  .dots {
+    display: flex;
+    gap: 3px;
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+  }
+  .dot.hobby-filled { background: #e67e22; border-color: #e67e22; }
+  .dot.person-filled { background: #8e44ad; border-color: #8e44ad; }
+  .dot-count {
+    font-size: 0.58rem;
+    font-family: sans-serif;
+    color: #bbb;
+    min-width: 22px;
+  }
+
+  /* Person tracker */
+  .person-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 6px;
+  }
+  .person-avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #8e44ad;
+    color: #fff;
+    font-size: 0.55rem;
+    font-family: sans-serif;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: -0.5px;
+  }
+  .person-info { flex: 1; }
+  .person-name {
+    font-size: 0.65rem;
+    font-family: sans-serif;
+    color: #444;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .person-role {
+    font-size: 0.58rem;
+    font-family: sans-serif;
+    color: #aaa;
+    line-height: 1.2;
+  }
+
+  /* Blind spot panel */
+  .blind-spot {
+    background: #1a1a1a;
+    color: #f5f3ee;
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-top: 8px;
+  }
+  .blind-spot h3 {
+    font-size: 0.7rem;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #e67e22;
+    margin-bottom: 12px;
+  }
+  .blind-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .blind-item { }
+  .blind-item-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .blind-item-desc {
+    font-size: 0.7rem;
+    color: #aaa;
+    line-height: 1.4;
+    font-family: sans-serif;
+  }
+
+  @media (max-width: 760px) {
+    .papers-grid { grid-template-columns: 1fr; }
+    .blind-items { grid-template-columns: 1fr; }
+    header { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌍 WORLD HEADLINE</h1>
+  <span class="date" id="dateDisplay"></span>
+  <span class="subtitle">What the world is reading — across the spectrum</span>
+</header>
+
+<nav class="region-nav">
+  <a href="uk_press_today.html" class="active">🇬🇧 UK</a>
+  <a href="europe_press_today.html">🌍 Europe</a>
+  <span style="color:#555; font-size:0.7rem; font-family:sans-serif; padding:4px 6px;">Coming soon:</span>
+  <a href="#">🇺🇸 USA</a>
+  <a href="#">🌎 Americas</a>
+  <a href="#">🌏 Asia-Pacific</a>
+  <a href="#">🌐 Middle East</a>
+</nav>
+
+<div class="spectrum-bar"></div>
+
+<div class="container">
+
+  <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+  <h2 class="section-title">United Kingdom — Press Today</h2>
+
+  <div class="papers-grid">
+
+    <!-- THE OBSERVER (Left) -->
+    <div class="paper-card">
+      <div class="paper-header">
+        <div class="paper-lean lean-left">◀ Left-leaning</div>
+        <div class="paper-name">The Observer</div>
+        <div class="paper-meta">
+          Sun circ. ~160,000 · Educated, progressive, London/urban<br>
+          ABC1, 35–65, university-educated
+        </div>
+        <div class="paper-tone">Thoughtful · Campaigning · Pro-EU</div>
+      </div>
+
+      <div class="stories">
+        <div class="story" onclick="toggleStory(this)">
+          <div class="story-rank">Lead</div>
+          <div class="story-headline">Labour's leadership race begins in earnest as Burnham and Streeting signal their intentions</div>
+          <div class="story-tease">The succession question Starmer can't silence.</div>
+          <div class="story-detail">Andy Burnham and Wes Streeting are both positioning for a future Labour leadership contest, with senior figures beginning informal campaigns even as Starmer insists he will fight on. The Observer frames this as a healthy democratic debate about Labour's direction, focusing on policy substance and who can renew the project.</div>
+          <a class="story-url" href="https://www.theguardian.com/observer" target="_blank" onclick="event.stopPropagation()">theguardian.com/observer</a>
+        </div>
+        <div class="story" onclick="toggleStory(this)">
+          <div class="story-rank">Second</div>
+          <div class="story-headline">NHS drug price deal with US raises alarm among patient groups</div>
+          <div class="story-tease">The price of zero tariffs: Britain's sick pay more.</div>
+          <div class="story-detail">The UK–US pharmaceutical deal grants zero US tariffs on British medicines, but in return the UK agreed to raise NHS drug prices by 25%. The Observer leads with the patient and charity reaction, framing it as a threat to the founding principle of free-at-point-of-use healthcare.</div>
+          <a class="story-url" href="https://www.theguardian.com/observer" target="_blank" onclick="event.stopPropagation()">theguardian.com/observer</a>
+        </div>
+        <div class="story" onclick="toggleStory(this)">
+          <div class="story-rank">Third</div>
+          <div class="story-headline">Wales wakes up without Labour for the first time in a century</div>
+          <div class="story-tease">A hundred-year dynasty ends. Now what?</div>
+          <div class="story-detail">Welsh Labour's catastrophic defeat ended over 100 years of Labour control in Wales. The Observer examines the structural factors — not just Starmer's unpopularity — including housing costs, deindustrialisation, and the rise of Plaid Cymru and Reform.</div>
+          <a class="story-url" href="https://www.theguardian.com/observer" target="_blank" onclick="event.stopPropagation()">theguardian.com/observer</a>
+        </div>
+      </div>
+
+      <div class="expand-hint">↕ tap story to expand</div>
+
+      <div class="trackers">
+        <div class="tracker-block">
+          <div class="tracker-label">📌 Hobby Horse — topic tracker (8 weeks)</div>
+          <div class="tracker-row">
+            <div class="tracker-topic">NHS &amp; public services</div>
+            <div class="dots">
+              <div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Labour politics &amp; leadership</div>
+            <div class="dots">
+              <div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Climate &amp; environment</div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Inequality &amp; poverty</div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Trans &amp; gender rights</div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+        </div>
+
+        <div class="tracker-block">
+          <div class="tracker-label">👤 Undue Influence — person tracker (8 weeks)</div>
+          <div class="person-row">
+            <div class="person-avatar">AB</div>
+            <div class="person-info">
+              <div class="person-name">Andy Burnham</div>
+              <div class="person-role">Mayor of Greater Manchester</div>
+            </div>
+            <div class="dots">
+              <div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="person-row">
+            <div class="person-avatar">LN</div>
+            <div class="person-info">
+              <div class="person-name">Lisa Nandy</div>
+              <div class="person-role">Culture Secretary</div>
+            </div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+          <div class="person-row">
+            <div class="person-avatar">SK</div>
+            <div class="person-info">
+              <div class="person-name">Sadiq Khan</div>
+              <div class="person-role">Mayor of London</div>
+            </div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUNDAY TIMES (Centre) -->
+    <div class="paper-card">
+      <div class="paper-header">
+        <div class="paper-lean lean-centre">● Centre / Centre-right</div>
+        <div class="paper-name">The Sunday Times</div>
+        <div class="paper-meta">
+          Sun circ. ~620,000 · Establishment, professional, national<br>
+          ABC1, 40–65, homeowners, business readers
+        </div>
+        <div class="paper-tone">Authoritative · Investigative · Pro-market</div>
+      </div>
+
+      <div class="stories">
+        <div class="story" onclick="toggleStory(this)">
+          <div class="story-rank">Lead</div>
+          <div class="story-headline">"I want 10 years in No 10" — Starmer defies rebels as 97 Labour MPs call for his exit</div>
+          <div class="story-tease">A prime minister under siege — but not going anywhere.</div>
+          <div class="story-detail">97 Labour MPs signed a letter calling on Starmer to resign or set a departure timetable. Starmer responded defiantly, saying he intends to serve a decade as Prime Minister. The Sunday Times frames this as a crisis of authority, examining whether the parliamentary party has the numbers or the will to force the issue.</div>
+          <a class="story-url" href="https://www.thetimes.co.uk/sunday-times" target="_blank" onclick="event.stopPropagation()">thetimes.co.uk/sunday-times</a>
+        </div>
+        <div class="story" onclick="toggleStory(this)">
+          <div class="story-rank">Second</div>
+          <div class="story-headline">Pharma deal exposes fault line in Britain's trade strategy</div>
+          <div class="story-tease">A win for exporters, a question mark for the NHS.</div>
+          <div class="story-detail">The Sunday Times analyses the UK–US pharmaceutical deal as a strategic trade-off: British drug companies get tariff-free US access in exchange for higher NHS prices. The paper explores who wins (British pharma multinationals) and who might lose (the health service's drug budget).</div>
+          <a class="story-url" href="https://www.thetimes.co.uk/sunday-times" target="_blank" onclick="event.stopPropagation()">thetimes.co.uk/sunday-times</a>
+        </div>
+        <div class="story" onclick="toggleStory(this)">
+          <div class="story-rank">Third</div>
+          <div class="story-headline">Can Streeting or Badenoch reshape their parties in time?</div>
+          <div class="story-tease">Two politicians, two parties, one question about electability.</div>
+          <div class="story-detail">A comparative profile of Wes Streeting (Labour's health secretary and likely leadership candidate) and Kemi Badenoch (Conservative leader), examining whether either can articulate a compelling vision before the next election cycle begins in earnest.</div>
+          <a class="story-url" href="https://www.thetimes.co.uk/sunday-times" target="_blank" onclick="event.stopPropagation()">thetimes.co.uk/sunday-times</a>
+        </div>
+      </div>
+
+      <div class="expand-hint">↕ tap story to expand</div>
+
+      <div class="trackers">
+        <div class="tracker-block">
+          <div class="tracker-label">📌 Hobby Horse — topic tracker (8 weeks)</div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Political leadership &amp; elections</div>
+            <div class="dots">
+              <div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Economy &amp; trade</div>
+            <div class="dots">
+              <div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Defence &amp; security</div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Housing &amp; planning</div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Business &amp; markets</div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+        </div>
+
+        <div class="tracker-block">
+          <div class="tracker-label">👤 Undue Influence — person tracker (8 weeks)</div>
+          <div class="person-row">
+            <div class="person-avatar">WS</div>
+            <div class="person-info">
+              <div class="person-name">Wes Streeting</div>
+              <div class="person-role">Health Secretary</div>
+            </div>
+            <div class="dots">
+              <div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="person-row">
+            <div class="person-avatar">KB</div>
+            <div class="person-info">
+              <div class="person-name">Kemi Badenoch</div>
+              <div class="person-role">Conservative Leader</div>
+            </div>
+            <div class="dots">
+              <div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="person-row">
+            <div class="person-avatar">RR</div>
+            <div class="person-info">
+              <div class="person-name">Rachel Reeves</div>
+              <div class="person-role">Chancellor of the Exchequer</div>
+            </div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIL ON SUNDAY (Right) -->
+    <div class="paper-card">
+      <div class="paper-header">
+        <div class="paper-lean lean-right">▶ Right-leaning</div>
+        <div class="paper-name">Mail on Sunday</div>
+        <div class="paper-meta">
+          Sun circ. ~800,000 · Middle England, suburban, traditional<br>
+          C1C2, 45–70, homeowners, aspirational working class
+        </div>
+        <div class="paper-tone">Populist · Patriotic · Eurosceptic</div>
+      </div>
+
+      <div class="stories">
+        <div class="story" onclick="toggleStory(this)">
+          <div class="story-rank">Lead</div>
+          <div class="story-headline">97 Labour traitors: the MPs who want to stab Starmer in the back</div>
+          <div class="story-tease">Britain's governing party tears itself apart.</div>
+          <div class="story-detail">The Mail on Sunday covers the same Starmer rebellion but through a destabilisation lens — focusing on disloyalty, chaos, and the perception of weak government. The paper implies that Labour's internal divisions prove it was never fit to govern, and suggests Nigel Farage stands to benefit most.</div>
+          <a class="story-url" href="https://www.dailymail.co.uk/mailonsunday" target="_blank" onclick="event.stopPropagation()">dailymail.co.uk/mailonsunday</a>
+        </div>
+        <div class="story" onclick="toggleStory(this)">
+          <div class="story-rank">Second</div>
+          <div class="story-headline">NHS drug deal lets Americans pick our pockets — and Starmer calls it a win</div>
+          <div class="story-tease">We get zero tariffs. They get 25% more of your NHS money.</div>
+          <div class="story-detail">The Mail frames the pharma deal as a capitulation — Britain gave away higher NHS drug costs in exchange for something British pharma companies wanted, not ordinary patients. Strong anti-deal rhetoric, questioning whether Starmer's trade negotiators were outmanoeuvred by Washington.</div>
+          <a class="story-url" href="https://www.dailymail.co.uk/mailonsunday" target="_blank" onclick="event.stopPropagation()">dailymail.co.uk/mailonsunday</a>
+        </div>
+        <div class="story" onclick="toggleStory(this)">
+          <div class="story-rank">Third</div>
+          <div class="story-headline">Farage: "Wales shows what Reform can do across Britain"</div>
+          <div class="story-tease">The man who never tires of being right — or saying so.</div>
+          <div class="story-detail">Nigel Farage gives the Mail on Sunday an exclusive interview claiming Welsh Labour's collapse vindicates Reform UK's national strategy. The paper gives him generous space to set out his vision for 2029, with minimal critical interrogation of Reform's own policy platform.</div>
+          <a class="story-url" href="https://www.dailymail.co.uk/mailonsunday" target="_blank" onclick="event.stopPropagation()">dailymail.co.uk/mailonsunday</a>
+        </div>
+      </div>
+
+      <div class="expand-hint">↕ tap story to expand</div>
+
+      <div class="trackers">
+        <div class="tracker-block">
+          <div class="tracker-label">📌 Hobby Horse — topic tracker (8 weeks)</div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Anti-government / Labour failure</div>
+            <div class="dots">
+              <div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Immigration &amp; borders</div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Cost of living &amp; taxes</div>
+            <div class="dots">
+              <div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Reform &amp; Farage rise</div>
+            <div class="dots">
+              <div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="tracker-row">
+            <div class="tracker-topic">Crime &amp; justice</div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+        </div>
+
+        <div class="tracker-block">
+          <div class="tracker-label">👤 Undue Influence — person tracker (8 weeks)</div>
+          <div class="person-row">
+            <div class="person-avatar">NF</div>
+            <div class="person-info">
+              <div class="person-name">Nigel Farage</div>
+              <div class="person-role">Reform UK Leader, MP</div>
+            </div>
+            <div class="dots">
+              <div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">1/8</div>
+          </div>
+          <div class="person-row">
+            <div class="person-avatar">KB</div>
+            <div class="person-info">
+              <div class="person-name">Kemi Badenoch</div>
+              <div class="person-role">Conservative Leader</div>
+            </div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+          <div class="person-row">
+            <div class="person-avatar">BJ</div>
+            <div class="person-info">
+              <div class="person-name">Boris Johnson</div>
+              <div class="person-role">Former Prime Minister</div>
+            </div>
+            <div class="dots">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="dot-count">0/8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /papers-grid -->
+
+  <!-- BLIND SPOT PANEL -->
+  <div class="blind-spot">
+    <h3>🔭 The World Doesn't See This — Britain's Blind Spots</h3>
+    <div class="blind-items">
+      <div class="blind-item">
+        <div class="blind-item-title">The Labour civil war</div>
+        <div class="blind-item-desc">97 MPs calling for the PM to go barely registered outside Britain. Internationally, Starmer is seen as a stable if uninspiring figure. Inside the UK it feels like a full-blown crisis.</div>
+      </div>
+      <div class="blind-item">
+        <div class="blind-item-title">Welsh politics</div>
+        <div class="blind-item-desc">Labour losing control of Wales for the first time in 100 years is huge in British political history. Almost no international outlet covered it.</div>
+      </div>
+      <div class="blind-item">
+        <div class="blind-item-title">NHS as moral symbol</div>
+        <div class="blind-item-desc">The NHS drug price row matters to other countries as a trade fact. In Britain it's a near-religious debate about national identity and what the state owes its citizens.</div>
+      </div>
+      <div class="blind-item">
+        <div class="blind-item-title">Reform's momentum</div>
+        <div class="blind-item-desc">Farage is a figure of mild curiosity abroad. In Britain his party is now polling neck-and-neck with Labour — a genuinely historic shift that foreign press has largely missed.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  // Set today's date
+  const d = new Date();
+  document.getElementById('dateDisplay').textContent = d.toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+
+  function toggleStory(el) {
+    el.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
