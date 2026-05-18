@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Americas Press Today — World Headline</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f5f3ee; color: #1a1a1a; min-height: 100vh; }
+  header { background: #1a1a1a; color: #f5f3ee; padding: 18px 32px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  header h1 { font-size: 1.4rem; letter-spacing: 0.08em; font-weight: 700; }
+  header .date { font-size: 0.8rem; color: #999; font-family: sans-serif; }
+  header .subtitle { font-size: 0.75rem; color: #888; font-family: sans-serif; margin-left: auto; }
+  .region-nav { background: #2c2c2c; padding: 8px 32px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .region-nav a { color: #ccc; text-decoration: none; font-size: 0.72rem; font-family: sans-serif; padding: 4px 10px; border-radius: 3px; transition: background 0.15s; }
+  .region-nav a:hover { background: #444; color: #fff; }
+  .region-nav a.active { background: #c0392b; color: #fff; }
+  .region-nav span.sep { color: #555; font-size: 0.7rem; font-family: sans-serif; padding: 4px 4px; }
+  .spectrum-bar { height: 4px; background: linear-gradient(to right, #2980b9, #27ae60, #c0392b); }
+  .container { max-width: 1140px; margin: 0 auto; padding: 24px 20px; }
+
+  .pan-region { background: #1a3a5c; color: #f5f3ee; border-radius: 4px; padding: 18px 22px; margin-bottom: 24px; }
+  .pan-region h3 { font-size: 0.68rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.12em; color: #5dade2; margin-bottom: 12px; }
+  .pan-stories { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  .pan-story-num { font-size: 0.6rem; font-family: sans-serif; color: #85c1e9; margin-bottom: 3px; }
+  .pan-story-head { font-size: 0.82rem; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+  .pan-story-desc { font-size: 0.7rem; color: #aed6f1; font-family: sans-serif; line-height: 1.4; }
+
+  .tier1-tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 2px solid #1a1a1a; }
+  button.tier1-tab { padding: 8px 16px; cursor: pointer; font-family: sans-serif; font-size: 0.8rem; font-weight: 700; background: #e8e4dd; color: #666; border: 2px solid transparent; border-bottom: none; border-radius: 4px 4px 0 0; transition: all 0.15s; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  button.tier1-tab:hover { background: #ddd8cf; color: #1a1a1a; }
+  button.tier1-tab.active { background: #1a1a1a; color: #f5f3ee; }
+  .region-panel { display: none; background: #fff; border: 2px solid #1a1a1a; border-top: none; border-radius: 0 0 4px 4px; padding: 16px; margin-bottom: 24px; }
+  .region-panel.active { display: block; }
+  .tier2-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 16px; }
+  button.tier2-tab { padding: 5px 12px; border-radius: 3px; cursor: pointer; font-family: sans-serif; font-size: 0.72rem; font-weight: 700; border: 2px solid #ddd; background: #f9f9f9; color: #666; transition: all 0.15s; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  button.tier2-tab:hover { border-color: #999; color: #1a1a1a; }
+  button.tier2-tab.active { border-color: #1a1a1a; background: #1a1a1a; color: #f5f3ee; }
+  button.tier2-tab.soon { opacity: 0.5; pointer-events: none; }
+  .country-panel { display: none; }
+  .country-panel.active { display: block; }
+
+  .edition-tag { font-family: sans-serif; font-size: 0.68rem; color: #888; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  h2.section-title { font-size: 1rem; font-weight: 700; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid #1a1a1a; }
+  .papers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 20px; }
+  .paper-card { background: #fafafa; border: 1px solid #e8e8e8; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+  .paper-header { padding: 12px 14px 8px; border-bottom: 1px solid #eee; }
+  .paper-lean { font-size: 0.62rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 3px; }
+  .lean-left { color: #2980b9; } .lean-centre { color: #27ae60; } .lean-right { color: #c0392b; }
+  .paper-name { font-size: 0.9rem; font-weight: 700; }
+  .paper-meta { font-size: 0.6rem; color: #999; font-family: sans-serif; margin-top: 2px; line-height: 1.4; }
+  .paper-tone { display: inline-block; font-size: 0.58rem; font-family: sans-serif; padding: 2px 5px; border-radius: 2px; margin-top: 4px; background: #f0f0f0; color: #555; }
+  .stories { padding: 9px 12px; flex: 1; }
+  .story { padding: 7px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+  .story:last-child { border-bottom: none; }
+  .story-rank { font-size: 0.58rem; font-family: sans-serif; color: #bbb; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+  .story-headline { font-size: 0.76rem; font-weight: 700; line-height: 1.3; margin-bottom: 2px; }
+  .story-tease { font-size: 0.7rem; color: #666; font-style: italic; line-height: 1.3; }
+  .story-detail { display: none; font-size: 0.7rem; color: #444; line-height: 1.5; margin-top: 5px; padding-top: 5px; border-top: 1px dashed #e0e0e0; }
+  .story.open .story-detail { display: block; }
+  .story-url { display: block; font-size: 0.58rem; color: #bbb; font-family: sans-serif; margin-top: 4px; text-decoration: none; word-break: break-all; }
+  .story-url:hover { color: #888; }
+  .expand-hint { font-size: 0.6rem; font-family: sans-serif; color: #ccc; text-align: right; padding: 4px 12px 8px; font-style: italic; }
+  .trackers { border-top: 1px solid #eee; padding: 9px 12px 11px; }
+  .tracker-block { margin-bottom: 9px; }
+  .tracker-block:last-child { margin-bottom: 0; }
+  .tracker-label { font-size: 0.58rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 5px; }
+  .tracker-row { display: flex; align-items: center; gap: 5px; margin-bottom: 3px; }
+  .tracker-topic { font-size: 0.6rem; font-family: sans-serif; color: #555; flex: 1; line-height: 1.2; }
+  .dots { display: flex; gap: 2px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; border: 1px solid #ddd; background: #fff; }
+  .dot.hobby-filled { background: #e67e22; border-color: #e67e22; }
+  .dot.person-filled { background: #8e44ad; border-color: #8e44ad; }
+  .dot-count { font-size: 0.56rem; font-family: sans-serif; color: #bbb; min-width: 20px; }
+  .person-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .person-avatar { width: 19px; height: 19px; border-radius: 50%; background: #8e44ad; color: #fff; font-size: 0.48rem; font-family: sans-serif; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .person-info { flex: 1; }
+  .person-name { font-size: 0.6rem; font-family: sans-serif; color: #444; font-weight: 700; line-height: 1.2; }
+  .person-role { font-size: 0.55rem; font-family: sans-serif; color: #aaa; }
+  .blind-spot { background: #1a1a1a; color: #f5f3ee; border-radius: 4px; padding: 16px 20px; margin-top: 6px; }
+  .blind-spot h3 { font-size: 0.66rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.12em; color: #e67e22; margin-bottom: 10px; }
+  .blind-items { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+  .blind-item-title { font-size: 0.76rem; font-weight: 700; margin-bottom: 2px; }
+  .blind-item-desc { font-size: 0.66rem; color: #aaa; line-height: 1.4; font-family: sans-serif; }
+  .coming-soon { text-align: center; padding: 48px 20px; color: #999; font-family: sans-serif; }
+  .coming-soon .cs-flag { font-size: 2.5rem; margin-bottom: 10px; }
+  .coming-soon h3 { font-size: 1rem; color: #555; margin-bottom: 8px; }
+  .coming-soon p { font-size: 0.8rem; line-height: 1.5; max-width: 340px; margin: 0 auto; }
+  @media (max-width: 760px) { .papers-grid { grid-template-columns: 1fr; } .pan-stories { grid-template-columns: 1fr; } .blind-items { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🌍 WORLD HEADLINE</h1>
+  <span class="date" id="dateDisplay"></span>
+  <span class="subtitle">What the world is reading — across the spectrum</span>
+</header>
+<nav class="region-nav">
+  <a href="index.html">🏠 Home</a>
+  <span class="sep">|</span>
+  <a href="uk_press_today.html">🇬🇧 UK</a>
+  <a href="europe_press_today.html">🌍 Europe</a>
+  <a href="americas_press_today.html" class="active">🌎 Americas</a>
+  <a href="asia_press_today.html">🌏 Asia-Pacific</a>
+  <span class="sep">|</span>
+  <a href="index.html#mideast">🌐 Middle East</a>
+  <a href="index.html#africa">🌍 Africa</a>
+</nav>
+<div class="spectrum-bar"></div>
+<div class="container">
+
+  <div class="pan-region">
+    <h3>🌎 Pan-Americas — what the continent is talking about this week</h3>
+    <div class="pan-stories">
+      <div class="pan-story"><div class="pan-story-num">① Top Story</div><div class="pan-story-head">Trump's tariff war reshapes trade across the hemisphere</div><div class="pan-story-desc">US tariffs on Canada, Mexico, and Brazil are forcing a dramatic realignment of supply chains. Canada and Mexico are caught between their largest trading partner and new opportunities with the EU and Asia.</div></div>
+      <div class="pan-story"><div class="pan-story-num">② Second Story</div><div class="pan-story-head">Immigration: the issue that connects every country in the Americas</div><div class="pan-story-desc">From Venezuelan migration through Colombia and into the US, to Haitian refugees in Brazil, to Central Americans at the US-Mexico border — the continent is defined by mass movement driven by poverty, violence, and climate.</div></div>
+      <div class="pan-story"><div class="pan-story-num">③ Third Story</div><div class="pan-story-head">Latin America turns east: China fills the gap Trump leaves</div><div class="pan-story-desc">As the US pulls back from multilateral engagement, China is deepening infrastructure investment and trade relationships across South America — particularly in Brazil, Chile, and Peru.</div></div>
+    </div>
+  </div>
+
+  <div class="tier1-tabs">
+    <button class="tier1-tab active" onclick="showRegion('north',this)">🌎 North America</button>
+    <button class="tier1-tab" onclick="showRegion('central',this)">🌴 Central America &amp; Caribbean</button>
+    <button class="tier1-tab" onclick="showRegion('south',this)">🌎 South America</button>
+  </div>
+
+  <!-- ===== NORTH AMERICA ===== -->
+  <div id="region-north" class="region-panel active">
+    <div class="tier2-tabs">
+      <button class="tier2-tab active" onclick="showCountry('north','usa',this)">🇺🇸 United States</button>
+      <button class="tier2-tab" onclick="showCountry('north','canada',this)">🇨🇦 Canada</button>
+      <button class="tier2-tab" onclick="showCountry('north','mexico',this)">🇲🇽 Mexico</button>
+    </div>
+
+    <!-- USA -->
+    <div id="north-usa" class="country-panel active">
+      <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+      <h2 class="section-title">🇺🇸 United States — Today's Press</h2>
+      <div class="papers-grid">
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-left">◀ Left / Liberal</div><div class="paper-name">The New York Times</div><div class="paper-meta">Circ. ~10m digital · National elite, coastal, educated<br>Founded 1851 · "All the News That's Fit to Print"</div><div class="paper-tone">Liberal · Establishment · Global outlook</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Trump's second term at 16 months: what has actually changed — and what hasn't</div><div class="story-tease">The chaos was real. The transformation is more complicated.</div><div class="story-detail">The NYT's politics desk runs a detailed audit of Trump's second term: significant rollbacks on climate, immigration enforcement, and federal workforce, but courts blocking much of the most aggressive action. The paper finds institutional resilience held in places — and shattered in others. Tone is sober and factual, letting the record speak.</div><a class="story-url" href="https://www.nytimes.com" target="_blank" onclick="event.stopPropagation()">nytimes.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">The federal workers who lost their jobs — and are fighting back</div><div class="story-tease">DOGE fired them. The courts aren't so sure that was legal.</div><div class="story-detail">NYT profiles federal workers caught in the DOGE-driven mass layoffs, many of whom are winning reinstatement orders in federal court. The paper frames this as a constitutional story about executive power limits — and a human story about lives disrupted by an unprecedented experiment in government downsizing.</div><a class="story-url" href="https://www.nytimes.com" target="_blank" onclick="event.stopPropagation()">nytimes.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Gaza: the humanitarian crisis America stopped talking about</div><div class="story-tease">The cameras moved on. The dying didn't.</div><div class="story-detail">A NYT investigation documents conditions in Gaza that have worsened significantly since the initial media focus faded. The paper's foreign correspondents provide on-the-ground reporting that much of the US media has deprioritised — and draws criticism from both left (for being too slow) and right (for being too critical of Israel).</div><a class="story-url" href="https://www.nytimes.com" target="_blank" onclick="event.stopPropagation()">nytimes.com</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Trump &amp; democratic institutions</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">DOGE &amp; federal workforce</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Gaza &amp; Middle East</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Trump</div><div class="person-role">President (as subject)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">EM</div><div class="person-info"><div class="person-name">Elon Musk</div><div class="person-role">DOGE / tech billionaire</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">KH</div><div class="person-info"><div class="person-name">Kamala Harris</div><div class="person-role">Former VP, Dem. future</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-centre">● Centre</div><div class="paper-name">USA Today</div><div class="paper-meta">Circ. ~1.6m · National, mainstream, Middle America<br>Founded 1982 · America's most widely read print paper</div><div class="paper-tone">Mainstream · Accessible · Non-partisan tone</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Americans' finances: the gap between the data and the feeling</div><div class="story-tease">Unemployment is low. Consumer confidence is not.</div><div class="story-detail">USA Today's economics team explores the persistent gap between strong headline economic numbers and widespread public pessimism. Unemployment is at 4.1%, but grocery prices remain 22% above 2020 levels, housing is out of reach for first-time buyers, and credit card delinquencies are rising. The paper tries to reconcile the contradiction without taking political sides.</div><a class="story-url" href="https://www.usatoday.com" target="_blank" onclick="event.stopPropagation()">usatoday.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Tariffs are hitting American shoppers — here's what costs more</div><div class="story-tease">A practical guide to the trade war's price tag.</div><div class="story-detail">USA Today takes a consumer-focused approach to the tariff story: a breakdown of specific goods that have become more expensive, from electronics to clothing to cars. No political framing — just: this costs more than it did, and here's why. One of the paper's most-read formats.</div><a class="story-url" href="https://www.usatoday.com" target="_blank" onclick="event.stopPropagation()">usatoday.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">The US opioid crisis is not over — it just changed shape</div><div class="story-tease">Fentanyl deaths are falling. Meth and tranq are rising.</div><div class="story-detail">USA Today's health desk documents the evolution of the US drug crisis: fentanyl overdoses have declined slightly as naloxone became more widespread, but xylazine ("tranq") and methamphetamine use is surging in rural and suburban communities. The paper covers this as a public health story, focusing on affected communities rather than politics.</div><a class="story-url" href="https://www.usatoday.com" target="_blank" onclick="event.stopPropagation()">usatoday.com</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Cost of living &amp; economy</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Tariffs &amp; trade impact</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Public health &amp; drug crisis</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Trump</div><div class="person-role">President</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">JB</div><div class="person-info"><div class="person-name">JD Vance</div><div class="person-role">Vice President</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+              <div class="person-row"><div class="person-avatar">EM</div><div class="person-info"><div class="person-name">Elon Musk</div><div class="person-role">DOGE</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-right">▶ Right / Conservative</div><div class="paper-name">Wall Street Journal</div><div class="paper-meta">Circ. ~3.5m digital · Business, financial, professional class<br>Founded 1889 · News reporting centrist, editorial page strongly right</div><div class="paper-tone">Pro-market · Conservative editorial · Business-first</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Trump's tariffs are a tax on American business — and the bill is coming due</div><div class="story-tease">The WSJ editorial board parts ways with the White House on trade.</div><div class="story-detail">The WSJ's editorial board — reliably conservative but deeply pro-free-trade — delivers a sharp critique of Trump's tariff programme, calling it an economic own-goal that raises costs for US manufacturers and consumers without achieving its stated goals of reshoring industry. The paper's news coverage is more neutral; the editorial page is furious.</div><a class="story-url" href="https://www.wsj.com" target="_blank" onclick="event.stopPropagation()">wsj.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">The Federal Reserve is running out of options</div><div class="story-tease">Inflation is sticky. Growth is slowing. The Fed can't fix both.</div><div class="story-detail">WSJ's economics team examines the Federal Reserve's increasingly difficult position: tariff-driven inflation is sticky enough that rate cuts risk stoking it, but slowing growth and a weakening jobs market argue for easing. The paper concludes the Fed is in a stagflation trap that monetary policy alone cannot resolve.</div><a class="story-url" href="https://www.wsj.com" target="_blank" onclick="event.stopPropagation()">wsj.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">DOGE: what was saved, what was destroyed, and what we still don't know</div><div class="story-tease">The audit of the audit.</div><div class="story-detail">The WSJ runs one of the most detailed post-mortems on the DOGE cost-cutting exercise: significant savings in some areas, courts reversing others, and a category of disruption — institutional knowledge lost, systems degraded — that won't show up in a balance sheet for years. The paper is critical but frames this as a management failure, not a political one.</div><a class="story-url" href="https://www.wsj.com" target="_blank" onclick="event.stopPropagation()">wsj.com</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Free trade vs tariffs</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Fed &amp; monetary policy</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Deregulation &amp; business climate</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">JR</div><div class="person-info"><div class="person-name">Jerome Powell</div><div class="person-role">Fed Chair</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Trump</div><div class="person-role">President</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">SS</div><div class="person-info"><div class="person-name">Scott Bessent</div><div class="person-role">Treasury Secretary</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="blind-spot"><h3>🔭 What America's Press Sees That The World Misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The opioid crisis never ended</div><div class="blind-item-desc">International coverage of the US drug crisis peaked around 2017-2019. It never went away — it evolved. Hundreds of thousands of Americans have died since the world moved on. It remains the defining domestic tragedy of the era.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Local news collapse</div><div class="blind-item-desc">Hundreds of American local newspapers have closed since 2020. "News deserts" — communities with no local coverage — now cover vast swathes of the country. The long-term democratic consequences are barely covered internationally.</div></div>
+        <div class="blind-item"><div class="blind-item-title">America's housing crisis</div><div class="blind-item-desc">The US has a housing shortage of roughly 4 million homes. Home ownership is increasingly unattainable for under-40s. This is as acute as anything in the UK or Spain — and receives a fraction of the political attention.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The state-level story</div><div class="blind-item-desc">International coverage of the US focuses entirely on Washington. But abortion law, education policy, gun law, and voting rights are now set at state level — and the divergence between red and blue states is creating what are effectively two different countries.</div></div>
+      </div></div>
+    </div><!-- /north-usa -->
+
+    <!-- CANADA -->
+    <div id="north-canada" class="country-panel">
+      <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+      <h2 class="section-title">🇨🇦 Canada — La Presse d'Aujourd'hui</h2>
+      <div class="papers-grid">
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-left">◀ Centre-left</div><div class="paper-name">Toronto Star</div><div class="paper-meta">Circ. ~700,000 digital · Canada's largest paper, progressive, Ontario-focused</div><div class="paper-tone">Progressive · Pro-welfare state · Anti-Conservative</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Carney's first 100 days: the man who inherited a crisis</div><div class="story-tease">New PM, same problems — but a different kind of leader for different times.</div><div class="story-detail">The Toronto Star reviews Mark Carney's first 100 days as Prime Minister: a surprisingly sure-footed performance navigating Trump's trade threats, a housing crisis, and a restive caucus. The paper — traditionally Liberal-leaning — gives credit where it's due while pushing Carney to move faster on housing affordability and healthcare funding.</div><a class="story-url" href="https://www.thestar.com" target="_blank" onclick="event.stopPropagation()">thestar.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Trump called us the 51st state. Canadians have not forgotten.</div><div class="story-tease">A nationalism that didn't exist two years ago is now reshaping Canadian identity.</div><div class="story-detail">The Star documents a genuine shift in Canadian national identity triggered by Trump's annexation rhetoric and tariff threats. Buy-Canadian movements, record travel boycotts of the US, and a surge in Canadian flag sales. The paper frames this as a rare moment of pan-Canadian unity across the usual fault lines of region, language, and class.</div><a class="story-url" href="https://www.thestar.com" target="_blank" onclick="event.stopPropagation()">thestar.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Canada's housing crisis: the market that failed a generation</div><div class="story-tease">Vancouver and Toronto prices are still eye-watering. The rest of Canada is catching up.</div><div class="story-detail">The Star investigates how the housing crisis has spread beyond Toronto and Vancouver to previously affordable cities — Calgary, Halifax, Winnipeg — as remote workers dispersed during the pandemic. Average home prices in Canada have risen 45% since 2020 in real terms.</div><a class="story-url" href="https://www.thestar.com" target="_blank" onclick="event.stopPropagation()">thestar.com</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Trump &amp; Canada-US relations</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Housing crisis</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Canadian identity &amp; sovereignty</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">MC</div><div class="person-info"><div class="person-name">Mark Carney</div><div class="person-role">Prime Minister, Liberal</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Trump</div><div class="person-role">US President (as threat)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">PP</div><div class="person-info"><div class="person-name">Pierre Poilievre</div><div class="person-role">Conservative Leader</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-centre">● Centre</div><div class="paper-name">The Globe and Mail</div><div class="paper-meta">Circ. ~900,000 digital · National quality readership, business and policy class</div><div class="paper-tone">Centrist · Pro-business · National perspective</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Canada needs a new economic model — and Carney knows it</div><div class="story-tease">Too dependent on the US, too reliant on commodities, too slow to build.</div><div class="story-detail">The Globe's editorial board argues that Trump's tariffs have exposed a structural vulnerability in the Canadian economy that long predates his presidency. Canada exports 75% of its goods to the US, has underinvested in manufacturing, and has a productivity gap with comparable economies. Carney's real task, the paper argues, is economic reorientation — not just trade negotiation.</div><a class="story-url" href="https://www.theglobeandmail.com" target="_blank" onclick="event.stopPropagation()">theglobeandmail.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Quebec is watching — and it doesn't always like what it sees</div><div class="story-tease">English Canada's nationalism boom has a French exception.</div><div class="story-detail">The Globe examines Quebec's more ambivalent response to the wave of Canadian nationalism triggered by Trump. Quebecers have their own distinct identity and are wary of English-Canadian patriotism that historically erased French culture. The paper asks whether Carney — an anglophone Quebecer — can bridge the divide.</div><a class="story-url" href="https://www.theglobeandmail.com" target="_blank" onclick="event.stopPropagation()">theglobeandmail.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Canada's immigration rethink: from "more" to "the right kind"</div><div class="story-tease">The pivot that no one expected from a Liberal government.</div><div class="story-detail">The Carney Liberals have significantly tightened immigration targets — a reversal of a decade of aggressive expansion under Trudeau. The Globe covers this as a pragmatic response to housing pressure and labour market data, noting that public opinion shifted sharply on immigration after the housing crisis worsened.</div><a class="story-url" href="https://www.theglobeandmail.com" target="_blank" onclick="event.stopPropagation()">theglobeandmail.com</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Economic reorientation</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Canada-US trade &amp; tariffs</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Quebec &amp; national unity</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">MC</div><div class="person-info"><div class="person-name">Mark Carney</div><div class="person-role">Prime Minister</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Trump</div><div class="person-role">US President</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">FLQ</div><div class="person-info"><div class="person-name">François Legault</div><div class="person-role">Quebec Premier, CAQ</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-right">▶ Centre-right / Conservative</div><div class="paper-name">National Post</div><div class="paper-meta">Circ. ~400,000 digital · Conservative, business-oriented, national</div><div class="paper-tone">Conservative · Pro-market · Western Canada voice</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Carney's Liberals are spending Canada into a corner</div><div class="story-tease">A new PM with old spending habits.</div><div class="story-detail">The National Post's editorial board argues that despite the change in Liberal leadership, the government's fiscal approach remains recklessly expansionary. With a federal deficit already high and US tariffs squeezing revenues, the paper calls for immediate spending restraint — a position the Carney government has shown little appetite for.</div><a class="story-url" href="https://nationalpost.com" target="_blank" onclick="event.stopPropagation()">nationalpost.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Alberta is watching Ottawa with familiar suspicion</div><div class="story-tease">Every federal crisis looks different from the oil patch.</div><div class="story-detail">The National Post gives prominent coverage to Alberta Premier Danielle Smith's criticism of federal energy and equalization policy, framing western alienation as a legitimate grievance rather than regional grievance. The paper warns Carney that ignoring Alberta risks a separatist surge that would dwarf Quebec's.</div><a class="story-url" href="https://nationalpost.com" target="_blank" onclick="event.stopPropagation()">nationalpost.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Poilievre was right about the housing crisis — even if he lost the election</div><div class="story-tease">The Conservatives' housing message outlasted their campaign.</div><div class="story-detail">The National Post argues that Pierre Poilievre's "build more houses" agenda — once dismissed as simplistic — has been quietly adopted by the Carney Liberals in all but name. The paper takes some satisfaction in this, framing it as an ideological vindication for supply-side housing policy.</div><a class="story-url" href="https://nationalpost.com" target="_blank" onclick="event.stopPropagation()">nationalpost.com</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Federal spending &amp; deficit</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Western Canada / Alberta</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Supply-side housing policy</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">PP</div><div class="person-info"><div class="person-name">Pierre Poilievre</div><div class="person-role">Conservative Leader</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">DS</div><div class="person-info"><div class="person-name">Danielle Smith</div><div class="person-role">Alberta Premier</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">MC</div><div class="person-info"><div class="person-name">Mark Carney</div><div class="person-role">PM (as critic target)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="blind-spot"><h3>🔭 Canada's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The sovereignty shock</div><div class="blind-item-desc">Trump's "51st state" comments triggered an identity crisis unlike anything since the Quebec referendums. Canada is rediscovering its own national character in response to external threat. This is a profound sociological moment largely invisible internationally.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Western alienation</div><div class="blind-item-desc">Alberta's frustration with Ottawa is structural, long-standing, and serious. The possibility of western Canadian separatism is not as remote as international observers assume. Canadian media covers this constantly. Foreign press treats it as curiosity.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The Indigenous reconciliation gap</div><div class="blind-item-desc">Canada's Truth and Reconciliation commitments remain largely unfulfilled. The gap between official statements and lived reality on First Nations reserves is enormous — and covered with great seriousness in Canadian papers and almost none internationally.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Canada's housing crisis rivals London or Sydney</div><div class="blind-item-desc">Price-to-income ratios in Vancouver and Toronto are among the worst in the developed world. This is as acute as anywhere — but Canada's generally positive international image means it receives far less global attention than equivalent crises elsewhere.</div></div>
+      </div></div>
+    </div><!-- /north-canada -->
+
+    <!-- MEXICO -->
+    <div id="north-mexico" class="country-panel">
+      <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+      <h2 class="section-title">🇲🇽 Mexico — La Prensa de Hoy</h2>
+      <div class="papers-grid">
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-left">◀ Left / Progressive</div><div class="paper-name">La Jornada</div><div class="paper-meta">Circ. ~90,000 · Left-wing intellectual, Mexico City<br>Founded 1984, anti-neoliberal tradition</div><div class="paper-tone">Progressive · Anti-US hegemony · AMLO-sympathetic</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Sheinbaum holds the line against Trump — with one hand tied behind her back</div><div class="story-tease">Mexico's first female president navigates an impossible neighbour.</div><div class="story-detail">La Jornada frames President Claudia Sheinbaum's diplomatic tightrope walk with Washington as a triumph of pragmatic sovereignty. The paper supports her resistance to US pressure on migration enforcement and cartel policy while acknowledging that Mexico's economic dependence on the US severely limits her options. Tone is supportive but realistic.</div><a class="story-url" href="https://www.jornada.com.mx" target="_blank" onclick="event.stopPropagation()">jornada.com.mx</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">US tariffs on Mexico: USMCA is dead in all but name</div><div class="story-tease">The trade deal everyone signed is the trade deal nobody respects.</div><div class="story-detail">La Jornada analyses US tariffs on Mexican goods that technically violate the USMCA agreement, arguing that Trump's contempt for multilateral rules has rendered the treaty meaningless. The paper calls for Mexico to accelerate trade diversification toward the EU and China — a position the Sheinbaum government has not fully embraced.</div><a class="story-url" href="https://www.jornada.com.mx" target="_blank" onclick="event.stopPropagation()">jornada.com.mx</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Judicial reform: Sheinbaum defends what her predecessor built</div><div class="story-tease">Mexico's judges are now elected. The legal world is still reeling.</div><div class="story-detail">La Jornada covers the aftermath of AMLO's controversial judicial reform — which made Supreme Court and federal judges subject to popular election — as a democratic success story. Critics say it opened the judiciary to cartel influence; La Jornada says it ended elite capture of the courts.</div><a class="story-url" href="https://www.jornada.com.mx" target="_blank" onclick="event.stopPropagation()">jornada.com.mx</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">US-Mexico sovereignty &amp; dignity</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Trade diversification</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Judicial &amp; institutional reform</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">CS</div><div class="person-info"><div class="person-name">Claudia Sheinbaum</div><div class="person-role">President of Mexico</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">AL</div><div class="person-info"><div class="person-name">AMLO (López Obrador)</div><div class="person-role">Former President (shadow)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Trump</div><div class="person-role">US President (as antagonist)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-centre">● Centre</div><div class="paper-name">Reforma</div><div class="paper-meta">Circ. ~120,000 · Professional class, Mexico City, national<br>Founded 1993, editorially independent</div><div class="paper-tone">Independent · Investigative · Anti-corruption</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Sheinbaum and Trump: a relationship built on managed tension</div><div class="story-tease">Neither wants a confrontation. Neither can fully avoid one.</div><div class="story-detail">Reforma's Washington and Mexico City correspondents analyse the Sheinbaum-Trump dynamic: Mexico has made significant concessions on migration enforcement to avoid the worst tariff scenarios, but Trump's demands keep escalating. The paper warns this is unsustainable and that Mexico's sovereignty is being eroded incrementally.</div><a class="story-url" href="https://www.reforma.com" target="_blank" onclick="event.stopPropagation()">reforma.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Cartel violence: the map of Mexico the government doesn't want you to see</div><div class="story-tease">Official statistics and lived reality are two different countries.</div><div class="story-detail">A Reforma investigation maps cartel territorial control across Mexico, finding that the Sinaloa and CJNG cartels effectively govern significant portions of several states with minimal federal interference. The paper's security correspondent is one of the most credible voices on organised crime in Latin America.</div><a class="story-url" href="https://www.reforma.com" target="_blank" onclick="event.stopPropagation()">reforma.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Nearshoring: the industrial boom Trump accidentally created</div><div class="story-tease">US companies are moving production to Mexico to avoid Chinese tariffs.</div><div class="story-detail">Reforma documents the "nearshoring" boom in northern Mexico: US companies relocating supply chains from China to Mexico to take advantage of USMCA — even as Trump imposes tariffs. Industrial parks in Monterrey and Saltillo are full. The paper explores the economic opportunity and its limits.</div><a class="story-url" href="https://www.reforma.com" target="_blank" onclick="event.stopPropagation()">reforma.com</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">US-Mexico diplomatic tension</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Cartel violence &amp; security</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Nearshoring &amp; economy</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">CS</div><div class="person-info"><div class="person-name">Claudia Sheinbaum</div><div class="person-role">President of Mexico</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Trump</div><div class="person-role">US President</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">MA</div><div class="person-info"><div class="person-name">Marco Rubio</div><div class="person-role">US Secretary of State</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-right">▶ Right / Conservative</div><div class="paper-name">Milenio</div><div class="paper-meta">Circ. ~100,000 print + large digital · Business conservative, national</div><div class="paper-tone">Conservative · Pro-business · Critical of Morena</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Sheinbaum's judicial reform is handing Mexico's courts to the cartels</div><div class="story-tease">Elected judges sound democratic. In Mexico's reality, it's something else.</div><div class="story-detail">Milenio leads with concerns from legal scholars and business groups that the AMLO-era judicial reform — defended by Sheinbaum — is enabling cartel interference in judicial elections. The paper reports on several states where known organised crime candidates are running unopposed for judgeships, framing this as an existential threat to the rule of law.</div><a class="story-url" href="https://www.milenio.com" target="_blank" onclick="event.stopPropagation()">milenio.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Business confidence falls — investors are watching Sheinbaum nervously</div><div class="story-tease">The nearshoring boom is real. So is the regulatory uncertainty.</div><div class="story-detail">Milenio's business desk reports a decline in business confidence surveys, with investors citing unpredictable regulatory changes, energy policy uncertainty, and concern about the rule of law following the judicial reform. The paper contrasts this with the government's optimistic economic messaging.</div><a class="story-url" href="https://www.milenio.com" target="_blank" onclick="event.stopPropagation()">milenio.com</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Crime statistics: the numbers Morena buries</div><div class="story-tease">Homicide rates are lower — but extortion and kidnapping are up.</div><div class="story-detail">Milenio publishes a breakdown of crime statistics it argues the Sheinbaum government underreports: while headline homicide numbers have improved, extortion, kidnapping, and "forced disappearances" have risen sharply in several states. The paper frames this as selective truth-telling by a government prioritising optics over safety.</div><a class="story-url" href="https://www.milenio.com" target="_blank" onclick="event.stopPropagation()">milenio.com</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Judicial reform &amp; rule of law</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Business climate &amp; investment</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Crime stats &amp; security</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">CS</div><div class="person-info"><div class="person-name">Claudia Sheinbaum</div><div class="person-role">President (as critic target)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">XG</div><div class="person-info"><div class="person-name">Xóchitl Gálvez</div><div class="person-role">Opposition leader (PAN/PRI/PRD)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">AL</div><div class="person-info"><div class="person-name">AMLO</div><div class="person-role">Former President (shadow PM)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="blind-spot"><h3>🔭 Mexico's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The cartels as parallel state</div><div class="blind-item-desc">In significant parts of Mexico, cartels provide employment, dispute resolution, and infrastructure — functioning as a parallel government. This is covered seriously by Mexican journalists (at great personal risk) and almost not at all internationally beyond sensationalised violence coverage.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Mexico's missing persons crisis</div><div class="blind-item-desc">Over 100,000 people are listed as disappeared in Mexico — a figure that dwarfs any similar crisis in Europe or North America. Families organising their own searches. This barely registers in international news.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The nearshoring revolution</div><div class="blind-item-desc">Trump's tariffs on China have turned Mexico into the world's most attractive manufacturing location for US-bound goods. This is transforming the Mexican economy faster than any policy in decades. International coverage is thin.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Femicide</div><div class="blind-item-desc">Mexico has among the highest femicide rates in the world. Women's movements, the "glitter protests," and the political response are major domestic stories. International coverage occasionally spikes then disappears entirely.</div></div>
+      </div></div>
+    </div><!-- /north-mexico -->
+  </div><!-- /region-north -->
+
+  <!-- CENTRAL & SOUTH stubs -->
+  <div id="region-central" class="region-panel">
+    <div class="coming-soon"><div class="cs-flag">🌴</div><h3>Central America &amp; Caribbean — Coming Soon</h3><p>Cuba (Granma / 14ymedio), Guatemala, El Salvador (El Faro — one of Latin America's finest investigative outlets), Jamaica, Trinidad. A region defined by migration, US influence, and extraordinary journalistic bravery.</p></div>
+  </div>
+  <div id="region-south" class="region-panel">
+    <div class="tier2-tabs">
+      <button class="tier2-tab soon">🇧🇷 Brazil — Soon</button>
+      <button class="tier2-tab soon">🇦🇷 Argentina — Soon</button>
+      <button class="tier2-tab soon">🇨🇴 Colombia — Soon</button>
+      <button class="tier2-tab soon">🇨🇱 Chile — Soon</button>
+      <button class="tier2-tab soon">🇵🇪 Peru — Soon</button>
+    </div>
+    <div class="coming-soon"><div class="cs-flag">🌎</div><h3>South America — Coming Soon</h3><p>Brazil's Folha de S.Paulo, O Globo, and Veja magazine · Argentina's La Nación, Clarín, and Página 12 — three papers that couldn't be more different · Colombia's El Tiempo · Chile's El Mercurio. A continent where left and right are locked in genuinely historic battles over economic models, and where journalism is practised at considerable personal risk.</p></div>
+  </div>
+
+</div>
+<script>
+  const d = new Date();
+  document.getElementById('dateDisplay').textContent = d.toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+  function toggleStory(el) { el.classList.toggle('open'); }
+  function showRegion(id, tabEl) {
+    document.querySelectorAll('.region-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tier1-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('region-' + id).classList.add('active');
+    tabEl.classList.add('active');
+  }
+  function showCountry(region, country, tabEl) {
+    const panel = document.getElementById('region-' + region);
+    panel.querySelectorAll('.country-panel').forEach(p => p.classList.remove('active'));
+    panel.querySelectorAll('.tier2-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(region + '-' + country).classList.add('active');
+    tabEl.classList.add('active');
+  }
+</script>
+</body>
+</html>

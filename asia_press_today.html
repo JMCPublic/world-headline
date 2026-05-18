@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asia-Pacific Press — World Headline</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #0a0a1a; color: #e8e4d0; min-height: 100vh; }
+
+  .site-header { background: linear-gradient(135deg, #0d1b2a 0%, #1a2744 50%, #0d1b2a 100%);
+    border-bottom: 2px solid #2a4a7f; padding: 18px 24px; }
+  .site-header h1 { font-size: 1.5rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #c8a951; font-weight: 300; }
+  .site-header p { font-size: 0.8rem; color: #8899aa; margin-top: 4px; letter-spacing: 1px; }
+
+  .region-nav { background: #111827; border-bottom: 1px solid #1e3a5f; padding: 10px 24px;
+    display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .region-nav a { color: #7fa8c8; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.5px;
+    transition: color 0.2s; }
+  .region-nav a:hover, .region-nav a.active { color: #c8a951; }
+  .region-nav span { color: #2a4a7f; }
+
+  .top-panel { background: linear-gradient(135deg, #1a2744 0%, #0d1b2a 100%);
+    border: 1px solid #2a4a7f; border-radius: 8px; margin: 20px 20px 0;
+    padding: 18px 22px; }
+  .top-panel h2 { font-size: 1rem; letter-spacing: 2px; color: #c8a951; margin-bottom: 12px;
+    text-transform: uppercase; }
+  .top3 { display: flex; gap: 14px; flex-wrap: wrap; }
+  .top3-item { flex: 1; min-width: 200px; background: rgba(255,255,255,0.04);
+    border-left: 3px solid #2a4a7f; padding: 10px 14px; border-radius: 0 6px 6px 0; }
+  .top3-item .rank { font-size: 0.7rem; color: #c8a951; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 4px; }
+  .top3-item p { font-size: 0.85rem; line-height: 1.4; color: #c8d8e8; }
+
+  .dashboard { padding: 20px; }
+
+  /* Tier 1 — region tabs */
+  .tier1-tabs { display: flex; gap: 8px; margin-bottom: 0; flex-wrap: wrap; }
+  button.tier1-tab { background: #111827; border: 1px solid #2a4a7f; color: #7fa8c8;
+    padding: 9px 18px; border-radius: 6px 6px 0 0; font-size: 0.82rem; cursor: pointer;
+    letter-spacing: 0.5px; transition: all 0.2s; touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent; font-family: Georgia, serif; }
+  button.tier1-tab:hover { background: #1a2744; color: #c8a951; }
+  button.tier1-tab.active { background: #1a2744; border-bottom-color: #1a2744;
+    color: #c8a951; border-top: 2px solid #c8a951; }
+
+  .region-panel { display: none; background: #111827; border: 1px solid #2a4a7f;
+    border-radius: 0 6px 6px 6px; padding: 16px; }
+  .region-panel.active { display: block; }
+
+  /* Tier 2 — country tabs */
+  .tier2-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  button.tier2-tab { background: #0d1b2a; border: 1px solid #1e3a5f; color: #7fa8c8;
+    padding: 6px 14px; border-radius: 4px; font-size: 0.78rem; cursor: pointer;
+    letter-spacing: 0.5px; transition: all 0.2s; touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent; font-family: Georgia, serif; }
+  button.tier2-tab:hover { background: #1a2744; color: #c8a951; }
+  button.tier2-tab.active { background: #1a2744; color: #c8a951; border-color: #c8a951; }
+  button.tier2-tab.soon { opacity: 0.45; cursor: default; pointer-events: none; }
+
+  .country-panel { display: none; }
+  .country-panel.active { display: block; }
+
+  .country-title { font-size: 1.05rem; color: #c8a951; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 1px solid #2a4a7f; }
+
+  /* Paper cards */
+  .papers { display: flex; gap: 14px; flex-wrap: wrap; }
+  .paper { flex: 1; min-width: 260px; background: #0d1b2a; border: 1px solid #1e3a5f;
+    border-radius: 8px; overflow: hidden; }
+  .paper-header { padding: 12px 16px; }
+  .paper-header .lean { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 4px; font-weight: bold; }
+  .lean-left { color: #e05c5c; }
+  .lean-centre { color: #7fa8c8; }
+  .lean-right { color: #5c9e6e; }
+  .paper-name { font-size: 1rem; color: #e8e4d0; font-weight: bold; }
+  .paper-desc { font-size: 0.72rem; color: #8899aa; margin-top: 2px; }
+
+  .stories { padding: 0 16px 14px; }
+  .story { border-top: 1px solid #1e3a5f; padding: 10px 0; }
+  .story-headline { font-size: 0.88rem; color: #c8d8e8; line-height: 1.4; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .story-headline:hover { color: #c8a951; }
+  .story-toggle { color: #2a4a7f; font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
+  .story-detail { display: none; font-size: 0.78rem; color: #8899aa; margin-top: 6px;
+    line-height: 1.5; padding-left: 8px; border-left: 2px solid #2a4a7f; }
+  .story-detail.open { display: block; }
+
+  /* Trackers */
+  .trackers { padding: 10px 16px 14px; border-top: 1px solid #1e3a5f; }
+  .tracker-row { margin-bottom: 8px; }
+  .tracker-label { font-size: 0.68rem; color: #8899aa; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 4px; }
+  .tracker-topic { font-size: 0.75rem; color: #c8d8e8; margin-bottom: 4px; }
+  .dots { display: flex; gap: 4px; flex-wrap: wrap; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid; }
+  .dot.amber { background: #c8a951; border-color: #c8a951; }
+  .dot.amber-empty { background: transparent; border-color: #4a3a1a; }
+  .dot.purple { background: #9b59b6; border-color: #9b59b6; }
+  .dot.purple-empty { background: transparent; border-color: #3a1a4a; }
+
+  /* Blind spots */
+  .blind-spots { margin-top: 14px; background: rgba(200,169,81,0.06);
+    border: 1px solid rgba(200,169,81,0.2); border-radius: 6px; padding: 12px 16px; }
+  .blind-spots h4 { font-size: 0.72rem; color: #c8a951; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 8px; }
+  .blind-spot-item { font-size: 0.78rem; color: #8899aa; padding: 4px 0;
+    border-top: 1px solid rgba(200,169,81,0.1); }
+  .blind-spot-item:first-of-type { border-top: none; }
+
+  /* Stub */
+  .stub-panel { background: rgba(42,74,127,0.1); border: 1px dashed #2a4a7f;
+    border-radius: 6px; padding: 30px; text-align: center; color: #4a6a9a; }
+  .stub-panel p { margin-top: 8px; font-size: 0.82rem; }
+
+  @media (max-width: 600px) {
+    .papers { flex-direction: column; }
+    .top3 { flex-direction: column; }
+    .site-header h1 { font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <h1>🌏 Asia-Pacific Press</h1>
+  <p>East Asia · South & SE Asia · Pacific — Left / Centre / Right</p>
+</div>
+
+<nav class="region-nav">
+  <a href="index.html">🏠 Home</a>
+  <span>|</span>
+  <a href="uk_press_today.html">🇬🇧 UK</a>
+  <a href="europe_press_today.html">🌍 Europe</a>
+  <a href="americas_press_today.html">🌎 Americas</a>
+  <a href="asia_press_today.html" class="active">🌏 Asia-Pac</a>
+  <span>|</span>
+  <a href="index.html#mideast">🌐 Middle East</a>
+  <a href="index.html#africa">🌍 Africa</a>
+</nav>
+
+<div class="top-panel">
+  <h2>🌏 Asia-Pacific — Top Stories This Week</h2>
+  <div class="top3">
+    <div class="top3-item">
+      <div class="rank">Story 1</div>
+      <p>US tariff fallout reshapes Asia-Pacific trade alliances — every regional economy recalibrating supply chains and export dependency</p>
+    </div>
+    <div class="top3-item">
+      <div class="rank">Story 2</div>
+      <p>South China Sea tensions rise as China's military presence near Philippines and Vietnam draws ASEAN concern and US naval response</p>
+    </div>
+    <div class="top3-item">
+      <div class="rank">Story 3</div>
+      <p>AI and tech investment boom: Japan, South Korea, Malaysia and Australia all racing to position as regional AI hubs post-DeepSeek</p>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard">
+  <div class="tier1-tabs">
+    <button class="tier1-tab active" onclick="showRegion('east', this)">🗾 East Asia</button>
+    <button class="tier1-tab" onclick="showRegion('sea', this)">🌴 South &amp; SE Asia</button>
+    <button class="tier1-tab" onclick="showRegion('pacific', this)">🦘 Pacific</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ EAST ASIA ═══ -->
+  <div id="region-east" class="region-panel active">
+    <div class="tier2-tabs">
+      <button class="tier2-tab soon" onclick="showCountry('east','japan',this)">🇯🇵 Japan <small>(soon)</small></button>
+      <button class="tier2-tab soon" onclick="showCountry('east','china',this)">🇨🇳 China <small>(soon)</small></button>
+      <button class="tier2-tab soon" onclick="showCountry('east','korea',this)">🇰🇷 South Korea <small>(soon)</small></button>
+    </div>
+    <div id="east-japan" class="country-panel active">
+      <div class="stub-panel">🗾 <strong>Japan</strong><p>Coming soon — Asahi Shimbun, Yomiuri Shimbun, Sankei Shimbun</p></div>
+    </div>
+    <div id="east-china" class="country-panel">
+      <div class="stub-panel">🇨🇳 <strong>China</strong><p>Coming soon — South China Morning Post (HK), Global Times, Caixin</p></div>
+    </div>
+    <div id="east-korea" class="country-panel">
+      <div class="stub-panel">🇰🇷 <strong>South Korea</strong><p>Coming soon — Hankyoreh, JoongAng Ilbo, Chosun Ilbo</p></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ SOUTH & SE ASIA ═══ -->
+  <div id="region-sea" class="region-panel">
+    <div class="tier2-tabs">
+      <button class="tier2-tab active" onclick="showCountry('sea','malaysia',this)">🇲🇾 Malaysia</button>
+      <button class="tier2-tab soon" onclick="showCountry('sea','india',this)">🇮🇳 India <small>(soon)</small></button>
+      <button class="tier2-tab soon" onclick="showCountry('sea','singapore',this)">🇸🇬 Singapore <small>(soon)</small></button>
+      <button class="tier2-tab soon" onclick="showCountry('sea','indonesia',this)">🇮🇩 Indonesia <small>(soon)</small></button>
+      <button class="tier2-tab soon" onclick="showCountry('sea','vietnam',this)">🇻🇳 Vietnam <small>(soon)</small></button>
+      <button class="tier2-tab soon" onclick="showCountry('sea','philippines',this)">🇵🇭 Philippines <small>(soon)</small></button>
+    </div>
+
+    <!-- MALAYSIA -->
+    <div id="sea-malaysia" class="country-panel active">
+      <div class="country-title">🇲🇾 Malaysia — Press Today</div>
+      <div class="papers">
+
+        <!-- Malaysiakini -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-left">◀ Independent / Left-Liberal</div>
+            <div class="paper-name">Malaysiakini</div>
+            <div class="paper-desc">Online-only · English & BM · Fearless watchdog journalism · Paywall</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Anwar defends unity government as Bersatu and PN attack budget priorities ahead of by-elections</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">PM Anwar Ibrahim faces sustained fire from opposition Perikatan Nasional as the unity government's RM421bn budget is picked apart ahead of crucial Selangor and Terengganu by-elections. PN frames spending as favouring the west coast urbanites at the expense of rural Malay heartlands.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Corruption watch: MACC probes RM2.4bn defence procurement irregularities stretching back a decade</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">Malaysia's anti-corruption commission has opened a sprawling investigation into defence ministry contracts awarded between 2013–2023, with multiple former senior officials named. Malaysiakini leads on access to whistleblower testimony and leaked procurement documents.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>US tariffs hit Malaysia's semiconductor and glove sectors — exporters demand government relief package</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">Malaysia's position as a key chip-packaging and medical glove exporter leaves it exposed to Washington's sweeping tariff regime. The Penang semiconductor corridor faces margin compression; manufacturers are lobbying Putrajaya for a RM6bn relief and diversification fund.</div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">🐎 Hobby Horse</div>
+              <div class="tracker-topic">Political corruption & accountability</div>
+              <div class="dots">
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber"></span>
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber-empty"></span>
+                <span class="dot amber-empty"></span><span class="dot amber-empty"></span>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">👤 Undue Influence</div>
+              <div class="tracker-topic">Anwar Ibrahim</div>
+              <div class="dots">
+                <span class="dot purple"></span><span class="dot purple"></span><span class="dot purple"></span>
+                <span class="dot purple"></span><span class="dot purple-empty"></span><span class="dot purple-empty"></span>
+                <span class="dot purple-empty"></span><span class="dot purple-empty"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Star -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre / Mainstream</div>
+            <div class="paper-name">The Star</div>
+            <div class="paper-desc">Print & digital · Largest English daily · MCA-linked ownership · Business-friendly</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Malaysia GDP growth holds at 4.9% — investment pipeline strong despite global headwinds</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">Bank Negara's quarterly data shows Malaysia's economy expanding ahead of most regional peers, driven by data centre investment from US tech giants and resilient domestic consumption. The Star leads with the minister's optimism, giving less prominence to risks from tariff exposure.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Madani economy: foreign direct investment in manufacturing hits 15-year high at RM63bn</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">MIDA figures show record FDI inflows, with US chip companies and Chinese EV manufacturers both betting on Malaysia as a manufacturing base. The Star frames this as a Madani economy success, noting Johor's growth as a data centre hub alongside Singapore's overflow demand.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Floods season early warning: NADMA pre-positions relief as Kelantan and Pahang brace for monsoon</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">Malaysia's monsoon flood season approaches and The Star covers preparations across the worst-affected east coast states. Government coordination is presented positively; opposition criticism of inadequate drainage infrastructure investment appears further down the coverage.</div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">🐎 Hobby Horse</div>
+              <div class="tracker-topic">Investment & economic growth</div>
+              <div class="dots">
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber"></span>
+                <span class="dot amber"></span><span class="dot amber-empty"></span><span class="dot amber-empty"></span>
+                <span class="dot amber-empty"></span><span class="dot amber-empty"></span>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">👤 Undue Influence</div>
+              <div class="tracker-topic">Tengku Zafrul (Finance Ministry)</div>
+              <div class="dots">
+                <span class="dot purple"></span><span class="dot purple"></span><span class="dot purple"></span>
+                <span class="dot purple-empty"></span><span class="dot purple-empty"></span><span class="dot purple-empty"></span>
+                <span class="dot purple-empty"></span><span class="dot purple-empty"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- New Straits Times -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-right">▶ Right / Pro-Government</div>
+            <div class="paper-name">New Straits Times</div>
+            <div class="paper-desc">Print & digital · UMNO-aligned history · Establishment voice · Malay national interest</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Unity government one year on: stability delivered, security strengthened, economy on track</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">NST's favourable retrospective on the Anwar-led unity government emphasises political stability and improved diplomatic standing. The piece relies heavily on government-supplied data and minister quotes, framing the coalition's performance as a national success story ahead of by-elections.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Bumiputera equity threshold review: government reaffirms affirmative policy commitments</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">NST leads on the government reiterating Bumiputera economic participation targets in the face of criticism from some business groups. The paper frames this as a non-negotiable national policy pillar, giving extensive column space to UMNO and Bersatu voices who frame it as identity politics.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Malaysia condemns Israeli offensive in Gaza — foreign minister calls for emergency UN session</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">NST leads strongly on Malaysia's vocal Gaza position, which plays well domestically and aligns the government with majority Muslim public opinion. The paper gives prominent space to the Foreign Ministry's diplomatic pushback and Malaysia's calls for accountability at the ICJ.</div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">🐎 Hobby Horse</div>
+              <div class="tracker-topic">Malay rights & national identity</div>
+              <div class="dots">
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber"></span>
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber-empty"></span>
+                <span class="dot amber-empty"></span><span class="dot amber-empty"></span>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">👤 Undue Influence</div>
+              <div class="tracker-topic">Anwar Ibrahim</div>
+              <div class="dots">
+                <span class="dot purple"></span><span class="dot purple"></span><span class="dot purple"></span>
+                <span class="dot purple"></span><span class="dot purple"></span><span class="dot purple-empty"></span>
+                <span class="dot purple-empty"></span><span class="dot purple-empty"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 What Malaysian Papers Are Missing This Week</h4>
+        <div class="blind-spot-item">The Rohingya refugee crisis — 100,000+ in Malaysia, rarely covered sympathetically in any mainstream outlet</div>
+        <div class="blind-spot-item">Press freedom — Malaysia ranks 107th globally; self-censorship at The Star and NST goes unexamined</div>
+        <div class="blind-spot-item">LGBTQ+ rights — decriminalisation debate happening regionally but near-invisible in Malaysian English press</div>
+        <div class="blind-spot-item">Chinese Malaysian community politics — MCA's near-irrelevance and community anxieties underreported</div>
+      </div>
+    </div><!-- /malaysia -->
+
+    <!-- Stubs for other SEA countries -->
+    <div id="sea-india" class="country-panel">
+      <div class="stub-panel">🇮🇳 <strong>India</strong><p>Coming soon — The Hindu, Times of India, The Print</p></div>
+    </div>
+    <div id="sea-singapore" class="country-panel">
+      <div class="stub-panel">🇸🇬 <strong>Singapore</strong><p>Coming soon — The Straits Times, Today, The Independent SG</p></div>
+    </div>
+    <div id="sea-indonesia" class="country-panel">
+      <div class="stub-panel">🇮🇩 <strong>Indonesia</strong><p>Coming soon — Kompas, Tempo, Jakarta Post</p></div>
+    </div>
+    <div id="sea-vietnam" class="country-panel">
+      <div class="stub-panel">🇻🇳 <strong>Vietnam</strong><p>Coming soon — VnExpress, Tuoi Tre, Vietnam News</p></div>
+    </div>
+    <div id="sea-philippines" class="country-panel">
+      <div class="stub-panel">🇵🇭 <strong>Philippines</strong><p>Coming soon — Philippine Daily Inquirer, Manila Bulletin, Rappler</p></div>
+    </div>
+  </div><!-- /region-sea -->
+
+  <!-- ═══════════════════════════════════════════ PACIFIC ═══ -->
+  <div id="region-pacific" class="region-panel">
+    <div class="tier2-tabs">
+      <button class="tier2-tab active" onclick="showCountry('pacific','australia',this)">🇦🇺 Australia</button>
+      <button class="tier2-tab soon" onclick="showCountry('pacific','newzealand',this)">🇳🇿 New Zealand <small>(soon)</small></button>
+    </div>
+
+    <!-- AUSTRALIA -->
+    <div id="pacific-australia" class="country-panel active">
+      <div class="country-title">🇦🇺 Australia — Press Today</div>
+      <div class="papers">
+
+        <!-- Sydney Morning Herald -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-left">◀ Centre-Left / Liberal</div>
+            <div class="paper-name">Sydney Morning Herald</div>
+            <div class="paper-desc">Nine Entertainment · Quality broadsheet · Progressive on climate & rights · National reach</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Albanese second term: housing, renewable energy and AUKUS dominate first 100 days agenda</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">The SMH covers the re-elected Labor government's ambitious legislative programme with cautious optimism. Housing affordability is framed as the defining test — Help to Buy scheme, build-to-rent incentives — while the AUKUS submarine deal timeline remains contested. Climate: 82% renewable energy target commitment front and centre.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>NDIS reform: minister promises sustainability fixes without stripping support from vulnerable Australians</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">The National Disability Insurance Scheme's ballooning cost — projected at A$50bn by 2027 — forces the government into politically painful reform. SMH balances fiscal reality against personal stories of participants who fear losing services, keeping human stakes central to the coverage.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>US tariffs and Trump's Pacific posture: Australia caught between alliance loyalty and trade exposure</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">Australia's unusual position — a Five Eyes ally facing US tariffs on steel and aluminium — generates SMH analysis of the tension between security dependence and economic sovereignty. The paper is sceptical of Washington's reliability and flags growing bipartisan interest in hedging toward ASEAN and China relationships.</div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">🐎 Hobby Horse</div>
+              <div class="tracker-topic">Housing affordability crisis</div>
+              <div class="dots">
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber"></span>
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber"></span>
+                <span class="dot amber-empty"></span><span class="dot amber-empty"></span>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">👤 Undue Influence</div>
+              <div class="tracker-topic">Anthony Albanese</div>
+              <div class="dots">
+                <span class="dot purple"></span><span class="dot purple"></span><span class="dot purple"></span>
+                <span class="dot purple"></span><span class="dot purple-empty"></span><span class="dot purple-empty"></span>
+                <span class="dot purple-empty"></span><span class="dot purple-empty"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Australian Financial Review -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre / Business</div>
+            <div class="paper-name">Australian Financial Review</div>
+            <div class="paper-desc">Nine Entertainment · Business elite readership · Free market · Hard paywall</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>RBA holds rates as inflation cools — but mortgage holders warned: relief is slow and conditional</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">The Reserve Bank of Australia holds the cash rate at 4.1% amid moderating CPI data. AFR takes a harder line than SMH on the outlook, quoting business economists warning that premature cuts risk re-igniting services inflation. The paper positions itself as giving the institutional view, not the politically convenient one.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Tech IPO revival: ASX listings pipeline strongest since 2021 as venture capital exits accumulate</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">AFR's markets desk reports a resurgent Australian IPO market, with three fintech and two AI-adjacent companies flagged for Q3 ASX listings. The paper frames this as evidence that post-pandemic correction is over and capital markets are functioning again — a story SMH would likely give less prominence.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Labour market: skills shortages persist in construction and healthcare despite immigration surge</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">Record net overseas migration has not solved Australia's structural skills gaps in the sectors that need workers most, AFR finds. The coverage takes an employer perspective — migration settings, visa processing delays, training pipeline failures — and is sceptical of government claims that migration alone will fix housing construction shortfalls.</div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">🐎 Hobby Horse</div>
+              <div class="tracker-topic">Interest rates & business costs</div>
+              <div class="dots">
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber"></span>
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber-empty"></span>
+                <span class="dot amber-empty"></span><span class="dot amber-empty"></span>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">👤 Undue Influence</div>
+              <div class="tracker-topic">Michele Bullock (RBA Governor)</div>
+              <div class="dots">
+                <span class="dot purple"></span><span class="dot purple"></span><span class="dot purple"></span>
+                <span class="dot purple"></span><span class="dot purple"></span><span class="dot purple-empty"></span>
+                <span class="dot purple-empty"></span><span class="dot purple-empty"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Australian -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-right">▶ Right / Conservative</div>
+            <div class="paper-name">The Australian</div>
+            <div class="paper-desc">News Corp (Murdoch) · National conservative voice · Influential with policymakers · Sceptical of progressive agenda</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Net zero targets "economically reckless" — industry warns renewable grid instability costing billions</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">The Australian continues its years-long campaign against Labor's renewables-first energy policy, foregrounding industry lobby warnings about grid reliability, energy price spikes, and the cost of storage infrastructure. The paper gives space to Liberal and National critics and consistently questions the economic modelling behind net zero commitments.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>Voice aftermath: Indigenous policy needs "practical solutions, not symbolism," says opposition</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">Following the failed 2023 Voice to Parliament referendum, The Australian tracks the ongoing Indigenous policy debate — framing the opposition view that practical programs (jobs, health, safety) should replace constitutional recognition. The paper consistently platformes critics of the Uluru Statement framing.</div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                <span>AUKUS submarine timeline slipping — defence experts warn first boat won't arrive before 2040</span>
+                <span class="story-toggle">▶</span>
+              </div>
+              <div class="story-detail">The Australian's defence coverage questions whether AUKUS is delivering on its strategic promise, with defence analysts warning the Virginia-class purchase schedule is at risk from US Navy's own production pressures. The paper supports the AUKUS concept but holds the government to account on delivery — a more forensic critique than SMH's softer coverage.</div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">🐎 Hobby Horse</div>
+              <div class="tracker-topic">Anti-renewables / energy costs</div>
+              <div class="dots">
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber"></span>
+                <span class="dot amber"></span><span class="dot amber"></span><span class="dot amber"></span>
+                <span class="dot amber"></span><span class="dot amber-empty"></span>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">👤 Undue Influence</div>
+              <div class="tracker-topic">Peter Dutton (Opposition Leader)</div>
+              <div class="dots">
+                <span class="dot purple"></span><span class="dot purple"></span><span class="dot purple"></span>
+                <span class="dot purple"></span><span class="dot purple"></span><span class="dot purple"></span>
+                <span class="dot purple-empty"></span><span class="dot purple-empty"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 What Australian Papers Are Missing This Week</h4>
+        <div class="blind-spot-item">Pacific Island climate displacement — existential threat to Australia's neighbours largely absent from domestic coverage</div>
+        <div class="blind-spot-item">Aged care reform — landmark legislation passed but follow-through on implementation rarely tracked</div>
+        <div class="blind-spot-item">First Nations deaths in custody — ongoing crisis underreported outside Indigenous specialist media</div>
+        <div class="blind-spot-item">Australia-China relationship nuance — still framed as binary (engagement vs. decoupling) rather than sector-by-sector complexity</div>
+      </div>
+    </div><!-- /australia -->
+
+    <div id="pacific-newzealand" class="country-panel">
+      <div class="stub-panel">🇳🇿 <strong>New Zealand</strong><p>Coming soon — NZ Herald, Stuff, The Spinoff</p></div>
+    </div>
+  </div><!-- /region-pacific -->
+
+</div><!-- /dashboard -->
+
+<script>
+function showRegion(id, tabEl) {
+  document.querySelectorAll('.region-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tier1-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('region-' + id).classList.add('active');
+  tabEl.classList.add('active');
+}
+
+function showCountry(region, country, tabEl) {
+  const panel = document.getElementById('region-' + region);
+  panel.querySelectorAll('.country-panel').forEach(p => p.classList.remove('active'));
+  panel.querySelectorAll('.tier2-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(region + '-' + country).classList.add('active');
+  tabEl.classList.add('active');
+}
+
+function toggleStory(el) {
+  const detail = el.parentElement.querySelector('.story-detail');
+  const toggle = el.querySelector('.story-toggle');
+  if (detail) {
+    detail.classList.toggle('open');
+    if (toggle) toggle.textContent = detail.classList.contains('open') ? '▼' : '▶';
+  }
+}
+</script>
+
+</body>
+</html>

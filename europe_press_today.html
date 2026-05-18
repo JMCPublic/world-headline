@@ -37,6 +37,8 @@
   .tier2-tab:hover { border-color: #999; color: #1a1a1a; }
   .tier2-tab.active { border-color: #1a1a1a; background: #1a1a1a; color: #f5f3ee; }
   .tier2-tab.soon { opacity: 0.5; cursor: default; }
+  button.tier1-tab, button.tier2-tab { font-family: sans-serif; border: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  button.tier2-tab.soon { pointer-events: none; }
   .country-panel { display: none; }
   .country-panel.active { display: block; }
 
@@ -101,8 +103,8 @@
   <a href="uk_press_today.html">🇬🇧 UK</a>
   <a href="europe_press_today.html" class="active">🌍 Europe</a>
   <span class="sep">|</span>
-  <a href="index.html#americas">🌎 Americas</a>
-  <a href="index.html#asia">🌏 Asia-Pacific</a>
+  <a href="americas_press_today.html">🌎 Americas</a>
+  <a href="asia_press_today.html">🌏 Asia-Pacific</a>
   <a href="index.html#mideast">🌐 Middle East</a>
   <a href="index.html#africa">🌍 Africa</a>
 </nav>
@@ -120,20 +122,20 @@
 
   <!-- REGION TIER 1 TABS -->
   <div class="tier1-tabs">
-    <div class="tier1-tab active" onclick="showRegion('west',this)">🌍 Western Europe</div>
-    <div class="tier1-tab" onclick="showRegion('north',this)">🌨 Scandinavia &amp; Nordics</div>
-    <div class="tier1-tab" onclick="showRegion('south',this)">☀️ Mediterranean</div>
-    <div class="tier1-tab" onclick="showRegion('central',this)">🏔 Central &amp; Balkans</div>
+    <button class="tier1-tab active" onclick="showRegion('west',this)">🌍 Western Europe</button>
+    <button class="tier1-tab" onclick="showRegion('north',this)">🌨 Scandinavia &amp; Nordics</button>
+    <button class="tier1-tab" onclick="showRegion('south',this)">☀️ Mediterranean</button>
+    <button class="tier1-tab" onclick="showRegion('central',this)">🏔 Central &amp; Balkans</button>
   </div>
 
   <!-- ===== WESTERN EUROPE ===== -->
   <div id="region-west" class="region-panel active">
     <div class="tier2-tabs">
-      <div class="tier2-tab active" onclick="showCountry('west','france',this)">🇫🇷 France</div>
-      <div class="tier2-tab" onclick="showCountry('west','germany',this)">🇩🇪 Germany</div>
-      <div class="tier2-tab" onclick="showCountry('west','netherlands',this)">🇳🇱 Netherlands</div>
-      <div class="tier2-tab" onclick="showCountry('west','belgium',this)">🇧🇪 Belgium</div>
-      <div class="tier2-tab" onclick="showCountry('west','ireland',this)">🇮🇪 Ireland</div>
+      <button class="tier2-tab active" onclick="showCountry('west','france',this)">🇫🇷 France</button>
+      <button class="tier2-tab" onclick="showCountry('west','germany',this)">🇩🇪 Germany</button>
+      <button class="tier2-tab" onclick="showCountry('west','netherlands',this)">🇳🇱 Netherlands</button>
+      <button class="tier2-tab" onclick="showCountry('west','belgium',this)">🇧🇪 Belgium</button>
+      <button class="tier2-tab" onclick="showCountry('west','ireland',this)">🇮🇪 Ireland</button>
     </div>
 
     <!-- FRANCE -->
@@ -305,10 +307,10 @@
   <!-- ===== SCANDINAVIA ===== -->
   <div id="region-north" class="region-panel">
     <div class="tier2-tabs">
-      <div class="tier2-tab active" onclick="showCountry('north','sweden',this)">🇸🇪 Sweden</div>
-      <div class="tier2-tab" onclick="showCountry('north','norway',this)">🇳🇴 Norway</div>
-      <div class="tier2-tab" onclick="showCountry('north','denmark',this)">🇩🇰 Denmark</div>
-      <div class="tier2-tab" onclick="showCountry('north','finland',this)">🇫🇮 Finland</div>
+      <button class="tier2-tab active" onclick="showCountry('north','sweden',this)">🇸🇪 Sweden</button>
+      <button class="tier2-tab" onclick="showCountry('north','norway',this)">🇳🇴 Norway</button>
+      <button class="tier2-tab" onclick="showCountry('north','denmark',this)">🇩🇰 Denmark</button>
+      <button class="tier2-tab" onclick="showCountry('north','finland',this)">🇫🇮 Finland</button>
     </div>
 
     <!-- SWEDEN (full content) -->
@@ -390,17 +392,92 @@
 
     <div id="north-norway" class="country-panel"><div class="coming-soon"><div class="cs-flag">🇳🇴</div><h3>Norway — Coming Soon</h3><p>Dagbladet (left), Aftenposten (centre), Dagens Næringsliv / VG (right). The unique perspective of a rich oil state watching Europe's energy crisis from the outside.</p></div></div>
     <div id="north-denmark" class="country-panel"><div class="coming-soon"><div class="cs-flag">🇩🇰</div><h3>Denmark — Coming Soon</h3><p>Information (left), Politiken (centre-left), Berlingske (centre-right), Jyllands-Posten (right). The country that moved furthest and fastest on immigration policy — and what that actually looks like in its press.</p></div></div>
-    <div id="north-finland" class="country-panel"><div class="coming-soon"><div class="cs-flag">🇫🇮</div><h3>Finland — Coming Soon</h3><p>Helsingin Sanomat (centre-liberal), Ilta-Sanomat (popular). The NATO member with the longest border with Russia — and a media that has been warning about this threat for decades.</p></div></div>
+    <div id="north-finland" class="country-panel">
+      <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+      <h2 class="section-title">🇫🇮 Finland — Tänään Lehdissä</h2>
+      <div class="papers-grid">
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-left">◀ Centre-left / Liberal</div><div class="paper-name">Helsingin Sanomat</div><div class="paper-meta">Circ. ~280,000 · Finland's largest paper, urban educated readership</div><div class="paper-tone">Liberal · Pro-EU · Independent</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Finland's NATO year two: the threat is real, and we always knew it</div><div class="story-tease">Finns were warning about Russia for decades. Nobody listened.</div><div class="story-detail">Helsingin Sanomat marks two years of NATO membership with a frank retrospective. Finland shares an 1,340km border with Russia — longer than any other NATO member. The paper documents how Finnish intelligence and defence planners had been sounding alarms about Russian intent since at least 2014, while the rest of Europe dismissed the threat as Finnish paranoia.</div><a class="story-url" href="https://www.hs.fi" target="_blank" onclick="event.stopPropagation()">hs.fi</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Housing costs squeeze the young — Finland joins Europe's generational divide</div><div class="story-tease">The Nordic welfare state promised security. Rent didn't get the memo.</div><div class="story-detail">HS investigates a growing affordability crisis in Helsinki and Tampere, where rents have risen sharply while graduate starting salaries have stagnated. Finland had largely avoided the housing crisis gripping the rest of Europe — but no longer. The paper links this to a broader erosion of the social compact that underpins the Finnish welfare model.</div><a class="story-url" href="https://www.hs.fi" target="_blank" onclick="event.stopPropagation()">hs.fi</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Orpo's government cuts bite — the welfare debate Finland thought it had settled</div><div class="story-tease">Austerity is a word Finns thought belonged to southern Europe.</div><div class="story-detail">Finland's centre-right Orpo government is implementing the sharpest public spending cuts in decades to address a budget deficit that ballooned post-pandemic. HS covers the political and human cost — cuts to unemployment benefits, student allowances, and local services — with notable concern for the most vulnerable.</div><a class="story-url" href="https://www.hs.fi" target="_blank" onclick="event.stopPropagation()">hs.fi</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">NATO &amp; Russia threat</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Welfare cuts &amp; austerity</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Housing &amp; generational equality</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">PO</div><div class="person-info"><div class="person-name">Petteri Orpo</div><div class="person-role">Prime Minister, NCP</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">SM</div><div class="person-info"><div class="person-name">Sanna Marin</div><div class="person-role">Former PM, SDP (opposition)</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+              <div class="person-row"><div class="person-avatar">VP</div><div class="person-info"><div class="person-name">Vladimir Putin</div><div class="person-role">Russian President (as threat)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-centre">● Centre / Business</div><div class="paper-name">Kauppalehti</div><div class="paper-meta">Circ. ~90,000 · Finland's leading business daily, professional class</div><div class="paper-tone">Pro-business · Pragmatic · Economic focus</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Finland's economy: small, open, and very exposed to global headwinds</div><div class="story-tease">When the world catches a cold, Finland gets pneumonia.</div><div class="story-detail">Kauppalehti analyses Finland's economic vulnerability: heavily dependent on exports, with Nokia's shadow long gone and the forest industry contracting. The paper sees opportunity in the defence technology boom — Finnish companies are winning contracts across NATO — but warns the transition will be painful for traditional manufacturing workers.</div><a class="story-url" href="https://www.kauppalehti.fi" target="_blank" onclick="event.stopPropagation()">kauppalehti.fi</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Defence spending: Finland's industry boom nobody predicted</div><div class="story-tease">NATO membership has a silver lining — if you make ammunition.</div><div class="story-detail">Finnish defence companies — Patria, Nammo, and a cluster of tech suppliers — are experiencing a once-in-a-generation growth surge as NATO members rearmed. Kauppalehti covers this as an economic opportunity story, asking whether Finland can leverage its position to build a lasting defence tech cluster.</div><a class="story-url" href="https://www.kauppalehti.fi" target="_blank" onclick="event.stopPropagation()">kauppalehti.fi</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Budget cuts vs investment: Orpo's impossible equation</div><div class="story-tease">You can't cut your way to growth — but you can't borrow forever either.</div><div class="story-detail">Kauppalehti's economics editor takes a balanced view of the Orpo government's austerity programme — acknowledging the deficit was unsustainable, but questioning whether cutting R&amp;D, education, and infrastructure spending undermines Finland's long-term competitive position.</div><a class="story-url" href="https://www.kauppalehti.fi" target="_blank" onclick="event.stopPropagation()">kauppalehti.fi</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Finnish economic competitiveness</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Defence industry boom</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Budget &amp; deficit</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">PO</div><div class="person-info"><div class="person-name">Petteri Orpo</div><div class="person-role">Prime Minister</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">RR</div><div class="person-info"><div class="person-name">Riikka Purra</div><div class="person-role">Finance Minister, Finns Party</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">CL</div><div class="person-info"><div class="person-name">Christine Lagarde</div><div class="person-role">ECB President</div></div><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">0/8</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="paper-card">
+          <div class="paper-header"><div class="paper-lean lean-right">▶ Right / Populist tabloid</div><div class="paper-name">Iltalehti</div><div class="paper-meta">Circ. ~300,000 · Mass market tabloid, nationwide</div><div class="paper-tone">Populist · Nationalist · Finns Party-sympathetic</div></div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Immigrants commit disproportionate crimes — Iltalehti publishes the data</div><div class="story-tease">The story Finnish mainstream media won't lead with.</div><div class="story-detail">Iltalehti leads with crime statistics broken down by country of origin, a format that mainstream Finnish media uses rarely and carefully. The paper argues this data is suppressed for political reasons, and frames its publication as a public service. The approach is a reliable traffic driver and a Finns Party talking point.</div><a class="story-url" href="https://www.iltalehti.fi" target="_blank" onclick="event.stopPropagation()">iltalehti.fi</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Ordinary Finns are paying for elite climate policy</div><div class="story-tease">Green taxes hit working people hardest — and nobody in Helsinki seems to care.</div><div class="story-detail">Iltalehti runs a populist energy costs piece contrasting the price rises faced by rural Finnish drivers and heating-oil users with what it characterises as the indifference of urban progressive politicians. The Finns Party's anti-green-tax platform features prominently.</div><a class="story-url" href="https://www.iltalehti.fi" target="_blank" onclick="event.stopPropagation()">iltalehti.fi</a></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">NATO yes, EU bureaucracy no — Finland must defend its sovereignty in Brussels</div><div class="story-tease">Iltalehti supports the military alliance but not the superstate.</div><div class="story-detail">Iltalehti takes a position consistent with the Finns Party's distinctive nationalism: full-throated support for NATO membership and military spending, combined with fierce hostility to EU regulatory overreach, particularly on agriculture, energy, and social policy. A coalition in tension that reflects the paper's readership.</div><a class="story-url" href="https://www.iltalehti.fi" target="_blank" onclick="event.stopPropagation()">iltalehti.fi</a></div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Immigration &amp; crime stats</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Energy costs &amp; green taxes</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Sovereignty vs EU</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">RP</div><div class="person-info"><div class="person-name">Riikka Purra</div><div class="person-role">Finns Party leader / Finance Minister</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">PO</div><div class="person-info"><div class="person-name">Petteri Orpo</div><div class="person-role">Prime Minister</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">VP</div><div class="person-info"><div class="person-name">Vladimir Putin</div><div class="person-role">Russian President (as villain)</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="blind-spot"><h3>🔭 Finland's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Finland was right about Russia — for decades</div><div class="blind-item-desc">Finnish analysts and politicians had been warning about Russian aggression since 2008. They were routinely dismissed as alarmist by Western European partners. This vindication runs deep in Finnish public consciousness and shapes everything.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Finlandization — the concept that still stings</div><div class="blind-item-desc">"Finlandization" was coined as a pejorative for Cold War-era Finnish deference to Soviet pressure. Finns find the term unfair — they maintained democracy while staying neutral. Now NATO members, the debate about what was lost and gained in those decades is alive.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The world's best education system — but at what cost?</div><div class="blind-item-desc">Finland's schools are globally famous. Domestically the debate is about whether the model is under pressure from budget cuts, teacher shortages, and post-pandemic learning loss. The gap between Finland's global reputation and domestic anxiety is rarely covered internationally.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The Finns Party in government</div><div class="blind-item-desc">Finland's far-right Finns Party holds the Finance Ministry in a coalition with the centre-right — a combination almost unique in Europe. The policy consequences, internal tensions, and what it means for Finnish society are barely discussed outside Finland.</div></div>
+      </div></div>
+    </div>
+
   </div><!-- /region-north -->
 
   <!-- ===== MEDITERRANEAN ===== -->
   <div id="region-south" class="region-panel">
     <div class="tier2-tabs">
-      <div class="tier2-tab active" onclick="showCountry('south','italy',this)">🇮🇹 Italy</div>
-      <div class="tier2-tab" onclick="showCountry('south','spain',this)">🇪🇸 Spain</div>
-      <div class="tier2-tab" onclick="showCountry('south','portugal',this)">🇵🇹 Portugal</div>
-      <div class="tier2-tab" onclick="showCountry('south','greece',this)">🇬🇷 Greece</div>
-      <div class="tier2-tab" onclick="showCountry('south','turkey',this)">🇹🇷 Turkey</div>
+      <button class="tier2-tab active" onclick="showCountry('south','italy',this)">🇮🇹 Italy</button>
+      <button class="tier2-tab" onclick="showCountry('south','spain',this)">🇪🇸 Spain</button>
+      <button class="tier2-tab" onclick="showCountry('south','portugal',this)">🇵🇹 Portugal</button>
+      <button class="tier2-tab" onclick="showCountry('south','greece',this)">🇬🇷 Greece</button>
+      <button class="tier2-tab" onclick="showCountry('south','turkey',this)">🇹🇷 Turkey</button>
     </div>
     <div id="south-italy" class="country-panel active">
       <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
@@ -556,11 +633,11 @@
   <!-- ===== CENTRAL & BALKANS ===== -->
   <div id="region-central" class="region-panel">
     <div class="tier2-tabs">
-      <div class="tier2-tab active" onclick="showCountry('central','poland',this)">🇵🇱 Poland</div>
-      <div class="tier2-tab" onclick="showCountry('central','czechia',this)">🇨🇿 Czech Republic</div>
-      <div class="tier2-tab" onclick="showCountry('central','hungary',this)">🇭🇺 Hungary</div>
-      <div class="tier2-tab" onclick="showCountry('central','austria',this)">🇦🇹 Austria</div>
-      <div class="tier2-tab" onclick="showCountry('central','balkans',this)">🗺 Balkans</div>
+      <button class="tier2-tab active" onclick="showCountry('central','poland',this)">🇵🇱 Poland</button>
+      <button class="tier2-tab" onclick="showCountry('central','czechia',this)">🇨🇿 Czech Republic</button>
+      <button class="tier2-tab" onclick="showCountry('central','hungary',this)">🇭🇺 Hungary</button>
+      <button class="tier2-tab" onclick="showCountry('central','austria',this)">🇦🇹 Austria</button>
+      <button class="tier2-tab" onclick="showCountry('central','balkans',this)">🗺 Balkans</button>
     </div>
     <div id="central-poland" class="country-panel active">
       <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
