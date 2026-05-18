@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Headline — What the world is reading today</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f5f3ee; color: #1a1a1a; min-height: 100vh; }
+
+  header { background: #1a1a1a; color: #f5f3ee; padding: 24px 32px; }
+  .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  header h1 { font-size: 1.8rem; letter-spacing: 0.08em; font-weight: 700; }
+  header .tagline { font-size: 0.85rem; color: #888; font-family: sans-serif; margin-top: 4px; }
+  header .date { font-size: 0.8rem; color: #666; font-family: sans-serif; margin-left: auto; }
+  .spectrum-bar { height: 5px; background: linear-gradient(to right, #2980b9 0%, #27ae60 50%, #c0392b 100%); }
+
+  .mission { background: #fff; border-bottom: 1px solid #e8e4dd; }
+  .mission-inner { max-width: 1100px; margin: 0 auto; padding: 16px 20px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .mission p { font-size: 0.82rem; color: #555; font-family: sans-serif; line-height: 1.5; flex: 1; min-width: 260px; }
+  .spectrum-legend { display: flex; gap: 14px; flex-shrink: 0; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.68rem; font-family: sans-serif; color: #777; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .legend-dot.left { background: #2980b9; }
+  .legend-dot.centre { background: #27ae60; }
+  .legend-dot.right { background: #c0392b; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+
+  /* Continent sections */
+  .continent { margin-bottom: 36px; }
+  .continent-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #1a1a1a; }
+  .continent-flag { font-size: 1.4rem; }
+  .continent-name { font-size: 1.1rem; font-weight: 700; }
+  .continent-desc { font-size: 0.72rem; color: #888; font-family: sans-serif; margin-left: auto; }
+
+  /* Region blocks */
+  .regions { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .region-block { background: #fff; border: 1px solid #e8e4dd; border-radius: 4px; overflow: hidden; }
+  .region-title { background: #2c2c2c; color: #f5f3ee; font-family: sans-serif; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 7px 12px; }
+  .country-list { padding: 8px 0; }
+  .country-item { display: flex; align-items: center; gap: 8px; padding: 5px 12px; font-family: sans-serif; font-size: 0.76rem; }
+  .country-item a { color: #1a1a1a; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
+  .country-item a:hover { color: #c0392b; }
+  .country-item a .live-badge { font-size: 0.55rem; background: #27ae60; color: #fff; padding: 1px 5px; border-radius: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .country-item.soon { color: #bbb; }
+  .country-item.soon span { font-size: 0.74rem; }
+  .soon-badge { font-size: 0.55rem; background: #e8e4dd; color: #999; padding: 1px 5px; border-radius: 2px; font-weight: 700; text-transform: uppercase; }
+
+  /* World view teaser */
+  .world-view-teaser { background: #2c3e50; color: #f5f3ee; border-radius: 4px; padding: 20px 24px; margin-bottom: 32px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .world-view-teaser .wv-text { flex: 1; min-width: 220px; }
+  .world-view-teaser h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+  .world-view-teaser p { font-size: 0.76rem; color: #aac4d8; font-family: sans-serif; line-height: 1.5; }
+  .wv-badge { background: #e67e22; color: #fff; font-family: sans-serif; font-size: 0.65rem; font-weight: 700; padding: 6px 14px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+
+  footer { background: #1a1a1a; color: #666; text-align: center; padding: 18px; font-family: sans-serif; font-size: 0.68rem; margin-top: 20px; }
+  footer a { color: #888; text-decoration: none; }
+  footer a:hover { color: #ccc; }
+
+  @media (max-width: 600px) { .regions { grid-template-columns: 1fr 1fr; } header h1 { font-size: 1.3rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <h1>🌍 WORLD HEADLINE</h1>
+      <div class="tagline">What the world is reading — left, centre, and right — every day</div>
+    </div>
+    <div class="date" id="dateDisplay"></div>
+  </div>
+</header>
+<div class="spectrum-bar"></div>
+
+<div class="mission">
+  <div class="mission-inner">
+    <p>Every country has a story it's obsessed with that the rest of the world barely knows exists. This site shows you what newspapers across the political spectrum are leading with — so you can see your own country as others see it, and understand what others are living through.</p>
+    <div class="spectrum-legend">
+      <div class="legend-item"><div class="legend-dot left"></div> Left-leaning</div>
+      <div class="legend-item"><div class="legend-dot centre"></div> Centre</div>
+      <div class="legend-item"><div class="legend-dot right"></div> Right-leaning</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- World View teaser -->
+  <div class="world-view-teaser">
+    <div class="wv-text">
+      <h3>🌐 World View — coming soon</h3>
+      <p>An aggregate view across all countries: what is the global left talking about this week? Where do left and right actually agree? Which stories does every country cover — and which does every country ignore?</p>
+    </div>
+    <div class="wv-badge">In development</div>
+  </div>
+
+  <!-- ===== EUROPE ===== -->
+  <div class="continent" id="europe">
+    <div class="continent-header">
+      <span class="continent-flag">🌍</span>
+      <span class="continent-name">Europe</span>
+      <span class="continent-desc">Click a region, then a country</span>
+    </div>
+    <div class="regions">
+      <div class="region-block">
+        <div class="region-title">🇬🇧 United Kingdom</div>
+        <div class="country-list">
+          <div class="country-item"><a href="uk_press_today.html">🇬🇧 United Kingdom <span class="live-badge">Live</span></a></div>
+        </div>
+      </div>
+      <div class="region-block">
+        <div class="region-title">🌍 Western Europe</div>
+        <div class="country-list">
+          <div class="country-item"><a href="europe_press_today.html">🇫🇷 France <span class="live-badge">Live</span></a></div>
+          <div class="country-item"><a href="europe_press_today.html">🇩🇪 Germany <span class="live-badge">Live</span></a></div>
+          <div class="country-item soon"><span>🇳🇱 Netherlands</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇧🇪 Belgium</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇮🇪 Ireland</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+      <div class="region-block">
+        <div class="region-title">🌨 Scandinavia &amp; Nordics</div>
+        <div class="country-list">
+          <div class="country-item"><a href="europe_press_today.html">🇸🇪 Sweden <span class="live-badge">Live</span></a></div>
+          <div class="country-item soon"><span>🇳🇴 Norway</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇩🇰 Denmark</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇫🇮 Finland</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+      <div class="region-block">
+        <div class="region-title">☀️ Mediterranean</div>
+        <div class="country-list">
+          <div class="country-item"><a href="europe_press_today.html">🇮🇹 Italy <span class="live-badge">Live</span></a></div>
+          <div class="country-item"><a href="europe_press_today.html">🇪🇸 Spain <span class="live-badge">Live</span></a></div>
+          <div class="country-item soon"><span>🇵🇹 Portugal</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇬🇷 Greece</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇹🇷 Turkey</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+      <div class="region-block">
+        <div class="region-title">🏔 Central &amp; Balkans</div>
+        <div class="country-list">
+          <div class="country-item"><a href="europe_press_today.html">🇵🇱 Poland <span class="live-badge">Live</span></a></div>
+          <div class="country-item soon"><span>🇨🇿 Czech Republic</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇭🇺 Hungary</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇦🇹 Austria</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🗺 Balkans</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== AMERICAS ===== -->
+  <div class="continent" id="americas">
+    <div class="continent-header">
+      <span class="continent-flag">🌎</span>
+      <span class="continent-name">The Americas</span>
+      <span class="continent-desc">North · Central · South</span>
+    </div>
+    <div class="regions">
+      <div class="region-block">
+        <div class="region-title">🌎 North America</div>
+        <div class="country-list">
+          <div class="country-item soon"><span>🇺🇸 United States</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇨🇦 Canada</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇲🇽 Mexico</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+      <div class="region-block">
+        <div class="region-title">🌴 Central America &amp; Caribbean</div>
+        <div class="country-list">
+          <div class="country-item soon"><span>🇨🇺 Cuba</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇯🇲 Jamaica</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇬🇹 Guatemala</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+      <div class="region-block">
+        <div class="region-title">🌎 South America</div>
+        <div class="country-list">
+          <div class="country-item soon"><span>🇧🇷 Brazil</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇦🇷 Argentina</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇨🇴 Colombia</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇨🇱 Chile</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇵🇪 Peru</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MIDDLE EAST ===== -->
+  <div class="continent" id="mideast">
+    <div class="continent-header">
+      <span class="continent-flag">🌐</span>
+      <span class="continent-name">Middle East</span>
+      <span class="continent-desc">The world's most covered — and least understood — region</span>
+    </div>
+    <div class="regions">
+      <div class="region-block">
+        <div class="region-title">🕌 Levant &amp; Gulf</div>
+        <div class="country-list">
+          <div class="country-item soon"><span>🇮🇱 Israel</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇱🇧 Lebanon</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇸🇦 Saudi Arabia</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇦🇪 UAE</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇶🇦 Qatar</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+      <div class="region-block">
+        <div class="region-title">🌙 North Africa</div>
+        <div class="country-list">
+          <div class="country-item soon"><span>🇪🇬 Egypt</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇲🇦 Morocco</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇹🇳 Tunisia</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+      <div class="region-block">
+        <div class="region-title">🇮🇷 Iran &amp; Central Asia</div>
+        <div class="country-list">
+          <div class="country-item soon"><span>🇮🇷 Iran</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇵🇰 Pakistan</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇦🇫 Afghanistan</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ASIA-PACIFIC ===== -->
+  <div class="continent" id="asia">
+    <div class="continent-header">
+      <span class="continent-flag">🌏</span>
+      <span class="continent-name">Asia-Pacific</span>
+      <span class="continent-desc">Home to more than half the world's population</span>
+    </div>
+    <div class="regions">
+      <div class="region-block">
+        <div class="region-title">🏯 East Asia</div>
+        <div class="country-list">
+          <div class="country-item soon"><span>🇨🇳 China</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇯🇵 Japan</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇰🇷 South Korea</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇹🇼 Taiwan</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+      <div class="region-block">
+        <div class="region-title">🌺 South &amp; SE Asia</div>
+        <div class="country-list">
+          <div class="country-item soon"><span>🇮🇳 India</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇮🇩 Indonesia</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇸🇬 Singapore</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇻🇳 Vietnam</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+      <div class="region-block">
+        <div class="region-title">🦘 Pacific</div>
+        <div class="country-list">
+          <div class="country-item soon"><span>🇦🇺 Australia</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇳🇿 New Zealand</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== AFRICA ===== -->
+  <div class="continent" id="africa">
+    <div class="continent-header">
+      <span class="continent-flag">🌍</span>
+      <span class="continent-name">Africa</span>
+      <span class="continent-desc">The continent the world's press covers least — and understands least</span>
+    </div>
+    <div class="regions">
+      <div class="region-block">
+        <div class="region-title">🌍 Sub-Saharan Africa</div>
+        <div class="country-list">
+          <div class="country-item soon"><span>🇳🇬 Nigeria</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇰🇪 Kenya</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇬🇭 Ghana</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇿🇦 South Africa</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item soon"><span>🇪🇹 Ethiopia</span> <span class="soon-badge">Soon</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>World Headline · Showing what the world is reading, across the political spectrum · <a href="uk_press_today.html">UK</a> · <a href="europe_press_today.html">Europe</a></p>
+  <p style="margin-top:6px;">Edition 1 — May 2026 · Updated weekly · <span id="footerDate"></span></p>
+</footer>
+
+<script>
+  const d = new Date();
+  const fmt = d.toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+  document.getElementById('dateDisplay').textContent = fmt;
+  document.getElementById('footerDate').textContent = fmt;
+</script>
+
+</body>
+</html>
