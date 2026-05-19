@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Middle East Press — World Headline</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f5f3ee; color: #1a1a1a; min-height: 100vh; }
+  .site-header { background: #1a1a1a; padding: 18px 24px; }
+  .site-header h1 { font-size: 1.5rem; letter-spacing: 3px; text-transform: uppercase; color: #f5f3ee; font-weight: 700; }
+  .site-header p { font-size: 0.8rem; color: #888; margin-top: 4px; letter-spacing: 1px; }
+  .spectrum-bar { height: 4px; background: linear-gradient(to right, #2980b9 0%, #27ae60 50%, #c0392b 100%); }
+  .region-nav { background: #2c2c2c; border-bottom: 1px solid #444; padding: 8px 24px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .region-nav a { color: #ccc; text-decoration: none; font-size: 0.78rem; font-family: sans-serif; padding: 4px 10px; border-radius: 3px; transition: background 0.15s; }
+  .region-nav a:hover, .region-nav a.active { background: #444; color: #fff; }
+  .region-nav span { color: #555; font-size: 0.7rem; padding: 4px; }
+  .top-panel { background: #fff; border: 1px solid #e8e4dd; border-radius: 4px; margin: 20px 20px 0; padding: 18px 22px; }
+  .top-panel h2 { font-size: 0.85rem; letter-spacing: 2px; color: #555; margin-bottom: 12px; text-transform: uppercase; font-family: sans-serif; font-weight: 700; }
+  .top3 { display: flex; gap: 14px; flex-wrap: wrap; }
+  .top3-item { flex: 1; min-width: 200px; background: #f9f7f4; border-left: 3px solid #ccc; padding: 10px 14px; border-radius: 0 4px 4px 0; }
+  .top3-item .rank { font-size: 0.65rem; color: #999; letter-spacing: 1px; font-family: sans-serif; text-transform: uppercase; margin-bottom: 4px; }
+  .top3-item p { font-size: 0.82rem; line-height: 1.5; color: #444; font-family: sans-serif; }
+  .dashboard { padding: 20px; }
+  .tier1-tabs { display: flex; gap: 6px; margin-bottom: 0; flex-wrap: wrap; }
+  button.tier1-tab { background: #e8e4dd; border: 1px solid #ccc; color: #555; padding: 8px 16px; border-radius: 4px 4px 0 0; font-size: 0.78rem; cursor: pointer; letter-spacing: 0.5px; transition: all 0.2s; touch-action: manipulation; -webkit-tap-highlight-color: transparent; font-family: sans-serif; font-weight: 700; text-transform: uppercase; }
+  button.tier1-tab:hover { background: #ddd; color: #1a1a1a; }
+  button.tier1-tab.active { background: #2c2c2c; border-bottom-color: #2c2c2c; color: #fff; }
+  .region-panel { display: none; background: #fff; border: 1px solid #e8e4dd; border-radius: 0 4px 4px 4px; padding: 16px; }
+  .region-panel.active { display: block; }
+  .tier2-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  button.tier2-tab { background: #f5f3ee; border: 1px solid #ddd; color: #555; padding: 5px 12px; border-radius: 3px; font-size: 0.75rem; cursor: pointer; letter-spacing: 0.3px; transition: all 0.2s; touch-action: manipulation; -webkit-tap-highlight-color: transparent; font-family: sans-serif; }
+  button.tier2-tab:hover { background: #e8e4dd; color: #1a1a1a; }
+  button.tier2-tab.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+  button.tier2-tab.soon { opacity: 0.4; cursor: default; pointer-events: none; }
+  .country-panel { display: none; }
+  .country-panel.active { display: block; }
+  .country-title { font-size: 0.95rem; color: #1a1a1a; letter-spacing: 2px; font-family: sans-serif; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #1a1a1a; }
+  .papers { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 16px; }
+  .paper { background: #fafafa; border: 1px solid #e8e8e8; border-radius: 4px; overflow: hidden; }
+  .paper-header { padding: 12px 14px 8px; border-bottom: 1px solid #eee; }
+  .lean { font-size: 0.62rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 3px; }
+  .lean-left { color: #2980b9; } .lean-centre { color: #27ae60; } .lean-right { color: #c0392b; }
+  .paper-name { font-size: 0.9rem; font-weight: 700; color: #1a1a1a; }
+  .paper-desc { font-size: 0.6rem; color: #999; font-family: sans-serif; margin-top: 2px; line-height: 1.4; }
+  .stories { padding: 0 14px 12px; }
+  .story { border-top: 1px solid #eee; padding: 8px 0; }
+  .story-headline { font-size: 0.84rem; color: #1a1a1a; line-height: 1.4; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .story-headline:hover { color: #c0392b; }
+  .story-toggle { color: #ccc; font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
+  .story-detail { display: none; font-size: 0.78rem; color: #555; margin-top: 6px; line-height: 1.5; padding-left: 8px; border-left: 2px solid #ddd; font-family: sans-serif; }
+  .story-detail.open { display: block; }
+  .story-url { display: block; font-size: 0.68rem; color: #999; margin-top: 6px; font-family: sans-serif; text-decoration: none; }
+  .story-url:hover { color: #c0392b; }
+  .trackers { padding: 10px 14px 12px; border-top: 1px solid #eee; }
+  .tracker-row { margin-bottom: 8px; }
+  .tracker-label { font-size: 0.62rem; color: #999; letter-spacing: 1px; font-family: sans-serif; text-transform: uppercase; margin-bottom: 4px; }
+  .tracker-topic { font-size: 0.73rem; color: #444; margin-bottom: 4px; font-family: sans-serif; }
+  .dots { display: flex; gap: 4px; flex-wrap: wrap; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid; }
+  .dot.amber { background: #c8a951; border-color: #c8a951; } .dot.amber-empty { background: transparent; border-color: #ddd; }
+  .dot.purple { background: #9b59b6; border-color: #9b59b6; } .dot.purple-empty { background: transparent; border-color: #ddd; }
+  .blind-spots { margin-top: 14px; background: #fffdf5; border: 1px solid #e8e0c0; border-radius: 4px; padding: 12px 16px; }
+  .blind-spots h4 { font-size: 0.65rem; color: #8B6914; letter-spacing: 2px; font-family: sans-serif; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+  .blind-spot-item { font-size: 0.78rem; color: #555; padding: 5px 0; font-family: sans-serif; border-top: 1px solid #f0e8c0; line-height: 1.4; }
+  .blind-spot-item:first-of-type { border-top: none; }
+  .stub-panel { background: #f9f7f4; border: 1px dashed #ccc; border-radius: 4px; padding: 30px; text-align: center; color: #999; font-family: sans-serif; }
+  .stub-panel p { margin-top: 8px; font-size: 0.82rem; }
+  @media (max-width: 760px) { .papers { grid-template-columns: 1fr; } .top3 { flex-direction: column; } .site-header h1 { font-size: 1.1rem; } }
+  .country-stats { display: none; position: absolute; top: calc(100% + 6px); left: 0; width: 240px; background: #fff; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding: 12px 14px; z-index: 1000; font-family: sans-serif; pointer-events: none; white-space: normal; }
+  .tab-wrap { position: relative; display: inline-block; }
+  .tab-wrap:hover .country-stats { display: block; }
+  .cs-name { font-size: 0.82rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+  .cs-row { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: #555; margin-bottom: 3px; }
+  .cs-icon { font-size: 0.75rem; flex-shrink: 0; }
+  .cs-divider { border-top: 1px solid #eee; margin: 8px 0; }
+  .cs-govt-label { font-size: 0.72rem; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+  .cs-govt-detail { font-size: 0.68rem; color: #666; margin-bottom: 2px; }
+  .cs-leader { font-size: 0.68rem; color: #888; font-style: italic; }
+  .cs-opp-title { font-size: 0.65rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .cs-opp-leader { font-size: 0.64rem; color: #999; margin-bottom: 5px; margin-left: 8px; font-style: italic; }
+  .cs-opp { font-size: 0.68rem; color: #555; margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
+  .cs-lean { font-size: 0.58rem; color: #fff; padding: 1px 5px; border-radius: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
+  @media (hover: none) { .country-stats { display: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <h1>🕌 Middle East Press</h1>
+  <p>Levant · Gulf · North Africa — Left / Centre / Right</p>
+</div>
+<div class="spectrum-bar"></div>
+
+<nav class="region-nav">
+  <a href="index.html">🏠 Home</a>
+  <span>|</span>
+  <a href="uk_press_today.html">🇬🇧 UK</a>
+  <a href="europe_press_today.html">🌍 Europe</a>
+  <a href="americas_press_today.html">🌎 Americas</a>
+  <a href="asia_press_today.html">🌏 Asia-Pac</a>
+  <a href="africa_press_today.html">🌍 Africa</a>
+  <a href="middleeast_press_today.html" class="active">🕌 Middle East</a>
+  <span>|</span>
+  <a href="poles_apart.html">⚡ Poles Apart</a>
+  <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
+</nav>
+
+<div class="top-panel">
+  <h2>🕌 Middle East — Top Stories This Week</h2>
+  <div class="top3">
+    <div class="top3-item">
+      <div class="rank">Story 1</div>
+      <p>Gaza ceasefire negotiations at critical juncture — hostage deal framework contested by Netanyahu's far-right coalition partners as humanitarian pressure mounts</p>
+    </div>
+    <div class="top3-item">
+      <div class="rank">Story 2</div>
+      <p>Iran nuclear programme: US-Iran indirect talks resume as European powers warn enrichment levels are approaching weapons-grade threshold</p>
+    </div>
+    <div class="top3-item">
+      <div class="rank">Story 3</div>
+      <p>Post-Assad Syria: regional powers jostling for influence as the new government in Damascus tries to establish authority over a fractured country</p>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard">
+  <div class="tier1-tabs">
+    <button class="tier1-tab active" onclick="showRegion('levant', this)">🕍 Levant</button>
+    <button class="tier1-tab soon">🌙 Gulf — Soon</button>
+    <button class="tier1-tab soon">🏜️ North Africa — Soon</button>
+  </div>
+
+  <!-- ══════════════════════════════ LEVANT ══════════════════════════════ -->
+  <div id="region-levant" class="region-panel active">
+    <div class="tier2-tabs">
+      <div class="tab-wrap">
+        <button class="tier2-tab active" onclick="showCountry('levant','israel',this)">🇮🇱 Israel</button>
+        <div class="country-stats">
+          <div class="cs-name">🇮🇱 Israel</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Jerusalem (contested)</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>9.9m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Proportional Representation</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Parliamentary Republic (no written constitution)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#c0392b">Right</span></div>
+          <div class="cs-govt-detail">Likud + Religious Zionism + Otzma Yehudit</div>
+          <div class="cs-leader">PM: Benjamin Netanyahu (Likud)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#27ae60">Centre</span> Yesh Atid</div>
+          <div class="cs-opp-leader">Yair Lapid</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> National Unity</div>
+          <div class="cs-opp-leader">Benny Gantz</div>
+        </div>
+      </div>
+      <button class="tier2-tab soon">🇱🇧 Lebanon — Soon</button>
+      <button class="tier2-tab soon">🇹🇷 Turkey — Soon</button>
+    </div>
+
+    <!-- ISRAEL -->
+    <div id="levant-israel" class="country-panel active">
+      <div class="country-title">🇮🇱 Israel — Press Today</div>
+      <div class="papers">
+
+        <!-- Haaretz — Left -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-left">◀ Left / Progressive</div>
+            <div class="paper-name">Haaretz</div>
+            <div class="paper-desc">Israel's most internationally read daily. Liberal, anti-occupation, fiercely critical of Netanyahu. The paper the government hates most.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Ben-Gvir and Smotrich are not coalition partners — they are the tail wagging the dog
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Haaretz argues that Finance Minister Bezalel Smotrich and National Security Minister Itamar Ben-Gvir — both far-right — have effectively captured Netanyahu's government. The paper's central thesis: Netanyahu needs them to survive politically and legally, so they set the real agenda. Gaza policy, West Bank settler violence, and judicial overhaul are all, in Haaretz's reading, driven by the far right's demands rather than any strategic calculus.
+                <a href="https://www.haaretz.com" class="story-url" target="_blank">→ haaretz.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Gaza: the humanitarian catastrophe the world sees and the Israeli government says doesn't exist
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Haaretz has been the most consistent Israeli outlet in reporting casualty figures, displacement, and aid blockages in Gaza that the government disputes or minimises. The paper publishes accounts from field workers, UNRWA staff, and international medical teams. Its Gaza coverage is why it is simultaneously Israel's most internationally cited newspaper and the one the government most wants to silence.
+                <a href="https://www.haaretz.com" class="story-url" target="_blank">→ haaretz.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The hostages' families are being used — and they know it
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Haaretz has run a sustained editorial line arguing that Netanyahu's government has repeatedly prioritised coalition survival over achieving a hostage deal. The paper gives prominent coverage to hostage families who have turned against the government, and has published several investigations into moments when a deal was reportedly close but talks collapsed due to Israeli demands shaped by far-right pressure.
+                <a href="https://www.haaretz.com" class="story-url" target="_blank">→ haaretz.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Judicial overhaul &amp; democratic backsliding</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Ben-Gvir / Smotrich far-right veto power</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yedioth Ahronoth — Centre -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre</div>
+            <div class="paper-name">Yedioth Ahronoth</div>
+            <div class="paper-desc">Israel's highest-circulation print daily. Centrist-populist, once pro-Netanyahu, now sharply critical. Reflects mainstream Israeli public anxiety.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The hostage deal: what we know, what's being offered, and why it keeps falling apart
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Yedioth Ahronoth's coverage of hostage negotiations is the most closely followed in Israel — its reporters have senior contacts on all sides of the mediation. The paper presents the deal framework in granular detail and has consistently reported that the main obstacle is not Hamas's demands but disagreements within the Israeli cabinet over whether to accept a permanent ceasefire as part of the arrangement.
+                <a href="https://www.ynetnews.com" class="story-url" target="_blank">→ ynetnews.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Economy on war footing: the cost of 18 months of conflict and who is paying it
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Israel's economy has absorbed a significant shock from the ongoing conflict — defence spending has surged, tourism has collapsed, foreign investment has slowed, and the shekel has weakened. Yedioth Ahronoth frames this as a middle-class story: the cost of living up, social services squeezed, and reservists' families carrying a disproportionate burden while the ultra-Orthodox exemption from military service remains politically untouchable.
+                <a href="https://www.ynetnews.com" class="story-url" target="_blank">→ ynetnews.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Protest movement: the Saturday night rallies haven't stopped — and the government still isn't listening
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Weekly mass protests — calling for a hostage deal, early elections, and an end to the judicial overhaul — have continued since October 2023. Yedioth Ahronoth covers these as genuine expressions of mainstream Israeli frustration, distinct from the left-wing framing the government applies. The paper notes that protest organisers now include bereaved families, reservists, and business owners who voted for Netanyahu in the past.
+                <a href="https://www.ynetnews.com" class="story-url" target="_blank">→ ynetnews.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Hostage deal &amp; home-front cost of war</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">US mediation pressure (Rubio / Trump envoys)</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Israel Hayom — Right -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-right">▶ Right / Pro-Government</div>
+            <div class="paper-name">Israel Hayom</div>
+            <div class="paper-desc">Israel's highest-circulation daily (free distribution). Founded by Sheldon Adelson. Firmly pro-Netanyahu, the paper the opposition calls "Bibiton" (Bibi's paper).</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Hamas is stalling — the blame for no deal lies in Gaza, not Jerusalem
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Israel Hayom's consistent line on hostage negotiations is that Israel has made reasonable proposals and Hamas has rejected or undermined them. The paper gives prominent coverage to statements from the prime minister's office and military briefings, and frames international pressure on Israel to accept a deal as naive about Hamas's bad faith. It is the primary outlet through which the government's version of events reaches the widest Israeli audience.
+                <a href="https://www.israelhayom.com" class="story-url" target="_blank">→ israelhayom.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                IDF operation in Rafah: military objectives are being achieved, critics are wrong
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Israel Hayom provides the most unambiguously pro-military coverage of the Gaza operation of any mainstream Israeli paper. It features IDF spokespersons, embedded reporting, and retired generals who support the campaign's scope and duration. Civilian casualty figures from Gaza health authorities are treated as unreliable; military achievements are headlined. The paper is the default read for Israel's security establishment and settler community.
+                <a href="https://www.israelhayom.com" class="story-url" target="_blank">→ israelhayom.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The protest movement is a political operation, not a spontaneous uprising
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Israel Hayom frames the ongoing protest movement as orchestrated by political opponents of Netanyahu — particularly the old guard of the security and legal establishment — rather than as a genuine expression of public feeling. The paper runs op-eds arguing that the protesters represent a minority seeking to overturn election results through street pressure rather than the ballot box.
+                <a href="https://www.israelhayom.com" class="story-url" target="_blank">→ israelhayom.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Security legitimacy &amp; Iran threat</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Netanyahu / Likud government narrative</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 Israel's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">🕍 <strong>The ultra-Orthodox question:</strong> Israel's fastest-growing population group — Haredi Jews — largely does not serve in the military, does not participate in the formal economy, and receives state subsidies while secular Israelis carry the tax and defence burden. This internal social fracture is as consequential as any external conflict but almost never appears in international coverage of Israel.</div>
+        <div class="blind-spot-item">🌍 <strong>Israel's African and Mizrahi majority:</strong> Over half of Israeli Jews trace their origin to Middle Eastern and North African countries — not Europe. The Ashkenazi/Mizrahi cultural divide shapes Israeli politics profoundly, including why working-class Mizrahi voters back Netanyahu despite economic pressures. This dimension is almost entirely absent from Western coverage.</div>
+        <div class="blind-spot-item">💻 <strong>Tech sector exodus:</strong> Hundreds of Israeli tech workers and startups have quietly relocated to Portugal, Cyprus, and the UK since 2023 — combining war risk, judicial uncertainty, and military reserve duty into a calculation that makes leaving rational. The long-term brain drain risk to Israel's innovation economy is a story almost no international outlet is tracking.</div>
+      </div>
+    </div><!-- end #levant-israel -->
+  </div><!-- end #region-levant -->
+
+</div><!-- end .dashboard -->
+
+<footer style="background:#1a1a1a;color:#666;text-align:center;padding:18px;font-family:sans-serif;font-size:0.68rem;margin-top:20px;">
+  World Headline — what the world is reading, left, centre and right, every day.<br>
+  <a href="index.html" style="color:#888;text-decoration:none;">← Back to homepage</a>
+</footer>
+
+<script>
+function showRegion(regionId, btn) {
+  document.querySelectorAll('.region-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tier1-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('region-' + regionId).classList.add('active');
+  btn.classList.add('active');
+}
+function showCountry(region, country, btn) {
+  const panel = document.getElementById('region-' + region);
+  panel.querySelectorAll('.country-panel').forEach(p => p.classList.remove('active'));
+  panel.querySelectorAll('.tier2-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(region + '-' + country).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleStory(el) {
+  const detail = el.nextElementSibling;
+  const toggle = el.querySelector('.story-toggle');
+  detail.classList.toggle('open');
+  toggle.textContent = detail.classList.contains('open') ? '▲' : '▼';
+}
+</script>
+</body>
+</html>

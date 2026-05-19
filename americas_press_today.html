@@ -159,6 +159,7 @@
   <a href="americas_press_today.html" class="active">🌎 Americas</a>
   <a href="asia_press_today.html">🌏 Asia-Pacific</a>
   <a href="africa_press_today.html">🌍 Africa</a>
+  <a href="middleeast_press_today.html">🕌 Middle East</a>
   <span class="sep">|</span>
   <a href="index.html#mideast">🌐 Middle East</a>
   <a href="index.html#africa">🌍 Africa</a>
@@ -485,7 +486,7 @@
   <div id="region-south" class="region-panel">
     <div class="tier2-tabs">
       <div class="tab-wrap"><button class="tier2-tab active" onclick="showCountry('south','brazil',this)">🇧🇷 Brazil</button><div class="country-stats"><div class="cs-name">🇧🇷 Brazil</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Brasília</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>215m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Party-list proportional (open list)</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Federal Republic (Presidential)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#2980b9">Left</span></div><div class="cs-govt-detail">PT (Workers' Party) + broad coalition</div><div class="cs-leader">President: Lula da Silva (PT)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> PL (Liberal Party)</div><div class="cs-opp-leader">Jair Bolsonaro (facing trial)</div><div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> PSD / União Brasil</div><div class="cs-opp-leader">Multiple leaders — fragmented</div></div></div>
-      <button class="tier2-tab soon">🇦🇷 Argentina — Soon</button>
+      <div class="tab-wrap"><button class="tier2-tab" onclick="showCountry('south','argentina',this)">🇦🇷 Argentina</button><div class="country-stats"><div class="cs-name">🇦🇷 Argentina</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Buenos Aires</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>46m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>FPTP with runoff (Presidential)</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Federal Republic (Presidential)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#7b241c">Far Right</span></div><div class="cs-govt-detail">La Libertad Avanza (libertarian)</div><div class="cs-leader">President: Javier Milei</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#2980b9">Left</span> Unión por la Patria (Peronist)</div><div class="cs-opp-leader">Cristina Kirchner / Sergio Massa</div><div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> PRO / Juntos por el Cambio</div><div class="cs-opp-leader">Patricia Bullrich</div></div></div>
       <button class="tier2-tab soon">🇨🇴 Colombia — Soon</button>
       <button class="tier2-tab soon">🇨🇱 Chile — Soon</button>
       <button class="tier2-tab soon">🇵🇪 Peru — Soon</button>
@@ -629,7 +630,98 @@
 
       </div><!-- /papers-grid -->
     </div><!-- /south-brazil -->
-    <div class="coming-soon" style="margin-top:16px"><div class="cs-flag">🌎</div><h3>More of South America — Coming Soon</h3><p>Argentina's La Nación, Clarín &amp; Página 12 · Colombia's El Tiempo · Chile's El Mercurio. A continent where left and right are locked in genuinely historic battles over economic models.</p></div>
+    <div id="south-argentina" class="country-panel">
+      <div class="country-title">🇦🇷 Argentina — Press Today</div>
+      <div class="papers">
+
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-left">◀ Left / Progressive</div>
+            <div class="paper-name">Página 12</div>
+            <div class="paper-desc">Buenos Aires daily. Centre-left, Kirchnerist, union-friendly. The paper of the Argentine left and the loudest voice against Milei's austerity programme.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">Milei's chainsaw hits education: university funding cut 30% in real terms as students take to the streets<span class="story-toggle">▼</span></div>
+              <div class="story-detail">Javier Milei's radical austerity programme — the "motosierra" (chainsaw) he promised in his campaign — has cut public university funding dramatically. Página 12 frames this as an assault on a public university system that has historically been one of Argentina's most egalitarian institutions, offering free education to millions. Mass student protests have been the largest public demonstrations since Milei took office.<a href="https://www.pagina12.com.ar" class="story-url" target="_blank">→ pagina12.com.ar</a></div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">The peso devaluation: who got rich and who got poorer — the distributional story nobody wants to tell<span class="story-toggle">▼</span></div>
+              <div class="story-detail">Argentina's managed devaluation of the peso and the lifting of currency controls have been celebrated by financial markets. Página 12 presents the other side: real wages down 20% in dollar terms since Milei took office, import-dependent businesses struggling, and the working class paying for macroeconomic stabilisation in reduced purchasing power. The paper frames stabilisation as a class project that transfers the cost of correction to those least able to bear it.<a href="https://www.pagina12.com.ar" class="story-url" target="_blank">→ pagina12.com.ar</a></div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">Cristina Kirchner convicted — the left sees lawfare, the right sees justice<span class="story-toggle">▼</span></div>
+              <div class="story-detail">Former president Cristina Kirchner's corruption conviction — and the ongoing legal proceedings — dominate Página 12's political coverage. The paper argues consistently that the prosecutions are politically motivated "lawfare" orchestrated by judicial and media elites aligned with the right. It gives Kirchner herself extensive space to make this case, and frames her legal situation as central to understanding Argentine democracy's fragility.<a href="https://www.pagina12.com.ar" class="story-url" target="_blank">→ pagina12.com.ar</a></div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row"><div class="tracker-label">Hobby Horse</div><div class="tracker-topic">Social cost of austerity &amp; Peronist legacy defence</div><div class="dots"><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div></div></div>
+            <div class="tracker-row"><div class="tracker-label">Undue Influence</div><div class="tracker-topic">IMF conditionality &amp; Milei's Washington alignment</div><div class="dots"><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div></div></div>
+          </div>
+        </div>
+
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre</div>
+            <div class="paper-name">Clarín</div>
+            <div class="paper-desc">Argentina's largest-circulation daily. Historically centre-right and anti-Kirchner, now cautiously critical of Milei's excesses while backing economic reform. The paper the entire country reads.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">Milei's first year: inflation down, poverty up — how do you read that?<span class="story-toggle">▼</span></div>
+              <div class="story-detail">Clarín presents the Milei government's economic record in full complexity: monthly inflation has fallen from 25% to under 3%, a genuine macroeconomic achievement. But poverty has risen to over 50%, real wages have fallen, and public services are strained. Clarín's coverage reflects its readership — middle-class Argentines who want inflation solved but are worried about the social fabric unravelling in the process.<a href="https://www.clarin.com" class="story-url" target="_blank">→ clarin.com</a></div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">The IMF deal: $20bn and a new programme — but the conditions will bite in an election year<span class="story-toggle">▼</span></div>
+              <div class="story-detail">Argentina secured a fresh IMF programme in 2025. Clarín covers this as both a necessary lifeline and a political risk: the fiscal adjustments required will be painful in the run-up to mid-term elections. The paper notes that Argentina has had more IMF programmes than almost any country in history and asks whether this time the underlying structural reform is real or another cycle of stabilise-then-expand.<a href="https://www.clarin.com" class="story-url" target="_blank">→ clarin.com</a></div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">Security in Buenos Aires: Milei's law-and-order push — results so far mixed, ambition high<span class="story-toggle">▼</span></div>
+              <div class="story-detail">Urban crime and insecurity have been rising in greater Buenos Aires and Rosario, where narco-linked violence has become a significant political issue. Clarín covers the government's security responses — deploying federal police, new protocols for the Gendarmería — with balanced scrutiny: noting where crime statistics have improved and where they haven't, and whether the government's tough rhetoric matches operational capacity.<a href="https://www.clarin.com" class="story-url" target="_blank">→ clarin.com</a></div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row"><div class="tracker-label">Hobby Horse</div><div class="tracker-topic">Inflation &amp; economic stabilisation</div><div class="dots"><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div></div></div>
+            <div class="tracker-row"><div class="tracker-label">Undue Influence</div><div class="tracker-topic">IMF / US Treasury &amp; global bond market sentiment</div><div class="dots"><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div></div></div>
+          </div>
+        </div>
+
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-right">▶ Right / Conservative</div>
+            <div class="paper-name">La Nación</div>
+            <div class="paper-desc">Argentina's traditional conservative daily. Pro-market, anti-Peronist, enthusiastically pro-Milei. The paper of Argentina's economic and cultural establishment.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">The surplus is real: Milei has done what nobody thought possible — Argentina has a fiscal balance<span class="story-toggle">▼</span></div>
+              <div class="story-detail">Argentina achieved a primary fiscal surplus within months of Milei taking office — something that had eluded every government for over a decade. La Nación treats this as a historic achievement and an unambiguous validation of the libertarian shock therapy the president promised. The paper's op-ed pages overflow with economists arguing that this is the necessary foundation for sustainable growth, and that critics who focus on short-term pain misunderstand how economic recoveries work.<a href="https://www.lanacion.com.ar" class="story-url" target="_blank">→ lanacion.com.ar</a></div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">Deregulation is working: businesses say the state is finally getting out of their way<span class="story-toggle">▼</span></div>
+              <div class="story-detail">Milei's deregulation agenda — dismantling price controls, simplifying permits, opening sectors to competition — is celebrated by La Nación as an overdue liberation of Argentina's private sector from decades of interventionism. The paper runs extensive coverage of business confidence surveys showing improvement and profiles of companies investing or expanding for the first time in years. It is the counterpoint to Página 12's focus on workers' experience.<a href="https://www.lanacion.com.ar" class="story-url" target="_blank">→ lanacion.com.ar</a></div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">Kirchnerism is finished — the conviction is justice, not lawfare<span class="story-toggle">▼</span></div>
+              <div class="story-detail">La Nación has been the most consistent and enthusiastic voice in mainstream Argentine media arguing that Cristina Kirchner's corruption conviction is legitimate and overdue. The paper frames Peronism's claims of judicial persecution as a self-serving narrative designed to avoid accountability for documented corruption. It treats the conviction as a moment of institutional health rather than political targeting.<a href="https://www.lanacion.com.ar" class="story-url" target="_blank">→ lanacion.com.ar</a></div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row"><div class="tracker-label">Hobby Horse</div><div class="tracker-topic">Libertarian reform &amp; anti-Peronism</div><div class="dots"><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div></div></div>
+            <div class="tracker-row"><div class="tracker-label">Undue Influence</div><div class="tracker-topic">Milei / Trump alignment &amp; libertarian international</div><div class="dots"><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div></div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="blind-spots">
+        <h4>🔦 Argentina's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">🧉 <strong>The informal economy:</strong> Nearly half of Argentina's workforce operates in the informal sector — outside payroll taxes, labour protections, and official statistics. Every macroeconomic analysis of Argentina that ignores this is operating on half the picture. Milei's reforms hit formal workers hardest; informal workers were already living without state support.</div>
+        <div class="blind-spot-item">🌿 <strong>Lithium triangle geopolitics:</strong> Argentina sits on the world's largest lithium reserves, critical for EV batteries. The US, China, and the EU are all competing for access. Milei's deregulation agenda is reshaping mining concessions in ways that will affect global clean energy supply chains for decades — a story almost entirely absent from international coverage of his presidency.</div>
+        <div class="blind-spot-item">🐄 <strong>Agribusiness as political actor:</strong> Argentina's soya and beef export sector is one of the world's most powerful agricultural lobbies and has historically been the swing actor in Argentine political economy — supporting or undermining governments based on export tax policy. Its relationship with Milei (who cut export taxes) is a crucial part of understanding why his coalition holds together.</div>
+      </div>
+    </div>
+
+    <div class="coming-soon" style="margin-top:16px"><div class="cs-flag">🌎</div><h3>More of South America — Coming Soon</h3><p>Colombia's El Tiempo · Chile's El Mercurio · Peru's El Comercio. A continent where left and right are locked in genuinely historic battles over economic models.</p></div>
   </div>
 
 </div>

@@ -162,6 +162,7 @@
   <span>|</span>
   <a href="index.html#mideast">🌐 Middle East</a>
   <a href="africa_press_today.html">🌍 Africa</a>
+  <a href="middleeast_press_today.html">🕌 Middle East</a>
 
   <span class="sep">|</span>
   <a href="poles_apart.html">⚡ Poles Apart</a>
@@ -370,7 +371,7 @@
   <div id="region-sea" class="region-panel">
     <div class="tier2-tabs">
       <div class="tab-wrap"><button class="tier2-tab active" onclick="showCountry('sea','malaysia',this)">🇲🇾 Malaysia</button><div class="country-stats"><div class="cs-name">🇲🇾 Malaysia</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Kuala Lumpur</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>33m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>FPTP (Westminster)</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Constitutional Monarchy (Elective)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#27ae60">Centre</span></div><div class="cs-govt-detail">Pakatan Harapan + Barisan Nasional unity govt</div><div class="cs-leader">PM: Anwar Ibrahim (PKR)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> Perikatan Nasional (PN)</div><div class="cs-opp-leader">Muhyiddin Yassin</div><div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> PAS</div><div class="cs-opp-leader">Abdul Hadi Awang</div></div></div>
-      <button class="tier2-tab soon" onclick="showCountry('sea','india',this)">🇮🇳 India <small>(soon)</small></button>
+      <div class="tab-wrap"><button class="tier2-tab" onclick="showCountry('sea','india',this)">🇮🇳 India</button><div class="country-stats"><div class="cs-name">🇮🇳 India</div><div class="cs-row"><span class="cs-icon">🏛</span><span>New Delhi</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>1.44bn</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>First Past the Post</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Federal Republic (Parliamentary)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22">Centre Right</span></div><div class="cs-govt-detail">BJP-led NDA coalition</div><div class="cs-leader">PM: Narendra Modi (BJP)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> INC — Indian National Congress</div><div class="cs-opp-leader">Rahul Gandhi / Mallikarjun Kharge</div><div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> INDIA Alliance (broad coalition)</div></div></div>
       <button class="tier2-tab soon" onclick="showCountry('sea','singapore',this)">🇸🇬 Singapore <small>(soon)</small></button>
       <button class="tier2-tab soon" onclick="showCountry('sea','indonesia',this)">🇮🇩 Indonesia <small>(soon)</small></button>
       <button class="tier2-tab soon" onclick="showCountry('sea','vietnam',this)">🇻🇳 Vietnam <small>(soon)</small></button>
@@ -569,7 +570,96 @@
 
     <!-- Stubs for other SEA countries -->
     <div id="sea-india" class="country-panel">
-      <div class="stub-panel">🇮🇳 <strong>India</strong><p>Coming soon — The Hindu, Times of India, The Print</p></div>
+      <div id="sea-india" class="country-panel">
+        <div class="country-title">🇮🇳 India — Press Today</div>
+        <div class="papers">
+
+          <div class="paper">
+            <div class="paper-header">
+              <div class="lean lean-left">◀ Left / Progressive</div>
+              <div class="paper-name">The Hindu</div>
+              <div class="paper-desc">Chennai-based national daily. Centre-left, anti-communal, critical of BJP majoritarianism. India's paper of record for its liberal English-reading elite.</div>
+            </div>
+            <div class="stories">
+              <div class="story">
+                <div class="story-headline" onclick="toggleStory(this)">India-Pakistan ceasefire holds — but the diplomatic architecture that produced it remains fragile<span class="story-toggle">▼</span></div>
+                <div class="story-detail">The Hindu covers the India-Pakistan tension as a structural failure of regional diplomacy rather than a bilateral flare-up. The paper argues that without sustained back-channel engagement and US involvement, the ceasefire line manages the symptom but not the disease. It is critical of both governments' tendency to use border tensions for domestic political mobilisation.<a href="https://www.thehindu.com" class="story-url" target="_blank">→ thehindu.com</a></div>
+              </div>
+              <div class="story">
+                <div class="story-headline" onclick="toggleStory(this)">Electoral bonds verdict: Supreme Court struck them down, but the money has already moved<span class="story-toggle">▼</span></div>
+                <div class="story-detail">The Supreme Court's 2024 ruling against electoral bonds — anonymous political funding instruments used overwhelmingly by the BJP — is covered by The Hindu as an important democratic victory that came too late. The paper tracks the data: BJP received roughly 55% of all electoral bond funding, and asks whether the ruling changes anything when cash and shell-company donations remain available alternatives.<a href="https://www.thehindu.com" class="story-url" target="_blank">→ thehindu.com</a></div>
+              </div>
+              <div class="story">
+                <div class="story-headline" onclick="toggleStory(this)">Manipur: over a year of ethnic violence and the prime minister still hasn't visited<span class="story-toggle">▼</span></div>
+                <div class="story-detail">The conflict between Meitei and Kuki-Zo communities in Manipur — which has displaced tens of thousands and killed hundreds — remains one of The Hindu's persistent editorial commitments. The paper has criticised Modi for not visiting the state and for allowing what it characterises as a BJP state government to manage the crisis without federal intervention.<a href="https://www.thehindu.com" class="story-url" target="_blank">→ thehindu.com</a></div>
+              </div>
+            </div>
+            <div class="trackers">
+              <div class="tracker-row"><div class="tracker-label">Hobby Horse</div><div class="tracker-topic">Constitutional secularism &amp; minority rights</div><div class="dots"><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div></div></div>
+              <div class="tracker-row"><div class="tracker-label">Undue Influence</div><div class="tracker-topic">RSS / Hindutva ideological influence on BJP policy</div><div class="dots"><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div></div></div>
+            </div>
+          </div>
+
+          <div class="paper">
+            <div class="paper-header">
+              <div class="lean lean-centre">● Centre</div>
+              <div class="paper-name">Hindustan Times</div>
+              <div class="paper-desc">Delhi-based national daily. Centrist, business-friendly, broadly supportive of economic reform. India's establishment paper — read across party lines in the capital.</div>
+            </div>
+            <div class="stories">
+              <div class="story">
+                <div class="story-headline" onclick="toggleStory(this)">India's GDP grows at 6.8% — the headline masks a more complicated story about jobs<span class="story-toggle">▼</span></div>
+                <div class="story-detail">India's growth figures are the envy of most large economies but Hindustan Times's economics desk probes the quality of that growth. Formal sector job creation remains weak, agriculture distress is structural, and the manufacturing push has not yet absorbed the 10-12 million young Indians entering the workforce each year. The paper frames this as the defining challenge of Modi's third term.<a href="https://www.hindustantimes.com" class="story-url" target="_blank">→ hindustantimes.com</a></div>
+              </div>
+              <div class="story">
+                <div class="story-headline" onclick="toggleStory(this)">Operation Sindoor aftermath: military success, but what comes next with Pakistan?<span class="story-toggle">▼</span></div>
+                <div class="story-detail">Hindustan Times covered India's military strikes against Pakistan-based militant infrastructure with a broadly supportive but analytically cautious tone. The paper acknowledges public and political approval of the operation but asks harder questions about Pakistan's response calculus, the role of China as a backstop for Islamabad, and whether the strikes change the underlying dynamic or simply reset the clock.<a href="https://www.hindustantimes.com" class="story-url" target="_blank">→ hindustantimes.com</a></div>
+              </div>
+              <div class="story">
+                <div class="story-headline" onclick="toggleStory(this)">AI and India: the $1 trillion digital economy target — ambition or roadmap?<span class="story-toggle">▼</span></div>
+                <div class="story-detail">India's government has committed to building a $1 trillion digital economy by 2028. Hindustan Times covers the tech sector's expansion — UPI's global rollout, the semiconductor push, AI investment from global majors — with genuine enthusiasm, while noting that digital infrastructure outside the major cities remains patchy and the talent pipeline, while large, faces global competition for its best graduates.<a href="https://www.hindustantimes.com" class="story-url" target="_blank">→ hindustantimes.com</a></div>
+              </div>
+            </div>
+            <div class="trackers">
+              <div class="tracker-row"><div class="tracker-label">Hobby Horse</div><div class="tracker-topic">Economic growth &amp; India's global rise</div><div class="dots"><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div></div></div>
+              <div class="tracker-row"><div class="tracker-label">Undue Influence</div><div class="tracker-topic">China competition as strategic frame for all policy</div><div class="dots"><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div></div></div>
+            </div>
+          </div>
+
+          <div class="paper">
+            <div class="paper-header">
+              <div class="lean lean-right">▶ Right / Nationalist</div>
+              <div class="paper-name">Times of India</div>
+              <div class="paper-desc">India's largest English-language daily. Centre-right, pro-business, broadly sympathetic to BJP's economic agenda. India's most-read English newspaper by circulation.</div>
+            </div>
+            <div class="stories">
+              <div class="story">
+                <div class="story-headline" onclick="toggleStory(this)">India stands firm: why Operation Sindoor was necessary and proportionate<span class="story-toggle">▼</span></div>
+                <div class="story-detail">Times of India's coverage of the India-Pakistan military exchange was firmly on the side of the government's narrative — the strikes were targeted, necessary, and successful. The paper's op-ed pages featured retired generals and security analysts supporting the operation. It treated international calls for de-escalation as evidence of double standards applied to India that would never be applied to Western nations defending themselves.<a href="https://timesofindia.indiatimes.com" class="story-url" target="_blank">→ timesofindia.com</a></div>
+              </div>
+              <div class="story">
+                <div class="story-headline" onclick="toggleStory(this)">Waqf Amendment Act: the government's case for reform the opposition refuses to engage with<span class="story-toggle">▼</span></div>
+                <div class="story-detail">The Waqf (Amendment) Act — which changes management of Muslim religious endowment properties — has been framed by TOI as a necessary modernisation of an opaque system. The paper gives prominence to government arguments that the changes bring accountability to Waqf boards and protect non-Muslim property rights. Critics who call it anti-minority are described as playing politics rather than engaging with the legal substance.<a href="https://timesofindia.indiatimes.com" class="story-url" target="_blank">→ timesofindia.com</a></div>
+              </div>
+              <div class="story">
+                <div class="story-headline" onclick="toggleStory(this)">Make in India is working — the semiconductor and defence manufacturing data proves it<span class="story-toggle">▼</span></div>
+                <div class="story-detail">Times of India is the most enthusiastic mainstream outlet for Modi's manufacturing push. It covers factory openings, investment announcements, and export data with positive framing. The paper's business coverage treats India's industrial ambitions as both achievable and overdue — and is impatient with what it sees as structural pessimism from critics who focus on implementation gaps rather than the scale of the ambition.<a href="https://timesofindia.indiatimes.com" class="story-url" target="_blank">→ timesofindia.com</a></div>
+              </div>
+            </div>
+            <div class="trackers">
+              <div class="tracker-row"><div class="tracker-label">Hobby Horse</div><div class="tracker-topic">National security &amp; Hindu cultural confidence</div><div class="dots"><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div></div></div>
+              <div class="tracker-row"><div class="tracker-label">Undue Influence</div><div class="tracker-topic">BJP government messaging &amp; Modi brand</div><div class="dots"><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div></div></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="blind-spots">
+          <h4>🔦 India's Blind Spots — What the world misses</h4>
+          <div class="blind-spot-item">🌾 <strong>The farmer:</strong> India's 600 million-plus people dependent on agriculture live in a world almost entirely invisible to the English-language press — including India's own. Crop failures, debt cycles, and the slow collapse of rural livelihoods are the defining stories of the country, but they rarely surface unless there's a protest dramatic enough to block a highway.</div>
+          <div class="blind-spot-item">🏙️ <strong>Caste in the city:</strong> International coverage of caste focuses on rural atrocities. The urban reality — caste discrimination in hiring, housing, dating, and social networks across India's booming cities — is almost never examined, despite being the lived experience of hundreds of millions of people.</div>
+          <div class="blind-spot-item">🗳️ <strong>The 2024 election surprise:</strong> Modi won a third term but lost his majority — a political earthquake that Indian media covered exhaustively and international outlets largely missed. The BJP's dependence on coalition partners is now a structural constraint on policy that shapes every decision, yet most foreign coverage still treats Modi as governing with unchecked authority.</div>
+        </div>
+      </div>
     </div>
     <div id="sea-singapore" class="country-panel">
       <div class="stub-panel">🇸🇬 <strong>Singapore</strong><p>Coming soon — The Straits Times, Today, The Independent SG</p></div>
