@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poles Apart — World Headline</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Georgia", serif; background: #f5f3ee; color: #1a1a1a; min-height: 100vh; }
+  header { background: #1a1a1a; color: #f5f3ee; padding: 18px 32px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  header h1 { font-size: 1.4rem; letter-spacing: 0.08em; font-weight: 700; }
+  header .subtitle { font-size: 0.75rem; color: #888; font-family: sans-serif; margin-left: auto; }
+  .region-nav { background: #2c2c2c; padding: 8px 32px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .region-nav a { color: #ccc; text-decoration: none; font-size: 0.72rem; font-family: sans-serif; padding: 4px 10px; border-radius: 3px; transition: background 0.15s; }
+  .region-nav a:hover { background: #444; color: #fff; }
+  .region-nav a.active { background: #c0392b; color: #fff; }
+  .region-nav span.sep { color: #555; font-size: 0.7rem; font-family: sans-serif; padding: 4px 4px; }
+  .spectrum-bar { display: flex; height: 4px; background: linear-gradient(to right, #2980b9, #27ae60, #c0392b); }
+  .container { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+
+  /* ── Page hero ── */
+  .pa-hero { text-align: center; padding: 48px 20px 32px; border-bottom: 2px solid #1a1a1a; margin-bottom: 48px; }
+  .pa-hero h2 { font-size: 2.2rem; letter-spacing: 0.04em; margin-bottom: 10px; }
+  .pa-hero .pa-tagline { font-size: 1.05rem; color: #555; font-family: sans-serif; font-style: italic; max-width: 600px; margin: 0 auto 16px; line-height: 1.6; }
+  .pa-hero .pa-note { font-size: 0.72rem; color: #999; font-family: sans-serif; }
+
+  /* ── Section titles ── */
+  .pa-section { margin-bottom: 56px; }
+  .pa-section-title { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.03em; border-left: 4px solid #c0392b; padding-left: 14px; margin-bottom: 6px; }
+  .pa-section-sub { font-size: 0.72rem; font-family: sans-serif; color: #888; margin-left: 18px; margin-bottom: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .pa-body { font-size: 0.92rem; line-height: 1.8; color: #333; }
+  .pa-body p { margin-bottom: 16px; }
+  .pa-body strong { color: #1a1a1a; }
+
+  /* ── Coherence gap ── */
+  .coherence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0; }
+  @media (max-width: 640px) { .coherence-grid { grid-template-columns: 1fr; } }
+  .coherence-card { padding: 20px; border-radius: 6px; }
+  .coherence-card.right-card { background: #fff5f5; border: 1px solid #e8c5c5; }
+  .coherence-card.left-card { background: #f0f5ff; border: 1px solid #c5d5e8; }
+  .coherence-card h4 { font-size: 0.78rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+  .coherence-card.right-card h4 { color: #c0392b; }
+  .coherence-card.left-card h4 { color: #2980b9; }
+  .coherence-card ul { list-style: none; padding: 0; }
+  .coherence-card ul li { font-size: 0.82rem; font-family: sans-serif; line-height: 1.5; color: #444; padding: 5px 0 5px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); position: relative; }
+  .coherence-card ul li:last-child { border-bottom: none; }
+  .coherence-card ul li::before { content: "▸"; position: absolute; left: 0; color: #999; }
+  .coherence-verdict { background: #1a1a1a; color: #f5f3ee; padding: 16px 20px; border-radius: 4px; font-size: 0.84rem; font-family: sans-serif; font-style: italic; line-height: 1.6; text-align: center; margin-top: 20px; }
+
+  /* ── Playbooks ── */
+  .playbook-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+  @media (max-width: 640px) { .playbook-grid { grid-template-columns: 1fr; } }
+  .playbook-card { padding: 22px; border-radius: 6px; }
+  .playbook-card.for-left { background: #f0f5ff; border: 2px solid #2980b9; }
+  .playbook-card.for-right { background: #fff5f5; border: 2px solid #c0392b; }
+  .playbook-card h4 { font-size: 0.8rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+  .playbook-card.for-left h4 { color: #2980b9; }
+  .playbook-card.for-right h4 { color: #c0392b; }
+  .playbook-item { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .playbook-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .playbook-item .pi-num { font-size: 0.65rem; font-family: sans-serif; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .playbook-item .pi-head { font-size: 0.86rem; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .playbook-item .pi-body { font-size: 0.78rem; font-family: sans-serif; color: #555; line-height: 1.5; }
+  .analyst-note { background: #fffbf0; border: 1px solid #e8d5a0; border-radius: 4px; padding: 14px 18px; font-size: 0.78rem; font-family: sans-serif; color: #666; font-style: italic; line-height: 1.6; margin-top: 20px; }
+
+  /* ── Water Cooler ── */
+  .wc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-top: 20px; }
+  .wc-card { background: #fff; border: 1px solid #e8e4dd; border-radius: 6px; padding: 18px; }
+  .wc-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0ece5; }
+  .wc-flag { font-size: 1.6rem; }
+  .wc-country { font-size: 0.9rem; font-weight: 700; }
+  .wc-context { font-size: 0.65rem; font-family: sans-serif; color: #999; }
+  .wc-item { font-size: 0.78rem; font-family: sans-serif; color: #444; line-height: 1.5; padding: 6px 0 6px 14px; border-bottom: 1px solid #f5f3ee; position: relative; }
+  .wc-item:last-child { border-bottom: none; }
+  .wc-item::before { content: "💬"; position: absolute; left: 0; font-size: 0.65rem; top: 7px; }
+  .wc-hobbyhorses { margin-top: 24px; background: #1a1a1a; color: #f5f3ee; border-radius: 6px; padding: 22px 24px; }
+  .wc-hobbyhorses h4 { font-size: 0.8rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 16px; }
+  .hh-region { margin-bottom: 16px; }
+  .hh-region-name { font-size: 0.78rem; font-weight: 700; font-family: sans-serif; color: #e8c97a; margin-bottom: 6px; }
+  .hh-topics { font-size: 0.76rem; font-family: sans-serif; color: #ccc; line-height: 1.7; }
+
+  /* ── Cross-border Influence ── */
+  .influence-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+  .influence-card { background: #fff; border: 1px solid #e8e4dd; border-radius: 6px; padding: 18px; }
+  .inf-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .inf-avatar { width: 42px; height: 42px; border-radius: 50%; background: #1a1a1a; color: #f5f3ee; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-family: sans-serif; font-weight: 700; flex-shrink: 0; }
+  .inf-name { font-size: 0.88rem; font-weight: 700; }
+  .inf-role { font-size: 0.68rem; font-family: sans-serif; color: #888; }
+  .inf-arrows { font-size: 0.76rem; font-family: sans-serif; color: #555; line-height: 1.6; }
+  .inf-arrow-item { padding: 4px 0 4px 16px; position: relative; }
+  .inf-arrow-item::before { content: "→"; position: absolute; left: 0; color: #c0392b; font-weight: 700; }
+
+  /* ── Axis of Equal ── */
+  .aoe-wrapper { background: #fff; border: 2px dashed #ccc; border-radius: 8px; padding: 28px 24px; margin-top: 20px; }
+  .aoe-wip { font-size: 0.72rem; font-family: sans-serif; color: #999; text-align: center; margin-bottom: 20px; letter-spacing: 0.05em; }
+  .aoe-spectrum-bar { height: 8px; border-radius: 4px; background: linear-gradient(to right, #8B0000, #2980b9 25%, #27ae60 50%, #e67e22 75%, #4a0000); margin-bottom: 8px; position: relative; }
+  .aoe-labels { display: flex; justify-content: space-between; font-size: 0.65rem; font-family: sans-serif; color: #888; margin-bottom: 28px; }
+  .aoe-row { margin-bottom: 18px; }
+  .aoe-country-name { font-size: 0.74rem; font-family: sans-serif; font-weight: 700; color: #555; margin-bottom: 6px; }
+  .aoe-track { height: 28px; background: #f5f3ee; border-radius: 4px; position: relative; margin-bottom: 2px; }
+  .aoe-party { position: absolute; height: 22px; top: 3px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 0.58rem; font-family: sans-serif; font-weight: 700; color: #fff; white-space: nowrap; padding: 0 6px; transform: translateX(-50%); cursor: default; }
+  .aoe-note { font-size: 0.68rem; font-family: sans-serif; color: #bbb; text-align: center; margin-top: 20px; font-style: italic; }
+  .aoe-cta { text-align: center; margin-top: 16px; }
+  .aoe-cta a { font-size: 0.78rem; font-family: sans-serif; color: #c0392b; text-decoration: none; border: 1px solid #c0392b; padding: 6px 16px; border-radius: 3px; }
+  .aoe-cta a:hover { background: #c0392b; color: #fff; }
+
+  .date-stamp { font-size: 0.68rem; font-family: sans-serif; color: #bbb; text-align: right; padding: 32px 0 16px; border-top: 1px solid #e8e4dd; margin-top: 48px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>WORLD HEADLINE</h1>
+  <span class="subtitle">Poles Apart — Global Political Analysis</span>
+</header>
+
+<nav class="region-nav">
+  <a href="index.html">🏠 Home</a>
+  <span class="sep">|</span>
+  <a href="uk_press_today.html">🇬🇧 UK</a>
+  <a href="europe_press_today.html">🌍 Europe</a>
+  <span class="sep">|</span>
+  <a href="americas_press_today.html">🌎 Americas</a>
+  <a href="asia_press_today.html">🌏 Asia-Pacific</a>
+  <span class="sep">|</span>
+  <a href="poles_apart.html" class="active">⚡ Poles Apart</a>
+  <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
+</nav>
+<div class="spectrum-bar"></div>
+
+<div class="container">
+
+  <div class="pa-hero">
+    <h2>⚡ Poles Apart</h2>
+    <p class="pa-tagline">The global right has a playbook. The global left has a cause. Neither is winning cleanly — and here is why.</p>
+    <p class="pa-note">An opinionated read. Not neutral. Applies equally to both sides.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════ SECTION 1: THE COHERENCE GAP ═══ -->
+  <div class="pa-section" id="coherence-gap">
+    <div class="pa-section-title">The Coherence Gap</div>
+    <div class="pa-section-sub">Why the right sounds like one voice and the left sounds like a committee</div>
+
+    <div class="pa-body">
+      <p>Read the front pages of a right-leaning newspaper in Denmark, Brazil, the United States, Italy, and Malaysia in the same week. You will find the same arguments, the same emotional register, and often the same specific phrases. <strong>Immigration is a threat to culture and identity. Elites have failed ordinary people. The cost of living is high because of bad government, not global forces. Western institutions are rigged against the common man.</strong> This is not coincidence. It is cross-pollination at industrial scale.</p>
+      <p>Now read the progressive press across those same five countries. The Brazilian left is consumed by the Amazon and inequality rooted in 500 years of colonial exploitation. The Danish left is debating whether it abandoned its values by adopting the right's immigration policy in exchange for electoral survival. The Malaysian left is focused on corruption and ethnic political carve-ups. The American left is fighting over Gaza, trans rights, and student debt. All of these are legitimate concerns. None of them translate across borders. <strong>Shared values. No shared vocabulary.</strong></p>
+    </div>
+
+    <div class="coherence-grid">
+      <div class="coherence-card right-card">
+        <h4>▶ The Right — Coherent Across Continents</h4>
+        <ul>
+          <li>Immigration = cultural threat, not policy challenge</li>
+          <li>Cost of living = government failure, not market failure</li>
+          <li>Elite institutions (media, universities, courts) = rigged</li>
+          <li>National sovereignty &gt; multilateral obligations</li>
+          <li>Strong leader = strong country</li>
+          <li>Cross-pollination: Trump → Bolsonaro → Farage → Wilders → Le Pen → Meloni → Orbán all reading from the same script</li>
+        </ul>
+      </div>
+      <div class="coherence-card left-card">
+        <h4>◀ The Left — Fragmented by Region</h4>
+        <ul>
+          <li>Brazil: Amazon, inequality, Jan 8 / democracy</li>
+          <li>Scandinavia: welfare sustainability, institutional trust</li>
+          <li>Malaysia: corruption, ethnic rights, press freedom</li>
+          <li>USA: racial justice, reproductive rights, student debt</li>
+          <li>Poland: rule of law, EU values, post-PiS rebuilding</li>
+          <li>No cross-pollination. No shared emotional language. Every left talks to its own audience only.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="coherence-verdict">"The right found three things everyone agrees on and hammered them for twenty years. The left found thirty things everyone half-agrees on and talked about all of them simultaneously."</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ SECTION 2: THE PLAYBOOKS ═══ -->
+  <div class="pa-section" id="playbooks">
+    <div class="pa-section-title">The Playbooks</div>
+    <div class="pa-section-sub">An analyst's honest assessment — not cheerleading for either side</div>
+
+    <div class="playbook-grid">
+      <div class="playbook-card for-left">
+        <h4>◀ For the Left — What Would Actually Work</h4>
+        <div class="playbook-item">
+          <div class="pi-num">Move 1</div>
+          <div class="pi-head">Find your three things and only talk about those</div>
+          <div class="pi-body">Pick the three issues where there is genuine global consensus across progressive movements — cost of housing, climate action, and healthcare access are strong candidates — and concentrate all messaging firepower there. The right's coherence is a product of discipline, not accident. Stop dispersing.</div>
+        </div>
+        <div class="playbook-item">
+          <div class="pi-num">Move 2</div>
+          <div class="pi-head">Build cross-border messaging infrastructure</div>
+          <div class="pi-body">The right has a network of think tanks, media outlets, and conferences that share talking points globally. Soros-funded initiatives exist on the left but are defensive and disconnected. A genuinely internationalist left would have common framing for common problems — affordable housing in Seoul and Lisbon and Nairobi is the same crisis with different postcodes.</div>
+        </div>
+        <div class="playbook-item">
+          <div class="pi-num">Move 3</div>
+          <div class="pi-head">Find the emotional language — not just the correct policy</div>
+          <div class="pi-body">The right speaks in feelings: safety, pride, belonging, betrayal. The left speaks in policies: investment frameworks, structural reform, progressive taxation. Both are necessary but only one wins elections. The left needs to learn to say "your children should be able to afford a home" without the footnotes.</div>
+        </div>
+      </div>
+      <div class="playbook-card for-right">
+        <h4>▶ For the Right — What Would Consolidate the Gains</h4>
+        <div class="playbook-item">
+          <div class="pi-num">Move 1</div>
+          <div class="pi-head">Develop a credible answer to the cost of living — not just a villain</div>
+          <div class="pi-body">Blaming immigrants and elites for high housing and grocery prices wins elections but doesn't reduce prices. Governments of the right are now in power across much of the developed world and being judged on delivery. The playbook that wins opposition doesn't govern. A serious economic programme is overdue.</div>
+        </div>
+        <div class="playbook-item">
+          <div class="pi-num">Move 2</div>
+          <div class="pi-head">Dial back the extremes before they own you</div>
+          <div class="pi-body">The coherence of the global right is also its vulnerability. Le Pen, Wilders, Bolsonaro, and Meloni have made the mainstream right stronger — but they have also pulled it into territory (misogyny, race, democratic backsliding) that alienates moderates who would otherwise vote right on economics. The mainstream right needs to actively distance itself from its own fringe or the fringe becomes the story.</div>
+        </div>
+        <div class="playbook-item">
+          <div class="pi-num">Move 3</div>
+          <div class="pi-head">Appear to have more heart — not as a tactic, as a genuine offering</div>
+          <div class="pi-body">The right's perception problem is coldness. In a cost-of-living crisis, telling struggling families that markets will eventually fix things while cutting social programmes is politically and humanly inadequate. A conservatism that pairs fiscal responsibility with genuine care for those who fall behind would be electorally formidable and harder to caricature.</div>
+        </div>
+      </div>
+    </div>
+    <div class="analyst-note">⚖️ This analysis applies equally to both sides. The left's fragmentation is a real strategic failure. The right's coherence is a real strategic strength that also creates real democratic risks. Both are observable facts, not value judgements.</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ SECTION 3: THE WATER COOLER ═══ -->
+  <div class="pa-section" id="water-cooler">
+    <div class="pa-section-title">The Water Cooler</div>
+    <div class="pa-section-sub">If you are at work this week in these countries, you are probably talking about...</div>
+
+    <div class="wc-grid">
+
+      <div class="wc-card">
+        <div class="wc-header">
+          <div class="wc-flag">🇯🇵</div>
+          <div><div class="wc-country">Japan</div><div class="wc-context">Week of 19 May 2026</div></div>
+        </div>
+        <div class="wc-item">Whether Japan is really rearming — and what the neighbours think about it</div>
+        <div class="wc-item">The biggest pay rises in 30 years: why doesn't it feel like more money?</div>
+        <div class="wc-item">Trump's demands on the alliance and whether America can still be trusted</div>
+      </div>
+
+      <div class="wc-card">
+        <div class="wc-header">
+          <div class="wc-flag">🇧🇷</div>
+          <div><div class="wc-country">Brazil</div><div class="wc-context">Week of 19 May 2026</div></div>
+        </div>
+        <div class="wc-item">The Bolsonaro trial — justice or political theatre, depending who you ask</div>
+        <div class="wc-item">Lula's Amazon numbers: impressive stats, questionable on the Cerrado</div>
+        <div class="wc-item">US tariffs hitting Brazilian exports — who is Trump's trade war really for?</div>
+      </div>
+
+      <div class="wc-card">
+        <div class="wc-header">
+          <div class="wc-flag">🇫🇮</div>
+          <div><div class="wc-country">Finland</div><div class="wc-context">Week of 19 May 2026</div></div>
+        </div>
+        <div class="wc-item">Two years in NATO — did it make Finland safer, or just more expensive?</div>
+        <div class="wc-item">The government's welfare cuts and who is actually bearing the cost</div>
+        <div class="wc-item">The 1,340km border with Russia and what it means to live next to it</div>
+      </div>
+
+      <div class="wc-card">
+        <div class="wc-header">
+          <div class="wc-flag">🇩🇰</div>
+          <div><div class="wc-country">Denmark</div><div class="wc-context">Week of 19 May 2026</div></div>
+        </div>
+        <div class="wc-item">Trump and Greenland — a joke that doesn't feel funny when you live here</div>
+        <div class="wc-item">The immigration policy Denmark invented that the rest of Europe is now copying</div>
+        <div class="wc-item">Whether the 70% climate target is realistic when no one will touch the farmers</div>
+      </div>
+
+      <div class="wc-card">
+        <div class="wc-header">
+          <div class="wc-flag">🇲🇾</div>
+          <div><div class="wc-country">Malaysia</div><div class="wc-context">Week of 19 May 2026</div></div>
+        </div>
+        <div class="wc-item">The US-China trade war and which side Malaysia is supposed to be on</div>
+        <div class="wc-item">Anwar Ibrahim's unity government — is this reform or just a new arrangement?</div>
+        <div class="wc-item">Cost of living: the ringgit, subsidies, and the price of chicken</div>
+      </div>
+
+      <div class="wc-card">
+        <div class="wc-header">
+          <div class="wc-flag">🇰🇷</div>
+          <div><div class="wc-country">South Korea</div><div class="wc-context">Week of 19 May 2026</div></div>
+        </div>
+        <div class="wc-item">The martial law night — still processing what actually happened to the republic</div>
+        <div class="wc-item">Birth rate 0.72 — the world's lowest, and what it means for everyone's pension</div>
+        <div class="wc-item">North Korea supplying Russia — and the silence from Trump about it</div>
+      </div>
+
+      <div class="wc-card">
+        <div class="wc-header">
+          <div class="wc-flag">🇵🇱</div>
+          <div><div class="wc-country">Poland</div><div class="wc-context">Week of 19 May 2026</div></div>
+        </div>
+        <div class="wc-item">Ukraine next door — fatigue is starting but fear of Russia is always underneath</div>
+        <div class="wc-item">Tusk vs the old PiS judiciary — the rule-of-law battle is not over</div>
+        <div class="wc-item">Poland's defence spending: the highest in NATO by GDP share, and rising</div>
+      </div>
+
+      <div class="wc-card">
+        <div class="wc-header">
+          <div class="wc-flag">🇵🇹</div>
+          <div><div class="wc-country">Portugal</div><div class="wc-context">Week of 19 May 2026</div></div>
+        </div>
+        <div class="wc-item">Not being able to afford to live in the city you grew up in</div>
+        <div class="wc-item">Chega — where did this come from and is it going to keep growing?</div>
+        <div class="wc-item">Young Portuguese leaving for the UK and Switzerland — again</div>
+      </div>
+
+    </div>
+
+    <div class="wc-hobbyhorses">
+      <h4>🌍 Regional Hobby Horses — The Shared Preoccupations</h4>
+      <div class="hh-region">
+        <div class="hh-region-name">🌨 Scandinavia & Nordics</div>
+        <div class="hh-topics">Welfare sustainability as populations age · The immigration consensus that the left finally joined · Institutional trust as a national competitive advantage · Ukraine fatigue vs. Russia anxiety living side by side</div>
+      </div>
+      <div class="hh-region">
+        <div class="hh-region-name">🌍 Western & Southern Europe</div>
+        <div class="hh-topics">The far-right surge that nobody predicted a decade ago · Housing as a generational crisis, not a market correction · NATO spending targets and who can actually afford them · The coherence of Brussels vs. the incoherence of member states</div>
+      </div>
+      <div class="hh-region">
+        <div class="hh-region-name">🌏 East Asia</div>
+        <div class="hh-topics">China's military posture and whether the US alliance is still reliable · Demographic collapse — ageing Japan, imploding Korean birth rate, one-child China legacy · Economic nationalism vs. export dependency</div>
+      </div>
+      <div class="hh-region">
+        <div class="hh-region-name">🌏 South-East Asia</div>
+        <div class="hh-topics">The US-China trade war and the impossible neutrality it demands · Corruption as the baseline political expectation · Development vs. democratic accountability — can you have both?</div>
+      </div>
+      <div class="hh-region">
+        <div class="hh-region-name">🌎 Latin America</div>
+        <div class="hh-topics">Inflation trauma — it happened before and could happen again · The pendulum between left populism and right populism with few stops in the centre · US influence that doesn't go away regardless of who's in the White House</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ SECTION 4: CROSS-BORDER INFLUENCE ═══ -->
+  <div class="pa-section" id="influence">
+    <div class="pa-section-title">Cross-Border Undue Influence</div>
+    <div class="pa-section-sub">The political figures shaping conversations far beyond their own borders</div>
+
+    <div class="pa-body">
+      <p>Some political figures cast shadows well beyond their own elections. Below are the individuals whose ideas, methods, and rhetoric are genuinely shaping political debate across multiple countries — not because they intend to, but because the media, opposition parties, and think tanks of other nations have adopted them as reference points, templates, or warnings.</p>
+    </div>
+
+    <div class="influence-grid">
+
+      <div class="influence-card">
+        <div class="inf-header">
+          <div class="inf-avatar">DT</div>
+          <div><div class="inf-name">Donald Trump</div><div class="inf-role">US President — global populist template</div></div>
+        </div>
+        <div class="inf-arrows">
+          <div class="inf-arrow-item">Every right-wing party in Europe is asked if they are "their country's Trump"</div>
+          <div class="inf-arrow-item">NATO allies restructuring defence budgets around his demands</div>
+          <div class="inf-arrow-item">Brazil's Bolsonaro movement explicitly modelled its playbook on his</div>
+          <div class="inf-arrow-item">Japan, South Korea, Malaysia navigating tariff exposure simultaneously</div>
+          <div class="inf-arrow-item">The "stolen election" narrative has been copied in Brazil, Peru, and elsewhere</div>
+        </div>
+      </div>
+
+      <div class="influence-card">
+        <div class="inf-header">
+          <div class="inf-avatar">XJ</div>
+          <div><div class="inf-name">Xi Jinping</div><div class="inf-role">China — the silent anchor of Asian politics</div></div>
+        </div>
+        <div class="inf-arrows">
+          <div class="inf-arrow-item">Japan's rearmament debate is entirely framed around the China threat</div>
+          <div class="inf-arrow-item">South Korea's defence posture cannot be separated from Beijing's Taiwan signalling</div>
+          <div class="inf-arrow-item">Malaysia walks a tightrope between China trade and US security</div>
+          <div class="inf-arrow-item">Australia's entire strategic pivot is a response to Chinese assertiveness</div>
+          <div class="inf-arrow-item">The Global South's relationship with China's infrastructure funding reshapes every bilateral</div>
+        </div>
+      </div>
+
+      <div class="influence-card">
+        <div class="inf-header">
+          <div class="inf-avatar">VO</div>
+          <div><div class="inf-name">Viktor Orbán</div><div class="inf-role">Hungary — illiberal democracy's architect</div></div>
+        </div>
+        <div class="inf-arrows">
+          <div class="inf-arrow-item">Poland's PiS took his judiciary and media capture model and ran it further</div>
+          <div class="inf-arrow-item">Serbia's Vučić has adopted the playbook almost wholesale</div>
+          <div class="inf-arrow-item">Italian right and French RN cite him as a legitimate governing model</div>
+          <div class="inf-arrow-item">His EU obstruction on Ukraine gives cover to other reluctant member states</div>
+          <div class="inf-arrow-item">The Conservative Political Action Conference made him a keynote — exporting to the US</div>
+        </div>
+      </div>
+
+      <div class="influence-card">
+        <div class="inf-header">
+          <div class="inf-avatar">ML</div>
+          <div><div class="inf-name">Marine Le Pen</div><div class="inf-role">France — far-right normalisation model</div></div>
+        </div>
+        <div class="inf-arrows">
+          <div class="inf-arrow-item">Her "de-demonisation" strategy (removing the party's Nazi-era associations) is the template for Chega in Portugal, AfD in Germany, and Vox in Spain</div>
+          <div class="inf-arrow-item">Italian right watched her get to 49% and concluded mainstreaming works</div>
+          <div class="inf-arrow-item">Her Russia position — ambiguous for years — softened European far-right critique of Putin</div>
+          <div class="inf-arrow-item">French presidential 2027 shapes every European far-right calculation</div>
+        </div>
+      </div>
+
+      <div class="influence-card">
+        <div class="inf-header">
+          <div class="inf-avatar">JB</div>
+          <div><div class="inf-name">Jair Bolsonaro</div><div class="inf-role">Brazil — Latin America's right-wing template</div></div>
+        </div>
+        <div class="inf-arrows">
+          <div class="inf-arrow-item">Argentine right under Milei shares his economic libertarianism and social conservatism</div>
+          <div class="inf-arrow-item">Chilean right hardened its position watching Bolsonaro win and lose</div>
+          <div class="inf-arrow-item">His environmental rollback legitimised regional agribusiness lobbies</div>
+          <div class="inf-arrow-item">January 8 copycat risk: his "stolen election" narrative spread to at least three other Latin American right movements</div>
+        </div>
+      </div>
+
+      <div class="influence-card">
+        <div class="inf-header">
+          <div class="inf-avatar">EM</div>
+          <div><div class="inf-name">Elon Musk</div><div class="inf-role">US/Global — the amplification machine</div></div>
+        </div>
+        <div class="inf-arrows">
+          <div class="inf-arrow-item">X (Twitter) algorithmic amplification of right-wing content is documented across every country on this site</div>
+          <div class="inf-arrow-item">Direct intervention in UK, German, and Brazilian elections via platform and personal posts</div>
+          <div class="inf-arrow-item">Brazilian Supreme Court clash put him at the centre of a free speech vs. rule of law debate globally</div>
+          <div class="inf-arrow-item">His DOGE role has inspired copycat "efficiency" rhetoric in at least 8 right-wing parties worldwide</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ SECTION 5: AXIS OF EQUAL ═══ -->
+  <div class="pa-section" id="axis-of-equal">
+    <div class="pa-section-title">⚖️ Axis of Equal</div>
+    <div class="pa-section-sub">Where do parties actually sit — on the full spectrum from communism to fascism?</div>
+
+    <div class="pa-body">
+      <p>Most political reporting uses a compressed spectrum — "left," "centre," "right" — that obscures more than it reveals. A party called "conservative" in one country might sit to the left of a party called "socialist" in another. The Axis of Equal maps every party from every country on this site on a single honest scale, from the communist extreme to the fascist extreme, so you can compare across borders.</p>
+    </div>
+
+    <div class="aoe-wrapper">
+      <div class="aoe-wip">🚧 &nbsp; WORK IN PROGRESS — Axis of Equal &nbsp; 🚧</div>
+
+      <div class="aoe-spectrum-bar"></div>
+      <div class="aoe-labels">
+        <span>☭ Communist</span>
+        <span>◀ Left</span>
+        <span>● Centre</span>
+        <span>Right ▶</span>
+        <span>⚡ Fascist</span>
+      </div>
+
+      <!-- Placeholder rows -->
+      <div class="aoe-row">
+        <div class="aoe-country-name">Country 1 — [placeholder]</div>
+        <div class="aoe-track">
+          <div class="aoe-party" style="background:#5dade2; left:32%">Party A</div>
+          <div class="aoe-party" style="background:#27ae60; left:48%">Party B</div>
+          <div class="aoe-party" style="background:#c0392b; left:65%">Party C</div>
+        </div>
+      </div>
+
+      <div class="aoe-row">
+        <div class="aoe-country-name">Country 2 — [placeholder]</div>
+        <div class="aoe-track">
+          <div class="aoe-party" style="background:#2980b9; left:28%">Party X</div>
+          <div class="aoe-party" style="background:#e67e22; left:60%">Party Y</div>
+          <div class="aoe-party" style="background:#7b241c; left:78%">Party Z</div>
+        </div>
+      </div>
+
+      <!-- Real examples for illustration -->
+      <div class="aoe-row" style="margin-top:24px; padding-top:16px; border-top:1px dashed #ddd;">
+        <div class="aoe-country-name" style="color:#1a1a1a">🇺🇸 United States — illustrative example</div>
+        <div class="aoe-track">
+          <div class="aoe-party" style="background:#2980b9; left:40%">Democrats</div>
+          <div class="aoe-party" style="background:#c0392b; left:67%">Republicans</div>
+          <div class="aoe-party" style="background:#7b241c; left:82%">MAGA wing</div>
+        </div>
+      </div>
+
+      <div class="aoe-row">
+        <div class="aoe-country-name" style="color:#1a1a1a">🇬🇧 United Kingdom — illustrative example</div>
+        <div class="aoe-track">
+          <div class="aoe-party" style="background:#5dade2; left:38%">Labour</div>
+          <div class="aoe-party" style="background:#27ae60; left:46%">Lib Dems</div>
+          <div class="aoe-party" style="background:#c0392b; left:62%">Conservatives</div>
+          <div class="aoe-party" style="background:#7b241c; left:76%">Reform UK</div>
+        </div>
+      </div>
+
+      <div class="aoe-row">
+        <div class="aoe-country-name" style="color:#1a1a1a">🇩🇪 Germany — illustrative example</div>
+        <div class="aoe-track">
+          <div class="aoe-party" style="background:#2980b9; left:30%">Die Linke</div>
+          <div class="aoe-party" style="background:#5dade2; left:40%">SPD</div>
+          <div class="aoe-party" style="background:#27ae60; left:48%">Greens</div>
+          <div class="aoe-party" style="background:#e67e22; left:60%">CDU/CSU</div>
+          <div class="aoe-party" style="background:#7b241c; left:78%">AfD</div>
+        </div>
+      </div>
+
+      <div class="aoe-note">Positions are editorial assessments based on party manifestos, voting records, and international comparisons — not algorithmic. All 21 countries coming.</div>
+      <div class="aoe-cta"><a href="axis_of_equal.html">→ Open full interactive Axis of Equal</a></div>
+    </div>
+  </div>
+
+  <div class="date-stamp">Poles Apart · World Headline · Updated week of 19 May 2026</div>
+
+</div>
+
+<script>
+  // Placeholder for future dynamic updates
+  document.title = "Poles Apart — World Headline";
+</script>
+</body>
+</html>
