@@ -480,13 +480,152 @@
   </div>
   <div id="region-south" class="region-panel">
     <div class="tier2-tabs">
-      <button class="tier2-tab soon">🇧🇷 Brazil — Soon</button>
+      <div class="tab-wrap"><button class="tier2-tab active" onclick="showCountry('south','brazil',this)">🇧🇷 Brazil</button><div class="country-stats"><div class="cs-name">🇧🇷 Brazil</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Brasília</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>215m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Party-list proportional (open list)</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Federal Republic (Presidential)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#2980b9">Left</span></div><div class="cs-govt-detail">PT (Workers' Party) + broad coalition</div><div class="cs-leader">President: Lula da Silva (PT)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> PL (Liberal Party)</div><div class="cs-opp-leader">Jair Bolsonaro (facing trial)</div><div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> PSD / União Brasil</div><div class="cs-opp-leader">Multiple leaders — fragmented</div></div></div>
       <button class="tier2-tab soon">🇦🇷 Argentina — Soon</button>
       <button class="tier2-tab soon">🇨🇴 Colombia — Soon</button>
       <button class="tier2-tab soon">🇨🇱 Chile — Soon</button>
       <button class="tier2-tab soon">🇵🇪 Peru — Soon</button>
     </div>
-    <div class="coming-soon"><div class="cs-flag">🌎</div><h3>South America — Coming Soon</h3><p>Brazil's Folha de S.Paulo, O Globo, and Veja magazine · Argentina's La Nación, Clarín, and Página 12 — three papers that couldn't be more different · Colombia's El Tiempo · Chile's El Mercurio. A continent where left and right are locked in genuinely historic battles over economic models, and where journalism is practised at considerable personal risk.</p></div>
+    <div id="south-brazil" class="country-panel active">
+      <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+      <h2 class="section-title">🇧🇷 Brazil — Imprensa Brasileira Hoje</h2>
+      <div class="papers-grid">
+
+        <div class="paper-card">
+          <div class="paper-header">
+            <div class="paper-lean lean-left">◀ Centre-Left</div>
+            <div class="paper-name">Folha de S.Paulo</div>
+            <div class="paper-meta">Circ. ~2.5m digital · Brazil's largest circulation paper, São Paulo-based<br>Founded 1921 · Independent, liberal tradition</div>
+            <div class="paper-tone">Centre-left · Investigative · Pro-democracy</div>
+          </div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)">
+              <div class="story-rank">Lead</div>
+              <div class="story-headline">Lula's Amazon bet: can Brazil lead climate talks while growing its agribusiness?</div>
+              <div class="story-tease">Deforestation is down. Soy exports are up. Both things are true.</div>
+              <div class="story-detail">Folha's environment desk examines the central contradiction of Lula's third term: genuine progress on Amazon deforestation (down 50% versus Bolsonaro peak) coexisting with record agribusiness expansion into the Cerrado savannah — which the international community barely monitors. Brazil is positioning itself as a climate leader ahead of COP, but Folha finds the picture is more complicated than the government's messaging.</div>
+              <a class="story-url" href="https://www.folha.uol.com.br" target="_blank" onclick="event.stopPropagation()">folha.uol.com.br</a>
+            </div>
+            <div class="story" onclick="toggleStory(this)">
+              <div class="story-rank">Second</div>
+              <div class="story-headline">January 8 trials: two years on, justice is moving — but is it moving equally?</div>
+              <div class="story-tease">Rioters are in prison. Those who allegedly planned it are not all there yet.</div>
+              <div class="story-detail">Folha reviews the state of prosecutions from the January 8 2023 assault on Brazilian democratic institutions by Bolsonaro supporters — widely compared to January 6 in the US. Hundreds of lower-level participants have been convicted. Folha's legal team asks whether the architects of the alleged coup attempt, some with political connections, are receiving equal scrutiny from prosecutors.</div>
+              <a class="story-url" href="https://www.folha.uol.com.br" target="_blank" onclick="event.stopPropagation()">folha.uol.com.br</a>
+            </div>
+            <div class="story" onclick="toggleStory(this)">
+              <div class="story-rank">Third</div>
+              <div class="story-headline">Lula's base grows restless: the workers who voted him in aren't feeling the recovery</div>
+              <div class="story-tease">GDP is growing. Wages in the north and northeast are not keeping up.</div>
+              <div class="story-detail">Folha's social affairs team reports from Bahia and Pará, states that delivered Lula his victory margin, where residents report rising food prices, stagnant informal wages, and a disconnect between national economic data and lived experience. The paper stops short of predicting political consequences but notes Lula's approval in these regions has softened since his 2022 peak.</div>
+              <a class="story-url" href="https://www.folha.uol.com.br" target="_blank" onclick="event.stopPropagation()">folha.uol.com.br</a>
+            </div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Amazon / environment</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Democracy / Jan 8</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Social inequality</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">JB</div><div class="person-info"><div class="person-name">Jair Bolsonaro</div><div class="person-role">Former president / Jan 8 trials</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Trump</div><div class="person-role">Trade / tariff pressure</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="paper-card">
+          <div class="paper-header">
+            <div class="paper-lean lean-centre">● Centre</div>
+            <div class="paper-name">O Globo</div>
+            <div class="paper-meta">Circ. ~1.5m digital · Rio de Janeiro, part of Grupo Globo media empire<br>Founded 1925 · Brazil's most influential media brand</div>
+            <div class="paper-tone">Centre · Establishment · Pro-business stability</div>
+          </div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)">
+              <div class="story-rank">Lead</div>
+              <div class="story-headline">Brazil and the US: navigating Trump's tariffs without sacrificing alliances</div>
+              <div class="story-tease">Lula wants to be friends with everyone. Trump is making that harder.</div>
+              <div class="story-detail">O Globo's foreign affairs team examines the pressure on Brazil's foreign policy as Trump's broad tariff regime squeezes Brazilian exports — particularly steel, aluminium, and agricultural goods. The paper reports that the Lula government is quietly pursuing bilateral exemptions while maintaining a public posture of solidarity with other affected nations. The diplomatic tightrope between Washington and Beijing is analysed in detail.</div>
+              <a class="story-url" href="https://oglobo.globo.com" target="_blank" onclick="event.stopPropagation()">oglobo.globo.com</a>
+            </div>
+            <div class="story" onclick="toggleStory(this)">
+              <div class="story-rank">Second</div>
+              <div class="story-headline">The fiscal tightrope: can Brazil's new framework hold under political pressure?</div>
+              <div class="story-tease">Markets want discipline. Lula's base wants spending. Both are asking loudly.</div>
+              <div class="story-detail">O Globo's economics team examines Brazil's fiscal framework — introduced to replace the old spending cap — and finds it under strain from both sides: markets are nervous about compliance, and Lula's Workers' Party is pushing for more social investment. The central bank's independent interest rate stance is creating friction with the government in ways that O Globo characterises as manageable but worth watching.</div>
+              <a class="story-url" href="https://oglobo.globo.com" target="_blank" onclick="event.stopPropagation()">oglobo.globo.com</a>
+            </div>
+            <div class="story" onclick="toggleStory(this)">
+              <div class="story-rank">Third</div>
+              <div class="story-headline">Rio's security crisis: why the violence won't stop without federal action</div>
+              <div class="story-tease">Militias, drug factions, and a state government that has lost control.</div>
+              <div class="story-detail">O Globo's investigative team reports on the expanding territory of Rio de Janeiro militias — paramilitary groups often composed of off-duty and former police — who now control more of the metropolitan area than traditional drug factions. The paper argues the federal government must intervene more decisively, and examines the political connections that have historically shielded militia leaders from prosecution.</div>
+              <a class="story-url" href="https://oglobo.globo.com" target="_blank" onclick="event.stopPropagation()">oglobo.globo.com</a>
+            </div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Economy / fiscal policy</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Brazil-US relations</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Security / Rio violence</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">DT</div><div class="person-info"><div class="person-name">Donald Trump</div><div class="person-role">Tariffs / trade war</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">EM</div><div class="person-info"><div class="person-name">Elon Musk</div><div class="person-role">X / social media / STF clash</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="paper-card">
+          <div class="paper-header">
+            <div class="paper-lean lean-right">▶ Centre-Right</div>
+            <div class="paper-name">O Estado de S. Paulo</div>
+            <div class="paper-meta">Circ. ~1m digital · São Paulo establishment, known as "Estadão"<br>Founded 1875 · Brazil's paper of record for business &amp; law</div>
+            <div class="paper-tone">Centre-right · Pro-market · Rule of law emphasis</div>
+          </div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)">
+              <div class="story-rank">Lead</div>
+              <div class="story-headline">Lula's spending trajectory: the fiscal time bomb the government won't discuss</div>
+              <div class="story-tease">Primary surplus targets keep being missed. The new framework has no teeth.</div>
+              <div class="story-detail">Estadão's economics team presents a stark analysis of Brazil's public finances: mandatory spending is growing faster than revenues, the new fiscal framework lacks enforcement mechanisms, and the government has repeatedly used accounting manoeuvres to appear compliant while the underlying position deteriorates. The paper calls for a genuine structural reform of the public sector and argues that markets are being patient but that patience is finite.</div>
+              <a class="story-url" href="https://www.estadao.com.br" target="_blank" onclick="event.stopPropagation()">estadao.com.br</a>
+            </div>
+            <div class="story" onclick="toggleStory(this)">
+              <div class="story-rank">Second</div>
+              <div class="story-headline">Bolsonaro on trial: the judiciary must guarantee due process, not deliver a verdict</div>
+              <div class="story-tease">A fair trial is not the same as the outcome the left wants.</div>
+              <div class="story-detail">Estadão's legal affairs editor argues that while the January 8 events were serious and warrant prosecution, the pace and framing of proceedings against Bolsonaro and his allies risks the appearance of political justice. The paper does not defend Bolsonaro's conduct but insists that procedural fairness — including reasonable timelines and proportionate charges — must be maintained to protect Brazil's institutional credibility, not just the former president.</div>
+              <a class="story-url" href="https://www.estadao.com.br" target="_blank" onclick="event.stopPropagation()">estadao.com.br</a>
+            </div>
+            <div class="story" onclick="toggleStory(this)">
+              <div class="story-rank">Third</div>
+              <div class="story-headline">Brazil's economic potential is enormous — and the state is blocking it</div>
+              <div class="story-tease">Natural resources, young population, agricultural dominance. So why is growth so slow?</div>
+              <div class="story-detail">A long-read Estadão analysis of Brazil's chronic underperformance relative to its economic fundamentals, arguing that excessive state intervention, a byzantine tax system, and protected domestic industries are the primary barriers to the growth rates that Brazil's resource base should support. The piece draws comparisons with Australia and Canada — similar resource-rich economies that have achieved significantly higher productivity — and calls for a liberalisation agenda the current government has explicitly rejected.</div>
+              <a class="story-url" href="https://www.estadao.com.br" target="_blank" onclick="event.stopPropagation()">estadao.com.br</a>
+            </div>
+          </div>
+          <div class="expand-hint">↕ tap to expand</div>
+          <div class="trackers">
+            <div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div>
+              <div class="tracker-row"><div class="tracker-topic">Fiscal discipline</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Rule of law / due process</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="tracker-row"><div class="tracker-topic">Economic reform</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+            <div class="tracker-block"><div class="tracker-label">👤 Undue Influence (8 weeks)</div>
+              <div class="person-row"><div class="person-avatar">JB</div><div class="person-info"><div class="person-name">Jair Bolsonaro</div><div class="person-role">Trial / political opposition</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+              <div class="person-row"><div class="person-avatar">LL</div><div class="person-info"><div class="person-name">Lula da Silva</div><div class="person-role">President — spending &amp; policy</div></div><div class="dots"><div class="dot person-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /papers-grid -->
+    </div><!-- /south-brazil -->
+    <div class="coming-soon" style="margin-top:16px"><div class="cs-flag">🌎</div><h3>More of South America — Coming Soon</h3><p>Argentina's La Nación, Clarín &amp; Página 12 · Colombia's El Tiempo · Chile's El Mercurio. A continent where left and right are locked in genuinely historic battles over economic models.</p></div>
   </div>
 
 </div>
