@@ -84,7 +84,22 @@
   footer a { color: #888; text-decoration: none; }
   footer a:hover { color: #ccc; }
 
-  @media (max-width: 600px) { .regions { grid-template-columns: 1fr 1fr; } header h1 { font-size: 1.3rem; } .country-stats { display: none !important; } }
+  /* Nav link tooltip */
+  .nav-tip-wrap { position: relative; display: inline-block; }
+  .nav-tip-wrap > a { display: block; }
+  .nav-tip {
+    display: none; position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+    width: 220px; background: #1a1a1a; color: #f5f3ee;
+    border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+    padding: 12px 14px; z-index: 1000; font-family: sans-serif;
+    pointer-events: none;
+  }
+  .nav-tip::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-top: none; border-bottom-color: #1a1a1a; }
+  .nav-tip-wrap:hover .nav-tip { display: block; }
+  .nav-tip-title { font-size: 0.78rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
+  .nav-tip-body { font-size: 0.69rem; color: #bbb; line-height: 1.55; }
+
+  @media (max-width: 600px) { .regions { grid-template-columns: 1fr 1fr; } header h1 { font-size: 1.3rem; } .country-stats { display: none !important; } .nav-tip { display: none !important; } }
 </style>
 </head>
 <body>
@@ -107,7 +122,20 @@
   <a href="americas_press_today.html">🌎 Americas</a>
   <a href="asia_press_today.html">🌏 Asia-Pacific</a>
   <span class="sep">|</span>
-  <a href="poles_apart.html">⚡ Poles Apart</a>
+  <span class="nav-tip-wrap">
+    <a href="poles_apart.html">⚡ Poles Apart</a>
+    <div class="nav-tip">
+      <div class="nav-tip-title">⚡ Poles Apart</div>
+      <div class="nav-tip-body">Why the global right is winning the messaging war — and what the left keeps getting wrong. Plus: what people in Japan, Brazil, Finland and South Africa are actually talking about this week.</div>
+    </div>
+  </span>
+  <span class="nav-tip-wrap">
+    <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
+    <div class="nav-tip">
+      <div class="nav-tip-title">⚖️ Axis of Equal</div>
+      <div class="nav-tip-body">Every major party from 20 countries plotted on a single scale — from Communism to Fascism. See where your country's parties really sit, and how they compare to parties in other countries.</div>
+    </div>
+  </span>
 </nav>
 
 <div class="mission">
