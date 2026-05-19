@@ -6,118 +6,120 @@
 <title>Asia-Pacific Press — World Headline</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Georgia', serif; background: #0a0a1a; color: #e8e4d0; min-height: 100vh; }
+  body { font-family: 'Georgia', serif; background: #f5f3ee; color: #1a1a1a; min-height: 100vh; }
 
-  .site-header { background: linear-gradient(135deg, #0d1b2a 0%, #1a2744 50%, #0d1b2a 100%);
-    border-bottom: 2px solid #2a4a7f; padding: 18px 24px; }
+  .site-header { background: #1a1a1a; padding: 18px 24px; }
   .site-header h1 { font-size: 1.5rem; letter-spacing: 3px; text-transform: uppercase;
-    color: #c8a951; font-weight: 300; }
-  .site-header p { font-size: 0.8rem; color: #8899aa; margin-top: 4px; letter-spacing: 1px; }
+    color: #f5f3ee; font-weight: 700; }
+  .site-header p { font-size: 0.8rem; color: #888; margin-top: 4px; letter-spacing: 1px; }
+  .spectrum-bar { height: 4px; background: linear-gradient(to right, #2980b9 0%, #27ae60 50%, #c0392b 100%); }
 
-  .region-nav { background: #111827; border-bottom: 1px solid #1e3a5f; padding: 10px 24px;
-    display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-  .region-nav a { color: #7fa8c8; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.5px;
-    transition: color 0.2s; }
-  .region-nav a:hover, .region-nav a.active { color: #c8a951; }
-  .region-nav span { color: #2a4a7f; }
+  .region-nav { background: #2c2c2c; border-bottom: 1px solid #444; padding: 8px 24px;
+    display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .region-nav a { color: #ccc; text-decoration: none; font-size: 0.78rem; font-family: sans-serif;
+    padding: 4px 10px; border-radius: 3px; transition: background 0.15s; }
+  .region-nav a:hover, .region-nav a.active { background: #444; color: #fff; }
+  .region-nav span { color: #555; font-size: 0.7rem; padding: 4px; }
 
-  .top-panel { background: linear-gradient(135deg, #1a2744 0%, #0d1b2a 100%);
-    border: 1px solid #2a4a7f; border-radius: 8px; margin: 20px 20px 0;
-    padding: 18px 22px; }
-  .top-panel h2 { font-size: 1rem; letter-spacing: 2px; color: #c8a951; margin-bottom: 12px;
-    text-transform: uppercase; }
+  .top-panel { background: #fff; border: 1px solid #e8e4dd; border-radius: 4px;
+    margin: 20px 20px 0; padding: 18px 22px; }
+  .top-panel h2 { font-size: 0.85rem; letter-spacing: 2px; color: #555; margin-bottom: 12px;
+    text-transform: uppercase; font-family: sans-serif; font-weight: 700; }
   .top3 { display: flex; gap: 14px; flex-wrap: wrap; }
-  .top3-item { flex: 1; min-width: 200px; background: rgba(255,255,255,0.04);
-    border-left: 3px solid #2a4a7f; padding: 10px 14px; border-radius: 0 6px 6px 0; }
-  .top3-item .rank { font-size: 0.7rem; color: #c8a951; letter-spacing: 1px;
+  .top3-item { flex: 1; min-width: 200px; background: #f9f7f4;
+    border-left: 3px solid #ccc; padding: 10px 14px; border-radius: 0 4px 4px 0; }
+  .top3-item .rank { font-size: 0.65rem; color: #999; letter-spacing: 1px; font-family: sans-serif;
     text-transform: uppercase; margin-bottom: 4px; }
-  .top3-item p { font-size: 0.85rem; line-height: 1.4; color: #c8d8e8; }
+  .top3-item p { font-size: 0.82rem; line-height: 1.5; color: #444; font-family: sans-serif; }
 
   .dashboard { padding: 20px; }
 
   /* Tier 1 — region tabs */
-  .tier1-tabs { display: flex; gap: 8px; margin-bottom: 0; flex-wrap: wrap; }
-  button.tier1-tab { background: #111827; border: 1px solid #2a4a7f; color: #7fa8c8;
-    padding: 9px 18px; border-radius: 6px 6px 0 0; font-size: 0.82rem; cursor: pointer;
+  .tier1-tabs { display: flex; gap: 6px; margin-bottom: 0; flex-wrap: wrap; }
+  button.tier1-tab { background: #e8e4dd; border: 1px solid #ccc; color: #555;
+    padding: 8px 16px; border-radius: 4px 4px 0 0; font-size: 0.78rem; cursor: pointer;
     letter-spacing: 0.5px; transition: all 0.2s; touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent; font-family: Georgia, serif; }
-  button.tier1-tab:hover { background: #1a2744; color: #c8a951; }
-  button.tier1-tab.active { background: #1a2744; border-bottom-color: #1a2744;
-    color: #c8a951; border-top: 2px solid #c8a951; }
+    -webkit-tap-highlight-color: transparent; font-family: sans-serif; font-weight: 700;
+    text-transform: uppercase; }
+  button.tier1-tab:hover { background: #ddd; color: #1a1a1a; }
+  button.tier1-tab.active { background: #2c2c2c; border-bottom-color: #2c2c2c;
+    color: #fff; }
 
-  .region-panel { display: none; background: #111827; border: 1px solid #2a4a7f;
-    border-radius: 0 6px 6px 6px; padding: 16px; }
+  .region-panel { display: none; background: #fff; border: 1px solid #e8e4dd;
+    border-radius: 0 4px 4px 4px; padding: 16px; }
   .region-panel.active { display: block; }
 
   /* Tier 2 — country tabs */
-  .tier2-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-  button.tier2-tab { background: #0d1b2a; border: 1px solid #1e3a5f; color: #7fa8c8;
-    padding: 6px 14px; border-radius: 4px; font-size: 0.78rem; cursor: pointer;
-    letter-spacing: 0.5px; transition: all 0.2s; touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent; font-family: Georgia, serif; }
-  button.tier2-tab:hover { background: #1a2744; color: #c8a951; }
-  button.tier2-tab.active { background: #1a2744; color: #c8a951; border-color: #c8a951; }
-  button.tier2-tab.soon { opacity: 0.45; cursor: default; pointer-events: none; }
+  .tier2-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  button.tier2-tab { background: #f5f3ee; border: 1px solid #ddd; color: #555;
+    padding: 5px 12px; border-radius: 3px; font-size: 0.75rem; cursor: pointer;
+    letter-spacing: 0.3px; transition: all 0.2s; touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent; font-family: sans-serif; }
+  button.tier2-tab:hover { background: #e8e4dd; color: #1a1a1a; }
+  button.tier2-tab.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+  button.tier2-tab.soon { opacity: 0.4; cursor: default; pointer-events: none; }
 
   .country-panel { display: none; }
   .country-panel.active { display: block; }
 
-  .country-title { font-size: 1.05rem; color: #c8a951; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 14px; padding-bottom: 8px;
-    border-bottom: 1px solid #2a4a7f; }
+  .country-title { font-size: 0.95rem; color: #1a1a1a; letter-spacing: 2px; font-family: sans-serif;
+    text-transform: uppercase; font-weight: 700; margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 2px solid #1a1a1a; }
 
   /* Paper cards */
-  .papers { display: flex; gap: 14px; flex-wrap: wrap; }
-  .paper { flex: 1; min-width: 260px; background: #0d1b2a; border: 1px solid #1e3a5f;
-    border-radius: 8px; overflow: hidden; }
-  .paper-header { padding: 12px 16px; }
-  .paper-header .lean { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
-    margin-bottom: 4px; font-weight: bold; }
-  .lean-left { color: #e05c5c; }
-  .lean-centre { color: #7fa8c8; }
-  .lean-right { color: #5c9e6e; }
-  .paper-name { font-size: 1rem; color: #e8e4d0; font-weight: bold; }
-  .paper-desc { font-size: 0.72rem; color: #8899aa; margin-top: 2px; }
+  .papers { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 16px; }
+  .paper { background: #fafafa; border: 1px solid #e8e8e8; border-radius: 4px; overflow: hidden; }
+  .paper-header { padding: 12px 14px 8px; border-bottom: 1px solid #eee; }
+  .lean { font-size: 0.62rem; font-family: sans-serif; text-transform: uppercase;
+    letter-spacing: 0.1em; font-weight: 700; margin-bottom: 3px; }
+  .lean-left { color: #2980b9; }
+  .lean-centre { color: #27ae60; }
+  .lean-right { color: #c0392b; }
+  .paper-name { font-size: 0.9rem; font-weight: 700; color: #1a1a1a; }
+  .paper-desc { font-size: 0.6rem; color: #999; font-family: sans-serif; margin-top: 2px; line-height: 1.4; }
 
-  .stories { padding: 0 16px 14px; }
-  .story { border-top: 1px solid #1e3a5f; padding: 10px 0; }
-  .story-headline { font-size: 0.88rem; color: #c8d8e8; line-height: 1.4; cursor: pointer;
+  .stories { padding: 0 14px 12px; }
+  .story { border-top: 1px solid #eee; padding: 8px 0; }
+  .story-headline { font-size: 0.84rem; color: #1a1a1a; line-height: 1.4; cursor: pointer;
     display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-  .story-headline:hover { color: #c8a951; }
-  .story-toggle { color: #2a4a7f; font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
-  .story-detail { display: none; font-size: 0.78rem; color: #8899aa; margin-top: 6px;
-    line-height: 1.5; padding-left: 8px; border-left: 2px solid #2a4a7f; }
+  .story-headline:hover { color: #c0392b; }
+  .story-toggle { color: #ccc; font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
+  .story-detail { display: none; font-size: 0.78rem; color: #555; margin-top: 6px;
+    line-height: 1.5; padding-left: 8px; border-left: 2px solid #ddd; font-family: sans-serif; }
   .story-detail.open { display: block; }
+  .story-url { display: block; font-size: 0.68rem; color: #999; margin-top: 6px;
+    font-family: sans-serif; text-decoration: none; }
+  .story-url:hover { color: #c0392b; }
 
   /* Trackers */
-  .trackers { padding: 10px 16px 14px; border-top: 1px solid #1e3a5f; }
+  .trackers { padding: 10px 14px 12px; border-top: 1px solid #eee; }
   .tracker-row { margin-bottom: 8px; }
-  .tracker-label { font-size: 0.68rem; color: #8899aa; letter-spacing: 1px;
+  .tracker-label { font-size: 0.62rem; color: #999; letter-spacing: 1px; font-family: sans-serif;
     text-transform: uppercase; margin-bottom: 4px; }
-  .tracker-topic { font-size: 0.75rem; color: #c8d8e8; margin-bottom: 4px; }
+  .tracker-topic { font-size: 0.73rem; color: #444; margin-bottom: 4px; font-family: sans-serif; }
   .dots { display: flex; gap: 4px; flex-wrap: wrap; }
   .dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid; }
   .dot.amber { background: #c8a951; border-color: #c8a951; }
-  .dot.amber-empty { background: transparent; border-color: #4a3a1a; }
+  .dot.amber-empty { background: transparent; border-color: #ddd; }
   .dot.purple { background: #9b59b6; border-color: #9b59b6; }
-  .dot.purple-empty { background: transparent; border-color: #3a1a4a; }
+  .dot.purple-empty { background: transparent; border-color: #ddd; }
 
   /* Blind spots */
-  .blind-spots { margin-top: 14px; background: rgba(200,169,81,0.06);
-    border: 1px solid rgba(200,169,81,0.2); border-radius: 6px; padding: 12px 16px; }
-  .blind-spots h4 { font-size: 0.72rem; color: #c8a951; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 8px; }
-  .blind-spot-item { font-size: 0.78rem; color: #8899aa; padding: 4px 0;
-    border-top: 1px solid rgba(200,169,81,0.1); }
+  .blind-spots { margin-top: 14px; background: #fffdf5; border: 1px solid #e8e0c0;
+    border-radius: 4px; padding: 12px 16px; }
+  .blind-spots h4 { font-size: 0.65rem; color: #8B6914; letter-spacing: 2px; font-family: sans-serif;
+    text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+  .blind-spot-item { font-size: 0.78rem; color: #555; padding: 5px 0; font-family: sans-serif;
+    border-top: 1px solid #f0e8c0; line-height: 1.4; }
   .blind-spot-item:first-of-type { border-top: none; }
 
   /* Stub */
-  .stub-panel { background: rgba(42,74,127,0.1); border: 1px dashed #2a4a7f;
-    border-radius: 6px; padding: 30px; text-align: center; color: #4a6a9a; }
+  .stub-panel { background: #f9f7f4; border: 1px dashed #ccc; border-radius: 4px;
+    padding: 30px; text-align: center; color: #999; font-family: sans-serif; }
   .stub-panel p { margin-top: 8px; font-size: 0.82rem; }
 
-  @media (max-width: 600px) {
-    .papers { flex-direction: column; }
+  @media (max-width: 760px) {
+    .papers { grid-template-columns: 1fr; }
     .top3 { flex-direction: column; }
     .site-header h1 { font-size: 1.1rem; }
   }
@@ -214,21 +216,27 @@
                 <span>Anwar defends unity government as Bersatu and PN attack budget priorities ahead of by-elections</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">PM Anwar Ibrahim faces sustained fire from opposition Perikatan Nasional as the unity government's RM421bn budget is picked apart ahead of crucial Selangor and Terengganu by-elections. PN frames spending as favouring the west coast urbanites at the expense of rural Malay heartlands.</div>
+              <div class="story-detail">PM Anwar Ibrahim faces sustained fire from opposition Perikatan Nasional as the unity government's RM421bn budget is picked apart ahead of crucial Selangor and Terengganu by-elections. PN frames spending as favouring the west coast urbanites at the expense of rural Malay heartlands.
+              <a class="story-url" href="https://www.malaysiakini.com" target="_blank">malaysiakini.com</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>Corruption watch: MACC probes RM2.4bn defence procurement irregularities stretching back a decade</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">Malaysia's anti-corruption commission has opened a sprawling investigation into defence ministry contracts awarded between 2013–2023, with multiple former senior officials named. Malaysiakini leads on access to whistleblower testimony and leaked procurement documents.</div>
+              <div class="story-detail">Malaysia's anti-corruption commission has opened a sprawling investigation into defence ministry contracts awarded between 2013–2023, with multiple former senior officials named. Malaysiakini leads on access to whistleblower testimony and leaked procurement documents.
+              <a class="story-url" href="https://www.malaysiakini.com" target="_blank">malaysiakini.com</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>US tariffs hit Malaysia's semiconductor and glove sectors — exporters demand government relief package</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">Malaysia's position as a key chip-packaging and medical glove exporter leaves it exposed to Washington's sweeping tariff regime. The Penang semiconductor corridor faces margin compression; manufacturers are lobbying Putrajaya for a RM6bn relief and diversification fund.</div>
+              <div class="story-detail">Malaysia's position as a key chip-packaging and medical glove exporter leaves it exposed to Washington's sweeping tariff regime. The Penang semiconductor corridor faces margin compression; manufacturers are lobbying Putrajaya for a RM6bn relief and diversification fund.
+              <a class="story-url" href="https://www.malaysiakini.com" target="_blank">malaysiakini.com</a>
+            </div>
             </div>
           </div>
           <div class="trackers">
@@ -266,21 +274,27 @@
                 <span>Malaysia GDP growth holds at 4.9% — investment pipeline strong despite global headwinds</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">Bank Negara's quarterly data shows Malaysia's economy expanding ahead of most regional peers, driven by data centre investment from US tech giants and resilient domestic consumption. The Star leads with the minister's optimism, giving less prominence to risks from tariff exposure.</div>
+              <div class="story-detail">Bank Negara's quarterly data shows Malaysia's economy expanding ahead of most regional peers, driven by data centre investment from US tech giants and resilient domestic consumption. The Star leads with the minister's optimism, giving less prominence to risks from tariff exposure.
+              <a class="story-url" href="https://www.thestar.com.my" target="_blank">thestar.com.my</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>Madani economy: foreign direct investment in manufacturing hits 15-year high at RM63bn</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">MIDA figures show record FDI inflows, with US chip companies and Chinese EV manufacturers both betting on Malaysia as a manufacturing base. The Star frames this as a Madani economy success, noting Johor's growth as a data centre hub alongside Singapore's overflow demand.</div>
+              <div class="story-detail">MIDA figures show record FDI inflows, with US chip companies and Chinese EV manufacturers both betting on Malaysia as a manufacturing base. The Star frames this as a Madani economy success, noting Johor's growth as a data centre hub alongside Singapore's overflow demand.
+              <a class="story-url" href="https://www.thestar.com.my" target="_blank">thestar.com.my</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>Floods season early warning: NADMA pre-positions relief as Kelantan and Pahang brace for monsoon</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">Malaysia's monsoon flood season approaches and The Star covers preparations across the worst-affected east coast states. Government coordination is presented positively; opposition criticism of inadequate drainage infrastructure investment appears further down the coverage.</div>
+              <div class="story-detail">Malaysia's monsoon flood season approaches and The Star covers preparations across the worst-affected east coast states. Government coordination is presented positively; opposition criticism of inadequate drainage infrastructure investment appears further down the coverage.
+              <a class="story-url" href="https://www.thestar.com.my" target="_blank">thestar.com.my</a>
+            </div>
             </div>
           </div>
           <div class="trackers">
@@ -318,21 +332,27 @@
                 <span>Unity government one year on: stability delivered, security strengthened, economy on track</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">NST's favourable retrospective on the Anwar-led unity government emphasises political stability and improved diplomatic standing. The piece relies heavily on government-supplied data and minister quotes, framing the coalition's performance as a national success story ahead of by-elections.</div>
+              <div class="story-detail">NST's favourable retrospective on the Anwar-led unity government emphasises political stability and improved diplomatic standing. The piece relies heavily on government-supplied data and minister quotes, framing the coalition's performance as a national success story ahead of by-elections.
+              <a class="story-url" href="https://www.nst.com.my" target="_blank">nst.com.my</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>Bumiputera equity threshold review: government reaffirms affirmative policy commitments</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">NST leads on the government reiterating Bumiputera economic participation targets in the face of criticism from some business groups. The paper frames this as a non-negotiable national policy pillar, giving extensive column space to UMNO and Bersatu voices who frame it as identity politics.</div>
+              <div class="story-detail">NST leads on the government reiterating Bumiputera economic participation targets in the face of criticism from some business groups. The paper frames this as a non-negotiable national policy pillar, giving extensive column space to UMNO and Bersatu voices who frame it as identity politics.
+              <a class="story-url" href="https://www.nst.com.my" target="_blank">nst.com.my</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>Malaysia condemns Israeli offensive in Gaza — foreign minister calls for emergency UN session</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">NST leads strongly on Malaysia's vocal Gaza position, which plays well domestically and aligns the government with majority Muslim public opinion. The paper gives prominent space to the Foreign Ministry's diplomatic pushback and Malaysia's calls for accountability at the ICJ.</div>
+              <div class="story-detail">NST leads strongly on Malaysia's vocal Gaza position, which plays well domestically and aligns the government with majority Muslim public opinion. The paper gives prominent space to the Foreign Ministry's diplomatic pushback and Malaysia's calls for accountability at the ICJ.
+              <a class="story-url" href="https://www.nst.com.my" target="_blank">nst.com.my</a>
+            </div>
             </div>
           </div>
           <div class="trackers">
@@ -411,21 +431,27 @@
                 <span>Albanese second term: housing, renewable energy and AUKUS dominate first 100 days agenda</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">The SMH covers the re-elected Labor government's ambitious legislative programme with cautious optimism. Housing affordability is framed as the defining test — Help to Buy scheme, build-to-rent incentives — while the AUKUS submarine deal timeline remains contested. Climate: 82% renewable energy target commitment front and centre.</div>
+              <div class="story-detail">The SMH covers the re-elected Labor government's ambitious legislative programme with cautious optimism. Housing affordability is framed as the defining test — Help to Buy scheme, build-to-rent incentives — while the AUKUS submarine deal timeline remains contested. Climate: 82% renewable energy target commitment front and centre.
+              <a class="story-url" href="https://www.smh.com.au" target="_blank">smh.com.au</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>NDIS reform: minister promises sustainability fixes without stripping support from vulnerable Australians</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">The National Disability Insurance Scheme's ballooning cost — projected at A$50bn by 2027 — forces the government into politically painful reform. SMH balances fiscal reality against personal stories of participants who fear losing services, keeping human stakes central to the coverage.</div>
+              <div class="story-detail">The National Disability Insurance Scheme's ballooning cost — projected at A$50bn by 2027 — forces the government into politically painful reform. SMH balances fiscal reality against personal stories of participants who fear losing services, keeping human stakes central to the coverage.
+              <a class="story-url" href="https://www.smh.com.au" target="_blank">smh.com.au</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>US tariffs and Trump's Pacific posture: Australia caught between alliance loyalty and trade exposure</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">Australia's unusual position — a Five Eyes ally facing US tariffs on steel and aluminium — generates SMH analysis of the tension between security dependence and economic sovereignty. The paper is sceptical of Washington's reliability and flags growing bipartisan interest in hedging toward ASEAN and China relationships.</div>
+              <div class="story-detail">Australia's unusual position — a Five Eyes ally facing US tariffs on steel and aluminium — generates SMH analysis of the tension between security dependence and economic sovereignty. The paper is sceptical of Washington's reliability and flags growing bipartisan interest in hedging toward ASEAN and China relationships.
+              <a class="story-url" href="https://www.smh.com.au" target="_blank">smh.com.au</a>
+            </div>
             </div>
           </div>
           <div class="trackers">
@@ -463,21 +489,27 @@
                 <span>RBA holds rates as inflation cools — but mortgage holders warned: relief is slow and conditional</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">The Reserve Bank of Australia holds the cash rate at 4.1% amid moderating CPI data. AFR takes a harder line than SMH on the outlook, quoting business economists warning that premature cuts risk re-igniting services inflation. The paper positions itself as giving the institutional view, not the politically convenient one.</div>
+              <div class="story-detail">The Reserve Bank of Australia holds the cash rate at 4.1% amid moderating CPI data. AFR takes a harder line than SMH on the outlook, quoting business economists warning that premature cuts risk re-igniting services inflation. The paper positions itself as giving the institutional view, not the politically convenient one.
+              <a class="story-url" href="https://www.afr.com" target="_blank">afr.com</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>Tech IPO revival: ASX listings pipeline strongest since 2021 as venture capital exits accumulate</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">AFR's markets desk reports a resurgent Australian IPO market, with three fintech and two AI-adjacent companies flagged for Q3 ASX listings. The paper frames this as evidence that post-pandemic correction is over and capital markets are functioning again — a story SMH would likely give less prominence.</div>
+              <div class="story-detail">AFR's markets desk reports a resurgent Australian IPO market, with three fintech and two AI-adjacent companies flagged for Q3 ASX listings. The paper frames this as evidence that post-pandemic correction is over and capital markets are functioning again — a story SMH would likely give less prominence.
+              <a class="story-url" href="https://www.afr.com" target="_blank">afr.com</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>Labour market: skills shortages persist in construction and healthcare despite immigration surge</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">Record net overseas migration has not solved Australia's structural skills gaps in the sectors that need workers most, AFR finds. The coverage takes an employer perspective — migration settings, visa processing delays, training pipeline failures — and is sceptical of government claims that migration alone will fix housing construction shortfalls.</div>
+              <div class="story-detail">Record net overseas migration has not solved Australia's structural skills gaps in the sectors that need workers most, AFR finds. The coverage takes an employer perspective — migration settings, visa processing delays, training pipeline failures — and is sceptical of government claims that migration alone will fix housing construction shortfalls.
+              <a class="story-url" href="https://www.afr.com" target="_blank">afr.com</a>
+            </div>
             </div>
           </div>
           <div class="trackers">
@@ -515,21 +547,27 @@
                 <span>Net zero targets "economically reckless" — industry warns renewable grid instability costing billions</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">The Australian continues its years-long campaign against Labor's renewables-first energy policy, foregrounding industry lobby warnings about grid reliability, energy price spikes, and the cost of storage infrastructure. The paper gives space to Liberal and National critics and consistently questions the economic modelling behind net zero commitments.</div>
+              <div class="story-detail">The Australian continues its years-long campaign against Labor's renewables-first energy policy, foregrounding industry lobby warnings about grid reliability, energy price spikes, and the cost of storage infrastructure. The paper gives space to Liberal and National critics and consistently questions the economic modelling behind net zero commitments.
+              <a class="story-url" href="https://www.theaustralian.com.au" target="_blank">theaustralian.com.au</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>Voice aftermath: Indigenous policy needs "practical solutions, not symbolism," says opposition</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">Following the failed 2023 Voice to Parliament referendum, The Australian tracks the ongoing Indigenous policy debate — framing the opposition view that practical programs (jobs, health, safety) should replace constitutional recognition. The paper consistently platformes critics of the Uluru Statement framing.</div>
+              <div class="story-detail">Following the failed 2023 Voice to Parliament referendum, The Australian tracks the ongoing Indigenous policy debate — framing the opposition view that practical programs (jobs, health, safety) should replace constitutional recognition. The paper consistently platformes critics of the Uluru Statement framing.
+              <a class="story-url" href="https://www.theaustralian.com.au" target="_blank">theaustralian.com.au</a>
+            </div>
             </div>
             <div class="story">
               <div class="story-headline" onclick="toggleStory(this)">
                 <span>AUKUS submarine timeline slipping — defence experts warn first boat won't arrive before 2040</span>
                 <span class="story-toggle">▶</span>
               </div>
-              <div class="story-detail">The Australian's defence coverage questions whether AUKUS is delivering on its strategic promise, with defence analysts warning the Virginia-class purchase schedule is at risk from US Navy's own production pressures. The paper supports the AUKUS concept but holds the government to account on delivery — a more forensic critique than SMH's softer coverage.</div>
+              <div class="story-detail">The Australian's defence coverage questions whether AUKUS is delivering on its strategic promise, with defence analysts warning the Virginia-class purchase schedule is at risk from US Navy's own production pressures. The paper supports the AUKUS concept but holds the government to account on delivery — a more forensic critique than SMH's softer coverage.
+              <a class="story-url" href="https://www.theaustralian.com.au" target="_blank">theaustralian.com.au</a>
+            </div>
             </div>
           </div>
           <div class="trackers">
@@ -596,6 +634,22 @@ function toggleStory(el) {
     if (toggle) toggle.textContent = detail.classList.contains('open') ? '▼' : '▶';
   }
 }
+
+  // Deep-link navigation: read hash from URL and jump to right region + country
+  document.addEventListener('DOMContentLoaded', function() {
+    const hash = location.hash.slice(1);
+    if (!hash) return;
+    const panel = document.getElementById(hash);
+    if (!panel) return;
+    const regionPanel = panel.closest('.region-panel');
+    if (!regionPanel) return;
+    const regionId = regionPanel.id.replace('region-', '');
+    const regionTab = document.querySelector('button.tier1-tab[onclick*="\'' + regionId + '\'"]');
+    if (regionTab) showRegion(regionId, regionTab);
+    const countryId = hash.slice(regionId.length + 1);
+    const countryTab = document.querySelector('button.tier2-tab[onclick*="\'' + countryId + '\'"]');
+    if (countryTab) showCountry(regionId, countryId, countryTab);
+  });
 </script>
 
 </body>

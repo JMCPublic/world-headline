@@ -876,6 +876,23 @@
     document.getElementById(region + '-' + country).classList.add('active');
     tabEl.classList.add('active');
   }
+
+  // Deep-link navigation: read hash from URL and jump to right region + country
+  document.addEventListener('DOMContentLoaded', function() {
+    var hash = location.hash.slice(1);
+    if (!hash) return;
+    var panel = document.getElementById(hash);
+    if (!panel) return;
+    var regionPanel = panel.closest('.region-panel');
+    if (!regionPanel) return;
+    var regionId = regionPanel.id.replace('region-', '');
+    var regionTab = document.querySelector('button.tier1-tab[onclick*="' + regionId + '"]');
+    if (regionTab) showRegion(regionId, regionTab);
+    var countryId = hash.slice(regionId.length + 1);
+    var countryTab = document.querySelector('button.tier2-tab[onclick*="' + countryId + '"]');
+    if (countryTab) showCountry(regionId, countryId, countryTab);
+  });
+
 </script>
 </body>
 </html>
