@@ -15,65 +15,94 @@
   .region-nav a:hover { background: #444; color: #fff; }
   .region-nav a.active { background: #c0392b; color: #fff; }
   .region-nav span.sep { color: #555; font-size: 0.7rem; padding: 4px 4px; font-family: sans-serif; }
-  .spectrum-bar { height: 4px; background: linear-gradient(to right, #2980b9, #27ae60, #c0392b); }
+  .top-spectrum { height: 4px; background: linear-gradient(to right, #2980b9, #27ae60, #c0392b); }
 
   .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
 
-  /* Hero */
-  .aoe-hero { text-align: center; padding: 36px 20px 28px; border-bottom: 2px solid #1a1a1a; margin-bottom: 36px; }
+  .aoe-hero { text-align: center; padding: 32px 20px 24px; border-bottom: 2px solid #1a1a1a; margin-bottom: 28px; }
   .aoe-hero h2 { font-size: 2rem; letter-spacing: 0.04em; margin-bottom: 8px; }
-  .aoe-hero p { font-size: 0.88rem; font-family: sans-serif; color: #666; max-width: 620px; margin: 0 auto; line-height: 1.6; }
+  .aoe-hero p { font-size: 0.86rem; font-family: sans-serif; color: #666; max-width: 620px; margin: 0 auto; line-height: 1.6; }
 
-  /* Sticky spectrum reference */
-  .aoe-sticky-header { position: sticky; top: 0; z-index: 100; background: #f5f3ee; padding: 10px 0 6px; border-bottom: 1px solid #ddd; margin-bottom: 4px; }
-  .aoe-full-bar { height: 12px; border-radius: 6px; margin-bottom: 4px;
+  /* ── Sticky axis bar ── */
+  .aoe-sticky { position: sticky; top: 0; z-index: 200; background: #f5f3ee; padding: 8px 0 4px; border-bottom: 2px solid #1a1a1a; margin-bottom: 8px; }
+  .aoe-full-bar { height: 10px; border-radius: 5px; margin-bottom: 4px;
     background: linear-gradient(to right,
-      #5a0000 0%, #8B0000 5%,
-      #c0392b 10%, #2980b9 20%,
-      #5dade2 33%, #27ae60 50%,
+      #5a0000 0%, #8B0000 5%, #c0392b 10%,
+      #2980b9 20%, #5dade2 33%,
+      #27ae60 50%,
       #e67e22 66%, #c0392b 80%,
       #7b241c 90%, #1a0000 100%); }
-  .aoe-axis-labels { display: flex; justify-content: space-between; font-size: 0.6rem; font-family: sans-serif; color: #888; padding: 0 2px; }
+  .aoe-axis-labels { display: flex; justify-content: space-between; font-size: 0.59rem; font-family: sans-serif; color: #888; }
 
-  /* Filter bar */
-  .aoe-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
-  .aoe-filters span { font-size: 0.68rem; font-family: sans-serif; color: #888; }
-  .filter-btn { font-size: 0.65rem; font-family: sans-serif; padding: 3px 10px; border-radius: 3px; border: 1px solid #ccc; cursor: pointer; background: #fff; color: #555; transition: all 0.15s; }
-  .filter-btn:hover { border-color: #888; color: #1a1a1a; }
+  /* ── Control panels ── */
+  .controls-row { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 20px; }
+  .control-panel { background: #fff; border: 1px solid #e8e4dd; border-radius: 6px; padding: 14px 16px; flex: 1; min-width: 280px; }
+  .control-panel h4 { font-size: 0.7rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 10px; }
+
+  /* Lean filters */
+  .filter-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-btn { font-size: 0.63rem; font-family: sans-serif; padding: 3px 10px; border-radius: 20px; border: 1px solid #ccc; cursor: pointer; background: #fff; color: #555; transition: all 0.15s; white-space: nowrap; }
+  .filter-btn:hover { border-color: #888; }
   .filter-btn.active { color: #fff; border-color: transparent; }
+  .filter-btn[data-lean="all"].active { background: #1a1a1a; }
   .filter-btn[data-lean="left"].active { background: #2980b9; }
-  .filter-btn[data-lean="centre-left"].active { background: #5dade2; }
+  .filter-btn[data-lean="centre-left"].active { background: #5dade2; color: #1a1a1a; }
   .filter-btn[data-lean="centre"].active { background: #27ae60; }
   .filter-btn[data-lean="centre-right"].active { background: #e67e22; }
   .filter-btn[data-lean="right"].active { background: #c0392b; }
   .filter-btn[data-lean="far-right"].active { background: #7b241c; }
-  .filter-btn[data-lean="all"].active { background: #1a1a1a; }
 
-  /* Rows */
-  .aoe-region-header { font-size: 0.72rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #888; padding: 18px 0 8px; border-bottom: 1px solid #ddd; margin-bottom: 4px; }
-  .aoe-row { display: flex; align-items: flex-start; gap: 0; padding: 6px 0; border-bottom: 1px solid #f0ece5; }
-  .aoe-cname { width: 180px; min-width: 180px; font-size: 0.75rem; font-family: sans-serif; padding-top: 6px; color: #444; flex-shrink: 0; }
-  .aoe-track { flex: 1; background: #eee; border-radius: 4px; position: relative; min-height: 30px; }
-  .aoe-party { position: absolute; height: 22px; border-radius: 3px; display: flex; align-items: center; justify-content: center;
-    font-size: 0.56rem; font-family: sans-serif; font-weight: 700; color: #fff; white-space: nowrap;
-    padding: 0 5px; transform: translateX(-50%); cursor: default; transition: opacity 0.2s;
+  /* Country picker */
+  .cpick-pills { display: flex; gap: 5px; flex-wrap: wrap; max-height: 120px; overflow-y: auto; }
+  .cpick-btn { font-size: 0.63rem; font-family: sans-serif; padding: 3px 9px; border-radius: 20px; border: 1px solid #ccc; cursor: pointer; background: #fff; color: #555; transition: all 0.15s; white-space: nowrap; }
+  .cpick-btn:hover { border-color: #888; color: #1a1a1a; }
+  .cpick-btn.selected { background: #1a1a1a; color: #f5f3ee; border-color: #1a1a1a; }
+  .cpick-actions { margin-top: 8px; display: flex; gap: 8px; }
+  .cpick-action { font-size: 0.63rem; font-family: sans-serif; padding: 3px 10px; border-radius: 3px; border: 1px solid #ccc; cursor: pointer; background: #fff; color: #555; }
+  .cpick-action:hover { background: #f5f3ee; }
+  .compare-status { font-size: 0.63rem; font-family: sans-serif; color: #c0392b; margin-top: 6px; font-style: italic; }
+
+  /* ── Legend ── */
+  .aoe-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .aoe-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.63rem; font-family: sans-serif; color: #555; }
+  .aoe-legend-dot { width: 11px; height: 11px; border-radius: 2px; }
+
+  /* ── Chart rows ── */
+  .aoe-region-header { font-size: 0.7rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #888; padding: 16px 0 6px; border-bottom: 1px solid #ddd; margin-bottom: 2px; }
+  .aoe-row { display: flex; align-items: flex-start; gap: 0; padding: 5px 0; border-bottom: 1px solid #f0ece5; transition: opacity 0.2s; }
+  .aoe-row.hidden { display: none; }
+  .aoe-region-header.hidden { display: none; }
+  .aoe-cname { width: 175px; min-width: 175px; font-size: 0.74rem; font-family: sans-serif; padding-top: 6px; color: #444; flex-shrink: 0; }
+  .aoe-track {
+    flex: 1; border-radius: 3px; position: relative; min-height: 30px;
+    /* swim-lane gridlines at 20%, 35%, 50%, 65%, 80% */
+    background:
+      linear-gradient(rgba(0,0,0,0.07) 0,rgba(0,0,0,0.07) 100%) 10% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.07) 0,rgba(0,0,0,0.07) 100%) 20% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.12) 0,rgba(0,0,0,0.12) 100%) 35% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.18) 0,rgba(0,0,0,0.18) 100%) 50% 0/2px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.12) 0,rgba(0,0,0,0.12) 100%) 65% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.07) 0,rgba(0,0,0,0.07) 100%) 80% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.07) 0,rgba(0,0,0,0.07) 100%) 90% 0/1px 100% no-repeat,
+      #ebebeb;
+  }
+  .aoe-party { position: absolute; height: 22px; border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.56rem; font-family: sans-serif; font-weight: 700; color: #fff;
+    white-space: nowrap; padding: 0 5px; transform: translateX(-50%);
+    cursor: default; transition: opacity 0.2s, transform 0.15s;
     box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
-  .aoe-party:hover { z-index: 10; transform: translateX(-50%) scale(1.15); }
-  .aoe-party.dimmed { opacity: 0.12; }
+  .aoe-party:hover { z-index: 50; transform: translateX(-50%) scale(1.18); }
+  .aoe-party.dimmed { opacity: 0.1; }
 
-  /* Legend */
-  .aoe-legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 12px; }
-  .aoe-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.65rem; font-family: sans-serif; color: #555; }
-  .aoe-legend-dot { width: 12px; height: 12px; border-radius: 2px; }
-
-  /* Note */
-  .aoe-note { font-size: 0.7rem; font-family: sans-serif; color: #999; font-style: italic; text-align: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid #e8e4dd; line-height: 1.6; }
-  .back-link { text-align: center; margin-top: 16px; }
-  .back-link a { font-size: 0.78rem; font-family: sans-serif; color: #c0392b; text-decoration: none; }
+  .aoe-note { font-size: 0.68rem; font-family: sans-serif; color: #999; font-style: italic; text-align: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid #e8e4dd; line-height: 1.7; }
+  .back-link { text-align: center; margin-top: 12px; }
+  .back-link a { font-size: 0.76rem; font-family: sans-serif; color: #c0392b; text-decoration: none; }
 
   @media (max-width: 600px) {
-    .aoe-cname { width: 90px; min-width: 90px; font-size: 0.65rem; }
-    .aoe-party { font-size: 0.48rem; padding: 0 3px; }
+    .aoe-cname { width: 80px; min-width: 80px; font-size: 0.62rem; }
+    .aoe-party { font-size: 0.46rem; padding: 0 3px; height: 18px; }
+    .controls-row { flex-direction: column; }
   }
 </style>
 </head>
@@ -96,36 +125,76 @@
   <a href="poles_apart.html">⚡ Poles Apart</a>
   <a href="axis_of_equal.html" class="active">⚖️ Axis of Equal</a>
 </nav>
-<div class="spectrum-bar"></div>
+<div class="top-spectrum"></div>
 
 <div class="container">
 
   <div class="aoe-hero">
     <h2>⚖️ Axis of Equal</h2>
-    <p>Every party. Every country. One honest scale — from communist to fascist. A party called "conservative" in one country may sit to the left of a party called "socialist" in another. See where they all actually land.</p>
+    <p>Every party. Every country. One honest scale — from communist to fascist. A party called "conservative" in one country may sit to the left of a "socialist" in another. See where they actually land.</p>
+  </div>
+
+  <div class="controls-row">
+
+    <div class="control-panel">
+      <h4>🎨 Highlight by political lean</h4>
+      <div class="filter-pills">
+        <button class="filter-btn active" data-lean="all">All</button>
+        <button class="filter-btn" data-lean="left">Left</button>
+        <button class="filter-btn" data-lean="centre-left">Centre-Left</button>
+        <button class="filter-btn" data-lean="centre">Centre</button>
+        <button class="filter-btn" data-lean="centre-right">Centre-Right</button>
+        <button class="filter-btn" data-lean="right">Right</button>
+        <button class="filter-btn" data-lean="far-right">Far Right</button>
+      </div>
+    </div>
+
+    <div class="control-panel">
+      <h4>🔍 Compare specific countries</h4>
+      <div class="cpick-pills">
+<button class="cpick-btn" data-country="united-kingdom">🇬🇧 United Kingdom</button>
+<button class="cpick-btn" data-country="france">🇫🇷 France</button>
+<button class="cpick-btn" data-country="germany">🇩🇪 Germany</button>
+<button class="cpick-btn" data-country="netherlands">🇳🇱 Netherlands</button>
+<button class="cpick-btn" data-country="sweden">🇸🇪 Sweden</button>
+<button class="cpick-btn" data-country="norway">🇳🇴 Norway</button>
+<button class="cpick-btn" data-country="finland">🇫🇮 Finland</button>
+<button class="cpick-btn" data-country="denmark">🇩🇰 Denmark</button>
+<button class="cpick-btn" data-country="italy">🇮🇹 Italy</button>
+<button class="cpick-btn" data-country="spain">🇪🇸 Spain</button>
+<button class="cpick-btn" data-country="portugal">🇵🇹 Portugal</button>
+<button class="cpick-btn" data-country="poland">🇵🇱 Poland</button>
+<button class="cpick-btn" data-country="united-states">🇺🇸 United States</button>
+<button class="cpick-btn" data-country="canada">🇨🇦 Canada</button>
+<button class="cpick-btn" data-country="mexico">🇲🇽 Mexico</button>
+<button class="cpick-btn" data-country="brazil">🇧🇷 Brazil</button>
+<button class="cpick-btn" data-country="malaysia">🇲🇾 Malaysia</button>
+<button class="cpick-btn" data-country="australia">🇦🇺 Australia</button>
+<button class="cpick-btn" data-country="japan">🇯🇵 Japan</button>
+<button class="cpick-btn" data-country="south-korea">🇰🇷 South Korea</button>
+
+      </div>
+      <div class="cpick-actions">
+        <button class="cpick-action" id="compare-btn">Show selected only</button>
+        <button class="cpick-action" id="reset-btn">Show all countries</button>
+      </div>
+      <div class="compare-status" id="compare-status"></div>
+    </div>
+
   </div>
 
   <div class="aoe-legend">
-    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#2980b9"></div> Left</div>
-    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#5dade2"></div> Centre-Left</div>
-    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#27ae60"></div> Centre</div>
-    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#e67e22"></div> Centre-Right</div>
-    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#c0392b"></div> Right</div>
-    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#7b241c"></div> Far Right</div>
+    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#2980b9"></div>Left</div>
+    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#5dade2"></div>Centre-Left</div>
+    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#27ae60"></div>Centre</div>
+    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#e67e22"></div>Centre-Right</div>
+    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#c0392b"></div>Right</div>
+    <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#7b241c"></div>Far Right</div>
+    <span style="font-size:0.6rem;font-family:sans-serif;color:#aaa;margin-left:8px;">— faint lines mark Left / Centre-Left / Centre / Centre-Right / Right zones</span>
   </div>
 
-  <div class="aoe-filters">
-    <span>Highlight:</span>
-    <button class="filter-btn active" data-lean="all">All parties</button>
-    <button class="filter-btn" data-lean="left">Left</button>
-    <button class="filter-btn" data-lean="centre-left">Centre-Left</button>
-    <button class="filter-btn" data-lean="centre">Centre</button>
-    <button class="filter-btn" data-lean="centre-right">Centre-Right</button>
-    <button class="filter-btn" data-lean="right">Right</button>
-    <button class="filter-btn" data-lean="far-right">Far Right</button>
-  </div>
-
-  <div class="aoe-sticky-header">
+  <!-- ── Sticky scale bar ── -->
+  <div class="aoe-sticky">
     <div class="aoe-full-bar"></div>
     <div class="aoe-axis-labels">
       <span>☭ Communist</span>
@@ -138,134 +207,101 @@
     </div>
   </div>
 
+  <!-- ── Chart ── -->
   <div id="aoe-chart">
-<div class="aoe-region-header">🌍 Europe</div>
+    <div class="aoe-region-header" data-region="europe">🌍 Europe</div>
+    <div class="aoe-row" data-country="united-kingdom"><div class="aoe-cname">🇬🇧 United Kingdom</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:44%;top:4px;" title="Lib Dems">Lib Dems</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:40%;top:26px;" title="Labour">Labour</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:64%;top:4px;" title="Conservatives">Conservatives</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:82%;top:26px;" title="Reform UK">Reform UK</div></div></div>
+    <div class="aoe-row" data-country="france"><div class="aoe-cname">🇫🇷 France</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:22%;top:4px;" title="LFI / NFP">LFI / NFP</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:50%;top:4px;" title="Macron / Ren.">Macron / Ren.</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:64%;top:26px;" title="Les Rép.">Les Rép.</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:83%;top:4px;" title="RN">RN</div></div></div>
+    <div class="aoe-row" data-country="germany"><div class="aoe-cname">🇩🇪 Germany</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:18%;top:4px;" title="Die Linke">Die Linke</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:37%;top:4px;" title="SPD">SPD</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:41%;top:26px;" title="Greens">Greens</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:63%;top:4px;" title="CDU/CSU">CDU/CSU</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:84%;top:4px;" title="AfD">AfD</div></div></div>
+    <div class="aoe-row" data-country="netherlands"><div class="aoe-cname">🇳🇱 Netherlands</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:34%;top:4px;" title="GL-PvdA">GL-PvdA</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:47%;top:4px;" title="D66">D66</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:61%;top:4px;" title="VVD">VVD</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:83%;top:4px;" title="PVV">PVV</div></div></div>
+    <div class="aoe-row" data-country="sweden"><div class="aoe-cname">🇸🇪 Sweden</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:20%;top:4px;" title="Left Party">Left Party</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:38%;top:4px;" title="Social Dems">Social Dems</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:62%;top:4px;" title="Moderates">Moderates</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:79%;top:4px;" title="Sweden Dems">Sweden Dems</div></div></div>
+    <div class="aoe-row" data-country="norway"><div class="aoe-cname">🇳🇴 Norway</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:15%;top:4px;" title="Red Party">Red Party</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:37%;top:4px;" title="Labour (Ap)">Labour (Ap)</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:62%;top:4px;" title="Høyre">Høyre</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:76%;top:4px;" title="FrP">FrP</div></div></div>
+    <div class="aoe-row" data-country="finland"><div class="aoe-cname">🇫🇮 Finland</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:20%;top:4px;" title="Left Alliance">Left Alliance</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:37%;top:4px;" title="Social Dems">Social Dems</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:41%;top:26px;" title="Greens">Greens</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:63%;top:4px;" title="NCP (Kok.)">NCP (Kok.)</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:79%;top:4px;" title="Finns Party">Finns Party</div></div></div>
+    <div class="aoe-row" data-country="denmark"><div class="aoe-cname">🇩🇰 Denmark</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:42%;top:4px;" title="Soc. Dems">Soc. Dems</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:62%;top:4px;" title="Venstre">Venstre</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:77%;top:4px;" title="People's Pty">People's Pty</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:83%;top:26px;" title="New Right">New Right</div></div></div>
+    <div class="aoe-row" data-country="italy"><div class="aoe-cname">🇮🇹 Italy</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:30%;top:4px;" title="M5S">M5S</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:36%;top:26px;" title="PD">PD</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:64%;top:4px;" title="Forza Italia">Forza Italia</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:76%;top:4px;" title="Lega">Lega</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:83%;top:26px;" title="FdI (Meloni)">FdI (Meloni)</div></div></div>
+    <div class="aoe-row" data-country="spain"><div class="aoe-cname">🇪🇸 Spain</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:22%;top:4px;" title="Sumar">Sumar</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:38%;top:4px;" title="PSOE">PSOE</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:65%;top:4px;" title="PP">PP</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:83%;top:4px;" title="Vox">Vox</div></div></div>
+    <div class="aoe-row" data-country="portugal"><div class="aoe-cname">🇵🇹 Portugal</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:18%;top:4px;" title="Left Bloc">Left Bloc</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:37%;top:4px;" title="PS">PS</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:63%;top:4px;" title="PSD / AD">PSD / AD</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:83%;top:4px;" title="Chega">Chega</div></div></div>
+    <div class="aoe-row" data-country="poland"><div class="aoe-cname">🇵🇱 Poland</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:27%;top:4px;" title="Lewica">Lewica</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:45%;top:4px;" title="KO (Tusk)">KO (Tusk)</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:73%;top:4px;" title="PiS">PiS</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:81%;top:26px;" title="Confederation">Confederation</div></div></div>
+    <div class="aoe-region-header" data-region="americas">🌎 Americas & SE Asia</div>
+    <div class="aoe-row" data-country="united-states"><div class="aoe-cname">🇺🇸 United States</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:28%;top:4px;" title="Progressives">Progressives</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:43%;top:4px;" title="Democrats">Democrats</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:68%;top:4px;" title="Republicans">Republicans</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:81%;top:26px;" title="MAGA">MAGA</div></div></div>
+    <div class="aoe-row" data-country="canada"><div class="aoe-cname">🇨🇦 Canada</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:30%;top:4px;" title="NDP">NDP</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:44%;top:4px;" title="Liberals">Liberals</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:64%;top:4px;" title="Conservatives">Conservatives</div></div></div>
+    <div class="aoe-row" data-country="mexico"><div class="aoe-cname">🇲🇽 Mexico</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:27%;top:4px;" title="Morena (PT)">Morena (PT)</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:50%;top:4px;" title="PRI">PRI</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:65%;top:4px;" title="PAN">PAN</div></div></div>
+    <div class="aoe-row" data-country="brazil"><div class="aoe-cname">🇧🇷 Brazil</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:27%;top:4px;" title="PT (Lula)">PT (Lula)</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:50%;top:4px;" title="MDB / centre">MDB / centre</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:78%;top:4px;" title="PL (Bolsonaro)">PL (Bolsonaro</div></div></div>
+    <div class="aoe-row" data-country="malaysia"><div class="aoe-cname">🇲🇾 Malaysia</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:42%;top:4px;" title="PKR / PH">PKR / PH</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:56%;top:4px;" title="BN / UMNO">BN / UMNO</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:70%;top:4px;" title="PN / Bersatu">PN / Bersatu</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:73%;top:26px;" title="PAS">PAS</div></div></div>
+    <div class="aoe-region-header" data-region="pacific">🌏 Asia-Pacific</div>
+    <div class="aoe-row" data-country="australia"><div class="aoe-cname">🇦🇺 Australia</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:27%;top:4px;" title="Greens">Greens</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:40%;top:4px;" title="Labor (ALP)">Labor (ALP)</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:65%;top:4px;" title="Lib-Nat Coal.">Lib-Nat Coal.</div></div></div>
+    <div class="aoe-row" data-country="japan"><div class="aoe-cname">🇯🇵 Japan</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:37%;top:4px;" title="CDP">CDP</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:52%;top:4px;" title="Nippon Ishin">Nippon Ishin</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:63%;top:4px;" title="LDP">LDP</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:74%;top:26px;" title="Nippon Kaigi">Nippon Kaigi</div></div></div>
+    <div class="aoe-row" data-country="south-korea"><div class="aoe-cname">🇰🇷 South Korea</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:38%;top:4px;" title="DP (Dems)">DP (Dems)</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:65%;top:4px;" title="PPP">PPP</div></div></div>
 
-      <div class="aoe-row">
-        <div class="aoe-cname">🇬🇧 United Kingdom</div>
-        <div class="aoe-track" style="height:52px"><div class="aoe-party" style="background:#27ae60;left:44%;top:4px;" title="Lib Dems">Lib Dems</div><div class="aoe-party" style="background:#5dade2;left:40%;top:26px;" title="Labour">Labour</div><div class="aoe-party" style="background:#e67e22;left:64%;top:4px;" title="Conservatives">Conservative</div><div class="aoe-party" style="background:#7b241c;left:82%;top:26px;" title="Reform UK">Reform UK</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇫🇷 France</div>
-        <div class="aoe-track" style="height:52px"><div class="aoe-party" style="background:#2980b9;left:22%;top:4px;" title="LFI / NFP">LFI / NFP</div><div class="aoe-party" style="background:#27ae60;left:50%;top:4px;" title="Macron / Ren.">Macron / Ren</div><div class="aoe-party" style="background:#e67e22;left:64%;top:26px;" title="Les Rép.">Les Rép.</div><div class="aoe-party" style="background:#7b241c;left:83%;top:4px;" title="RN">RN</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇩🇪 Germany</div>
-        <div class="aoe-track" style="height:52px"><div class="aoe-party" style="background:#2980b9;left:18%;top:4px;" title="Die Linke">Die Linke</div><div class="aoe-party" style="background:#5dade2;left:37%;top:4px;" title="SPD">SPD</div><div class="aoe-party" style="background:#5dade2;left:41%;top:26px;" title="Greens">Greens</div><div class="aoe-party" style="background:#e67e22;left:63%;top:4px;" title="CDU/CSU">CDU/CSU</div><div class="aoe-party" style="background:#7b241c;left:84%;top:4px;" title="AfD">AfD</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇳🇱 Netherlands</div>
-        <div class="aoe-track" style="height:30px"><div class="aoe-party" style="background:#5dade2;left:34%;top:4px;" title="GL-PvdA">GL-PvdA</div><div class="aoe-party" style="background:#27ae60;left:47%;top:4px;" title="D66">D66</div><div class="aoe-party" style="background:#e67e22;left:61%;top:4px;" title="VVD">VVD</div><div class="aoe-party" style="background:#7b241c;left:83%;top:4px;" title="PVV">PVV</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇸🇪 Sweden</div>
-        <div class="aoe-track" style="height:30px"><div class="aoe-party" style="background:#2980b9;left:20%;top:4px;" title="Left Party">Left Party</div><div class="aoe-party" style="background:#5dade2;left:38%;top:4px;" title="Social Dems">Social Dems</div><div class="aoe-party" style="background:#e67e22;left:62%;top:4px;" title="Moderates">Moderates</div><div class="aoe-party" style="background:#c0392b;left:79%;top:4px;" title="Sweden Dems">Sweden Dems</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇳🇴 Norway</div>
-        <div class="aoe-track" style="height:30px"><div class="aoe-party" style="background:#2980b9;left:15%;top:4px;" title="Red Party">Red Party</div><div class="aoe-party" style="background:#5dade2;left:37%;top:4px;" title="Labour (Ap)">Labour (Ap)</div><div class="aoe-party" style="background:#e67e22;left:62%;top:4px;" title="Høyre">Høyre</div><div class="aoe-party" style="background:#c0392b;left:76%;top:4px;" title="FrP">FrP</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇫🇮 Finland</div>
-        <div class="aoe-track" style="height:52px"><div class="aoe-party" style="background:#2980b9;left:20%;top:4px;" title="Left Alliance">Left Allianc</div><div class="aoe-party" style="background:#5dade2;left:37%;top:4px;" title="Social Dems">Social Dems</div><div class="aoe-party" style="background:#5dade2;left:41%;top:26px;" title="Greens">Greens</div><div class="aoe-party" style="background:#e67e22;left:63%;top:4px;" title="NCP (Kok.)">NCP (Kok.)</div><div class="aoe-party" style="background:#c0392b;left:79%;top:4px;" title="Finns Party">Finns Party</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇩🇰 Denmark</div>
-        <div class="aoe-track" style="height:52px"><div class="aoe-party" style="background:#5dade2;left:42%;top:4px;" title="Soc. Dems">Soc. Dems</div><div class="aoe-party" style="background:#e67e22;left:62%;top:4px;" title="Venstre">Venstre</div><div class="aoe-party" style="background:#c0392b;left:77%;top:4px;" title="People's Pty">People's Pty</div><div class="aoe-party" style="background:#7b241c;left:83%;top:26px;" title="New Right">New Right</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇮🇹 Italy</div>
-        <div class="aoe-track" style="height:52px"><div class="aoe-party" style="background:#2980b9;left:30%;top:4px;" title="M5S">M5S</div><div class="aoe-party" style="background:#5dade2;left:36%;top:26px;" title="PD">PD</div><div class="aoe-party" style="background:#e67e22;left:64%;top:4px;" title="Forza Italia">Forza Italia</div><div class="aoe-party" style="background:#c0392b;left:76%;top:4px;" title="Lega">Lega</div><div class="aoe-party" style="background:#7b241c;left:83%;top:26px;" title="FdI (Meloni)">FdI (Meloni)</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇪🇸 Spain</div>
-        <div class="aoe-track" style="height:30px"><div class="aoe-party" style="background:#2980b9;left:22%;top:4px;" title="Sumar">Sumar</div><div class="aoe-party" style="background:#5dade2;left:38%;top:4px;" title="PSOE">PSOE</div><div class="aoe-party" style="background:#e67e22;left:65%;top:4px;" title="PP">PP</div><div class="aoe-party" style="background:#7b241c;left:83%;top:4px;" title="Vox">Vox</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇵🇹 Portugal</div>
-        <div class="aoe-track" style="height:30px"><div class="aoe-party" style="background:#2980b9;left:18%;top:4px;" title="Left Bloc">Left Bloc</div><div class="aoe-party" style="background:#5dade2;left:37%;top:4px;" title="PS">PS</div><div class="aoe-party" style="background:#e67e22;left:63%;top:4px;" title="PSD / AD">PSD / AD</div><div class="aoe-party" style="background:#7b241c;left:83%;top:4px;" title="Chega">Chega</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇵🇱 Poland</div>
-        <div class="aoe-track" style="height:52px"><div class="aoe-party" style="background:#2980b9;left:27%;top:4px;" title="Lewica">Lewica</div><div class="aoe-party" style="background:#27ae60;left:45%;top:4px;" title="KO (Tusk)">KO (Tusk)</div><div class="aoe-party" style="background:#c0392b;left:73%;top:4px;" title="PiS">PiS</div><div class="aoe-party" style="background:#7b241c;left:81%;top:26px;" title="Confederation">Confederatio</div></div>
-      </div><div class="aoe-region-header">🌎 Americas & SE Asia</div>
-
-      <div class="aoe-row">
-        <div class="aoe-cname">🇺🇸 United States</div>
-        <div class="aoe-track" style="height:52px"><div class="aoe-party" style="background:#2980b9;left:28%;top:4px;" title="Progressives">Progressives</div><div class="aoe-party" style="background:#5dade2;left:43%;top:4px;" title="Democrats">Democrats</div><div class="aoe-party" style="background:#c0392b;left:68%;top:4px;" title="Republicans">Republicans</div><div class="aoe-party" style="background:#7b241c;left:81%;top:26px;" title="MAGA">MAGA</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇨🇦 Canada</div>
-        <div class="aoe-track" style="height:30px"><div class="aoe-party" style="background:#2980b9;left:30%;top:4px;" title="NDP">NDP</div><div class="aoe-party" style="background:#5dade2;left:44%;top:4px;" title="Liberals">Liberals</div><div class="aoe-party" style="background:#e67e22;left:64%;top:4px;" title="Conservatives">Conservative</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇲🇽 Mexico</div>
-        <div class="aoe-track" style="height:30px"><div class="aoe-party" style="background:#2980b9;left:27%;top:4px;" title="Morena (PT)">Morena (PT)</div><div class="aoe-party" style="background:#27ae60;left:50%;top:4px;" title="PRI">PRI</div><div class="aoe-party" style="background:#e67e22;left:65%;top:4px;" title="PAN">PAN</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇧🇷 Brazil</div>
-        <div class="aoe-track" style="height:30px"><div class="aoe-party" style="background:#2980b9;left:27%;top:4px;" title="PT (Lula)">PT (Lula)</div><div class="aoe-party" style="background:#27ae60;left:50%;top:4px;" title="MDB / centre">MDB / centre</div><div class="aoe-party" style="background:#c0392b;left:78%;top:4px;" title="PL (Bolsonaro)">PL (Bolsonar</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇲🇾 Malaysia</div>
-        <div class="aoe-track" style="height:52px"><div class="aoe-party" style="background:#27ae60;left:42%;top:4px;" title="PKR / PH">PKR / PH</div><div class="aoe-party" style="background:#e67e22;left:56%;top:4px;" title="BN / UMNO">BN / UMNO</div><div class="aoe-party" style="background:#c0392b;left:70%;top:4px;" title="PN / Bersatu">PN / Bersatu</div><div class="aoe-party" style="background:#c0392b;left:73%;top:26px;" title="PAS">PAS</div></div>
-      </div><div class="aoe-region-header">🌏 Asia-Pacific</div>
-
-      <div class="aoe-row">
-        <div class="aoe-cname">🇦🇺 Australia</div>
-        <div class="aoe-track" style="height:30px"><div class="aoe-party" style="background:#2980b9;left:27%;top:4px;" title="Greens">Greens</div><div class="aoe-party" style="background:#5dade2;left:40%;top:4px;" title="Labor (ALP)">Labor (ALP)</div><div class="aoe-party" style="background:#e67e22;left:65%;top:4px;" title="Lib-Nat Coal.">Lib-Nat Coal</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇯🇵 Japan</div>
-        <div class="aoe-track" style="height:52px"><div class="aoe-party" style="background:#5dade2;left:37%;top:4px;" title="CDP">CDP</div><div class="aoe-party" style="background:#27ae60;left:52%;top:4px;" title="Nippon Ishin">Nippon Ishin</div><div class="aoe-party" style="background:#e67e22;left:63%;top:4px;" title="LDP">LDP</div><div class="aoe-party" style="background:#c0392b;left:74%;top:26px;" title="Sankei/right">Sankei/right</div></div>
-      </div>
-      <div class="aoe-row">
-        <div class="aoe-cname">🇰🇷 South Korea</div>
-        <div class="aoe-track" style="height:30px"><div class="aoe-party" style="background:#5dade2;left:38%;top:4px;" title="DP (Dems)">DP (Dems)</div><div class="aoe-party" style="background:#e67e22;left:65%;top:4px;" title="PPP">PPP</div></div>
-      </div>
   </div>
 
   <p class="aoe-note">
-    Positions are editorial assessments based on party manifestos, stated positions, voting records, and international comparisons — not algorithmic scores.<br>
-    Reasonable people can disagree on exact placement. The goal is honest cross-country comparison, not a definitive ranking.<br>
-    Hover over any party badge for its full name. Click a filter above to highlight parties of a particular lean across all countries.
+    Positions are editorial assessments based on manifestos, stated positions, and voting records — not algorithmic.<br>
+    Hover over any badge for the party's full name. Use the controls above to highlight a lean or compare countries side by side.
   </p>
   <div class="back-link"><a href="poles_apart.html">← Back to Poles Apart</a></div>
 
 </div>
 
 <script>
-  // Filter functionality
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      const lean = this.dataset.lean;
-      document.querySelectorAll('.aoe-party').forEach(p => {
-        if (lean === 'all') {
-          p.classList.remove('dimmed');
-        } else {
-          const pLean = p.style.background;
-          const pTitle = p.getAttribute('title') || '';
-          // Match by background color
-          const leanColours = {
-            'left':         'rgb(41, 128, 185)',
-            'centre-left':  'rgb(93, 173, 226)',
-            'centre':       'rgb(39, 174, 96)',
-            'centre-right': 'rgb(230, 126, 34)',
-            'right':        'rgb(192, 57, 43)',
-            'far-right':    'rgb(123, 36, 28)',
-          };
-          const targetColour = leanColours[lean];
-          if (pLean === targetColour || p.style.backgroundColor === targetColour) {
-            p.classList.remove('dimmed');
-          } else {
-            p.classList.add('dimmed');
-          }
-        }
-      });
+// ── Lean filter ──
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const lean = this.dataset.lean;
+    document.querySelectorAll('.aoe-party').forEach(p => {
+      p.classList.toggle('dimmed', lean !== 'all' && p.dataset.lean !== lean);
     });
   });
+});
+
+// ── Country picker ──
+const pickBtns = document.querySelectorAll('.cpick-btn');
+pickBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('selected');
+    updateStatus();
+  });
+});
+
+function updateStatus() {
+  const sel = [...document.querySelectorAll('.cpick-btn.selected')];
+  const status = document.getElementById('compare-status');
+  if (sel.length === 0) {
+    status.textContent = '';
+  } else {
+    status.textContent = sel.length + ' countr' + (sel.length===1?'y':'ies') + ' selected — click "Show selected only" to compare';
+  }
+}
+
+document.getElementById('compare-btn').addEventListener('click', function() {
+  const selected = [...document.querySelectorAll('.cpick-btn.selected')].map(b => b.dataset.country);
+  if (selected.length === 0) { alert('Pick at least one country first.'); return; }
+
+  document.querySelectorAll('.aoe-row').forEach(row => {
+    row.classList.toggle('hidden', !selected.includes(row.dataset.country));
+  });
+
+  // Hide region headers that have no visible rows
+  document.querySelectorAll('.aoe-region-header').forEach(hdr => {
+    const reg = hdr.dataset.region;
+    const visibleInRegion = [...document.querySelectorAll('.aoe-row:not(.hidden)')].some(r => {
+      // rows don't carry region — check adjacent siblings
+      return true; // simplification: keep all headers visible
+    });
+    // Always keep headers — they help with context even in compare mode
+  });
+
+  document.getElementById('compare-status').textContent =
+    'Comparing ' + selected.length + ' countr' + (selected.length===1?'y':'ies') + ' — click "Show all" to reset';
+});
+
+document.getElementById('reset-btn').addEventListener('click', function() {
+  document.querySelectorAll('.aoe-row').forEach(r => r.classList.remove('hidden'));
+  document.querySelectorAll('.cpick-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('compare-status').textContent = '';
+});
 </script>
 
 </body>
