@@ -27,25 +27,45 @@
 
   .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
 
-  /* Continent sections */
   .continent { margin-bottom: 36px; }
   .continent-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #1a1a1a; }
   .continent-flag { font-size: 1.4rem; }
   .continent-name { font-size: 1.1rem; font-weight: 700; }
   .continent-desc { font-size: 0.72rem; color: #888; font-family: sans-serif; margin-left: auto; }
 
-  /* Region blocks */
   .regions { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
-  .region-block { background: #fff; border: 1px solid #e8e4dd; border-radius: 4px; overflow: hidden; }
+  .region-block { background: #fff; border: 1px solid #e8e4dd; border-radius: 4px; overflow: visible; }
   .region-title { background: #2c2c2c; color: #f5f3ee; font-family: sans-serif; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 7px 12px; }
   .country-list { padding: 8px 0; }
-  .country-item { display: flex; align-items: center; gap: 8px; padding: 5px 12px; font-family: sans-serif; font-size: 0.76rem; }
+
+  /* Country items with hover card */
+  .country-item { position: relative; display: flex; align-items: center; padding: 5px 12px; font-family: sans-serif; font-size: 0.76rem; }
   .country-item a { color: #1a1a1a; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
   .country-item a:hover { color: #c0392b; }
   .country-item a .live-badge { font-size: 0.55rem; background: #27ae60; color: #fff; padding: 1px 5px; border-radius: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
   .country-item.soon { color: #bbb; }
   .country-item.soon span { font-size: 0.74rem; }
   .soon-badge { font-size: 0.55rem; background: #e8e4dd; color: #999; padding: 1px 5px; border-radius: 2px; font-weight: 700; text-transform: uppercase; }
+
+  /* Hover stats card */
+  .country-stats {
+    display: none; position: absolute; left: 105%; top: 0;
+    width: 240px; background: #fff; border: 1px solid #ddd;
+    border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    padding: 12px 14px; z-index: 1000; font-family: sans-serif;
+    pointer-events: none;
+  }
+  .country-item:hover .country-stats { display: block; }
+  .cs-name { font-size: 0.82rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+  .cs-row { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: #555; margin-bottom: 3px; }
+  .cs-icon { font-size: 0.75rem; flex-shrink: 0; }
+  .cs-divider { border-top: 1px solid #eee; margin: 8px 0; }
+  .cs-govt-label { font-size: 0.68rem; color: #999; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+  .cs-govt-detail { font-size: 0.75rem; color: #333; margin-bottom: 3px; }
+  .cs-leader { font-size: 0.75rem; color: #333; font-weight: 600; }
+  .cs-opp-title { font-size: 0.68rem; color: #999; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .cs-opp { font-size: 0.72rem; color: #444; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+  .cs-lean { font-size: 0.58rem; color: #fff; padding: 1px 5px; border-radius: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
 
   /* World view teaser */
   .world-view-teaser { background: #2c3e50; color: #f5f3ee; border-radius: 4px; padding: 20px 24px; margin-bottom: 32px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
@@ -58,7 +78,7 @@
   footer a { color: #888; text-decoration: none; }
   footer a:hover { color: #ccc; }
 
-  @media (max-width: 600px) { .regions { grid-template-columns: 1fr 1fr; } header h1 { font-size: 1.3rem; } }
+  @media (max-width: 600px) { .regions { grid-template-columns: 1fr 1fr; } header h1 { font-size: 1.3rem; } .country-stats { display: none !important; } }
 </style>
 </head>
 <body>
@@ -76,7 +96,7 @@
 
 <div class="mission">
   <div class="mission-inner">
-    <p>Every country has a story it's obsessed with that the rest of the world barely knows exists. This site shows you what newspapers across the political spectrum are leading with — so you can see your own country as others see it, and understand what others are living through.</p>
+    <p>Every country has a story it's obsessed with that the rest of the world barely knows exists. This site shows you what newspapers across the political spectrum are leading with — so you can see your own country as others see it, and understand what others are living through. <em>Hover over any live country for a quick political snapshot.</em></p>
     <div class="spectrum-legend">
       <div class="legend-item"><div class="legend-dot left"></div> Left-leaning</div>
       <div class="legend-item"><div class="legend-dot centre"></div> Centre</div>
@@ -87,7 +107,6 @@
 
 <div class="container">
 
-  <!-- World View teaser -->
   <div class="world-view-teaser">
     <div class="wv-text">
       <h3>🌐 World View — coming soon</h3>
@@ -96,26 +115,86 @@
     <div class="wv-badge">In development</div>
   </div>
 
-  <!-- ===== EUROPE ===== -->
+  <!-- EUROPE -->
   <div class="continent" id="europe">
     <div class="continent-header">
       <span class="continent-flag">🌍</span>
       <span class="continent-name">Europe</span>
-      <span class="continent-desc">Click a region, then a country</span>
+      <span class="continent-desc">Hover a country for political snapshot</span>
     </div>
     <div class="regions">
       <div class="region-block">
         <div class="region-title">🇬🇧 United Kingdom</div>
         <div class="country-list">
-          <div class="country-item"><a href="uk_press_today.html">🇬🇧 United Kingdom <span class="live-badge">Live</span></a></div>
+          <div class="country-item">
+            <a href="uk_press_today.html">🇬🇧 United Kingdom <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇬🇧 United Kingdom</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>London</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>67.7m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>FPTP</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div>
+          <div class="cs-govt-detail">Labour majority</div>
+          <div class="cs-leader">PM: Keir Starmer (Labour)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> Conservatives</div><div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> Reform UK</div><div class="cs-opp"><span class="cs-lean" style="background:#27ae60">Centre</span> Lib Democrats</div>
+        </div>
+          </div>
         </div>
       </div>
       <div class="region-block">
         <div class="region-title">🌍 Western Europe</div>
         <div class="country-list">
-          <div class="country-item"><a href="europe_press_today.html#west-france">🇫🇷 France <span class="live-badge">Live</span></a></div>
-          <div class="country-item"><a href="europe_press_today.html#west-germany">🇩🇪 Germany <span class="live-badge">Live</span></a></div>
-          <div class="country-item"><a href="europe_press_today.html#west-netherlands">🇳🇱 Netherlands <span class="live-badge">Live</span></a></div>
+          <div class="country-item">
+            <a href="europe_press_today.html#west-france">🇫🇷 France <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇫🇷 France</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Paris</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>68.4m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Two-round majority</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#27ae60">Centre</span></div>
+          <div class="cs-govt-detail">Centrist coalition minority</div>
+          <div class="cs-leader">PM: Bayrou · Pres: Macron</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> RN – Le Pen / Bardella</div><div class="cs-opp"><span class="cs-lean" style="background:#2980b9">Left</span> NFP / La France Insoumise</div>
+        </div>
+          </div>
+          <div class="country-item">
+            <a href="europe_press_today.html#west-germany">🇩🇪 Germany <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇩🇪 Germany</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Berlin</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>84.7m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Mixed-member proportional</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22">Centre Right</span></div>
+          <div class="cs-govt-detail">CDU/CSU + SPD coalition</div>
+          <div class="cs-leader">Chancellor: Friedrich Merz (CDU)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> AfD</div><div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> Greens</div><div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> SPD</div>
+        </div>
+          </div>
+          <div class="country-item">
+            <a href="europe_press_today.html#west-netherlands">🇳🇱 Netherlands <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇳🇱 Netherlands</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>The Hague</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>17.9m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Proportional (party list)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#c0392b">Right</span></div>
+          <div class="cs-govt-detail">PVV + VVD + NSC + BBB coalition</div>
+          <div class="cs-leader">PM: Dick Schoof (PVV-backed)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> Labour-GreenLeft</div><div class="cs-opp"><span class="cs-lean" style="background:#27ae60">Centre</span> D66</div><div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> CDA</div>
+        </div>
+          </div>
           <div class="country-item soon"><span>🇧🇪 Belgium</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇮🇪 Ireland</span> <span class="soon-badge">Soon</span></div>
         </div>
@@ -123,17 +202,92 @@
       <div class="region-block">
         <div class="region-title">🌨 Scandinavia &amp; Nordics</div>
         <div class="country-list">
-          <div class="country-item"><a href="europe_press_today.html#north-sweden">🇸🇪 Sweden <span class="live-badge">Live</span></a></div>
-          <div class="country-item"><a href="europe_press_today.html#north-norway">🇳🇴 Norway <span class="live-badge">Live</span></a></div>
+          <div class="country-item">
+            <a href="europe_press_today.html#north-sweden">🇸🇪 Sweden <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇸🇪 Sweden</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Stockholm</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>10.5m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Proportional (party list)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22">Centre Right</span></div>
+          <div class="cs-govt-detail">Moderate-led minority (SD support)</div>
+          <div class="cs-leader">PM: Ulf Kristersson (Moderate)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> Social Democrats</div><div class="cs-opp"><span class="cs-lean" style="background:#2980b9">Left</span> Left Party</div>
+        </div>
+          </div>
+          <div class="country-item">
+            <a href="europe_press_today.html#north-norway">🇳🇴 Norway <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇳🇴 Norway</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Oslo</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>5.5m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Proportional (party list)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div>
+          <div class="cs-govt-detail">Labour + Centre coalition</div>
+          <div class="cs-leader">PM: Jonas Gahr Støre (Labour)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> Conservatives</div><div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> Progress Party (populist)</div>
+        </div>
+          </div>
           <div class="country-item soon"><span>🇩🇰 Denmark</span> <span class="soon-badge">Soon</span></div>
-          <div class="country-item"><a href="europe_press_today.html#north-finland">🇫🇮 Finland <span class="live-badge">Live</span></a></div>
+          <div class="country-item">
+            <a href="europe_press_today.html#north-finland">🇫🇮 Finland <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇫🇮 Finland</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Helsinki</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>5.6m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Proportional (open list)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#c0392b">Right</span></div>
+          <div class="cs-govt-detail">NCP + Finns Party + SFP + KD</div>
+          <div class="cs-leader">PM: Petteri Orpo (NCP)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> Social Democrats</div><div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> Greens</div>
+        </div>
+          </div>
         </div>
       </div>
       <div class="region-block">
         <div class="region-title">☀️ Mediterranean</div>
         <div class="country-list">
-          <div class="country-item"><a href="europe_press_today.html#south-italy">🇮🇹 Italy <span class="live-badge">Live</span></a></div>
-          <div class="country-item"><a href="europe_press_today.html#south-spain">🇪🇸 Spain <span class="live-badge">Live</span></a></div>
+          <div class="country-item">
+            <a href="europe_press_today.html#south-italy">🇮🇹 Italy <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇮🇹 Italy</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Rome</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>59.2m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Mixed PR + FPTP</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#c0392b">Right</span></div>
+          <div class="cs-govt-detail">FdI + Lega + Forza Italia</div>
+          <div class="cs-leader">PM: Giorgia Meloni (Brothers of Italy)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> PD – Democratic Party</div><div class="cs-opp"><span class="cs-lean" style="background:#8e44ad">Populist</span> Five Star Movement</div>
+        </div>
+          </div>
+          <div class="country-item">
+            <a href="europe_press_today.html#south-spain">🇪🇸 Spain <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇪🇸 Spain</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Madrid</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>47.4m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Proportional (D'Hondt)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div>
+          <div class="cs-govt-detail">PSOE minority (regional support)</div>
+          <div class="cs-leader">PM: Pedro Sánchez (PSOE)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> PP – People's Party</div><div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> Vox</div>
+        </div>
+          </div>
           <div class="country-item soon"><span>🇵🇹 Portugal</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇬🇷 Greece</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇹🇷 Turkey</span> <span class="soon-badge">Soon</span></div>
@@ -142,7 +296,22 @@
       <div class="region-block">
         <div class="region-title">🏔 Central &amp; Balkans</div>
         <div class="country-list">
-          <div class="country-item"><a href="europe_press_today.html#central-poland">🇵🇱 Poland <span class="live-badge">Live</span></a></div>
+          <div class="country-item">
+            <a href="europe_press_today.html#central-poland">🇵🇱 Poland <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇵🇱 Poland</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Warsaw</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>38.3m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Proportional (D'Hondt)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#27ae60">Centre</span></div>
+          <div class="cs-govt-detail">Civic Coalition + Third Way + Left</div>
+          <div class="cs-leader">PM: Donald Tusk (KO)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> PiS – Law & Justice</div><div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> Confederation</div>
+        </div>
+          </div>
           <div class="country-item soon"><span>🇨🇿 Czech Republic</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇭🇺 Hungary</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇦🇹 Austria</span> <span class="soon-badge">Soon</span></div>
@@ -152,7 +321,7 @@
     </div>
   </div>
 
-  <!-- ===== AMERICAS ===== -->
+  <!-- AMERICAS -->
   <div class="continent" id="americas">
     <div class="continent-header">
       <span class="continent-flag">🌎</span>
@@ -163,9 +332,54 @@
       <div class="region-block">
         <div class="region-title">🌎 North America</div>
         <div class="country-list">
-          <div class="country-item"><a href="americas_press_today.html#north-usa">🇺🇸 United States <span class="live-badge">Live</span></a></div>
-          <div class="country-item"><a href="americas_press_today.html#north-canada">🇨🇦 Canada <span class="live-badge">Live</span></a></div>
-          <div class="country-item"><a href="americas_press_today.html#north-mexico">🇲🇽 Mexico <span class="live-badge">Live</span></a></div>
+          <div class="country-item">
+            <a href="americas_press_today.html#north-usa">🇺🇸 United States <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇺🇸 United States</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Washington D.C.</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>335m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>FPTP / Electoral College</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#c0392b">Right</span></div>
+          <div class="cs-govt-detail">Republican majority</div>
+          <div class="cs-leader">President: Donald Trump (Republican)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> Democratic Party</div>
+        </div>
+          </div>
+          <div class="country-item">
+            <a href="americas_press_today.html#north-canada">🇨🇦 Canada <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇨🇦 Canada</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Ottawa</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>40m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>FPTP</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div>
+          <div class="cs-govt-detail">Liberal majority</div>
+          <div class="cs-leader">PM: Mark Carney (Liberal)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> Conservative Party (Poilievre)</div><div class="cs-opp"><span class="cs-lean" style="background:#2980b9">Left</span> NDP</div>
+        </div>
+          </div>
+          <div class="country-item">
+            <a href="americas_press_today.html#north-mexico">🇲🇽 Mexico <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇲🇽 Mexico</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Mexico City</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>130m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Mixed PR + FPTP</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#2980b9">Left</span></div>
+          <div class="cs-govt-detail">Morena supermajority</div>
+          <div class="cs-leader">President: Claudia Sheinbaum (Morena)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> PAN + PRI + PRD bloc</div><div class="cs-opp"><span class="cs-lean" style="background:#27ae60">Centre</span> Movimiento Ciudadano</div>
+        </div>
+          </div>
         </div>
       </div>
       <div class="region-block">
@@ -189,7 +403,7 @@
     </div>
   </div>
 
-  <!-- ===== MIDDLE EAST ===== -->
+  <!-- MIDDLE EAST -->
   <div class="continent" id="mideast">
     <div class="continent-header">
       <span class="continent-flag">🌐</span>
@@ -226,7 +440,7 @@
     </div>
   </div>
 
-  <!-- ===== ASIA-PACIFIC ===== -->
+  <!-- ASIA-PACIFIC -->
   <div class="continent" id="asia">
     <div class="continent-header">
       <span class="continent-flag">🌏</span>
@@ -246,7 +460,22 @@
       <div class="region-block">
         <div class="region-title">🌺 South &amp; SE Asia</div>
         <div class="country-list">
-          <div class="country-item"><a href="asia_press_today.html#sea-malaysia">🇲🇾 Malaysia <span class="live-badge">Live</span></a></div>
+          <div class="country-item">
+            <a href="asia_press_today.html#sea-malaysia">🇲🇾 Malaysia <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇲🇾 Malaysia</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Kuala Lumpur</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>34m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>FPTP</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#27ae60">Centre</span></div>
+          <div class="cs-govt-detail">Unity coalition (PH + BN + GPS)</div>
+          <div class="cs-leader">PM: Anwar Ibrahim (PKR)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> Perikatan Nasional (PN)</div><div class="cs-opp"><span class="cs-lean" style="background:#1a5276">Islamist</span> PAS</div>
+        </div>
+          </div>
           <div class="country-item soon"><span>🇮🇳 India</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇮🇩 Indonesia</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇸🇬 Singapore</span> <span class="soon-badge">Soon</span></div>
@@ -256,14 +485,29 @@
       <div class="region-block">
         <div class="region-title">🦘 Pacific</div>
         <div class="country-list">
-          <div class="country-item"><a href="asia_press_today.html#pacific-australia">🇦🇺 Australia <span class="live-badge">Live</span></a></div>
+          <div class="country-item">
+            <a href="asia_press_today.html#pacific-australia">🇦🇺 Australia <span class="live-badge">Live</span></a>
+            <div class="country-stats">
+          <div class="cs-name">🇦🇺 Australia</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Canberra</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>26.5m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Preferential voting (AV)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div>
+          <div class="cs-govt-detail">Labor majority</div>
+          <div class="cs-leader">PM: Anthony Albanese (Labor)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> Liberal-National Coalition (Dutton)</div><div class="cs-opp"><span class="cs-lean" style="background:#27ae60">Centre</span> Greens (balance of power)</div>
+        </div>
+          </div>
           <div class="country-item soon"><span>🇳🇿 New Zealand</span> <span class="soon-badge">Soon</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== AFRICA ===== -->
+  <!-- AFRICA -->
   <div class="continent" id="africa">
     <div class="continent-header">
       <span class="continent-flag">🌍</span>
@@ -284,7 +528,7 @@
     </div>
   </div>
 
-</div><!-- /container -->
+</div>
 
 <footer>
   <p>World Headline · Showing what the world is reading, across the political spectrum · <a href="uk_press_today.html">UK</a> · <a href="europe_press_today.html">Europe</a> · <a href="americas_press_today.html">Americas</a> · <a href="asia_press_today.html">Asia-Pacific</a></p>
