@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa Press — World Headline</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f5f3ee; color: #1a1a1a; min-height: 100vh; }
+
+  .site-header { background: #1a1a1a; padding: 18px 24px; }
+  .site-header h1 { font-size: 1.5rem; letter-spacing: 3px; text-transform: uppercase;
+    color: #f5f3ee; font-weight: 700; }
+  .site-header p { font-size: 0.8rem; color: #888; margin-top: 4px; letter-spacing: 1px; }
+  .spectrum-bar { height: 4px; background: linear-gradient(to right, #2980b9 0%, #27ae60 50%, #c0392b 100%); }
+
+  .region-nav { background: #2c2c2c; border-bottom: 1px solid #444; padding: 8px 24px;
+    display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .region-nav a { color: #ccc; text-decoration: none; font-size: 0.78rem; font-family: sans-serif;
+    padding: 4px 10px; border-radius: 3px; transition: background 0.15s; }
+  .region-nav a:hover, .region-nav a.active { background: #444; color: #fff; }
+  .region-nav span { color: #555; font-size: 0.7rem; padding: 4px; }
+
+  .top-panel { background: #fff; border: 1px solid #e8e4dd; border-radius: 4px;
+    margin: 20px 20px 0; padding: 18px 22px; }
+  .top-panel h2 { font-size: 0.85rem; letter-spacing: 2px; color: #555; margin-bottom: 12px;
+    text-transform: uppercase; font-family: sans-serif; font-weight: 700; }
+  .top3 { display: flex; gap: 14px; flex-wrap: wrap; }
+  .top3-item { flex: 1; min-width: 200px; background: #f9f7f4;
+    border-left: 3px solid #ccc; padding: 10px 14px; border-radius: 0 4px 4px 0; }
+  .top3-item .rank { font-size: 0.65rem; color: #999; letter-spacing: 1px; font-family: sans-serif;
+    text-transform: uppercase; margin-bottom: 4px; }
+  .top3-item p { font-size: 0.82rem; line-height: 1.5; color: #444; font-family: sans-serif; }
+
+  .dashboard { padding: 20px; }
+
+  /* Tier 1 — region tabs */
+  .tier1-tabs { display: flex; gap: 6px; margin-bottom: 0; flex-wrap: wrap; }
+  button.tier1-tab { background: #e8e4dd; border: 1px solid #ccc; color: #555;
+    padding: 8px 16px; border-radius: 4px 4px 0 0; font-size: 0.78rem; cursor: pointer;
+    letter-spacing: 0.5px; transition: all 0.2s; touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent; font-family: sans-serif; font-weight: 700;
+    text-transform: uppercase; }
+  button.tier1-tab:hover { background: #ddd; color: #1a1a1a; }
+  button.tier1-tab.active { background: #2c2c2c; border-bottom-color: #2c2c2c; color: #fff; }
+
+  .region-panel { display: none; background: #fff; border: 1px solid #e8e4dd;
+    border-radius: 0 4px 4px 4px; padding: 16px; }
+  .region-panel.active { display: block; }
+
+  /* Tier 2 — country tabs */
+  .tier2-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  button.tier2-tab { background: #f5f3ee; border: 1px solid #ddd; color: #555;
+    padding: 5px 12px; border-radius: 3px; font-size: 0.75rem; cursor: pointer;
+    letter-spacing: 0.3px; transition: all 0.2s; touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent; font-family: sans-serif; }
+  button.tier2-tab:hover { background: #e8e4dd; color: #1a1a1a; }
+  button.tier2-tab.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+  button.tier2-tab.soon { opacity: 0.4; cursor: default; pointer-events: none; }
+
+  .country-panel { display: none; }
+  .country-panel.active { display: block; }
+
+  .country-title { font-size: 0.95rem; color: #1a1a1a; letter-spacing: 2px; font-family: sans-serif;
+    text-transform: uppercase; font-weight: 700; margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 2px solid #1a1a1a; }
+
+  /* Paper cards */
+  .papers { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 16px; }
+  .paper { background: #fafafa; border: 1px solid #e8e8e8; border-radius: 4px; overflow: hidden; }
+  .paper-header { padding: 12px 14px 8px; border-bottom: 1px solid #eee; }
+  .lean { font-size: 0.62rem; font-family: sans-serif; text-transform: uppercase;
+    letter-spacing: 0.1em; font-weight: 700; margin-bottom: 3px; }
+  .lean-left { color: #2980b9; }
+  .lean-centre-left { color: #5dade2; }
+  .lean-centre { color: #27ae60; }
+  .lean-centre-right { color: #e67e22; }
+  .lean-right { color: #c0392b; }
+  .paper-name { font-size: 0.9rem; font-weight: 700; color: #1a1a1a; }
+  .paper-desc { font-size: 0.6rem; color: #999; font-family: sans-serif; margin-top: 2px; line-height: 1.4; }
+
+  .stories { padding: 0 14px 12px; }
+  .story { border-top: 1px solid #eee; padding: 8px 0; }
+  .story-headline { font-size: 0.84rem; color: #1a1a1a; line-height: 1.4; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .story-headline:hover { color: #c0392b; }
+  .story-toggle { color: #ccc; font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; }
+  .story-detail { display: none; font-size: 0.78rem; color: #555; margin-top: 6px;
+    line-height: 1.5; padding-left: 8px; border-left: 2px solid #ddd; font-family: sans-serif; }
+  .story-detail.open { display: block; }
+  .story-url { display: block; font-size: 0.68rem; color: #999; margin-top: 6px;
+    font-family: sans-serif; text-decoration: none; }
+  .story-url:hover { color: #c0392b; }
+
+  /* Trackers */
+  .trackers { padding: 10px 14px 12px; border-top: 1px solid #eee; }
+  .tracker-row { margin-bottom: 8px; }
+  .tracker-label { font-size: 0.62rem; color: #999; letter-spacing: 1px; font-family: sans-serif;
+    text-transform: uppercase; margin-bottom: 4px; }
+  .tracker-topic { font-size: 0.73rem; color: #444; margin-bottom: 4px; font-family: sans-serif; }
+  .dots { display: flex; gap: 4px; flex-wrap: wrap; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid; }
+  .dot.amber { background: #c8a951; border-color: #c8a951; }
+  .dot.amber-empty { background: transparent; border-color: #ddd; }
+  .dot.purple { background: #9b59b6; border-color: #9b59b6; }
+  .dot.purple-empty { background: transparent; border-color: #ddd; }
+
+  /* Blind spots */
+  .blind-spots { margin-top: 14px; background: #fffdf5; border: 1px solid #e8e0c0;
+    border-radius: 4px; padding: 12px 16px; }
+  .blind-spots h4 { font-size: 0.65rem; color: #8B6914; letter-spacing: 2px; font-family: sans-serif;
+    text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+  .blind-spot-item { font-size: 0.78rem; color: #555; padding: 5px 0; font-family: sans-serif;
+    border-top: 1px solid #f0e8c0; line-height: 1.4; }
+  .blind-spot-item:first-of-type { border-top: none; }
+
+  /* Stub */
+  .stub-panel { background: #f9f7f4; border: 1px dashed #ccc; border-radius: 4px;
+    padding: 30px; text-align: center; color: #999; font-family: sans-serif; }
+  .stub-panel p { margin-top: 8px; font-size: 0.82rem; }
+
+  @media (max-width: 760px) {
+    .papers { grid-template-columns: 1fr; }
+    .top3 { flex-direction: column; }
+    .site-header h1 { font-size: 1.1rem; }
+  }
+
+  /* ── Hover stats cards on country tabs ── */
+  .country-stats { display: none; position: absolute; top: calc(100% + 6px); left: 0;
+    width: 240px; background: #fff; border: 1px solid #ddd; border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding: 12px 14px;
+    z-index: 1000; font-family: sans-serif; pointer-events: none; white-space: normal; }
+  .tab-wrap { position: relative; display: inline-block; }
+  .tab-wrap:hover .country-stats { display: block; }
+  .cs-name { font-size: 0.82rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+  .cs-row { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: #555; margin-bottom: 3px; }
+  .cs-icon { font-size: 0.75rem; flex-shrink: 0; }
+  .cs-divider { border-top: 1px solid #eee; margin: 8px 0; }
+  .cs-govt-label { font-size: 0.72rem; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+  .cs-govt-detail { font-size: 0.68rem; color: #666; margin-bottom: 2px; }
+  .cs-leader { font-size: 0.68rem; color: #888; font-style: italic; }
+  .cs-opp-title { font-size: 0.65rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .cs-opp-leader { font-size: 0.64rem; color: #999; margin-bottom: 5px; margin-left: 8px; font-style: italic; }
+  .cs-opp { font-size: 0.68rem; color: #555; margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
+  .cs-lean { font-size: 0.58rem; color: #fff; padding: 1px 5px; border-radius: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
+  @media (hover: none) { .country-stats { display: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <h1>🌍 Africa Press</h1>
+  <p>West Africa · Southern Africa · East Africa — Left / Centre / Right</p>
+</div>
+<div class="spectrum-bar"></div>
+
+<nav class="region-nav">
+  <a href="index.html">🏠 Home</a>
+  <span>|</span>
+  <a href="uk_press_today.html">🇬🇧 UK</a>
+  <a href="europe_press_today.html">🌍 Europe</a>
+  <a href="americas_press_today.html">🌎 Americas</a>
+  <a href="asia_press_today.html">🌏 Asia-Pac</a>
+  <a href="africa_press_today.html" class="active">🌍 Africa</a>
+  <span>|</span>
+  <a href="poles_apart.html">⚡ Poles Apart</a>
+  <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
+</nav>
+
+<div class="top-panel">
+  <h2>🌍 Africa — Top Stories This Week</h2>
+  <div class="top3">
+    <div class="top3-item">
+      <div class="rank">Story 1</div>
+      <p>South Africa's Government of National Unity faces its first major stress test as ANC and DA clash over budget priorities and land reform timelines</p>
+    </div>
+    <div class="top3-item">
+      <div class="rank">Story 2</div>
+      <p>Ghana's new NDC government begins economic reset — cocoa revenues down, IMF programme on track, but youth unemployment remains the defining pressure</p>
+    </div>
+    <div class="top3-item">
+      <div class="rank">Story 3</div>
+      <p>Chinese investment vs Western conditionality: African nations weighing infrastructure deals against debt exposure as the continent's great power contest intensifies</p>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard">
+  <div class="tier1-tabs">
+    <button class="tier1-tab" onclick="showRegion('west', this)">🌴 West Africa</button>
+    <button class="tier1-tab active" onclick="showRegion('south', this)">🦁 Southern Africa</button>
+    <button class="tier1-tab soon">🌄 East Africa — Soon</button>
+  </div>
+
+  <!-- ═══════════════════════ WEST AFRICA ═══ -->
+  <div id="region-west" class="region-panel">
+    <div class="tier2-tabs">
+      <div class="tab-wrap">
+        <button class="tier2-tab active" onclick="showCountry('west','ghana',this)">🇬🇭 Ghana</button>
+        <div class="country-stats">
+          <div class="cs-name">🇬🇭 Ghana</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Accra</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>34m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>First Past the Post</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Constitutional Republic (Presidential)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div>
+          <div class="cs-govt-detail">NDC — National Democratic Congress</div>
+          <div class="cs-leader">President: John Mahama</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> NPP — New Patriotic Party</div>
+          <div class="cs-opp-leader">Mahamudu Bawumia (2024 candidate)</div>
+        </div>
+      </div>
+      <button class="tier2-tab soon">🇳🇬 Nigeria — Soon</button>
+      <button class="tier2-tab soon">🇸🇳 Senegal — Soon</button>
+    </div>
+
+    <!-- GHANA -->
+    <div id="west-ghana" class="country-panel active">
+      <div class="country-title">🇬🇭 Ghana — Press Today</div>
+      <div class="papers">
+
+        <!-- The Chronicle — Left/Progressive -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-left">◀ Left / Progressive</div>
+            <div class="paper-name">The Chronicle</div>
+            <div class="paper-desc">Independent daily. Investigative focus, critical of power — government or opposition alike. Strong voice for civil society.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Youth unemployment at 47%: Mahama's first 100 days must deliver more than rhetoric
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Ghana's youth unemployment crisis — nearly half of under-25s without formal work — is The Chronicle's defining domestic issue. The paper argues the new NDC government won the December election on a change mandate but must now translate campaign promises into visible economic relief within its first year, or face the same disillusionment that ended the NPP's tenure.
+                <a href="https://thechronicle.com.gh" class="story-url" target="_blank">→ thechronicle.com.gh</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Galamsey crisis: illegal gold mining still destroying Pra and Offin rivers despite crackdowns
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Illegal small-scale mining (galamsey) has contaminated major rivers and destroyed farmland across Ghana's forest belt. The Chronicle has consistently covered this as an environmental justice issue — disproportionately harming rural communities while profits flow to connected networks. The new government has pledged renewed enforcement but The Chronicle is sceptical given the issue's deep political entanglement.
+                <a href="https://thechronicle.com.gh" class="story-url" target="_blank">→ thechronicle.com.gh</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                IMF programme conditions: are austerity measures punishing the poor to rescue the cedi?
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Ghana secured an IMF bailout in 2023 after a debt default. The Chronicle questions whether the conditions — public sector wage restraint, subsidy cuts, utility price increases — are exacting too high a social cost. It argues the IMF programme stabilises macro numbers while deepening everyday poverty, and calls on the Mahama government to negotiate softer conditionalities.
+                <a href="https://thechronicle.com.gh" class="story-url" target="_blank">→ thechronicle.com.gh</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Economic justice &amp; anti-corruption</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">IMF / World Bank conditionality</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daily Graphic — Centre -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre</div>
+            <div class="paper-name">Daily Graphic</div>
+            <div class="paper-desc">Ghana's largest-circulation daily. State-founded but editorially centrist. Record of covering government and opposition with relative balance.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Mahama meets investors: government seeks $2bn infrastructure push to kickstart growth
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                President Mahama has held a series of investor roadshows in Accra and Abidjan, pitching Ghana's post-stabilisation credentials to foreign capital. Daily Graphic reports the government is targeting roads, ports, and digital infrastructure as the primary sectors, with a $2bn pipeline across three years. Analysts quoted are cautiously optimistic but note that political risk perception remains elevated following the 2022 default.
+                <a href="https://www.graphic.com.gh" class="story-url" target="_blank">→ graphic.com.gh</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Cocoa season: COCOBOD sets farmgate price up 50% but farmers say it still isn't enough
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Ghana's cocoa farmers received a 50% price increase from the Ghana Cocoa Board (COCOBOD) this season — but with global cocoa prices at historic highs, farmers argue the state marketing board is absorbing margins that should flow to growers. Daily Graphic presents both the government's position (price stability, forward sales) and farmers' concerns in a balanced format that is characteristic of its institutional voice.
+                <a href="https://www.graphic.com.gh" class="story-url" target="_blank">→ graphic.com.gh</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                ECOWAS summit: Ghana calls for renewed bloc solidarity amid Sahel crisis spillover
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                As Burkina Faso, Mali and Niger drift from ECOWAS under military rule, Ghana has positioned itself as a stabilising voice within the bloc. Daily Graphic covers Mahama's regional diplomacy and Ghana's pitch to be the democratic anchor of West Africa — a role that carries real economic opportunity if it succeeds in keeping regional trade corridors open.
+                <a href="https://www.graphic.com.gh" class="story-url" target="_blank">→ graphic.com.gh</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Economic recovery &amp; regional stability</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">China &amp; Gulf investment</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daily Guide — Right/NPP-aligned -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-right">▶ Right / Conservative</div>
+            <div class="paper-name">Daily Guide</div>
+            <div class="paper-desc">Centre-right independent daily. Broadly aligned with NPP values — free markets, private sector growth. Now in watchdog mode against the NDC government.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                NDC's 24-hour economy plan: bold promise or impossible without reliable power grid?
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                John Mahama campaigned on a "24-hour economy" — staggered business shifts to boost productivity. Daily Guide is sceptical, pointing to Ghana's persistent power supply problems (dumsor) as the fatal flaw. The paper argues that without first solving electricity reliability, extending economic activity into evening hours simply extends the burden on an already strained grid.
+                <a href="https://dailyguideafrica.com" class="story-url" target="_blank">→ dailyguideafrica.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Opposition demands audit of NDC's first budget — "the deficit numbers don't add up"
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The NPP opposition has demanded an independent audit of the new government's supplementary budget, claiming the fiscal projections are optimistic and that off-balance-sheet liabilities from the previous NPP administration have been selectively included to inflate the inherited deficit. Daily Guide covers this as a legitimate accountability question — its natural role as the paper closest to the party now in opposition.
+                <a href="https://dailyguideafrica.com" class="story-url" target="_blank">→ dailyguideafrica.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Private sector voices alarm at new import levies threatening manufacturing competitiveness
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Ghana Union of Traders Association and several manufacturing bodies have warned that new import levies — designed to protect local industry — risk triggering retaliatory measures and raising input costs for businesses that depend on imported raw materials. Daily Guide's pro-business editorial line gives these concerns prominent coverage, framing them as a risk to the private sector-led recovery the government has promised.
+                <a href="https://dailyguideafrica.com" class="story-url" target="_blank">→ dailyguideafrica.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Private sector &amp; business environment</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">NDC government scrutiny</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 Ghana's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">🌊 <strong>Coastal erosion crisis:</strong> Ghana is losing up to 2 metres of coastline per year in some areas — entire fishing communities are relocating. Rarely makes international news despite being an accelerating climate emergency.</div>
+        <div class="blind-spot-item">🌍 <strong>Afrocontinental migration pressure:</strong> Ghana is both a source and destination country for West African migration. The internal dynamics — economic migrants from Mali and Burkina Faso fleeing instability — are reshaping Ghana's social fabric in ways the global press entirely overlooks.</div>
+        <div class="blind-spot-item">📱 <strong>Fintech leadership:</strong> Ghana is one of Africa's most advanced mobile money markets. The interoperability of its payment systems — allowing transfers across networks — is a model being studied globally, but the story rarely escapes the specialist press.</div>
+      </div>
+    </div><!-- end #west-ghana -->
+  </div><!-- end #region-west -->
+
+  <!-- ═══════════════════════ SOUTHERN AFRICA ═══ -->
+  <div id="region-south" class="region-panel active">
+    <div class="tier2-tabs">
+      <div class="tab-wrap">
+        <button class="tier2-tab active" onclick="showCountry('south','sa',this)">🇿🇦 South Africa</button>
+        <div class="country-stats">
+          <div class="cs-name">🇿🇦 South Africa</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Pretoria / Cape Town</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>62m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Proportional Representation</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Constitutional Republic (Presidential)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div>
+          <div class="cs-govt-detail">GNU — ANC + DA + IFP coalition</div>
+          <div class="cs-leader">President: Cyril Ramaphosa (ANC)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> DA — Democratic Alliance</div>
+          <div class="cs-opp-leader">John Steenhuisen</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#2980b9">Far Left</span> EFF — Economic Freedom Fighters</div>
+          <div class="cs-opp-leader">Julius Malema</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Populist</span> MK Party</div>
+          <div class="cs-opp-leader">Jacob Zuma</div>
+        </div>
+      </div>
+      <button class="tier2-tab soon">🇿🇼 Zimbabwe — Soon</button>
+      <button class="tier2-tab soon">🇧🇼 Botswana — Soon</button>
+    </div>
+
+    <!-- SOUTH AFRICA -->
+    <div id="south-sa" class="country-panel active">
+      <div class="country-title">🇿🇦 South Africa — Press Today</div>
+      <div class="papers">
+
+        <!-- Mail & Guardian — Left -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-left">◀ Left / Progressive</div>
+            <div class="paper-name">Mail &amp; Guardian</div>
+            <div class="paper-desc">South Africa's premier investigative weekly. Progressive, anti-corruption, historically anti-apartheid. The paper the powerful fear most.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                GNU fault lines: ANC and DA's budget clash reveals how fragile the unity government really is
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                South Africa's Government of National Unity — formed after the ANC lost its majority in the May 2024 election — is showing significant strain. The Mail &amp; Guardian reports that ANC and DA negotiators are deadlocked on social grant increases vs fiscal discipline, with the DA threatening to vote against the budget. The paper frames this as a fundamental values clash, not merely a negotiating tactic.
+                <a href="https://mg.co.za" class="story-url" target="_blank">→ mg.co.za</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Land reform stalled: 30 years after democracy, 72% of commercial farmland still in white ownership
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Mail &amp; Guardian's land coverage is an ongoing project — it argues that the slow pace of land redistribution is not just an economic failure but a political time bomb. With the EFF and MK Party radicalising the debate and the DA resistant to expropriation, the ANC is caught between coalition stability and its own base's expectations. The paper calls for urgent legislative progress before the issue is fully captured by extremes on both sides.
+                <a href="https://mg.co.za" class="story-url" target="_blank">→ mg.co.za</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                State capture trials: Zondo Commission leads to convictions — but the big fish remain free
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                South Africa's decade-long state capture scandal — in which billions were looted from state enterprises under Jacob Zuma — has produced some prosecutions but the M&amp;G reports mounting frustration that senior figures implicated in the Zondo Commission report continue to hold public positions or avoid prosecution. The paper tracks this as an ongoing accountability deficit threatening the credibility of South Africa's democratic institutions.
+                <a href="https://mg.co.za" class="story-url" target="_blank">→ mg.co.za</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">State capture accountability &amp; inequality</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Jacob Zuma / MK Party destabilisation</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daily Maverick — Centre-Left -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-left">◀ Centre Left</div>
+            <div class="paper-name">Daily Maverick</div>
+            <div class="paper-desc">Digital-first investigative outlet. Membership-funded, fiercely independent. Broke the Gupta/state capture stories. South Africa's most-read online paper.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Eskom's grid: load shedding is over — but the infrastructure crisis that caused it is not
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                South Africa went 300+ days without load shedding in 2024 — the end of a crisis that paralysed the economy for years. But Daily Maverick's energy desk reports that Eskom's generation capacity remains fragile, with ageing coal plants running above safe maintenance levels. The paper warns that the reprieve is temporary without a decisive shift to renewables and private generation.
+                <a href="https://dailymaverick.co.za" class="story-url" target="_blank">→ dailymaverick.co.za</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                BRICS+ and the rand: SA's geopolitical balancing act is testing investor confidence
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                South Africa's foreign policy — maintaining ties with Russia and China while seeking Western investment — is becoming harder to sustain. Daily Maverick's analysis notes that the GNU has shifted rhetoric slightly toward the West, but structural commitments to BRICS remain unchanged. The paper explores whether SA can credibly play both sides as great power competition intensifies.
+                <a href="https://dailymaverick.co.za" class="story-url" target="_blank">→ dailymaverick.co.za</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Crime index: SA records 27,000 murders in 2024 — the policy debate that never quite gets resolved
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                South Africa's murder rate — among the highest in the world at over 45 per 100,000 — is covered by Daily Maverick with a data-driven, policy-focused lens. The paper examines policing capacity, the role of illegal firearms, gang economies, and why successive governments have failed to reduce violent crime despite it being electorally important. The GNU has pledged a new integrated policing strategy but detail remains thin.
+                <a href="https://dailymaverick.co.za" class="story-url" target="_blank">→ dailymaverick.co.za</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Energy transition &amp; governance accountability</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">BRICS / Russia-China alignment</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Citizen — Right -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-right">▶ Right / Conservative</div>
+            <div class="paper-name">The Citizen</div>
+            <div class="paper-desc">Centre-right daily with a broad popular readership. Pro-law-and-order, sceptical of ANC economic policy, broadly aligned with DA governance values.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Property rights under threat: expropriation bill must be rejected, says business lobby
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                South Africa's Expropriation Bill — allowing state acquisition of land, in some cases without compensation — is The Citizen's most consistent source of editorial anxiety. Business groups, agricultural associations and DA coalition partners have all warned it will trigger capital flight. The Citizen covers this as an existential risk to property rights and investor confidence, and calls on the ANC to withdraw the bill as a condition of GNU stability.
+                <a href="https://citizen.co.za" class="story-url" target="_blank">→ citizen.co.za</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Crime and policing: SAPS resource crisis leaves citizens unprotected — time for private sector solutions
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The South African Police Service faces a staffing and resource crisis. The Citizen argues the government must both boost SAPS funding and enable greater private security provision in a structured way. The paper is sympathetic to neighbourhood patrol schemes and community policing forums, reflecting its readership's practical experience of living with high crime in urban and suburban South Africa.
+                <a href="https://citizen.co.za" class="story-url" target="_blank">→ citizen.co.za</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                DA in the GNU: Steenhuisen insists coalition is worth it — but the ANC keeps testing patience
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Citizen — broadly sympathetic to the DA — is tracking the difficult calculus facing John Steenhuisen's party inside the GNU. The paper reports that DA members in the coalition say they are influencing economic policy positively, but that the ANC's continued land reform push, appointment of cadre-deployment loyalists, and resistance to private sector electricity generation are testing the limits of the arrangement.
+                <a href="https://citizen.co.za" class="story-url" target="_blank">→ citizen.co.za</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Crime, property rights &amp; ANC accountability</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Julius Malema / EFF radicalisation pressure</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 South Africa's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">🌊 <strong>Water crisis:</strong> Johannesburg — Africa's wealthiest city — regularly runs out of water due to crumbling infrastructure and an ageing Rand Water system. This is not a drought story; it's an infrastructure collapse story that the international press consistently undercoveres.</div>
+        <div class="blind-spot-item">🌍 <strong>SA as Africa's anchor democracy:</strong> South Africa's political trajectory matters far beyond its borders. If the GNU fails and ANC-populist alliances entrench, the ripple effects across Southern Africa will be significant — but the world's media covers SA as a local story, not a continental bellwether.</div>
+        <div class="blind-spot-item">💡 <strong>Rooftop solar revolution:</strong> Load shedding triggered an extraordinary private solar uptake — SA added more rooftop solar per capita than almost any country in the world in 2023–24. This clean energy transformation is happening organically, from the bottom up, and is largely invisible to international energy commentators.</div>
+      </div>
+    </div><!-- end #south-sa -->
+  </div><!-- end #region-south -->
+
+</div><!-- end .dashboard -->
+
+<footer style="background:#1a1a1a;color:#666;text-align:center;padding:18px;font-family:sans-serif;font-size:0.68rem;margin-top:20px;">
+  World Headline — what the world is reading, left, centre and right, every day.<br>
+  <a href="index.html" style="color:#888;text-decoration:none;">← Back to homepage</a>
+</footer>
+
+<script>
+function showRegion(regionId, btn) {
+  document.querySelectorAll('.region-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tier1-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('region-' + regionId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function showCountry(region, country, btn) {
+  const panel = document.getElementById('region-' + region);
+  panel.querySelectorAll('.country-panel').forEach(p => p.classList.remove('active'));
+  panel.querySelectorAll('.tier2-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(region + '-' + country).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleStory(el) {
+  const detail = el.nextElementSibling;
+  const toggle = el.querySelector('.story-toggle');
+  detail.classList.toggle('open');
+  toggle.textContent = detail.classList.contains('open') ? '▲' : '▼';
+}
+</script>
+</body>
+</html>

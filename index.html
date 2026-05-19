@@ -80,6 +80,30 @@
   .world-view-teaser p { font-size: 0.76rem; color: #aac4d8; font-family: sans-serif; line-height: 1.5; }
   .wv-badge { background: #e67e22; color: #fff; font-family: sans-serif; font-size: 0.65rem; font-weight: 700; padding: 6px 14px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
 
+
+  /* ── Spectrum Tree teaser ── */
+  .spectrum-teaser { background: #1a1a1a; border-radius: 6px; padding: 20px 24px 22px; margin-bottom: 28px; }
+  .spectrum-teaser-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+  .spectrum-teaser h3 { font-size: 0.95rem; color: #f5f3ee; font-weight: 700; letter-spacing: 0.04em; }
+  .spectrum-teaser p { font-size: 0.74rem; color: #888; font-family: sans-serif; line-height: 1.5; margin-bottom: 16px; max-width: 700px; }
+  .mini-axis { margin-bottom: 6px; }
+  .mini-bar { height: 8px; border-radius: 4px; background: linear-gradient(to right, #5a0000 0%, #8B0000 5%, #c0392b 10%, #2980b9 20%, #5dade2 33%, #27ae60 50%, #e67e22 66%, #c0392b 80%, #7b241c 90%, #1a0000 100%); margin-bottom: 3px; }
+  .mini-labels { display: flex; justify-content: space-between; font-size: 0.52rem; font-family: sans-serif; color: #555; margin-bottom: 12px; }
+  .mini-rows { display: flex; flex-direction: column; gap: 5px; margin-bottom: 16px; }
+  .mini-row { display: flex; align-items: center; gap: 8px; }
+  .mini-cname { font-size: 0.65rem; font-family: sans-serif; color: #888; width: 110px; flex-shrink: 0; }
+  .mini-track { flex: 1; height: 18px; background: #2c2c2c; border-radius: 2px; position: relative; }
+  .mini-party { position: absolute; height: 14px; top: 2px; border-radius: 2px; font-size: 0.48rem; font-family: sans-serif; font-weight: 700; color: #fff; display: flex; align-items: center; justify-content: center; padding: 0 3px; transform: translateX(-50%); white-space: nowrap; }
+  .spectrum-teaser-cta { display: inline-block; background: #c0392b; color: #fff; font-family: sans-serif; font-size: 0.7rem; font-weight: 700; padding: 8px 18px; border-radius: 3px; text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; transition: background 0.15s; }
+  .spectrum-teaser-cta:hover { background: #a93226; }
+
+  /* ── Out of Scope explainer ── */
+  .oos-block { background: #2c2c2c; border-radius: 6px; padding: 18px 22px; margin-bottom: 0; }
+  .oos-block h4 { font-size: 0.7rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 10px; }
+  .oos-intro { font-size: 0.74rem; font-family: sans-serif; color: #888; line-height: 1.55; margin-bottom: 12px; }
+  .oos-countries { display: flex; gap: 8px; flex-wrap: wrap; }
+  .oos-tag { font-size: 0.65rem; font-family: sans-serif; background: #1a1a1a; color: #666; padding: 3px 10px; border-radius: 20px; border: 1px solid #444; }
+
   footer { background: #1a1a1a; color: #666; text-align: center; padding: 18px; font-family: sans-serif; font-size: 0.68rem; margin-top: 20px; }
   footer a { color: #888; text-decoration: none; }
   footer a:hover { color: #ccc; }
@@ -121,6 +145,7 @@
   <span class="sep">|</span>
   <a href="americas_press_today.html">🌎 Americas</a>
   <a href="asia_press_today.html">🌏 Asia-Pacific</a>
+  <a href="africa_press_today.html">🌍 Africa</a>
   <span class="sep">|</span>
   <span class="nav-tip-wrap">
     <a href="poles_apart.html">⚡ Poles Apart</a>
@@ -157,6 +182,58 @@
       <p>An aggregate view across all countries: what is the global left talking about this week? Where do left and right actually agree? Which stories does every country cover — and which does every country ignore?</p>
     </div>
     <div class="wv-badge">In development</div>
+  </div>
+
+
+  <!-- ── Spectrum Tree teaser ── -->
+  <div class="spectrum-teaser">
+    <div class="spectrum-teaser-header">
+      <h3>⚖️ Axis of Equal — Where do parties really sit?</h3>
+    </div>
+    <p>A "right-wing" party in Sweden sits to the left of a "centrist" party in the US. A "socialist" in Portugal is practically mainstream in Finland. The Axis of Equal plots every major party from every country on one honest scale — from Communist to Fascist — so you can finally compare like for like.</p>
+    <div class="mini-axis">
+      <div class="mini-bar"></div>
+      <div class="mini-labels"><span>☭ Communist</span><span>◀ Left</span><span>Centre</span><span>Right ▶</span><span>⚡ Fascist</span></div>
+    </div>
+    <div class="mini-rows">
+      <div class="mini-row">
+        <div class="mini-cname">🇺🇸 United States</div>
+        <div class="mini-track">
+          <div class="mini-party" style="background:#2980b9;left:28%">Prog.</div>
+          <div class="mini-party" style="background:#5dade2;left:43%">Dems</div>
+          <div class="mini-party" style="background:#c0392b;left:68%">GOP</div>
+          <div class="mini-party" style="background:#7b241c;left:81%">MAGA</div>
+        </div>
+      </div>
+      <div class="mini-row">
+        <div class="mini-cname">🇬🇧 United Kingdom</div>
+        <div class="mini-track">
+          <div class="mini-party" style="background:#5dade2;left:40%">Labour</div>
+          <div class="mini-party" style="background:#27ae60;left:51%">Lib Dems</div>
+          <div class="mini-party" style="background:#e67e22;left:64%">Tories</div>
+          <div class="mini-party" style="background:#7b241c;left:82%">Reform</div>
+        </div>
+      </div>
+      <div class="mini-row">
+        <div class="mini-cname">🇩🇪 Germany</div>
+        <div class="mini-track">
+          <div class="mini-party" style="background:#2980b9;left:18%">Linke</div>
+          <div class="mini-party" style="background:#5dade2;left:38%">SPD</div>
+          <div class="mini-party" style="background:#e67e22;left:63%">CDU</div>
+          <div class="mini-party" style="background:#7b241c;left:84%">AfD</div>
+        </div>
+      </div>
+      <div class="mini-row">
+        <div class="mini-cname">🇸🇪 Sweden</div>
+        <div class="mini-track">
+          <div class="mini-party" style="background:#2980b9;left:20%">Left</div>
+          <div class="mini-party" style="background:#5dade2;left:38%">Soc. Dems</div>
+          <div class="mini-party" style="background:#e67e22;left:62%">Moderates</div>
+          <div class="mini-party" style="background:#c0392b;left:79%">Swe. Dems</div>
+        </div>
+      </div>
+    </div>
+    <a href="axis_of_equal.html" class="spectrum-teaser-cta">Explore all 20 countries → full Axis of Equal</a>
   </div>
 
   <!-- EUROPE -->
@@ -363,7 +440,7 @@
         <div class="country-list">
           <div class="country-item">
             <a href="asia_press_today.html#pacific-australia">🇦🇺 Australia <span class="live-badge">Live</span></a>
-            <div class="country-stats"><div class="cs-name">🇦🇺 Australia</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Canberra</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>26.5m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Preferential (AV)</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Constitutional Monarchy (Federal)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div><div class="cs-govt-detail">Australian Labor Party majority</div><div class="cs-leader">PM: Anthony Albanese (ALP)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> Liberal-National Coalition</div><div class="cs-opp-leader">Peter Dutton (to 2025)</div><div class="cs-opp"><span class="cs-lean" style="background:#27ae60">Centre</span> Greens</div><div class="cs-opp-leader">Adam Bandt</div></div>
+            <div class="country-stats"><div class="cs-name">🇦🇺 Australia</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Canberra</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>26.5m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Preferential (AV)</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Constitutional Monarchy (Federal)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div><div class="cs-govt-detail">Labor majority</div><div class="cs-leader">PM: Anthony Albanese (Labor)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> Liberal-National Coalition</div><div class="cs-opp-leader">Peter Dutton</div></div>
           </div>
           <div class="country-item soon"><span>🇳🇿 New Zealand</span> <span class="soon-badge">Soon</span></div>
         </div>
@@ -382,20 +459,72 @@
       <div class="region-block">
         <div class="region-title">🌍 Sub-Saharan Africa</div>
         <div class="country-list">
+          <div class="country-item">
+            <a href="africa_press_today.html#south-sa"><span>🇿🇦 South Africa</span><span class="live-badge">Live</span></a>
+            <div class="country-stats">
+              <div class="cs-name">🇿🇦 South Africa</div>
+              <div class="cs-row"><span class="cs-icon">🏛</span><span>Pretoria / Cape Town</span></div>
+              <div class="cs-row"><span class="cs-icon">👥</span><span>62m</span></div>
+              <div class="cs-row"><span class="cs-icon">🗳</span><span>Proportional Representation</span></div>
+              <div class="cs-row"><span class="cs-icon">⚖️</span><span>Constitutional Republic (Presidential)</span></div>
+              <div class="cs-divider"></div>
+              <div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2;color:#fff">Centre Left</span></div>
+              <div class="cs-govt-detail">GNU — ANC + DA + IFP coalition</div>
+              <div class="cs-leader">President: Cyril Ramaphosa (ANC)</div>
+              <div class="cs-divider"></div>
+              <div class="cs-opp-title">Main Opposition</div>
+              <div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> DA — Democratic Alliance</div>
+              <div class="cs-opp-leader">John Steenhuisen</div>
+              <div class="cs-opp"><span class="cs-lean" style="background:#2980b9">Far Left</span> EFF — Economic Freedom Fighters</div>
+              <div class="cs-opp-leader">Julius Malema</div>
+            </div>
+          </div>
+          <div class="country-item">
+            <a href="africa_press_today.html#west-ghana"><span>🇬🇭 Ghana</span><span class="live-badge">Live</span></a>
+            <div class="country-stats">
+              <div class="cs-name">🇬🇭 Ghana</div>
+              <div class="cs-row"><span class="cs-icon">🏛</span><span>Accra</span></div>
+              <div class="cs-row"><span class="cs-icon">👥</span><span>34m</span></div>
+              <div class="cs-row"><span class="cs-icon">🗳</span><span>First Past the Post</span></div>
+              <div class="cs-row"><span class="cs-icon">⚖️</span><span>Constitutional Republic (Presidential)</span></div>
+              <div class="cs-divider"></div>
+              <div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2;color:#fff">Centre Left</span></div>
+              <div class="cs-govt-detail">NDC — National Democratic Congress</div>
+              <div class="cs-leader">President: John Mahama</div>
+              <div class="cs-divider"></div>
+              <div class="cs-opp-title">Main Opposition</div>
+              <div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> NPP — New Patriotic Party</div>
+              <div class="cs-opp-leader">Mahamudu Bawumia (2024 candidate)</div>
+            </div>
+          </div>
           <div class="country-item soon"><span>🇳🇬 Nigeria</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇰🇪 Kenya</span> <span class="soon-badge">Soon</span></div>
-          <div class="country-item soon"><span>🇬🇭 Ghana</span> <span class="soon-badge">Soon</span></div>
-          <div class="country-item soon"><span>🇿🇦 South Africa</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇪🇹 Ethiopia</span> <span class="soon-badge">Soon</span></div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- OUT OF SCOPE -->
+  <div class="oos-block" id="out-of-scope">
+    <h4>🚫 Why some countries aren't here</h4>
+    <div class="oos-intro">World Headline covers countries where a genuinely independent press exists — papers that can challenge the government without fear of shutdown, arrest, or forced closure. Some countries have no such press. Covering them would mean presenting state propaganda as journalism, which defeats the point. We note their absence rather than pretend they don't exist.</div>
+    <div class="oos-countries">
+      <span class="oos-tag">🇰🇵 North Korea — state monolith, no independent press</span>
+      <span class="oos-tag">🇹🇲 Turkmenistan — one of the world's most closed media environments</span>
+      <span class="oos-tag">🇪🇷 Eritrea — "the North Korea of Africa", zero press freedom</span>
+      <span class="oos-tag">🇧🇾 Belarus — independent media exiled or jailed since 2020</span>
+      <span class="oos-tag">🇷🇺 Russia — independent press effectively eliminated since 2022</span>
+      <span class="oos-tag">🇨🇳 China — all major outlets state-controlled</span>
+      <span class="oos-tag">🇸🇦 Saudi Arabia — no independent press permitted</span>
+      <span class="oos-tag">🇮🇷 Iran — independent journalists routinely imprisoned</span>
+    </div>
+  </div>
+
 </div>
 
 <footer>
-  <p>World Headline · Showing what the world is reading, across the political spectrum · <a href="uk_press_today.html">UK</a> · <a href="europe_press_today.html">Europe</a> · <a href="americas_press_today.html">Americas</a> · <a href="asia_press_today.html">Asia-Pacific</a></p>
+  <p>World Headline · Showing what the world is reading, across the political spectrum · <a href="uk_press_today.html">UK</a> · <a href="europe_press_today.html">Europe</a> · <a href="americas_press_today.html">Americas</a> · <a href="asia_press_today.html">Asia-Pacific</a> · <a href="africa_press_today.html">Africa</a></p>
   <p style="margin-top:6px;">Edition 1 — May 2026 · Updated weekly · <span id="footerDate"></span></p>
 </footer>
 

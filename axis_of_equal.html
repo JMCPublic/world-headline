@@ -99,6 +99,30 @@
   .back-link { text-align: center; margin-top: 12px; }
   .back-link a { font-size: 0.76rem; font-family: sans-serif; color: #c0392b; text-decoration: none; }
 
+
+  /* ── Best Place to Be ── */
+  .bptb-section { background: #1a1a1a; border-radius: 8px; padding: 22px 24px; margin-bottom: 24px; }
+  .bptb-section h3 { font-size: 0.8rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #888; margin-bottom: 6px; }
+  .bptb-intro { font-size: 0.76rem; font-family: sans-serif; color: #aaa; margin-bottom: 16px; line-height: 1.5; }
+  .bptb-identities { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .bptb-btn { font-size: 0.7rem; font-family: sans-serif; padding: 6px 13px; border-radius: 20px; border: 1px solid #444; cursor: pointer; background: #2c2c2c; color: #ccc; transition: all 0.15s; white-space: nowrap; }
+  .bptb-btn:hover { border-color: #888; color: #fff; }
+  .bptb-btn.active { color: #1a1a1a; border-color: transparent; font-weight: 700; }
+  .bptb-results { display: none; }
+  .bptb-results.open { display: block; }
+  .bptb-result-title { font-size: 0.72rem; font-family: sans-serif; color: #888; margin-bottom: 12px; font-style: italic; }
+  .bptb-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; }
+  .bptb-card { background: #2c2c2c; border-radius: 5px; padding: 10px 13px; display: flex; align-items: flex-start; gap: 10px; }
+  .bptb-rank { font-size: 1rem; font-family: sans-serif; font-weight: 700; color: #555; min-width: 26px; padding-top: 1px; }
+  .bptb-rank.gold { color: #c8a951; }
+  .bptb-rank.silver { color: #aaa; }
+  .bptb-rank.bronze { color: #cd7f32; }
+  .bptb-info { flex: 1; }
+  .bptb-cname { font-size: 0.78rem; font-family: sans-serif; font-weight: 700; color: #f5f3ee; margin-bottom: 3px; }
+  .bptb-party { font-size: 0.65rem; font-family: sans-serif; color: #aaa; margin-bottom: 5px; }
+  .bptb-bar-wrap { background: #1a1a1a; border-radius: 10px; height: 5px; overflow: hidden; }
+  .bptb-bar { height: 5px; border-radius: 10px; transition: width 0.4s ease; }
+
   @media (max-width: 600px) {
     .aoe-cname { width: 80px; min-width: 80px; font-size: 0.62rem; }
     .aoe-party { font-size: 0.46rem; padding: 0 3px; height: 18px; }
@@ -121,6 +145,7 @@
   <span class="sep">|</span>
   <a href="americas_press_today.html">🌎 Americas</a>
   <a href="asia_press_today.html">🌏 Asia-Pacific</a>
+  <a href="africa_press_today.html">🌍 Africa</a>
   <span class="sep">|</span>
   <a href="poles_apart.html">⚡ Poles Apart</a>
   <a href="axis_of_equal.html" class="active">⚖️ Axis of Equal</a>
@@ -181,6 +206,27 @@
       <div class="compare-status" id="compare-status"></div>
     </div>
 
+  </div>
+
+
+  <!-- ── Best Place to Be ── -->
+  <div class="bptb-section">
+    <h3>🌍 Best Place to Be</h3>
+    <div class="bptb-intro">Pick your political identity — see which countries have the strongest mainstream representation for your views, ranked by how closely a real party matches your position on the spectrum.</div>
+    <div class="bptb-identities">
+      <button class="bptb-btn" data-ideal="5" data-color="#8B0000" data-label="Communist / Far Left">☭ Communist</button>
+      <button class="bptb-btn" data-ideal="22" data-color="#2980b9" data-label="Socialist">🔴 Socialist</button>
+      <button class="bptb-btn" data-ideal="30" data-color="#27ae60" data-label="Green / Environmentalist">🌿 Green</button>
+      <button class="bptb-btn" data-ideal="38" data-color="#5dade2" data-label="Social Democrat">🌹 Social Democrat</button>
+      <button class="bptb-btn" data-ideal="50" data-color="#27ae60" data-label="Liberal / Centrist">🌐 Liberal / Centrist</button>
+      <button class="bptb-btn" data-ideal="60" data-color="#e67e22" data-label="Fiscal Conservative">💼 Fiscal Conservative</button>
+      <button class="bptb-btn" data-ideal="73" data-color="#c0392b" data-label="Traditional Conservative">🏛️ Traditional Conservative</button>
+      <button class="bptb-btn" data-ideal="84" data-color="#7b241c" data-label="Nationalist / Far Right">⚡ Nationalist</button>
+    </div>
+    <div class="bptb-results" id="bptb-results">
+      <div class="bptb-result-title" id="bptb-result-title"></div>
+      <div class="bptb-list" id="bptb-list"></div>
+    </div>
   </div>
 
   <div class="aoe-legend">
@@ -302,6 +348,75 @@ document.getElementById('reset-btn').addEventListener('click', function() {
   document.querySelectorAll('.cpick-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('compare-status').textContent = '';
 });
+// ── Best Place to Be ──
+function getCountryParties() {
+  const countries = {};
+  document.querySelectorAll('.aoe-row[data-country]').forEach(row => {
+    const key = row.dataset.country;
+    const cname = row.querySelector('.aoe-cname').textContent.trim();
+    const parties = [];
+    row.querySelectorAll('.aoe-party').forEach(p => {
+      const styleStr = p.getAttribute('style') || '';
+      const m = styleStr.match(/left:([\d.]+)%/);
+      const pos = m ? parseFloat(m[1]) : 50;
+      const bgm = styleStr.match(/background:\s*(#[0-9a-fA-F]+)/);
+      parties.push({ name: p.title || p.textContent.trim(), pos, lean: p.dataset.lean, color: bgm ? bgm[1] : '#888' });
+    });
+    countries[key] = { name: cname, parties };
+  });
+  return countries;
+}
+
+function scoreCountry(parties, idealPos) {
+  if (!parties.length) return null;
+  let best = parties.reduce((a, b) => Math.abs(a.pos - idealPos) <= Math.abs(b.pos - idealPos) ? a : b);
+  const dist = Math.abs(best.pos - idealPos);
+  const score = Math.max(0, Math.round(100 - dist * 2.2));
+  return { score, party: best };
+}
+
+document.querySelectorAll('.bptb-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.bptb-btn').forEach(b => { b.classList.remove('active'); b.style.background = ''; b.style.color = ''; });
+    this.classList.add('active');
+    this.style.background = this.dataset.color;
+    this.style.color = '#fff';
+
+    const ideal = parseFloat(this.dataset.ideal);
+    const label = this.dataset.label;
+    const color = this.dataset.color;
+    const allCountries = getCountryParties();
+
+    const ranked = Object.entries(allCountries).map(([key, data]) => {
+      const result = scoreCountry(data.parties, ideal);
+      return result ? { key, name: data.name, score: result.score, party: result.party } : null;
+    }).filter(Boolean).sort((a, b) => b.score - a.score);
+
+    const medals = ['🥇','🥈','🥉'];
+    const rankClasses = ['gold','silver','bronze'];
+
+    document.getElementById('bptb-result-title').textContent =
+      'Best countries for a ' + label + ' voter — ranked by closest mainstream party match:';
+
+    const list = document.getElementById('bptb-list');
+    list.innerHTML = ranked.map((r, i) => {
+      const medal = i < 3 ? medals[i] : (i + 1) + '.';
+      const rankClass = i < 3 ? rankClasses[i] : '';
+      const barW = Math.max(4, r.score);
+      return '<div class="bptb-card">' +
+        '<div class="bptb-rank ' + rankClass + '">' + medal + '</div>' +
+        '<div class="bptb-info">' +
+          '<div class="bptb-cname">' + r.name + '</div>' +
+          '<div class="bptb-party">Closest party: ' + r.party.name + '</div>' +
+          '<div class="bptb-bar-wrap"><div class="bptb-bar" style="width:' + barW + '%;background:' + color + '"></div></div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    document.getElementById('bptb-results').classList.add('open');
+  });
+});
+
 </script>
 
 </body>
