@@ -124,6 +124,20 @@
   .nav-tip-body { font-size: 0.69rem; color: #bbb; line-height: 1.55; }
 
   @media (max-width: 600px) { .regions { grid-template-columns: 1fr 1fr; } header h1 { font-size: 1.3rem; } .country-stats { display: none !important; } .nav-tip { display: none !important; } }
+  /* ── OOS exclusion hover card ── */
+  .oos-tag { cursor: default; }
+  .oos-tag[data-pop] { cursor: pointer; }
+  .oos-tag[data-pop]:hover { border-color: #666; color: #999; }
+  .oos-card { display: none; position: fixed; z-index: 9999; width: 220px;
+    background: #1a1a1a; border: 1px solid #555; border-radius: 6px;
+    padding: 11px 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    pointer-events: none; font-family: sans-serif; }
+  .oc-name { font-size: 0.8rem; font-weight: 700; color: #f5f3ee; margin-bottom: 8px; }
+  .oc-row { display: flex; gap: 7px; font-size: 0.68rem; color: #aaa; margin-bottom: 3px; align-items: flex-start; }
+  .oc-icon { min-width: 16px; }
+  .oc-divider { border-top: 1px solid #333; margin: 8px 0; }
+  .oc-reason { font-size: 0.68rem; color: #c0392b; line-height: 1.5; }
+  .oc-label { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 2px; }
 </style>
 </head>
 <body>
@@ -334,7 +348,7 @@
           </div>
           <div class="country-item soon"><span>🇨🇿 Czech Republic</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇭🇺 Hungary</span> <span class="soon-badge">Soon</span></div>
-          <div class="country-item soon"><span>🇦🇹 Austria</span> <span class="soon-badge">Soon</span></div>
+          <div class="country-item"><a href="europe_press_today.html#central-austria">🇦🇹 Austria <span class="live-badge">Live</span></a><div class="country-stats"><div class="cs-name">🇦🇹 Austria</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Vienna</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>9.1m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Party-list proportional</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Federal Parliamentary Republic</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22">Centre Right</span></div><div class="cs-govt-detail">ÖVP + SPÖ + NEOS coalition</div><div class="cs-leader">Chancellor: Christian Stocker (ÖVP)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> FPÖ (Freedom Party)</div><div class="cs-opp-leader">Herbert Kickl</div></div></div>
           <div class="country-item soon"><span>🗺 Balkans</span> <span class="soon-badge">Soon</span></div>
         </div>
       </div>
@@ -582,17 +596,62 @@
     <h4>🚫 Why some countries aren't here</h4>
     <div class="oos-intro">World Headline covers countries where a genuinely independent press exists — papers that can challenge the government without fear of shutdown, arrest, or forced closure. Some countries have no such press. Covering them would mean presenting state propaganda as journalism, which defeats the point. We note their absence rather than pretend they don't exist.</div>
     <div class="oos-countries">
-      <span class="oos-tag">🇰🇵 North Korea — state monolith, no independent press</span>
-      <span class="oos-tag">🇹🇲 Turkmenistan — one of the world's most closed media environments</span>
-      <span class="oos-tag">🇪🇷 Eritrea — "the North Korea of Africa", zero press freedom</span>
-      <span class="oos-tag">🇧🇾 Belarus — independent media exiled or jailed since 2020</span>
-      <span class="oos-tag">🇷🇺 Russia — independent press effectively eliminated since 2022</span>
-      <span class="oos-tag">🇨🇳 China — all major outlets state-controlled</span>
-      <span class="oos-tag">🇸🇦 Saudi Arabia — no independent press permitted</span>
-      <span class="oos-tag">🇮🇷 Iran — independent journalists routinely imprisoned</span>
+      <span class="oos-tag" data-flag="🇰🇵" data-cname="North Korea" data-pop="26m" data-system="One-party state" data-leader="Kim Jong-un (Supreme Leader)" data-reason="State media monolith — no independent press has ever existed. All outlets serve the Korean Workers' Party.">🇰🇵 North Korea — state monolith, no independent press</span>
+      <span class="oos-tag" data-flag="🇹🇲" data-cname="Turkmenistan" data-pop="6m" data-system="Presidential dictatorship" data-leader="Serdar Berdimuhamedow" data-reason="Ranked last or near-last on every press freedom index. All media state-controlled; foreign journalists routinely denied entry.">🇹🇲 Turkmenistan — one of the world's most closed media environments</span>
+      <span class="oos-tag" data-flag="🇪🇷" data-cname="Eritrea" data-pop="3.5m" data-system="Single-party state" data-leader="Isaias Afwerki (President since 1993)" data-reason="No licensed private media since 2001. Journalists imprisoned indefinitely without trial. Ranked last in Africa on press freedom.">🇪🇷 Eritrea — "the North Korea of Africa", zero press freedom</span>
+      <span class="oos-tag" data-flag="🇧🇾" data-cname="Belarus" data-pop="9.4m" data-system="Presidential dictatorship" data-leader="Alexander Lukashenko (since 1994)" data-reason="After the 2020 crackdown on election protests, remaining independent outlets were liquidated. Most journalists fled to Poland or Lithuania.">🇧🇾 Belarus — independent media exiled or jailed since 2020</span>
+      <span class="oos-tag" data-flag="🇷🇺" data-cname="Russia" data-pop="144m" data-system="Federal state (de facto autocracy)" data-leader="Vladimir Putin" data-reason="Last independent broadcasters shut down after February 2022 Ukraine invasion. Novaya Gazeta suspended; Echo of Moscow closed. Reporting the war truthfully is a criminal offence.">🇷🇺 Russia — independent press effectively eliminated since 2022</span>
+      <span class="oos-tag" data-flag="🇨🇳" data-cname="China" data-pop="1.4bn" data-system="One-party state (CPC)" data-leader="Xi Jinping (General Secretary)" data-reason="All major outlets operate under CPC direction. Foreign news sites blocked. Journalists who report critically face detention. Xi era brought tightened controls since 2012.">🇨🇳 China — all major outlets state-controlled</span>
+      <span class="oos-tag" data-flag="🇸🇦" data-cname="Saudi Arabia" data-pop="36m" data-system="Absolute monarchy" data-leader="King Salman / Crown Prince MBS" data-reason="No political parties; no independent press permitted. Jamal Khashoggi's 2018 murder underlined the risks facing journalists who criticise the government.">🇸🇦 Saudi Arabia — no independent press permitted</span>
+      <span class="oos-tag" data-flag="🇮🇷" data-cname="Iran" data-pop="88m" data-system="Islamic Republic (theocracy)" data-leader="Supreme Leader Khamenei / President Pezeshkian" data-reason="Press operates under supervision of the Supreme Leader. Journalists covering protests face arrest. International outlets banned; VPNs widely used to access news.">🇮🇷 Iran — independent journalists routinely imprisoned</span>
     </div>
 </div><!-- /oos-block -->
 
 </div><!-- /container -->
+
+<!-- ── OOS exclusion hover card ── -->
+<div class="oos-card" id="oosCard">
+  <div class="oc-name" id="ocName"></div>
+  <div class="oc-row"><span class="oc-icon">👥</span><span id="ocPop"></span></div>
+  <div class="oc-row"><span class="oc-icon">🏛</span><span id="ocSystem"></span></div>
+  <div class="oc-row"><span class="oc-icon">👤</span><span id="ocLeader"></span></div>
+  <div class="oc-divider"></div>
+  <div class="oc-label">Why World Headline doesn't cover this country</div>
+  <div class="oc-reason" id="ocReason"></div>
+</div>
+
+<script>
+(function() {
+  const card = document.getElementById('oosCard');
+  const ocName   = document.getElementById('ocName');
+  const ocPop    = document.getElementById('ocPop');
+  const ocSystem = document.getElementById('ocSystem');
+  const ocLeader = document.getElementById('ocLeader');
+  const ocReason = document.getElementById('ocReason');
+
+  document.querySelectorAll('.oos-tag[data-pop]').forEach(function(tag) {
+    tag.addEventListener('mouseenter', function(e) {
+      ocName.textContent   = (tag.dataset.flag || '') + ' ' + (tag.dataset.cname || '');
+      ocPop.textContent    = 'Population: ' + (tag.dataset.pop || '');
+      ocSystem.textContent = tag.dataset.system || '';
+      ocLeader.textContent = tag.dataset.leader || '';
+      ocReason.textContent = tag.dataset.reason || '';
+      card.style.display = 'block';
+      moveCard(e);
+    });
+    tag.addEventListener('mousemove', moveCard);
+    tag.addEventListener('mouseleave', function() { card.style.display = 'none'; });
+  });
+
+  function moveCard(e) {
+    var x = e.clientX + 16;
+    var y = e.clientY - 14;
+    if (x + 230 > window.innerWidth) x = e.clientX - 234;
+    if (y < 4) y = 4;
+    card.style.left = x + 'px';
+    card.style.top  = y + 'px';
+  }
+})();
+</script>
 </body>
 </html>

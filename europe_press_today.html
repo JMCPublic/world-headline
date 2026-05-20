@@ -139,6 +139,7 @@
   <a href="index.html#africa">🌍 Africa</a>
   <span class="sep">|</span>
   <a href="poles_apart.html">⚡ Poles Apart</a>
+  <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
 </nav>
 <div class="spectrum-bar"></div>
@@ -1095,7 +1096,7 @@
       <div class="tab-wrap"><button class="tier2-tab active" onclick="showCountry('central','poland',this)">🇵🇱 Poland</button><div class="country-stats"><div class="cs-name">🇵🇱 Poland</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Warsaw</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>38m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Party-list proportional</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Republic (Parliamentary)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#27ae60">Centre</span></div><div class="cs-govt-detail">KO + TD + Lewica coalition</div><div class="cs-leader">PM: Donald Tusk (KO)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> PiS (Law & Justice)</div><div class="cs-opp-leader">Jarosław Kaczyński</div><div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> Confederation</div><div class="cs-opp-leader">Sławomir Mentzen</div></div></div>
       <button class="tier2-tab" onclick="showCountry('central','czechia',this)">🇨🇿 Czech Republic</button>
       <button class="tier2-tab" onclick="showCountry('central','hungary',this)">🇭🇺 Hungary</button>
-      <button class="tier2-tab" onclick="showCountry('central','austria',this)">🇦🇹 Austria</button>
+      <div class="tab-wrap"><button class="tier2-tab" onclick="showCountry('central','austria',this)">🇦🇹 Austria</button><div class="country-stats"><div class="cs-name">🇦🇹 Austria</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Vienna</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>9.1m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Party-list proportional</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Federal Parliamentary Republic</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22">Centre Right</span></div><div class="cs-govt-detail">ÖVP + SPÖ + NEOS coalition</div><div class="cs-leader">Chancellor: Christian Stocker (ÖVP)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> FPÖ (Freedom Party)</div><div class="cs-opp-leader">Herbert Kickl</div></div></div>
       <button class="tier2-tab" onclick="showCountry('central','balkans',this)">🗺 Balkans</button>
     </div>
     <div id="central-poland" class="country-panel active">
@@ -1173,7 +1174,74 @@
 
     <div id="central-czechia" class="country-panel"><div class="coming-soon"><div class="cs-flag">🇨🇿</div><h3>Czech Republic — Coming Soon</h3><p>Deník N (left), MF Dnes (centre), Právo (centre-left). One of Central Europe's most stable democracies — and a country watching its eastern and western neighbours with growing unease.</p></div></div>
     <div id="central-hungary" class="country-panel"><div class="coming-soon"><div class="cs-flag">🇭🇺</div><h3>Hungary — Coming Soon</h3><p>Telex (independent/liberal), Magyar Nemzet (pro-Orbán), 24.hu (centre). The EU's most illiberal state — and a press landscape almost entirely captured by pro-government interests.</p></div></div>
-    <div id="central-austria" class="country-panel"><div class="coming-soon"><div class="cs-flag">🇦🇹</div><h3>Austria — Coming Soon</h3><p>Der Standard (left), Die Presse (centre-right), Krone (populist). A country where the far-right FPÖ is now the largest party — and what that means for a nation that spent decades in coalition-consensus politics.</p></div></div>
+    <div id="central-austria" class="country-panel">
+
+      <h2 class="section-title">🇦🇹 Austria — The Austrian Press Today</h2>
+
+      <!-- Der Standard -->
+      <div class="paper-block">
+        <div class="paper-header">
+          <div class="paper-lean lean-left">◀ Centre-Left</div>
+          <div class="paper-name">Der Standard</div>
+          <div class="paper-meta">Circ. ~85,000 · Vienna · Austria's leading quality liberal daily</div>
+          <div class="paper-tone">Liberal · Pro-EU · Critical of far-right · Investigative</div>
+        </div>
+        <div class="stories-list">
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Stocker's coalition: competence without conviction</div><div class="story-tease">Austria has a functioning government. Does it have a direction?</div><div class="story-detail">Six months into the ÖVP-SPÖ-NEOS coalition, Der Standard assesses a government that has avoided crisis but struggled to articulate a clear vision. Austerity measures have passed but public services are feeling the squeeze, and the coalition's internal tensions are beginning to show.</div><a class="story-url" href="https://www.derstandard.at" target="_blank" onclick="event.stopPropagation()">derstandard.at</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">FPÖ in opposition: louder, angrier, and gaining again in the polls</div><div class="story-tease">Kickl thrives without responsibility.</div><div class="story-detail">Herbert Kickl's FPÖ, excluded from government despite winning the 2024 election, has used its opposition role to maximum effect. New polling shows the party above 30% — higher than on election day. Der Standard examines how the "fortress Austria" rhetoric plays in small-town Austria.</div><a class="story-url" href="https://www.derstandard.at" target="_blank" onclick="event.stopPropagation()">derstandard.at</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Austria's asylum numbers fall — but the politics only intensify</div><div class="story-tease">Facts don't move the needle when fear does the work.</div><div class="story-detail">Official figures show asylum applications down 18% on last year, yet migration remains the dominant issue in Austrian politics. Der Standard explores how the FPÖ has successfully made migration a permanent emotional fault line regardless of the actual numbers.</div><a class="story-url" href="https://www.derstandard.at" target="_blank" onclick="event.stopPropagation()">derstandard.at</a></div>
+        </div>
+        <div class="hobby-horse"><h4>🏇 Der Standard's Hobby Horse</h4>
+          <div class="tracker-row"><div class="tracker-topic">Press freedom &amp; FPÖ threat to media</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">3/8</div></div>
+          <div class="tracker-row"><div class="tracker-topic">EU integration &amp; rule of law</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">2/8</div></div>
+        </div>
+      </div>
+
+      <!-- Die Presse -->
+      <div class="paper-block">
+        <div class="paper-header">
+          <div class="paper-lean lean-right">▶ Centre-Right</div>
+          <div class="paper-name">Die Presse</div>
+          <div class="paper-meta">Circ. ~65,000 · Vienna · Austria's conservative quality broadsheet</div>
+          <div class="paper-tone">Conservative · Pro-market · Eurosceptic-lite · Establishment right</div>
+        </div>
+        <div class="stories-list">
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">The three-way coalition's austerity plan: tough but necessary</div><div class="story-tease">Austria has been spending beyond its means. The reckoning is due.</div><div class="story-detail">Die Presse backs the coalition's fiscal consolidation programme, arguing that Austria's deficit overrun requires painful but unavoidable cuts. The paper focuses on pension reform and public sector wage restraint as the structural fixes the country has delayed for a decade.</div><a class="story-url" href="https://www.diepresse.com" target="_blank" onclick="event.stopPropagation()">diepresse.com</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Austria's neutrality: a constitutional principle or a strategic fiction?</div><div class="story-tease">The war in Ukraine has made Vienna's middle position uncomfortable.</div><div class="story-detail">With NATO expansion and the Ukraine war reshaping European security, Die Presse asks whether Austria's constitutionally enshrined neutrality is still a coherent policy or a post-war relic that prevents meaningful European defence cooperation.</div><a class="story-url" href="https://www.diepresse.com" target="_blank" onclick="event.stopPropagation()">diepresse.com</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">ÖVP must reclaim the centre-right before Kickl does it for them</div><div class="story-tease">The coalition is governing. The base is drifting.</div><div class="story-detail">A Die Presse editorial warns that governing with the Social Democrats risks the ÖVP ceding its core voter base to FPÖ permanently. Without a clear centre-right identity, the party risks becoming the junior partner in its own coalition narrative.</div><a class="story-url" href="https://www.diepresse.com" target="_blank" onclick="event.stopPropagation()">diepresse.com</a></div>
+        </div>
+        <div class="hobby-horse"><h4>🏇 Die Presse's Hobby Horse</h4>
+          <div class="tracker-row"><div class="tracker-topic">Fiscal responsibility &amp; deficit</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">4/8</div></div>
+          <div class="tracker-row"><div class="tracker-topic">Austrian neutrality debate</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">2/8</div></div>
+        </div>
+      </div>
+
+      <!-- Kronen Zeitung -->
+      <div class="paper-block">
+        <div class="paper-header">
+          <div class="paper-lean lean-right">▶ Right / Populist</div>
+          <div class="paper-name">Kronen Zeitung</div>
+          <div class="paper-meta">Circ. ~700,000 · Austria's most-read paper — nearly 1 in 3 Austrians reads it</div>
+          <div class="paper-tone">Populist · Anti-establishment · Pro-FPÖ-adjacent · Tabloid sensibility</div>
+        </div>
+        <div class="stories-list">
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Energy bills up again — and Brussels is to blame</div><div class="story-tease">Ordinary Austrians are paying for green ideology they didn't vote for.</div><div class="story-detail">The Krone leads with rising household energy costs, framing EU climate policy as the culprit. The paper quotes working-class families in Graz and Linz facing higher bills, and calls for a pause in green levies — a framing that aligns closely with FPÖ messaging.</div><a class="story-url" href="https://www.krone.at" target="_blank" onclick="event.stopPropagation()">krone.at</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Kickl poll surge: the people haven't forgotten who won</div><div class="story-tease">The FPÖ got the most votes. It got no power. Readers remember.</div><div class="story-detail">The Krone highlights new polling showing FPÖ support holding strong, framing the coalition's formation as a "stitch-up" by the political class against the democratic will. The coverage reinforces FPÖ's self-image as the persecuted majority party.</div><a class="story-url" href="https://www.krone.at" target="_blank" onclick="event.stopPropagation()">krone.at</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Migrants and crime: the connection the other papers won't make</div><div class="story-tease">We'll say what they won't.</div><div class="story-detail">A Krone report links a series of local crime incidents to migration policy, using individual cases to argue for stricter border controls. The framing — common in Austrian tabloid press — focuses on individual anecdote over statistical context.</div><a class="story-url" href="https://www.krone.at" target="_blank" onclick="event.stopPropagation()">krone.at</a></div>
+        </div>
+        <div class="hobby-horse"><h4>🏇 Krone's Hobby Horse</h4>
+          <div class="tracker-row"><div class="tracker-topic">Migration &amp; crime</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">5/8</div></div>
+          <div class="tracker-row"><div class="tracker-topic">Energy costs &amp; EU regulations</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">3/8</div></div>
+        </div>
+      </div>
+
+      <div class="blind-spot"><h3>🔭 Austria's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Austria's Nazi inheritance</div><div class="blind-item-desc">Austria long presented itself as Hitler's "first victim" rather than a willing participant. The reckoning with that self-exculpating myth remains incomplete and rarely surfaces in mainstream coverage.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Russian gas dependency</div><div class="blind-item-desc">Austria remained one of the EU's most dependent countries on Russian gas long after the Ukraine invasion — a geopolitical vulnerability that domestic papers have been slow to scrutinise.</div></div>
+        <div class="blind-item"><div class="blind-item-title">FPÖ's Russia links</div><div class="blind-item-desc">The FPÖ's documented ties to the Russian government and its 2016 "cooperation agreement" with United Russia are rarely examined in depth by the broader Austrian press.</div></div>
+      </div></div>
+
+    </div><!-- /central-austria -->
     <div id="central-balkans" class="country-panel"><div class="coming-soon"><div class="cs-flag">🗺</div><h3>The Balkans — Coming Soon</h3><p>Serbia (Danas / Politika / Informer), Croatia (Jutarnji list / Večernji list), Romania (G4Media / Digi24), Bulgaria, Slovenia, North Macedonia. A region where EU accession, Russian influence, and nationalist tensions create some of Europe's most intense political journalism.</p></div></div>
   </div><!-- /region-central -->
 
@@ -1230,6 +1298,7 @@
   <a href="middleeast_press_today.html">🕌 Middle East</a>
   <span class="sep">|</span>
   <a href="poles_apart.html">⚡ Poles Apart</a>
+  <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
 </nav>
 </body>
