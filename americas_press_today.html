@@ -35,7 +35,7 @@
   .dashboard { padding: 20px; }
 
   /* Tier 1 — region tabs */
-  .tier1-tabs { display: flex; gap: 6px; margin-bottom: 0; flex-wrap: wrap; }
+  .tier1-tabs { display: flex; gap: 6px; margin-bottom: 0; flex-wrap: wrap; border-bottom: 2px solid #1a1a1a; }
   button.tier1-tab { background: #e8e4dd; border: 1px solid #ccc; color: #555;
     padding: 8px 16px; border-radius: 4px 4px 0 0; font-size: 0.78rem; cursor: pointer;
     letter-spacing: 0.5px; transition: all 0.2s; touch-action: manipulation;
@@ -45,12 +45,12 @@
   button.tier1-tab.active { background: #2c2c2c; border-bottom-color: #2c2c2c;
     color: #fff; }
 
-  .region-panel { display: none; background: #fff; border: 1px solid #e8e4dd;
-    border-radius: 0 4px 4px 4px; padding: 16px; }
+  .region-panel { display: none; background: #fff; border: 2px solid #1a1a1a; border-top: none;
+    border-radius: 0 0 4px 4px; padding: 16px; margin-bottom: 24px; overflow: visible; }
   .region-panel.active { display: block; }
 
   /* Tier 2 — country tabs */
-  .tier2-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .tier2-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; overflow: visible; }
   button.tier2-tab { background: #f5f3ee; border: 1px solid #ddd; color: #555;
     padding: 5px 12px; border-radius: 3px; font-size: 0.75rem; cursor: pointer;
     letter-spacing: 0.3px; transition: all 0.2s; touch-action: manipulation;
@@ -137,7 +137,7 @@
   .country-stats { display: none; position: absolute; top: calc(100% + 6px); left: 0;
     width: 240px; background: #fff; border: 1px solid #ddd; border-radius: 6px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding: 12px 14px;
-    z-index: 1000; font-family: sans-serif; pointer-events: none; white-space: normal; }
+    z-index: 1200; font-family: sans-serif; pointer-events: none; white-space: normal; }
   .tab-wrap { position: relative; display: inline-block; }
   .tab-wrap:hover .country-stats { display: block; }
   .cs-name { font-size: 0.82rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
