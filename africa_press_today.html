@@ -198,7 +198,7 @@
   <div class="tier1-tabs">
     <button class="tier1-tab" onclick="showRegion('west', this)">🌴 West Africa</button>
     <button class="tier1-tab active" onclick="showRegion('south', this)">🦁 Southern Africa</button>
-    <button class="tier1-tab soon">🌄 East Africa — Soon</button>
+    <button class="tier1-tab" onclick="showRegion('east', this)">🌄 East Africa</button>
   </div>
 
   <!-- ═══════════════════════ WEST AFRICA ═══ -->
@@ -790,6 +790,219 @@
       </div>
     </div><!-- end #south-sa -->
   </div><!-- end #region-south -->
+
+  <!-- ═══════════════════════ EAST AFRICA ═══ -->
+  <div id="region-east" class="region-panel">
+    <div class="tier2-tabs" style="overflow:visible">
+      <div class="tab-wrap">
+        <button class="tier2-tab active" onclick="showCountry('east','kenya',this)">🇰🇪 Kenya</button>
+        <div class="country-stats">
+          <div class="cs-name">🇰🇪 Kenya</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Nairobi</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>55m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>First Past the Post (Presidential)</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Presidential Republic</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22;color:#fff">Centre Right</span></div>
+          <div class="cs-govt-detail">UDA — United Democratic Alliance</div>
+          <div class="cs-leader">President: William Ruto</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> ODM — Orange Democratic Movement (Raila Odinga)</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#27ae60">Centre</span> Wiper — Wiper Democratic Movement (Kalonzo Musyoka)</div>
+        </div>
+      </div>
+      <button class="tier2-tab soon">🇪🇹 Ethiopia — Soon</button>
+      <button class="tier2-tab soon">🇹🇿 Tanzania — Soon</button>
+    </div>
+
+    <!-- KENYA -->
+    <div id="east-kenya" class="country-panel active">
+      <div class="country-title">🇰🇪 Kenya — Press Today</div>
+      <div class="papers">
+
+        <!-- Daily Nation — Centre-Left -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-left">◀ Centre-Left</div>
+            <div class="paper-name">Daily Nation</div>
+            <div class="paper-desc">Kenya's largest-circulation daily. Part of Nation Media Group. Broadly independent, often critical of the Ruto government. Strong on accountability, civil liberties and economic fairness.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                One year after the Gen Z uprising: Finance Bill is dead but the grievances live on
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The June 2024 protests — in which young Kenyans stormed parliament and forced the withdrawal of the Finance Bill — were a watershed moment. Daily Nation's anniversary coverage asks whether anything changed. Ruto scrapped the bill, reshuffled his cabinet and promised austerity. But youth unemployment remains above 35%, the cost of living is still crushing, and a new wave of tax proposals has rekindled frustration. The paper argues the political class heard the noise but not the message.
+                <a href="https://nation.africa" class="story-url" target="_blank">→ nation.africa</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Debt trap: Kenya spends more on debt repayment than on health and education combined
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Kenya's external debt has ballooned to over $80bn — roughly 70% of GDP. Debt servicing now consumes more than 50% of government revenue, crowding out spending on hospitals, schools and infrastructure. Daily Nation's economics desk argues the IMF programme, while stabilising the shilling, has locked Kenya into a structural squeeze: austerity preserves debt repayment but deepens the cost-of-living crisis. The paper calls for a renegotiation of terms and more progressive taxation.
+                <a href="https://nation.africa" class="story-url" target="_blank">→ nation.africa</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Housing levy fury: workers ask why their pay is funding Ruto's political flagship
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Ruto's Affordable Housing Programme levies 1.5% of every worker's gross salary — matched by employers. The Supreme Court initially ruled it unconstitutional but a subsequent amendment kept it alive. Daily Nation covers the ongoing anger: workers see deductions they didn't consent to funding a programme where completed units remain unaffordable to the people paying for it. The paper notes that most beneficiaries in the initial allocations were civil servants, not the urban poor the programme claimed to target.
+                <a href="https://nation.africa" class="story-url" target="_blank">→ nation.africa</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Cost of living &amp; government accountability</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">IMF / World Bank conditionality</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Standard — Centre -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre</div>
+            <div class="paper-name">The Standard</div>
+            <div class="paper-desc">Kenya's second-largest daily. Standard Group-owned, editorially centrist. Covers government and opposition with broadly equal scepticism. Strong on regional and East Africa stories.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Ruto's broad-based government gamble: can a unity cabinet actually govern?
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                After the 2024 protests, Ruto brought opposition figures — including allies of Raila Odinga — into a broad-based government. The Standard examines whether this experiment in national unity has worked. On paper, it reduced political temperature; in practice, the coalition is ideologically incoherent, with ministers from opposing camps pulling in different directions on spending, taxation and land policy. The paper treats this as a governance challenge rather than a scandal, tracking cabinet coherence as a story in its own right.
+                <a href="https://standardmedia.co.ke" class="story-url" target="_blank">→ standardmedia.co.ke</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Kenya's Silicon Savannah: tech sector powers on despite economic headwinds
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Nairobi's technology ecosystem — home to M-Pesa, Safaricom, Twiga Foods and a growing fintech scene — continues to attract foreign investment even as macroeconomic conditions tighten. The Standard reports that Kenya remains East Africa's preferred tech hub, with startup funding holding up better than in Lagos or Cairo. The paper notes a tension: the same government that stifled the economy with tax hikes is also promoting digital transformation as a growth story.
+                <a href="https://standardmedia.co.ke" class="story-url" target="_blank">→ standardmedia.co.ke</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Al-Shabaab incursions: Kenya's security forces stretched along the Somalia border
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Al-Shabaab continues to stage cross-border attacks in Kenya's northeastern counties — ambushing security personnel, planting IEDs and disrupting pastoral communities. The Standard covers this as an ongoing operational challenge, distinct from the 2015–16 peak but persistent. Kenya's deployment in the AU Transition Mission in Somalia (ATMIS) and the new Somalia-led AUSSOM force draws its military thin. The paper calls for more resources for the northeast and faster local intelligence sharing.
+                <a href="https://standardmedia.co.ke" class="story-url" target="_blank">→ standardmedia.co.ke</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">East Africa regional integration</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">US bilateral ties &amp; Major Non-NATO Ally status</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Business Daily — Centre-Right -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-right">▶ Centre-Right / Pro-Business</div>
+            <div class="paper-name">Business Daily</div>
+            <div class="paper-desc">Nation Media Group's dedicated business paper. Market-oriented, pro-investment. Covers Ruto's economic reforms with cautious optimism. The paper Kenya's corporate class reads first.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Shilling stabilises: currency recovers 20% from 2024 lows as IMF programme holds
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Kenyan shilling — which hit a record low of 160 to the dollar in early 2024 — has recovered significantly, trading around 128–130 by mid-2025. Business Daily credits the IMF's $4.4bn Extended Fund Facility, tight CBK monetary policy and improved foreign exchange earnings. The paper treats currency stabilisation as a precondition for investment confidence and profiles companies that had deferred capital spending and are now returning to the market.
+                <a href="https://businessdailyafrica.com" class="story-url" target="_blank">→ businessdailyafrica.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Kenya as a regional hub: EAC, COMESA and the race to be East Africa's gateway economy
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Business Daily argues Kenya's strongest long-term play is as East Africa's trade and logistics hub — leveraging Mombasa port, the SGR rail line, Nairobi's air connectivity and its financial services depth. With Tanzania growing and Ethiopia liberalising, competition for regional hub status is intensifying. The paper profiles Kenyan companies expanding into Uganda, Rwanda and DRC and calls for faster EAC customs harmonisation to lock in Kenya's first-mover advantage.
+                <a href="https://businessdailyafrica.com" class="story-url" target="_blank">→ businessdailyafrica.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Raila at the AU: Kenya's soft power play as Odinga heads the African Union Commission
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Raila Odinga's election as African Union Commission Chairperson in February 2025 was backed by Ruto — a calculation that removed the opposition leader from domestic politics while boosting Kenya's continental standing. Business Daily covers this as a strategic win: Kenya now has a national in Africa's most powerful institutional role, creating influence over trade negotiations, infrastructure financing and AU-backed development programmes. The paper profiles Kenyan firms positioning to benefit from AU procurement.
+                <a href="https://businessdailyafrica.com" class="story-url" target="_blank">→ businessdailyafrica.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Foreign direct investment &amp; private sector growth</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Chinese infrastructure financing &amp; debt</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 Kenya's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">📱 <strong>M-Pesa as infrastructure:</strong> Mobile money didn't just transform banking in Kenya — it became the operating system for the economy. Merchants, farmers, landlords and governments transact through it. The international tech press covers M-Pesa as a fintech story; Kenyans experience it as basic infrastructure. Its political economy — Safaricom's quasi-monopoly, its tax contribution, its role in protest movements — is rarely examined outside Kenya.</div>
+        <div class="blind-spot-item">🌊 <strong>The Gen Z generation as a political force:</strong> The June 2024 protests were not a one-off. They marked the emergence of a genuinely post-tribal, digitally-organised Kenyan youth vote that cut across ethnic lines for the first time in the country's history. International coverage treated this as a riot story. Kenyan media understands it as a generational political realignment whose implications will play out over decades.</div>
+        <div class="blind-spot-item">🌍 <strong>Raila Odinga's continental role:</strong> Odinga's installation as AU Commission Chairperson in 2025 gives Kenya direct influence over Africa's primary multilateral institution. The domestic political calculation — Ruto backing his rival's departure — is as interesting as the continental implications. Neither story gets the attention outside Kenya it deserves.</div>
+      </div>
+    </div><!-- end #east-kenya -->
+
+  </div><!-- end #region-east -->
 
 </div><!-- end .dashboard -->
 

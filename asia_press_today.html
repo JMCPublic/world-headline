@@ -688,7 +688,7 @@
   <div id="region-pacific" class="region-panel">
     <div class="tier2-tabs">
       <div class="tab-wrap"><button class="tier2-tab active" onclick="showCountry('pacific','australia',this)">🇦🇺 Australia</button><div class="country-stats"><div class="cs-name">🇦🇺 Australia</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Canberra</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>26.5m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Preferential (AV)</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Constitutional Monarchy (Federal)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div><div class="cs-govt-detail">Australian Labor Party majority</div><div class="cs-leader">PM: Anthony Albanese (ALP)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> Liberal-National Coalition</div><div class="cs-opp-leader">Peter Dutton (to 2025)</div><div class="cs-opp"><span class="cs-lean" style="background:#27ae60">Centre</span> Greens</div><div class="cs-opp-leader">Adam Bandt</div></div></div>
-      <button class="tier2-tab soon" onclick="showCountry('pacific','newzealand',this)">🇳🇿 New Zealand <small>(soon)</small></button>
+      <div class="tab-wrap"><button class="tier2-tab" onclick="showCountry('pacific','newzealand',this)">🇳🇿 New Zealand</button><div class="country-stats"><div class="cs-name">🇳🇿 New Zealand</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Wellington</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>5.1m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Mixed-Member Proportional (MMP)</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Constitutional Monarchy (Parliamentary)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22;color:#fff">Centre Right</span></div><div class="cs-govt-detail">National + ACT + NZ First coalition</div><div class="cs-leader">PM: Christopher Luxon (National)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> NZ Labour (Chris Hipkins)</div><div class="cs-opp"><span class="cs-lean" style="background:#2980b9">Left</span> Green Party (Chlöe Swarbrick)</div></div></div>
     </div>
 
     <!-- AUSTRALIA -->
@@ -881,8 +881,186 @@
       </div>
     </div><!-- /australia -->
 
-    <div id="pacific-newzealand" class="country-panel">
-      <div class="stub-panel">🇳🇿 <strong>New Zealand</strong><p>Coming soon — NZ Herald, Stuff, The Spinoff</p></div>
+<div id="pacific-newzealand" class="country-panel">
+      <div class="country-title">🇳🇿 New Zealand — Press Today</div>
+      <div class="papers">
+
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-left">◀ Centre-Left</div>
+            <div class="paper-name">The Spinoff</div>
+            <div class="paper-desc">New Zealand's leading digital-native publication. Long-form, analytical, broadly progressive. Read by urban professionals, media workers and policymakers. Strong on culture and society.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The Treaty backlash: how the coalition's Māori policies became its biggest political liability
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                ACT's Treaty Principles Bill — which sought to redefine the Treaty of Waitangi as applying equally to all citizens, not as a partnership with Māori — triggered the largest protest march in New Zealand history in November 2024. The hikoi drew over 50,000 people to Wellington. The Spinoff's coverage frames this as a defining moment: the coalition misjudged how deeply the Treaty is embedded in New Zealand's national identity, even among non-Māori. The bill was voted down but the political damage lingers.
+                <a href="https://thespinoff.co.nz" class="story-url" target="_blank">→ thespinoff.co.nz</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Housing crisis unchanged: Luxon government's build targets fall short
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                New Zealand's housing crisis — some of the world's worst affordability ratios relative to incomes — has not improved under the Luxon government despite promises to cut red tape and accelerate consenting. The Spinoff's data journalism tracks actual building completions against targets and finds a significant shortfall. The paper argues the coalition's approach (supply-side deregulation) is necessary but insufficient without demand-side intervention, particularly for first-home buyers priced out of Auckland and Wellington.
+                <a href="https://thespinoff.co.nz" class="story-url" target="_blank">→ thespinoff.co.nz</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Public service cuts bite: thousands of jobs gone, services degraded
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Luxon government's fiscal consolidation programme eliminated over 6,000 public sector jobs in 2024 — the largest single-year reduction in decades. The Spinoff tracks the human cost: delayed consenting, slower benefit processing, reduced frontline health capacity. Government ministers frame this as right-sizing an over-bloated bureaucracy. The paper quotes former public servants who argue institutional knowledge lost in rapid redundancy rounds will take years to rebuild.
+                <a href="https://thespinoff.co.nz" class="story-url" target="_blank">→ thespinoff.co.nz</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Housing affordability &amp; inequality</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">AUKUS &amp; Five Eyes pressure</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre</div>
+            <div class="paper-name">Stuff / Dominion Post</div>
+            <div class="paper-desc">New Zealand's largest newspaper network, covering national and regional news. Broadly centrist, community-focused. Bought by its employees in 2020, making it one of the world's largest journalist-owned media companies.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Cost of living eases slightly — but working families still stretched
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                After New Zealand's sharp recession in 2023–24, inflation has moderated and the Reserve Bank has cut interest rates significantly. Stuff covers the uneven recovery: mortgage holders are seeing relief, but renters face still-rising costs, and food bank usage remains at record levels. The paper's regional coverage — from Invercargill to Northland — gives a texture to the economic story that Wellington-focused outlets miss: provincial New Zealand is hurting more than the headline numbers suggest.
+                <a href="https://www.stuff.co.nz" class="story-url" target="_blank">→ stuff.co.nz</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Climate adaptation: NZ councils face insurance withdrawal as flood risk rises
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Following Cyclone Gabrielle's devastating 2023 impact on Hawke's Bay, New Zealand is grappling with managed retreat from flood-prone areas. Stuff covers the insurance withdrawal crisis — entire coastal and river-adjacent communities losing access to affordable cover — as a forerunner of what other countries will face. Local councils are caught between ratepayer fury and the fiscal reality that some areas cannot be protected at reasonable cost.
+                <a href="https://www.stuff.co.nz" class="story-url" target="_blank">→ stuff.co.nz</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Pacific Islands policy: NZ and Australia scramble as China deepens influence
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                China's security and development agreements with Pacific Island nations have accelerated since the Solomon Islands deal. Stuff covers New Zealand's response: increased aid spending, more frequent ministerial visits, and a closer alignment with Australia's Pacific step-up. The paper notes the inherent tension: Pacific Island nations resent being treated as pieces on a great-power chessboard by Canberra and Wellington just as much as by Beijing.
+                <a href="https://www.stuff.co.nz" class="story-url" target="_blank">→ stuff.co.nz</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Climate adaptation &amp; managed retreat</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">China / Pacific Islands geopolitics</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-right">▶ Centre-Right</div>
+            <div class="paper-name">NZ Herald</div>
+            <div class="paper-desc">New Zealand's largest-circulation paper. Auckland-centric, broadly centre-right on economic issues. Owned by NZME. Supportive of the Luxon government's fiscal direction while covering its missteps evenhandedly.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Government's economic plan on track — but growth still elusive
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The NZ Herald broadly supports the Luxon government's fiscal consolidation and deregulation agenda, but its business desk is frank about the results: GDP growth remains anaemic, business confidence has recovered but investment hasn't followed, and the tradeable sector is struggling with an elevated New Zealand dollar. The paper argues the government's direction is correct but the timeline is longer than ministers are admitting publicly.
+                <a href="https://www.nzherald.co.nz" class="story-url" target="_blank">→ nzherald.co.nz</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Auckland's infrastructure deficit: the bill is coming and it is enormous
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Auckland — home to a third of New Zealand's population — faces a decades-long infrastructure backlog estimated at $30bn+. The NZ Herald has campaigned editorially for a dedicated infrastructure funding mechanism and faster consent processing. The city's water infrastructure, public transport and roads are all under stress. The paper is broadly sympathetic to the government's fast-track consenting reforms but impatient with the pace of actual delivery.
+                <a href="https://www.nzherald.co.nz" class="story-url" target="_blank">→ nzherald.co.nz</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                NZ First's influence: Winston Peters shapes coalition policy from the back seat
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Winston Peters — perennial kingmaker and NZ First leader — has used his coalition leverage to push back on Māori co-governance arrangements, slow the repeal of media legislation, and insert NZ First priorities on trade and foreign policy. The NZ Herald's political coverage tracks the coalition's internal tensions with unusual candour, noting that Luxon's management of Peters is his most delicate ongoing political challenge.
+                <a href="https://www.nzherald.co.nz" class="story-url" target="_blank">→ nzherald.co.nz</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Auckland infrastructure &amp; growth</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">US / Five Eyes security alignment</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 New Zealand's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">🌊 <strong>Pacific leadership, not Pacific tourism:</strong> New Zealand's relationship with the Pacific Islands is covered internationally as a geography and climate story. Kiwis understand it as a geopolitical responsibility, a diaspora reality (more Pacific Islanders live in Auckland than in Suva or Nukuʻalofa), and a defining part of national identity that has no equivalent in European or North American political cultures.</div>
+        <div class="blind-spot-item">📜 <strong>The Treaty is not symbolic:</strong> International media treats the Treaty of Waitangi as a historical document. In New Zealand it is a live constitutional instrument invoked in courts, woven into legislation, and debated at every election. The 2024 hikoi was not a protest — it was a constitutional assertion. That distinction is almost never understood outside New Zealand.</div>
+        <div class="blind-spot-item">🏡 <strong>The housing crisis as a civilisational failure:</strong> New Zealand has some of the world's worst housing affordability despite being a small, wealthy country with vast land. This is not a market failure — it is a deliberate political choice by successive governments to protect existing homeowners. The social consequences — families in motels, young professionals emigrating — are profound and undercovered internationally.</div>
+      </div>
     </div>
   </div><!-- /region-pacific -->
 

@@ -126,6 +126,30 @@
   .cc-note { font-size: 0.68rem; font-family: sans-serif; color: #888; line-height: 1.55; font-style: italic; }
   .cc-rare { font-size: 0.58rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.08em; color: #c0392b; margin-top: 8px; border-top: 1px solid #333; padding-top: 6px; }
+
+  /* ── Divergence Tracker ── */
+  .dt-intro { font-size:0.74rem; font-family:sans-serif; color:#777; margin-bottom:20px; line-height:1.6; }
+  .dt-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:16px; }
+  .dt-card { background:#fff; border:1px solid #e8e4dd; border-radius:6px; padding:16px 18px; }
+  .dt-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+  .dt-country { font-size:0.82rem; font-family:sans-serif; font-weight:700; color:#1a1a1a; }
+  .dt-score-wrap { display:flex; align-items:center; gap:6px; }
+  .dt-score { font-size:1rem; font-family:sans-serif; font-weight:700; color:#1a1a1a; }
+  .dt-label { font-size:0.58rem; font-family:sans-serif; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.07em; padding:2px 6px; border-radius:3px; }
+  .dt-label.extreme { background:#7b241c; color:#fff; }
+  .dt-label.high    { background:#c0392b; color:#fff; }
+  .dt-label.moderate{ background:#e67e22; color:#fff; }
+  .dt-label.low     { background:#27ae60; color:#fff; }
+  .dt-bar-wrap { height:5px; background:#f0ece5; border-radius:3px; margin-bottom:12px; overflow:hidden; }
+  .dt-bar { height:100%; border-radius:3px;
+    background: linear-gradient(to right, #2980b9, #c0392b); }
+  .dt-takes { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .dt-take { font-size:0.65rem; font-family:sans-serif; line-height:1.5; padding:8px 10px; border-radius:4px; }
+  .dt-take.left-take  { background:#eaf4fb; border-left:3px solid #2980b9; color:#1a4a6b; }
+  .dt-take.right-take { background:#fdf0ef; border-left:3px solid #c0392b; color:#6b1a1a; }
+  .dt-paper { font-size:0.58rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
+    opacity:0.7; margin-bottom:3px; }
 </style>
 </head>
 <body>
@@ -632,6 +656,136 @@
 
     </div>
   </div><!-- /pa-section#consensus -->
+
+
+  <div class="pa-section" id="divergence">
+    <div class="pa-section-title">📡 The Divergence Tracker</div>
+    <div class="pa-section-sub">How far apart are the left and right papers on this week's top story — by country</div>
+    <p class="dt-intro">A score of 10 means the left and right papers are covering the same event from parallel universes. A score of 1 means even the ideological opponents basically agree. These are this week's readings.</p>
+    <div class="dt-grid">
+
+      <div class="dt-card">
+        <div class="dt-header">
+          <div class="dt-country">🇮🇱 Israel</div>
+          <div class="dt-score-wrap"><div class="dt-score">9.2</div><div class="dt-label extreme">Extreme</div></div>
+        </div>
+        <div class="dt-bar-wrap"><div class="dt-bar" style="width:92%"></div></div>
+        <div class="dt-takes">
+          <div class="dt-take left-take"><div class="dt-paper">Haaretz</div>"A deal is possible — the PM is choosing war over hostages"</div>
+          <div class="dt-take right-take"><div class="dt-paper">Israel Hayom</div>"No deal without full Hamas dismantlement — that's not negotiation, that's surrender"</div>
+        </div>
+      </div>
+
+      <div class="dt-card">
+        <div class="dt-header">
+          <div class="dt-country">🇦🇷 Argentina</div>
+          <div class="dt-score-wrap"><div class="dt-score">8.8</div><div class="dt-label extreme">Extreme</div></div>
+        </div>
+        <div class="dt-bar-wrap"><div class="dt-bar" style="width:88%"></div></div>
+        <div class="dt-takes">
+          <div class="dt-take left-take"><div class="dt-paper">Página 12</div>"The IMF deal is a new chapter of colonial subordination — ordinary Argentines pay the price"</div>
+          <div class="dt-take right-take"><div class="dt-paper">La Nación</div>"The deal is painful but necessary — Kirchnerism spent us into this corner"</div>
+        </div>
+      </div>
+
+      <div class="dt-card">
+        <div class="dt-header">
+          <div class="dt-country">🇺🇸 United States</div>
+          <div class="dt-score-wrap"><div class="dt-score">8.5</div><div class="dt-label extreme">Extreme</div></div>
+        </div>
+        <div class="dt-bar-wrap"><div class="dt-bar" style="width:85%"></div></div>
+        <div class="dt-takes">
+          <div class="dt-take left-take"><div class="dt-paper">New York Times</div>"Tariffs are a regressive tax on American consumers — the economic data is unambiguous"</div>
+          <div class="dt-take right-take"><div class="dt-paper">Wall Street Journal</div>"Tariff leverage is working — trading partners are returning to the table on US terms"</div>
+        </div>
+      </div>
+
+      <div class="dt-card">
+        <div class="dt-header">
+          <div class="dt-country">🇵🇱 Poland</div>
+          <div class="dt-score-wrap"><div class="dt-score">8.1</div><div class="dt-label high">High</div></div>
+        </div>
+        <div class="dt-bar-wrap"><div class="dt-bar" style="width:81%"></div></div>
+        <div class="dt-takes">
+          <div class="dt-take left-take"><div class="dt-paper">Gazeta Wyborcza</div>"Only a pro-democratic president can protect the courts from the PiS rollback"</div>
+          <div class="dt-take right-take"><div class="dt-paper">Gazeta Polska</div>"The establishment candidate will surrender Polish sovereignty to Brussels bureaucrats"</div>
+        </div>
+      </div>
+
+      <div class="dt-card">
+        <div class="dt-header">
+          <div class="dt-country">🇮🇳 India</div>
+          <div class="dt-score-wrap"><div class="dt-score">7.9</div><div class="dt-label high">High</div></div>
+        </div>
+        <div class="dt-bar-wrap"><div class="dt-bar" style="width:79%"></div></div>
+        <div class="dt-takes">
+          <div class="dt-take left-take"><div class="dt-paper">The Hindu</div>"De-escalation must be the priority — military action risks catastrophic regional escalation"</div>
+          <div class="dt-take right-take"><div class="dt-paper">Times of India</div>"India showed strength and precision — Pakistan must understand there are real consequences"</div>
+        </div>
+      </div>
+
+      <div class="dt-card">
+        <div class="dt-header">
+          <div class="dt-country">🇫🇷 France</div>
+          <div class="dt-score-wrap"><div class="dt-score">7.2</div><div class="dt-label high">High</div></div>
+        </div>
+        <div class="dt-bar-wrap"><div class="dt-bar" style="width:72%"></div></div>
+        <div class="dt-takes">
+          <div class="dt-take left-take"><div class="dt-paper">Le Monde</div>"The government's migration obsession is a distraction from deeper social inequalities"</div>
+          <div class="dt-take right-take"><div class="dt-paper">Le Figaro</div>"France has lost control of its borders — the numbers are not an opinion, they're a fact"</div>
+        </div>
+      </div>
+
+      <div class="dt-card">
+        <div class="dt-header">
+          <div class="dt-country">🇬🇧 United Kingdom</div>
+          <div class="dt-score-wrap"><div class="dt-score">6.8</div><div class="dt-label high">High</div></div>
+        </div>
+        <div class="dt-bar-wrap"><div class="dt-bar" style="width:68%"></div></div>
+        <div class="dt-takes">
+          <div class="dt-take left-take"><div class="dt-paper">The Guardian</div>"A once-in-a-generation chance to fix the NHS is being squandered by timidity"</div>
+          <div class="dt-take right-take"><div class="dt-paper">Daily Mail</div>"More money won't fix a bureaucracy that consumes billions without improving care"</div>
+        </div>
+      </div>
+
+      <div class="dt-card">
+        <div class="dt-header">
+          <div class="dt-country">🇩🇪 Germany</div>
+          <div class="dt-score-wrap"><div class="dt-score">6.1</div><div class="dt-label moderate">Moderate</div></div>
+        </div>
+        <div class="dt-bar-wrap"><div class="dt-bar" style="width:61%"></div></div>
+        <div class="dt-takes">
+          <div class="dt-take left-take"><div class="dt-paper">Süddeutsche Ztg.</div>"The Merz government is mainstreaming AfD ideas under the cover of stability"</div>
+          <div class="dt-take right-take"><div class="dt-paper">Frankfurter Allg.</div>"CDU must be free to address migration concerns without being smeared as far-right"</div>
+        </div>
+      </div>
+
+      <div class="dt-card">
+        <div class="dt-header">
+          <div class="dt-country">🇮🇪 Ireland</div>
+          <div class="dt-score-wrap"><div class="dt-score">4.3</div><div class="dt-label moderate">Moderate</div></div>
+        </div>
+        <div class="dt-bar-wrap"><div class="dt-bar" style="width:43%"></div></div>
+        <div class="dt-takes">
+          <div class="dt-take left-take"><div class="dt-paper">Irish Times</div>"State intervention is the only answer — the housing market has demonstrably failed"</div>
+          <div class="dt-take right-take"><div class="dt-paper">Irish Independent</div>"Cut planning red tape — the state's own rules are the biggest obstacle to building"</div>
+        </div>
+      </div>
+
+      <div class="dt-card">
+        <div class="dt-header">
+          <div class="dt-country">🇳🇴 Norway</div>
+          <div class="dt-score-wrap"><div class="dt-score">2.8</div><div class="dt-label low">Low</div></div>
+        </div>
+        <div class="dt-bar-wrap"><div class="dt-bar" style="width:28%"></div></div>
+        <div class="dt-takes">
+          <div class="dt-take left-take"><div class="dt-paper">Dagbladet</div>"We must phase out extraction faster — our oil wealth was built on a climate debt"</div>
+          <div class="dt-take right-take"><div class="dt-paper">Aftenposten</div>"Responsible extraction funds our green transition — the two aren't incompatible"</div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /pa-section#divergence -->
 
   <div class="page-footer-nav">
     <a href="index.html">← Back to Home</a>
