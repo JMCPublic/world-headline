@@ -138,6 +138,11 @@
   .oc-divider { border-top: 1px solid #333; margin: 8px 0; }
   .oc-reason { font-size: 0.68rem; color: #c0392b; line-height: 1.5; }
   .oc-label { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 2px; }
+  .new-badge { display: inline-block; font-size: 0.52rem; font-family: sans-serif; font-weight: 700;
+    background: #27ae60; color: #fff; padding: 1px 5px; border-radius: 3px;
+    text-transform: uppercase; letter-spacing: 0.06em; margin-left: 4px;
+    vertical-align: middle; animation: newpulse 2s ease-in-out infinite; }
+  @keyframes newpulse { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
 </style>
 </head>
 <body>
@@ -348,7 +353,7 @@
           </div>
           <div class="country-item soon"><span>🇨🇿 Czech Republic</span> <span class="soon-badge">Soon</span></div>
           <div class="country-item soon"><span>🇭🇺 Hungary</span> <span class="soon-badge">Soon</span></div>
-          <div class="country-item"><a href="europe_press_today.html#central-austria">🇦🇹 Austria <span class="live-badge">Live</span></a><div class="country-stats"><div class="cs-name">🇦🇹 Austria</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Vienna</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>9.1m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Party-list proportional</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Federal Parliamentary Republic</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22">Centre Right</span></div><div class="cs-govt-detail">ÖVP + SPÖ + NEOS coalition</div><div class="cs-leader">Chancellor: Christian Stocker (ÖVP)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> FPÖ (Freedom Party)</div><div class="cs-opp-leader">Herbert Kickl</div></div></div>
+          <div class="country-item"><a href="europe_press_today.html#central-austria" data-added="2026-05-20">🇦🇹 Austria <span class="live-badge">Live</span></a><div class="country-stats"><div class="cs-name">🇦🇹 Austria</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Vienna</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>9.1m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Party-list proportional</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Federal Parliamentary Republic</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22">Centre Right</span></div><div class="cs-govt-detail">ÖVP + SPÖ + NEOS coalition</div><div class="cs-leader">Chancellor: Christian Stocker (ÖVP)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> FPÖ (Freedom Party)</div><div class="cs-opp-leader">Herbert Kickl</div></div></div>
           <div class="country-item soon"><span>🗺 Balkans</span> <span class="soon-badge">Soon</span></div>
         </div>
       </div>
@@ -646,11 +651,79 @@
   function moveCard(e) {
     var x = e.clientX + 16;
     var y = e.clientY - 14;
-    if (x + 230 > window.innerWidth) x = e.clientX - 234;
+    var cw = 230, ch = 200;
+    if (x + cw > window.innerWidth - 4)  x = e.clientX - cw - 8;
+    if (x < 4) x = 4;
+    if (y + ch > window.innerHeight - 4) y = window.innerHeight - ch - 8;
     if (y < 4) y = 4;
     card.style.left = x + 'px';
     card.style.top  = y + 'px';
   }
+})();
+</script>
+
+<script>
+// ── Nav-tip viewport clamp ──
+document.querySelectorAll('.nav-tip-wrap').forEach(function(wrap) {
+  wrap.addEventListener('mouseenter', function() {
+    var tip = wrap.querySelector('.nav-tip');
+    if (!tip) return;
+    var wr = wrap.getBoundingClientRect();
+    var tw = 220;
+    // Too close to right edge?
+    if (wr.left + tw / 2 > window.innerWidth - 12) {
+      tip.style.left = 'auto'; tip.style.right = '0'; tip.style.transform = 'none';
+    }
+    // Too close to left edge?
+    else if (wr.right - tw / 2 < 12) {
+      tip.style.left = '0'; tip.style.transform = 'none';
+    }
+  });
+  wrap.addEventListener('mouseleave', function() {
+    var tip = wrap.querySelector('.nav-tip');
+    if (!tip) return;
+    tip.style.left = ''; tip.style.right = ''; tip.style.transform = '';
+  });
+});
+</script>
+<script>
+// ── Country-stats card viewport clamp ──
+document.querySelectorAll('.country-item, .tab-wrap').forEach(function(item) {
+  item.addEventListener('mouseenter', function() {
+    var card = item.querySelector('.country-stats');
+    if (!card) return;
+    var ir = item.getBoundingClientRect();
+    var cw = 245, ch = 300;
+    if (ir.right + cw + 10 > window.innerWidth) {
+      card.style.left = 'auto'; card.style.right = '105%';
+    }
+    if (ir.top + ch > window.innerHeight - 10) {
+      card.style.top = 'auto'; card.style.bottom = '0';
+    }
+  });
+  item.addEventListener('mouseleave', function() {
+    var card = item.querySelector('.country-stats');
+    if (!card) return;
+    card.style.left = ''; card.style.right = '';
+    card.style.top = ''; card.style.bottom = '';
+  });
+});
+</script>
+
+<script>
+// ── "New this week" badges ──
+(function() {
+  var now = new Date();
+  document.querySelectorAll('a[data-added]').forEach(function(a) {
+    var added = new Date(a.getAttribute('data-added'));
+    var days = (now - added) / (1000 * 60 * 60 * 24);
+    if (days <= 7) {
+      var badge = document.createElement('span');
+      badge.className = 'new-badge';
+      badge.textContent = 'New';
+      a.appendChild(badge);
+    }
+  });
 })();
 </script>
 </body>

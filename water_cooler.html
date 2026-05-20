@@ -58,6 +58,32 @@
   .bottom-nav a.active { background: #c0392b; color: #fff; }
   .bottom-nav span.sep { color: #555; font-size: 0.7rem; font-family: sans-serif; padding: 4px 4px; }
   .bottom-nav .bn-label { color: #666; font-size: 0.65rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px; }
+
+  /* ── Weekly Pulse ── */
+  .wp-section { margin-top: 40px; }
+  .wp-section h3 { font-size: 1rem; font-family: sans-serif; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .wp-sub { font-size: 0.74rem; font-family: sans-serif; color: #888; margin-bottom: 18px; line-height: 1.5; }
+  .wp-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+  .wp-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.62rem; font-family: sans-serif; color: #777; }
+  .wp-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .wp-scroll { overflow-x: auto; border-radius: 6px; border: 1px solid #e8e4dd; }
+  .wp-table { border-collapse: collapse; width: 100%; min-width: 620px; }
+  .wp-table th { font-size: 0.62rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: #999; background: #faf9f7; padding: 8px 12px;
+    border-bottom: 2px solid #e8e4dd; text-align: left; white-space: nowrap; }
+  .wp-table th:first-child { min-width: 130px; }
+  .wp-table td { font-size: 0.68rem; font-family: sans-serif; color: #444; padding: 7px 12px;
+    border-bottom: 1px solid #f0ece5; vertical-align: top; line-height: 1.45; }
+  .wp-table tr:last-child td { border-bottom: none; }
+  .wp-table tr:hover td { background: #faf9f7; }
+  .wp-table td:first-child { font-weight: 600; color: #1a1a1a; white-space: nowrap; }
+  .wp-cell { display: flex; gap: 6px; align-items: flex-start; }
+  .wp-cat { width: 3px; border-radius: 2px; flex-shrink: 0; margin-top: 3px; align-self: stretch; min-height: 14px; }
+  .wp-cat.pol { background: #c0392b; }
+  .wp-cat.eco { background: #e67e22; }
+  .wp-cat.soc { background: #27ae60; }
+  .wp-cat.sec { background: #2980b9; }
+  .wp-cat.env { background: #16a085; }
 </style>
 </head>
 <body>
@@ -274,6 +300,132 @@
     </div>
   </div>
 
+
+  <div class="wp-section">
+    <h3>📅 Weekly Pulse</h3>
+    <p class="wp-sub">What each country was talking about, week by week. A record of the conversations that come and go — and the ones that keep coming back.</p>
+    <div class="wp-legend">
+      <div class="wp-legend-item"><div class="wp-dot" style="background:#c0392b"></div> Politics</div>
+      <div class="wp-legend-item"><div class="wp-dot" style="background:#e67e22"></div> Economy</div>
+      <div class="wp-legend-item"><div class="wp-dot" style="background:#27ae60"></div> Society</div>
+      <div class="wp-legend-item"><div class="wp-dot" style="background:#2980b9"></div> International</div>
+      <div class="wp-legend-item"><div class="wp-dot" style="background:#16a085"></div> Environment</div>
+    </div>
+    <div class="wp-scroll">
+      <table class="wp-table">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>19 May 2026</th>
+            <th>12 May 2026</th>
+            <th>5 May 2026</th>
+            <th>28 Apr 2026</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🇯🇵 Japan</td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>US tariff pressure &amp; trade deal talks</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>PM Ishiba budget &amp; approval slide</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Constitution Day — pacifism debate returns</div></td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>China tensions over Taiwan Strait</div></td>
+          </tr>
+          <tr>
+            <td>🇧🇷 Brazil</td>
+            <td><div class="wp-cell"><div class="wp-cat env"></div>Amazon dry-season fires begin early</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Lula approval dips; inflation creeps up</div></td>
+            <td><div class="wp-cell"><div class="wp-cat soc"></div>Indigenous land rights ruling</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>US tariff impact on Brazilian exports</div></td>
+          </tr>
+          <tr>
+            <td>🇫🇮 Finland</td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>NATO contribution &amp; defence spending</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Immigration policy tightening debate</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Energy independence from Russian gas</div></td>
+            <td><div class="wp-cell"><div class="wp-cat soc"></div>Youth mental health crisis</div></td>
+          </tr>
+          <tr>
+            <td>🇩🇰 Denmark</td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>Greenland &amp; US pressure — again</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Border controls &amp; migration vote</div></td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>Arctic sovereignty &amp; defence build-up</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Green energy exports to Germany</div></td>
+          </tr>
+          <tr>
+            <td>🇲🇾 Malaysia</td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>South China Sea incursions spike</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Ringgit weakness &amp; dollar peg debate</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>US-China trade war: which side to pick?</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Anwar Ibrahim reform stalls</div></td>
+          </tr>
+          <tr>
+            <td>🇰🇷 South Korea</td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Presidential election campaign heats up</div></td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>North Korea missile test provocation</div></td>
+            <td><div class="wp-cell"><div class="wp-cat soc"></div>Birth rate hits historic low — again</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>US tariffs hit Samsung &amp; Hyundai</div></td>
+          </tr>
+          <tr>
+            <td>🇵🇱 Poland</td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Presidential election — Tusk vs right</div></td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>Ukraine border: refugee fatigue grows</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Judiciary independence row with EU</div></td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>Russian threat &amp; Article 5 reassurance</div></td>
+          </tr>
+          <tr>
+            <td>🇵🇹 Portugal</td>
+            <td><div class="wp-cell"><div class="wp-cat soc"></div>Lisbon housing unaffordable for locals</div></td>
+            <td><div class="wp-cell"><div class="wp-cat soc"></div>Emigration: who's left to pay taxes?</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Tourism overload &amp; anti-gentrification</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Government minority — budget nerves</div></td>
+          </tr>
+          <tr>
+            <td>🇿🇦 South Africa</td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Eskom load-shedding returns</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>ANC-DA coalition tensions flare</div></td>
+            <td><div class="wp-cell"><div class="wp-cat soc"></div>Crime &amp; safety — new stats released</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Rand weakness &amp; credit downgrade risk</div></td>
+          </tr>
+          <tr>
+            <td>🇬🇭 Ghana</td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Mahama's first 100 days assessed</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>IMF debt restructuring conditions</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Cocoa prices &amp; farmer incomes</div></td>
+            <td><div class="wp-cell"><div class="wp-cat soc"></div>Youth unemployment — graduates emigrate</div></td>
+          </tr>
+          <tr>
+            <td>🇮🇪 Ireland</td>
+            <td><div class="wp-cell"><div class="wp-cat soc"></div>Rent crisis: no sign of easing</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Apple tax windfall — where does it go?</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Immigration — becoming a fault line</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Cost of living vs. corporate boom</div></td>
+          </tr>
+          <tr>
+            <td>🇮🇱 Israel</td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>Gaza ceasefire talks — again</div></td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>Hostage deal: families vs. government</div></td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>ICJ genocide case hearings</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Coalition: Haredi draft exemption row</div></td>
+          </tr>
+          <tr>
+            <td>🇮🇳 India</td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>Pakistan tensions after Operation Sindoor</div></td>
+            <td><div class="wp-cell"><div class="wp-cat sec"></div>India-Pakistan ceasefire — fragile</div></td>
+            <td><div class="wp-cell"><div class="wp-cat env"></div>Record heat wave across the subcontinent</div></td>
+            <td><div class="wp-cell"><div class="wp-cat pol"></div>Modi foreign policy &amp; Trump dynamics</div></td>
+          </tr>
+          <tr>
+            <td>🇦🇷 Argentina</td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Peso holds — Milei claims vindication</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>IMF deal signed; austerity bites</div></td>
+            <td><div class="wp-cell"><div class="wp-cat eco"></div>Inflation cooling — but still 80%+</div></td>
+            <td><div class="wp-cell"><div class="wp-cat soc"></div>Unions &amp; pensioners protest cuts</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <div class="page-footer-nav">
     <a href="index.html">← Back to Home</a>
     <button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to Top</button>
@@ -296,5 +448,30 @@
   <a href="water_cooler.html" class="active">💬 Water Cooler</a>
   <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
 </nav>
+
+<script>
+// ── Nav-tip viewport clamp ──
+document.querySelectorAll('.nav-tip-wrap').forEach(function(wrap) {
+  wrap.addEventListener('mouseenter', function() {
+    var tip = wrap.querySelector('.nav-tip');
+    if (!tip) return;
+    var wr = wrap.getBoundingClientRect();
+    var tw = 220;
+    // Too close to right edge?
+    if (wr.left + tw / 2 > window.innerWidth - 12) {
+      tip.style.left = 'auto'; tip.style.right = '0'; tip.style.transform = 'none';
+    }
+    // Too close to left edge?
+    else if (wr.right - tw / 2 < 12) {
+      tip.style.left = '0'; tip.style.transform = 'none';
+    }
+  });
+  wrap.addEventListener('mouseleave', function() {
+    var tip = wrap.querySelector('.nav-tip');
+    if (!tip) return;
+    tip.style.left = ''; tip.style.right = ''; tip.style.transform = '';
+  });
+});
+</script>
 </body>
 </html>
