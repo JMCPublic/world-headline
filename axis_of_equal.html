@@ -101,7 +101,7 @@
   .aoe-party.dimmed { opacity: 0.1; }
 
   /* ── Party hover tooltip ── */
-  .party-tooltip { display: none; position: fixed; z-index: 500;
+  .party-tooltip { display: none; position: fixed; z-index: 9999;
     background: #1a1a1a; color: #f5f3ee; border-radius: 6px;
     padding: 10px 13px; width: 200px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.35); pointer-events: none; }
@@ -161,6 +161,16 @@
   .bottom-nav a.active { background: #c0392b; color: #fff; }
   .bottom-nav span.sep { color: #555; font-size: 0.7rem; font-family: sans-serif; padding: 4px 4px; }
   .bottom-nav .bn-label { color: #666; font-size: 0.65rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px; }
+  .score-explainer { margin: 18px 0 0 0; border: 1px solid #e8e4dd; border-radius: 6px; overflow: hidden; }
+  .score-explainer summary { font-size: 0.68rem; font-family: sans-serif; font-weight: 700; color: #888; cursor: pointer; padding: 9px 14px; list-style: none; user-select: none; }
+  .score-explainer summary::-webkit-details-marker { display: none; }
+  .score-explainer summary::before { content: '▶ '; font-size: 0.55rem; }
+  .score-explainer[open] summary::before { content: '▼ '; }
+  .score-explainer summary:hover { color: #555; background: #faf9f7; }
+  .score-explainer-body { padding: 12px 16px 14px; font-size: 0.7rem; font-family: sans-serif; color: #777; line-height: 1.7; border-top: 1px solid #f0ece5; }
+  .score-explainer-body strong { color: #444; }
+  .score-explainer-body .se-row { display: flex; gap: 10px; margin: 6px 0; }
+  .score-explainer-body .se-label { font-weight: 700; color: #555; min-width: 130px; }
 </style>
 </head>
 <body>
@@ -370,6 +380,16 @@
     </div>
   </div>
 
+  <details class="score-explainer">
+    <summary>How is Best Place to Be scored?</summary>
+    <div class="score-explainer-body">
+      Each party on the chart is given a <strong>spectrum position from 0 to 100</strong> — 0 is the furthest left, 100 the furthest right, 50 is the centre. These positions are editorial assessments based on manifestos, stated policies, and voting records.<br><br>
+      When you pick a political identity, it maps to an <strong>ideal position</strong> on that same scale (e.g. Social Democrat = 38, Liberal/Centrist = 50, Traditional Conservative = 73). The tool then looks at every country and finds the party whose position is <em>closest</em> to your ideal.<br><br>
+      <strong>Score formula:</strong> <code>max(0, round(100 − distance × 2.2))</code><br>
+      A perfect match scores 100. Each point of distance costs 2.2 points. A party 45 points away scores 1; any further and the country drops off the list entirely.
+    </div>
+  </details>
+
   <p class="aoe-note">
     Positions are editorial assessments based on manifestos, stated positions, and voting records — not algorithmic.<br>
     Hover over any badge for the party's full name. Use the controls above to highlight a lean or compare countries side by side.
@@ -577,9 +597,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function moveTip(e) {
-    var x = e.clientX + 14;
-    var y = e.clientY - 10;
-    if (x + 210 > window.innerWidth) x = e.clientX - 214;
+    var x = e.clientX + 18;
+    var y = e.clientY - 14;
+    if (x + 210 > window.innerWidth) x = e.clientX - 218;
+    if (y < 4) y = 4;
     tip.style.left = x + 'px';
     tip.style.top  = y + 'px';
   }
