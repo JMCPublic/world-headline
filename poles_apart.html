@@ -113,6 +113,19 @@
   .bottom-nav a.active { background: #c0392b; color: #fff; }
   .bottom-nav span.sep { color: #555; font-size: 0.7rem; font-family: sans-serif; padding: 4px 4px; }
   .bottom-nav .bn-label { color: #666; font-size: 0.65rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px; }
+
+  /* ── Consensus Panel ── */
+  .consensus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .consensus-card { background: #1a1a1a; border-radius: 6px; padding: 16px 18px; border-left: 3px solid #e8c97a; }
+  .cc-country { font-size: 0.62rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: #e8c97a; margin-bottom: 6px; }
+  .cc-headline { font-size: 0.82rem; font-family: sans-serif; font-weight: 700; color: #f5f3ee;
+    margin-bottom: 8px; line-height: 1.4; }
+  .cc-papers { font-size: 0.65rem; font-family: sans-serif; color: #aaa; margin-bottom: 8px; }
+  .cc-papers span { background: #2c2c2c; padding: 2px 7px; border-radius: 3px; margin-right: 4px; display: inline-block; }
+  .cc-note { font-size: 0.68rem; font-family: sans-serif; color: #888; line-height: 1.55; font-style: italic; }
+  .cc-rare { font-size: 0.58rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #c0392b; margin-top: 8px; border-top: 1px solid #333; padding-top: 6px; }
 </style>
 </head>
 <body>
@@ -560,6 +573,66 @@
     </div><!-- /aoe-wrapper -->
   </div><!-- /pa-section#axis-of-equal -->
 
+
+  <div class="pa-section" id="consensus">
+    <div class="pa-section-title">🤝 The Consensus Moments</div>
+    <div class="pa-section-sub">When left and right papers in the same country agree — that's when you should pay attention</div>
+    <p style="font-size:0.74rem;font-family:sans-serif;color:#777;margin-bottom:20px;line-height:1.6;">
+      Most of the time, left and right papers in the same country cover the same story from opposite angles. But occasionally — rarely — they reach the same conclusion. When Haaretz and Israel Hayom agree, when the Guardian and the Daily Mail agree, something remarkable is happening. These are those moments.
+    </p>
+    <div class="consensus-grid">
+
+      <div class="consensus-card">
+        <div class="cc-country">🇮🇱 Israel</div>
+        <div class="cc-headline">The hostage families deserve an answer — and the government has none</div>
+        <div class="cc-papers"><span>Haaretz</span><span>Israel Hayom</span><span>Yedioth Ahronoth</span></div>
+        <div class="cc-note">Across the political spectrum, Israeli media has converged on one thing: the hostage crisis is the country's open wound. Left papers focus on political failure; right papers focus on military pressure. But both demand resolution. The government's inability to deliver a deal has become the rare story that unites the press.</div>
+        <div class="cc-rare">⚡ Rare consensus — normally poles apart</div>
+      </div>
+
+      <div class="consensus-card">
+        <div class="cc-country">🇬🇧 United Kingdom</div>
+        <div class="cc-headline">The NHS is in structural crisis — not a funding crisis</div>
+        <div class="cc-papers"><span>Guardian</span><span>Daily Telegraph</span><span>The Times</span></div>
+        <div class="cc-note">Left papers blame underfunding; right papers blame inefficiency. But both have arrived at the same conclusion: the current model isn't working and incremental fixes won't fix it. The disagreement is about solutions — the agreement, quietly, is that something structural has to change.</div>
+        <div class="cc-rare">⚡ Rare consensus — normally poles apart</div>
+      </div>
+
+      <div class="consensus-card">
+        <div class="cc-country">🇩🇪 Germany</div>
+        <div class="cc-headline">AfD's rise reflects a failure of mainstream politics — not just a protest vote</div>
+        <div class="cc-papers"><span>Süddeutsche Zeitung</span><span>FAZ</span><span>Die Welt</span></div>
+        <div class="cc-note">Left papers blame economic anxiety and inequality; right papers blame cultural alienation and migration policy failures. But all three have stopped treating AfD support as irrational or temporary. The consensus: something real is being expressed, and ignoring it has made it worse.</div>
+        <div class="cc-rare">⚡ Rare consensus — cross-spectrum agreement</div>
+      </div>
+
+      <div class="consensus-card">
+        <div class="cc-country">🇺🇸 United States</div>
+        <div class="cc-headline">The US national debt trajectory is unsustainable</div>
+        <div class="cc-papers"><span>New York Times</span><span>Wall Street Journal</span><span>Washington Post</span></div>
+        <div class="cc-note">Almost nothing unites US media right now. But fiscal analysts across the spectrum have converged: the debt-to-GDP trajectory is dangerous regardless of who is in power. Left papers blame tax cuts; right papers blame spending. Neither side has a politically viable solution — and that, quietly, is the consensus.</div>
+        <div class="cc-rare">⚡ Rare consensus — in a divided media landscape</div>
+      </div>
+
+      <div class="consensus-card">
+        <div class="cc-country">🇮🇪 Ireland</div>
+        <div class="cc-headline">Ireland's housing crisis is now a national emergency</div>
+        <div class="cc-papers"><span>Irish Times</span><span>Irish Independent</span><span>Irish Examiner</span></div>
+        <div class="cc-note">Irish papers disagree on almost everything else, but all three have declared housing a generational crisis in near-identical terms. Causes are contested — planning rules, investment funds, population growth — but the diagnosis is the same. Ireland is the rare country where even the solutions are beginning to converge: more state building.</div>
+        <div class="cc-rare">⚡ Strong consensus — unusually aligned</div>
+      </div>
+
+      <div class="consensus-card">
+        <div class="cc-country">🇯🇵 Japan</div>
+        <div class="cc-headline">Japan's demographic collapse has no comfortable answer</div>
+        <div class="cc-papers"><span>Asahi Shimbun</span><span>Yomiuri Shimbun</span><span>Nikkei</span></div>
+        <div class="cc-note">Left papers call for more immigration and gender equality; right papers resist both but have no alternative. On the underlying diagnosis — that Japan's birth rate collapse is an existential challenge with no solution that doesn't require changing something fundamental about Japanese society — there is quiet, uncomfortable agreement across the press.</div>
+        <div class="cc-rare">⚡ Consensus on problem — not on solution</div>
+      </div>
+
+    </div>
+  </div><!-- /pa-section#consensus -->
+
   <div class="page-footer-nav">
     <a href="index.html">← Back to Home</a>
     <button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to Top</button>
@@ -582,5 +655,30 @@
   <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
 </nav>
+
+<script>
+// ── Nav-tip viewport clamp ──
+document.querySelectorAll('.nav-tip-wrap').forEach(function(wrap) {
+  wrap.addEventListener('mouseenter', function() {
+    var tip = wrap.querySelector('.nav-tip');
+    if (!tip) return;
+    var wr = wrap.getBoundingClientRect();
+    var tw = 220;
+    // Too close to right edge?
+    if (wr.left + tw / 2 > window.innerWidth - 12) {
+      tip.style.left = 'auto'; tip.style.right = '0'; tip.style.transform = 'none';
+    }
+    // Too close to left edge?
+    else if (wr.right - tw / 2 < 12) {
+      tip.style.left = '0'; tip.style.transform = 'none';
+    }
+  });
+  wrap.addEventListener('mouseleave', function() {
+    var tip = wrap.querySelector('.nav-tip');
+    if (!tip) return;
+    tip.style.left = ''; tip.style.right = ''; tip.style.transform = '';
+  });
+});
+</script>
 </body>
 </html>

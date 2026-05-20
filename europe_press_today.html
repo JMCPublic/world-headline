@@ -1094,7 +1094,7 @@
   <div id="region-central" class="region-panel">
     <div class="tier2-tabs">
       <div class="tab-wrap"><button class="tier2-tab active" onclick="showCountry('central','poland',this)">🇵🇱 Poland</button><div class="country-stats"><div class="cs-name">🇵🇱 Poland</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Warsaw</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>38m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Party-list proportional</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Republic (Parliamentary)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#27ae60">Centre</span></div><div class="cs-govt-detail">KO + TD + Lewica coalition</div><div class="cs-leader">PM: Donald Tusk (KO)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> PiS (Law & Justice)</div><div class="cs-opp-leader">Jarosław Kaczyński</div><div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> Confederation</div><div class="cs-opp-leader">Sławomir Mentzen</div></div></div>
-      <button class="tier2-tab" onclick="showCountry('central','czechia',this)">🇨🇿 Czech Republic</button>
+      <div class="tab-wrap"><button class="tier2-tab" onclick="showCountry('central','czechia',this)">🇨🇿 Czech Republic</button><div class="country-stats"><div class="cs-name">🇨🇿 Czech Republic</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Prague</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>10.9m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Party-list proportional</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Parliamentary Republic</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22">Centre Right</span></div><div class="cs-govt-detail">ANO + SPD + Motorists coalition</div><div class="cs-leader">PM: Andrej Babiš (ANO)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> SPOLU (ODS-led)</div><div class="cs-opp-leader">Petr Fiala</div><div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> Pirates + STAN</div><div class="cs-opp-leader">Zdeněk Hřib</div></div></div>
       <button class="tier2-tab" onclick="showCountry('central','hungary',this)">🇭🇺 Hungary</button>
       <div class="tab-wrap"><button class="tier2-tab" onclick="showCountry('central','austria',this)">🇦🇹 Austria</button><div class="country-stats"><div class="cs-name">🇦🇹 Austria</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Vienna</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>9.1m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Party-list proportional</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Federal Parliamentary Republic</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22">Centre Right</span></div><div class="cs-govt-detail">ÖVP + SPÖ + NEOS coalition</div><div class="cs-leader">Chancellor: Christian Stocker (ÖVP)</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#7b241c">Far Right</span> FPÖ (Freedom Party)</div><div class="cs-opp-leader">Herbert Kickl</div></div></div>
       <button class="tier2-tab" onclick="showCountry('central','balkans',this)">🗺 Balkans</button>
@@ -1172,7 +1172,74 @@
       </div></div>
     </div><!-- /central-poland -->
 
-    <div id="central-czechia" class="country-panel"><div class="coming-soon"><div class="cs-flag">🇨🇿</div><h3>Czech Republic — Coming Soon</h3><p>Deník N (left), MF Dnes (centre), Právo (centre-left). One of Central Europe's most stable democracies — and a country watching its eastern and western neighbours with growing unease.</p></div></div>
+    <div id="central-czechia" class="country-panel">
+
+      <h2 class="section-title">🇨🇿 Czech Republic — The Czech Press Today</h2>
+
+      <!-- Deník N -->
+      <div class="paper-block">
+        <div class="paper-header">
+          <div class="paper-lean lean-left">◀ Centre-Left / Liberal</div>
+          <div class="paper-name">Deník N</div>
+          <div class="paper-meta">Founded 2014 · Prague · Czech Republic's leading independent investigative daily</div>
+          <div class="paper-tone">Liberal · Pro-EU · Investigative · Sharply critical of Babiš</div>
+        </div>
+        <div class="stories-list">
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Babiš back in power: the democracy stress test begins</div><div class="story-tease">He won fairly. Now watch what he does with it.</div><div class="story-detail">Deník N leads with an assessment of Babiš's first months back in office — a government critics feared would weaponise state institutions, and which is already moving to reshape the public broadcaster, judicial appointments, and media regulation. The paper notes the coalition's 108-seat majority gives it room to move fast.</div><a class="story-url" href="https://denikn.cz" target="_blank" onclick="event.stopPropagation()">denikn.cz</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Czech public media under pressure — editors warn of political interference</div><div class="story-tease">It starts with appointments. It ends with editorial direction.</div><div class="story-detail">Editors at Czech Television and Czech Radio report government pressure over appointment processes for senior roles. Deník N documents parallel tactics seen in Hungary under Orbán, noting the Czech government has studied the playbook carefully.</div><a class="story-url" href="https://denikn.cz" target="_blank" onclick="event.stopPropagation()">denikn.cz</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Czech EU policy pivots: less Brussels, more Budapest</div><div class="story-tease">The centre of gravity in Central Europe is shifting.</div><div class="story-detail">The new government has quietly aligned with Hungary and Slovakia on several EU votes, including on Ukraine aid and migration. Deník N tracks what it calls a "soft Visegrád realignment" — not dramatic, but consistent.</div><a class="story-url" href="https://denikn.cz" target="_blank" onclick="event.stopPropagation()">denikn.cz</a></div>
+        </div>
+        <div class="hobby-horse"><h4>🏇 Deník N's Hobby Horse</h4>
+          <div class="tracker-row"><div class="tracker-topic">Babiš conflict of interest &amp; Stork Nest</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">4/8</div></div>
+          <div class="tracker-row"><div class="tracker-topic">Rule of law &amp; judicial independence</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">3/8</div></div>
+        </div>
+      </div>
+
+      <!-- MF Dnes -->
+      <div class="paper-block">
+        <div class="paper-header">
+          <div class="paper-lean lean-right">▶ Centre-Right</div>
+          <div class="paper-name">MF Dnes</div>
+          <div class="paper-meta">Circ. ~200,000 · Prague · Czech Republic's largest daily</div>
+          <div class="paper-tone">Centre-right · Owned by Babiš's MAFRA group · Pro-stability · Business-friendly</div>
+        </div>
+        <div class="stories-list">
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">New government stabilises economy — growth forecast revised up</div><div class="story-tease">Business confidence is returning. Investors are watching.</div><div class="story-detail">MF Dnes leads with encouraging economic indicators under the new government: inflation down to 2.8%, GDP growth revised upward, and foreign investment figures holding steady. The paper frames the election result as a mandate for economic stability over ideological experimentation.</div><a class="story-url" href="https://www.idnes.cz" target="_blank" onclick="event.stopPropagation()">idnes.cz</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Prague housing: city council must unlock more land for building</div><div class="story-tease">Supply is the problem. Red tape is the villain.</div><div class="story-detail">MF Dnes focuses on the Prague housing crisis through a pro-market lens — insufficient building permits, slow planning decisions, and over-regulation blocking new supply. The solution, the paper argues, is deregulation and faster approvals, not rent controls.</div><a class="story-url" href="https://www.idnes.cz" target="_blank" onclick="event.stopPropagation()">idnes.cz</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Czech-US trade relations: tariff risk and how to manage it</div><div class="story-tease">Czech industry is deeply exposed. The government knows it.</div><div class="story-detail">Czech auto and manufacturing exports to the US are vulnerable to Trump-era tariff policy. MF Dnes examines which sectors face the greatest risk and whether bilateral negotiations can carve out Czech exemptions, given the country's NATO contributions and pro-American posture.</div><a class="story-url" href="https://www.idnes.cz" target="_blank" onclick="event.stopPropagation()">idnes.cz</a></div>
+        </div>
+        <div class="hobby-horse"><h4>🏇 MF Dnes's Hobby Horse</h4>
+          <div class="tracker-row"><div class="tracker-topic">Prague housing supply &amp; planning</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">3/8</div></div>
+          <div class="tracker-row"><div class="tracker-topic">Economic competitiveness vs. EU regulation</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">2/8</div></div>
+        </div>
+      </div>
+
+      <!-- Právo -->
+      <div class="paper-block">
+        <div class="paper-header">
+          <div class="paper-lean lean-left">◀ Centre-Left</div>
+          <div class="paper-name">Právo</div>
+          <div class="paper-meta">Founded 1920 · Prague · Traditional centre-left daily</div>
+          <div class="paper-tone">Centre-left · Pro-welfare · Trade union-friendly · Social democratic tradition</div>
+        </div>
+        <div class="stories-list">
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Wage growth lagging inflation — workers still losing ground</div><div class="story-tease">The numbers look better. The pay packets don't feel it.</div><div class="story-detail">Despite headline inflation falling, Právo reports that real wages for Czech workers in manufacturing, healthcare, and education remain below 2021 levels in purchasing power terms. The paper is sceptical of the government's economic optimism, calling it "boardroom confidence, not kitchen table confidence."</div><a class="story-url" href="https://www.novinky.cz" target="_blank" onclick="event.stopPropagation()">novinky.cz</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Czech healthcare: waiting lists hit record as doctors emigrate</div><div class="story-tease">Training doctors for Germany since 1993.</div><div class="story-detail">A Právo investigation finds record waiting times across Czech hospitals as qualified doctors continue to emigrate to Germany and Austria for salaries two to three times higher. The paper argues the government's fiscal caution is underfunding a system already at breaking point.</div><a class="story-url" href="https://www.novinky.cz" target="_blank" onclick="event.stopPropagation()">novinky.cz</a></div>
+          <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">SPD in government: far-right policy without the label</div><div class="story-tease">Okamura gets ministry posts. Watch what he does with them.</div><div class="story-detail">Právo profiles the SPD's role in the coalition, noting the far-right party now controls several ministries and is quietly advancing policies on migration, education, and public commemoration it couldn't pass in opposition. The paper warns the coalition is normalising the far-right faster than voters realise.</div><a class="story-url" href="https://www.novinky.cz" target="_blank" onclick="event.stopPropagation()">novinky.cz</a></div>
+        </div>
+        <div class="hobby-horse"><h4>🏇 Právo's Hobby Horse</h4>
+          <div class="tracker-row"><div class="tracker-topic">Healthcare underfunding &amp; doctor emigration</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">4/8</div></div>
+          <div class="tracker-row"><div class="tracker-topic">Workers' wages vs. cost of living</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">3/8</div></div>
+        </div>
+      </div>
+
+      <div class="blind-spot"><h3>🔭 Czech Republic's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Babiš's media empire</div><div class="blind-item-desc">Andrej Babiš owns MAFRA, which publishes MF Dnes and runs iDnes.cz — two of Czech Republic's largest news outlets. The conflict of interest between owning the government and owning the press is rarely examined in the very papers affected by it.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Czech Roma population</div><div class="blind-item-desc">One of Europe's largest Roma communities lives in the Czech Republic, facing systemic discrimination in housing, education, and employment. The mainstream press covers individual incidents but rarely the structural picture.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Communist-era accountability</div><div class="blind-item-desc">The StB (secret police) files from the communist era implicate many prominent figures still active in Czech public life. The subject surfaces periodically but rarely receives the sustained investigation it deserves.</div></div>
+      </div></div>
+
+    </div><!-- /central-czechia -->
     <div id="central-hungary" class="country-panel"><div class="coming-soon"><div class="cs-flag">🇭🇺</div><h3>Hungary — Coming Soon</h3><p>Telex (independent/liberal), Magyar Nemzet (pro-Orbán), 24.hu (centre). The EU's most illiberal state — and a press landscape almost entirely captured by pro-government interests.</p></div></div>
     <div id="central-austria" class="country-panel">
 
@@ -1301,5 +1368,53 @@
   <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
 </nav>
+
+<script>
+// ── Nav-tip viewport clamp ──
+document.querySelectorAll('.nav-tip-wrap').forEach(function(wrap) {
+  wrap.addEventListener('mouseenter', function() {
+    var tip = wrap.querySelector('.nav-tip');
+    if (!tip) return;
+    var wr = wrap.getBoundingClientRect();
+    var tw = 220;
+    // Too close to right edge?
+    if (wr.left + tw / 2 > window.innerWidth - 12) {
+      tip.style.left = 'auto'; tip.style.right = '0'; tip.style.transform = 'none';
+    }
+    // Too close to left edge?
+    else if (wr.right - tw / 2 < 12) {
+      tip.style.left = '0'; tip.style.transform = 'none';
+    }
+  });
+  wrap.addEventListener('mouseleave', function() {
+    var tip = wrap.querySelector('.nav-tip');
+    if (!tip) return;
+    tip.style.left = ''; tip.style.right = ''; tip.style.transform = '';
+  });
+});
+</script>
+<script>
+// ── Country-stats card viewport clamp ──
+document.querySelectorAll('.country-item, .tab-wrap').forEach(function(item) {
+  item.addEventListener('mouseenter', function() {
+    var card = item.querySelector('.country-stats');
+    if (!card) return;
+    var ir = item.getBoundingClientRect();
+    var cw = 245, ch = 300;
+    if (ir.right + cw + 10 > window.innerWidth) {
+      card.style.left = 'auto'; card.style.right = '105%';
+    }
+    if (ir.top + ch > window.innerHeight - 10) {
+      card.style.top = 'auto'; card.style.bottom = '0';
+    }
+  });
+  item.addEventListener('mouseleave', function() {
+    var card = item.querySelector('.country-stats');
+    if (!card) return;
+    card.style.left = ''; card.style.right = '';
+    card.style.top = ''; card.style.bottom = '';
+  });
+});
+</script>
 </body>
 </html>
