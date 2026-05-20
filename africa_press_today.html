@@ -222,8 +222,170 @@
           <div class="cs-opp-leader">Mahamudu Bawumia (2024 candidate)</div>
         </div>
       </div>
-      <button class="tier2-tab soon">🇳🇬 Nigeria — Soon</button>
+      <div class="tab-wrap">
+        <button class="tier2-tab" onclick="showCountry('west','nigeria',this)">🇳🇬 Nigeria</button>
+        <div class="country-stats">
+          <div class="cs-name">🇳🇬 Nigeria</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Abuja</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>230m (most populous in Africa)</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>First Past the Post (Presidential)</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Federal Republic (Presidential)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#e67e22">Centre Right</span></div>
+          <div class="cs-govt-detail">APC — All Progressives Congress</div>
+          <div class="cs-leader">President: Bola Tinubu</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> PDP — Peoples Democratic Party</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#27ae60">Centre Left</span> LP — Labour Party (Peter Obi)</div>
+        </div>
+      </div>
       <button class="tier2-tab soon">🇸🇳 Senegal — Soon</button>
+    </div>
+
+    <!-- NIGERIA -->
+    <div id="west-nigeria" class="country-panel">
+      <div class="country-title">🇳🇬 Nigeria — Press Today</div>
+      <div class="papers">
+
+        <!-- The Punch — Left/Centre-Left -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-left">◀ Left / Centre-Left</div>
+            <div class="paper-name">The Punch</div>
+            <div class="paper-desc">Nigeria's highest-circulation newspaper. Outspoken, irreverent, often critical of the Tinubu government. Strong on accountability and anti-corruption.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Fuel subsidy removal: one year on, millions still can't afford transport or cooking gas
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                President Tinubu's shock removal of the petrol subsidy in May 2023 triggered a cost-of-living crisis that The Punch has tracked relentlessly. Pump prices quadrupled; food prices followed. The paper argues the pain has been borne almost entirely by ordinary Nigerians while elite beneficiaries of the old subsidy regime were never held accountable. It calls for direct cash transfers to offset the impact — a promise made but largely undelivered.
+                <a href="https://punchng.com" class="story-url" target="_blank">→ punchng.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Naira devaluation has wiped out middle-class savings — CBN under fire
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Central Bank of Nigeria's unification of exchange rates in 2023 sent the naira plunging, eroding savings, pushing up import prices and triggering a wave of business closures. The Punch is sharply critical of the CBN's management, questioning whether devaluation served ordinary Nigerians or currency speculators. Inflation has since eased from a peak of 34% toward 14%, but The Punch argues recovery is uneven and fragile.
+                <a href="https://punchng.com" class="story-url" target="_blank">→ punchng.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Insecurity crisis: kidnapping, banditry and Boko Haram still claim lives across the North
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Mass kidnappings for ransom, armed banditry in the Northwest, and residual Boko Haram/ISWAP activity in the Northeast continue to displace millions. The Punch covers security as a governance failure — arguing the military is overstretched, underfunded and politically constrained from tackling the roots of violence: poverty, unemployment and weak local government. It is critical of the Tinubu administration for insufficient urgency.
+                <a href="https://punchng.com" class="story-url" target="_blank">→ punchng.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vanguard — Centre -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre</div>
+            <div class="paper-name">Vanguard</div>
+            <div class="paper-desc">Widely read Lagos-based daily. Balanced news coverage with a business and development focus. Less partisan than The Punch, covers government and opposition with similar scepticism.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                GDP growth at 3.98% — Nigeria's economy improving on paper, but Nigerians don't feel it
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Nigeria's headline GDP growth has recovered to near 4% but Vanguard consistently notes the disconnect between macro statistics and lived experience. Oil production remains below OPEC quotas due to theft and infrastructure decay; the non-oil economy is growing but from a low base. The paper calls for a credible jobs strategy targeting the 33% unemployment rate — the real measure of whether reforms are working.
+                <a href="https://vanguardngr.com" class="story-url" target="_blank">→ vanguardngr.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Tax reform bills signed: four major laws reshape Nigeria's revenue architecture
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                In June 2025, President Tinubu signed four landmark tax reform bills into law, consolidating Nigeria's fragmented revenue laws, adjusting VAT thresholds and overhauling company income tax. Vanguard covers the reforms with cautious optimism — noting they were contested by Northern governors and the Labour Party, who feared reduced allocations to states. The paper urges transparent implementation and strong FIRS enforcement.
+                <a href="https://vanguardngr.com" class="story-url" target="_blank">→ vanguardngr.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Food security emergency: Tinubu's April 2025 declaration one year on — what changed?
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                President Tinubu declared a food security emergency in April 2025 after a UN report found 31 million Nigerians facing acute food insecurity. Vanguard's follow-up coverage asks whether the declaration translated into meaningful action: emergency food imports were approved, grain reserves were released, but farmgate prices remain high and insecurity continues to displace farmers in the country's breadbasket regions.
+                <a href="https://vanguardngr.com" class="story-url" target="_blank">→ vanguardngr.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ThisDay — Right / Pro-Business -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-right">▶ Right / Pro-Business</div>
+            <div class="paper-name">ThisDay</div>
+            <div class="paper-desc">Lagos-based business and politics daily. Generally supportive of Tinubu's economic reforms. Voice of Nigeria's corporate and financial establishment. Close ties to APC policy circles.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Reforms are working: inflation falls to 14.45%, foreign investment returning to Nigeria
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                ThisDay frames the Tinubu economic programme as a difficult but necessary structural transformation. It highlights inflation falling from a 34% peak to around 14% by November 2025, improved CBN credibility after exchange-rate unification, and renewed interest from foreign investors in Nigerian bonds and equities. The paper argues the pain of 2023–24 was the price of ending decades of economic distortions.
+                <a href="https://thisdaylive.com" class="story-url" target="_blank">→ thisdaylive.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Lagos free trade zone and Lekki Deep Sea Port driving new economic corridors
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                ThisDay covers Nigeria's infrastructure and investment story enthusiastically. The Lekki Deep Sea Port, now fully operational, has begun to reduce the chronic congestion at Apapa that added billions to Nigeria's logistics costs. Combined with the Lagos free trade zone, ThisDay argues Nigeria is building the physical infrastructure of a competitive emerging market — if the policy environment holds.
+                <a href="https://thisdaylive.com" class="story-url" target="_blank">→ thisdaylive.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                2027 election landscape: APC must consolidate reform gains to retain the presidency
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                With the 2027 general elections approaching, ThisDay is tracking the political landscape carefully. It frames Tinubu's path to re-election as dependent on whether economic improvements become visible to voters before the campaign — lower inflation, more stable naira, and security gains in the North. The paper is broadly supportive of the APC position but urges the party to widen its coalition beyond Lagos and the Southwest.
+                <a href="https://thisdaylive.com" class="story-url" target="_blank">→ thisdaylive.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Blind spots -->
+      <div class="blind-spots">
+        <div class="blind-title">🕳 What Nigerian papers tend not to cover</div>
+        <div class="blind-item">
+          <span class="blind-label">Herders-farmers conflict</span> — The chronic violence between Fulani herdsmen and farming communities in the Middle Belt kills thousands annually but receives minimal sustained coverage relative to its scale. Ethnic and religious sensitivities make editors cautious.
+        </div>
+        <div class="blind-item">
+          <span class="blind-label">Oil theft and elite capture</span> — Nigeria loses an estimated 200,000 barrels per day to pipeline theft. The networks involved reach into the military and political class. Investigative reporting on this is rare; journalists who pursue it face serious risk.
+        </div>
+        <div class="blind-item">
+          <span class="blind-label">LGBTQ+ rights</span> — Nigeria's Same-Sex Marriage Prohibition Act (2014) criminalises same-sex relationships with up to 14 years in prison. Press coverage is almost uniformly hostile; human rights dimensions are largely absent from mainstream reporting.
+        </div>
+      </div>
     </div>
 
     <!-- GHANA -->
