@@ -33,6 +33,11 @@
       #e67e22 66%, #c0392b 80%,
       #7b241c 90%, #1a0000 100%); }
   .aoe-axis-labels { display: flex; justify-content: space-between; font-size: 0.59rem; font-family: sans-serif; color: #888; }
+  .aoe-scale-row { display: flex; justify-content: space-between; font-size: 0.58rem; font-family: sans-serif; margin-top: 3px; padding: 0 1px; }
+  .aoe-scale-row span { min-width: 18px; text-align: center; font-weight: 700; }
+  .aoe-scale-row .sl { color: #2980b9; }
+  .aoe-scale-row .sc { color: #27ae60; font-size: 0.65rem; }
+  .aoe-scale-row .sr { color: #c0392b; }
 
   /* ── Control panels ── */
   .controls-row { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -106,6 +111,7 @@
     text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 3px; }
   .pt-status.gov { background: #27ae60; color: #fff; }
   .pt-status.opp { background: #555; color: #ddd; }
+  .pt-score { font-size: 0.65rem; font-family: sans-serif; color: #aaa; margin-top: 6px; border-top: 1px solid #333; padding-top: 5px; }
 
 
   .aoe-note { font-size: 0.68rem; font-family: sans-serif; color: #999; font-style: italic; text-align: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid #e8e4dd; line-height: 1.7; }
@@ -176,7 +182,10 @@
   <a href="middleeast_press_today.html">🕌 Middle East</a>
   <span class="sep">|</span>
   <a href="poles_apart.html">⚡ Poles Apart</a>
+  <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html" class="active">⚖️ Axis of Equal</a>
+  <span class="sep">|</span>
+  <a href="#bptb-section">🌍 Best Place to Be</a>
 </nav>
 <div class="top-spectrum"></div>
 
@@ -242,26 +251,6 @@
   </div>
 
 
-  <!-- ── Best Place to Be ── -->
-  <div class="bptb-section">
-    <h3>🌍 Best Place to Be</h3>
-    <div class="bptb-intro">Pick your political identity — see which countries have the strongest mainstream representation for your views, ranked by how closely a real party matches your position on the spectrum.</div>
-    <div class="bptb-identities">
-      <button class="bptb-btn" data-ideal="5" data-color="#8B0000" data-label="Communist / Far Left">☭ Communist</button>
-      <button class="bptb-btn" data-ideal="22" data-color="#2980b9" data-label="Socialist">🔴 Socialist</button>
-      <button class="bptb-btn" data-ideal="30" data-color="#27ae60" data-label="Green / Environmentalist">🌿 Green</button>
-      <button class="bptb-btn" data-ideal="38" data-color="#5dade2" data-label="Social Democrat">🌹 Social Democrat</button>
-      <button class="bptb-btn" data-ideal="50" data-color="#27ae60" data-label="Liberal / Centrist">🌐 Liberal / Centrist</button>
-      <button class="bptb-btn" data-ideal="60" data-color="#e67e22" data-label="Fiscal Conservative">💼 Fiscal Conservative</button>
-      <button class="bptb-btn" data-ideal="73" data-color="#c0392b" data-label="Traditional Conservative">🏛️ Traditional Conservative</button>
-      <button class="bptb-btn" data-ideal="84" data-color="#7b241c" data-label="Nationalist / Far Right">⚡ Nationalist</button>
-    </div>
-    <div class="bptb-results" id="bptb-results">
-      <div class="bptb-result-title" id="bptb-result-title"></div>
-      <div class="bptb-list" id="bptb-list"></div>
-    </div>
-  </div>
-
   <div class="aoe-legend">
     <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#2980b9"></div>Left</div>
     <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#5dade2"></div>Centre-Left</div>
@@ -283,6 +272,29 @@
       <span>Centre-Right</span>
       <span>Right ▶</span>
       <span>⚡ Fascist</span>
+    </div>
+    <div class="aoe-scale-row">
+      <span class="sl">10</span>
+      <span class="sl">9</span>
+      <span class="sl">8</span>
+      <span class="sl">7</span>
+      <span class="sl">6</span>
+      <span class="sl">5</span>
+      <span class="sl">4</span>
+      <span class="sl">3</span>
+      <span class="sl">2</span>
+      <span class="sl">1</span>
+      <span class="sc">0</span>
+      <span class="sr">1</span>
+      <span class="sr">2</span>
+      <span class="sr">3</span>
+      <span class="sr">4</span>
+      <span class="sr">5</span>
+      <span class="sr">6</span>
+      <span class="sr">7</span>
+      <span class="sr">8</span>
+      <span class="sr">9</span>
+      <span class="sr">10</span>
     </div>
   </div>
 
@@ -334,6 +346,27 @@
       <span class="aoe-oos-tag">🇧🇾 Belarus — authoritarian</span>
       <span class="aoe-oos-tag">🇹🇲 Turkmenistan — one-party</span>
       <span class="aoe-oos-tag">🇪🇷 Eritrea — no elections</span>
+    </div>
+  </div>
+
+
+  <!-- ── Best Place to Be ── -->
+  <div class="bptb-section" id="bptb-section">
+    <h3>🌍 Best Place to Be</h3>
+    <div class="bptb-intro">Pick your political identity — see which countries have the strongest mainstream representation for your views, ranked by how closely a real party matches your position on the spectrum.</div>
+    <div class="bptb-identities">
+      <button class="bptb-btn" data-ideal="5" data-color="#8B0000" data-label="Communist / Far Left">☭ Communist</button>
+      <button class="bptb-btn" data-ideal="22" data-color="#2980b9" data-label="Socialist">🔴 Socialist</button>
+      <button class="bptb-btn" data-ideal="30" data-color="#27ae60" data-label="Green / Environmentalist">🌿 Green</button>
+      <button class="bptb-btn" data-ideal="38" data-color="#5dade2" data-label="Social Democrat">🌹 Social Democrat</button>
+      <button class="bptb-btn" data-ideal="50" data-color="#27ae60" data-label="Liberal / Centrist">🌐 Liberal / Centrist</button>
+      <button class="bptb-btn" data-ideal="60" data-color="#e67e22" data-label="Fiscal Conservative">💼 Fiscal Conservative</button>
+      <button class="bptb-btn" data-ideal="73" data-color="#c0392b" data-label="Traditional Conservative">🏛️ Traditional Conservative</button>
+      <button class="bptb-btn" data-ideal="84" data-color="#7b241c" data-label="Nationalist / Far Right">⚡ Nationalist</button>
+    </div>
+    <div class="bptb-results" id="bptb-results">
+      <div class="bptb-result-title" id="bptb-result-title"></div>
+      <div class="bptb-list" id="bptb-list"></div>
     </div>
   </div>
 
@@ -426,4 +459,136 @@ function getCountryParties() {
   return countries;
 }
 
-function scoreCoun
+function scoreCountry(parties, idealPos) {
+  let best = null;
+  let bestDist = 999;
+  parties.forEach(function(p) {
+    const dist = Math.abs(p.pos - idealPos);
+    if (dist < bestDist) { bestDist = dist; best = p; }
+  });
+  if (!best) return null;
+  const score = Math.max(0, Math.round(100 - bestDist * 2.2));
+  return { party: best, score: score };
+}
+
+document.querySelectorAll('.bptb-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.bptb-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const idealPos = parseFloat(btn.dataset.ideal);
+    const color    = btn.dataset.color || '#888';
+    const label    = btn.dataset.label || '';
+
+    const allCountries = getCountryParties();
+    const ranked = Object.entries(allCountries).map(function([key, data]) {
+      const result = scoreCountry(data.parties, idealPos);
+      return result ? { name: data.name, key: key, party: result.party, score: result.score } : null;
+    }).filter(Boolean).sort((a,b) => b.score - a.score);
+
+    const titleEl = document.getElementById('bptb-result-title');
+    const listEl  = document.getElementById('bptb-list');
+    const resultsEl = document.getElementById('bptb-results');
+
+    titleEl.textContent = 'Best countries for a ' + label + ' voter — ranked by closest mainstream party match:';
+    listEl.innerHTML = '';
+
+    ranked.slice(0, 12).forEach(function(item, i) {
+      const rankClass = i === 0 ? ' gold' : i === 1 ? ' silver' : i === 2 ? ' bronze' : '';
+      const rankSymbol = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1);
+      const barWidth = item.score + '%';
+      listEl.innerHTML += '<div class="bptb-card">' +
+        '<div class="bptb-rank' + rankClass + '">' + rankSymbol + '</div>' +
+        '<div class="bptb-info">' +
+          '<div class="bptb-cname">' + item.name + '</div>' +
+          '<div class="bptb-party">Closest: ' + item.party.name + '</div>' +
+          '<div class="bptb-bar-wrap"><div class="bptb-bar" style="width:' + barWidth + ';background:' + color + '"></div></div>' +
+        '</div>' +
+        '<div style="font-size:0.72rem;font-family:sans-serif;color:#888;min-width:32px;text-align:right;padding-top:2px">' + item.score + '</div>' +
+        '</div>';
+    });
+
+    resultsEl.classList.add('open');
+  });
+});
+
+// ── Deep-link navigation ──
+document.addEventListener('DOMContentLoaded', function() {
+  const hash = location.hash.slice(1);
+  if (hash === 'best-place-to-be') {
+    const el = document.getElementById('bptb-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+
+<!-- ── Party tooltip ── -->
+<div class="party-tooltip" id="partyTooltip">
+  <div class="pt-name" id="ptName"></div>
+  <div class="pt-leader" id="ptLeader"></div>
+  <div class="pt-status" id="ptStatus"></div>
+  <div class="pt-score" id="ptScore"></div>
+</div>
+
+<script>
+// ── Party hover tooltip ──
+(function() {
+  const tip = document.getElementById('partyTooltip');
+  const tipName   = document.getElementById('ptName');
+  const tipLeader = document.getElementById('ptLeader');
+  const tipStatus = document.getElementById('ptStatus');
+
+  const tipScore  = document.getElementById('ptScore');
+
+  document.querySelectorAll('.aoe-party').forEach(function(el) {
+    el.addEventListener('mouseenter', function(e) {
+      tipName.textContent   = el.getAttribute('title') || '';
+      const leader = el.getAttribute('data-leader') || '';
+      tipLeader.textContent = leader ? '\u{1F464} ' + leader : '';
+      const status = el.getAttribute('data-status') || '';
+      tipStatus.textContent = status === 'gov' ? '\u25CF In Government' : status === 'opp' ? '\u25CB Opposition' : '';
+      tipStatus.className   = 'pt-status ' + status;
+      var styleStr = el.getAttribute('style') || '';
+      var lm = styleStr.match(/left:(\d+(?:\.\d+)?)%/);
+      if (lm) {
+        var pos = parseFloat(lm[1]);
+        var rawScore = Math.abs(pos - 50) / 5;
+        var score = Math.round(rawScore * 10) / 10;
+        var side = pos < 49.5 ? 'Left ' : pos > 50.5 ? 'Right ' : '';
+        tipScore.textContent = '\uD83D\uDCCD Spectrum: ' + (side === '' ? 'Centre (0)' : side + score.toFixed(1) + ' / 10');
+      } else {
+        tipScore.textContent = '';
+      }
+      tip.style.display     = 'block';
+      moveTip(e);
+    });
+    el.addEventListener('mousemove', moveTip);
+    el.addEventListener('mouseleave', function() { tip.style.display = 'none'; });
+  });
+
+  function moveTip(e) {
+    var x = e.clientX + 14;
+    var y = e.clientY - 10;
+    if (x + 210 > window.innerWidth) x = e.clientX - 214;
+    tip.style.left = x + 'px';
+    tip.style.top  = y + 'px';
+  }
+})();
+</script>
+
+<nav class="bottom-nav">
+  <span class="bn-label">Navigate:</span>
+  <a href="index.html">🏠 Home</a>
+  <span class="sep">|</span>
+  <a href="uk_press_today.html">🇬🇧 UK</a>
+  <a href="europe_press_today.html">🌍 Europe</a>
+  <a href="americas_press_today.html">🌎 Americas</a>
+  <a href="asia_press_today.html">🌏 Asia-Pacific</a>
+  <a href="africa_press_today.html">🌍 Africa</a>
+  <a href="middleeast_press_today.html">🕌 Middle East</a>
+  <span class="sep">|</span>
+  <a href="poles_apart.html">⚡ Poles Apart</a>
+  <a href="water_cooler.html">💬 Water Cooler</a>
+  <a href="axis_of_equal.html" class="active">⚖️ Axis of Equal</a>
+</nav>
+</body>
+</html>

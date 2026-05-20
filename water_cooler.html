@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Water Cooler — World Headline</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Georgia", serif; background: #f5f3ee; color: #1a1a1a; min-height: 100vh; }
+  header { background: #1a1a1a; color: #f5f3ee; padding: 18px 32px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  header h1 { font-size: 1.4rem; letter-spacing: 0.08em; font-weight: 700; }
+  header .subtitle { font-size: 0.75rem; color: #888; font-family: sans-serif; margin-left: auto; }
+  .region-nav { background: #2c2c2c; padding: 8px 32px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .region-nav a { color: #ccc; text-decoration: none; font-size: 0.72rem; font-family: sans-serif; padding: 4px 10px; border-radius: 3px; transition: background 0.15s; }
+  .region-nav a:hover { background: #444; color: #fff; }
+  .region-nav a.active { background: #c0392b; color: #fff; }
+  .region-nav span.sep { color: #555; font-size: 0.7rem; font-family: sans-serif; padding: 4px 4px; }
+  .spectrum-bar { height: 4px; background: linear-gradient(to right, #2980b9, #27ae60, #c0392b); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+
+  /* ── Page hero ── */
+  .wc-hero { text-align: center; padding: 40px 20px 28px; border-bottom: 2px solid #1a1a1a; margin-bottom: 36px; }
+  .wc-hero h2 { font-size: 2rem; letter-spacing: 0.04em; margin-bottom: 10px; }
+  .wc-hero .wc-tagline { font-size: 0.95rem; color: #555; font-family: sans-serif; font-style: italic; max-width: 640px; margin: 0 auto 12px; line-height: 1.6; }
+  .wc-hero .wc-note { font-size: 0.7rem; color: #999; font-family: sans-serif; }
+
+  /* ── Water Cooler cards ── */
+  .wc-section-title { font-size: 1rem; font-weight: 700; letter-spacing: 0.03em; border-left: 4px solid #c0392b; padding-left: 14px; margin-bottom: 6px; }
+  .wc-section-sub { font-size: 0.72rem; font-family: sans-serif; color: #888; margin-left: 18px; margin-bottom: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .wc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 8px; }
+  .wc-card { background: #fff; border: 1px solid #e8e4dd; border-radius: 6px; padding: 18px; }
+  .wc-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0ece5; }
+  .wc-flag { font-size: 1.6rem; }
+  .wc-country { font-size: 0.9rem; font-weight: 700; }
+  .wc-context { font-size: 0.65rem; font-family: sans-serif; color: #999; }
+  .wc-item { font-size: 0.78rem; font-family: sans-serif; color: #444; line-height: 1.5; padding: 6px 0 6px 14px; border-bottom: 1px solid #f5f3ee; position: relative; }
+  .wc-item:last-child { border-bottom: none; }
+  .wc-item::before { content: "💬"; position: absolute; left: 0; font-size: 0.65rem; top: 7px; }
+
+  /* ── Hobby horses ── */
+  .wc-hobbyhorses { margin-top: 40px; background: #1a1a1a; color: #f5f3ee; border-radius: 6px; padding: 28px 32px; }
+  .wc-hobbyhorses h3 { font-size: 1rem; font-weight: 700; letter-spacing: 0.04em; color: #e8c97a; margin-bottom: 6px; }
+  .wc-hobbyhorses .hh-sub { font-size: 0.7rem; font-family: sans-serif; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 24px; }
+  .hh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .hh-region { margin-bottom: 0; }
+  .hh-region-name { font-size: 0.82rem; font-weight: 700; font-family: sans-serif; color: #e8c97a; margin-bottom: 6px; }
+  .hh-topics { font-size: 0.76rem; font-family: sans-serif; color: #ccc; line-height: 1.7; }
+
+  /* ── Footer nav ── */
+  .page-footer-nav { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e8e4dd; }
+  .page-footer-nav a, .page-footer-nav button { font-size: 0.76rem; font-family: sans-serif; color: #c0392b; text-decoration: none; background: none; border: 1px solid #e8c5c5; border-radius: 4px; padding: 6px 16px; cursor: pointer; transition: all 0.15s; min-width: 160px; text-align: center; }
+  .page-footer-nav a:hover, .page-footer-nav button:hover { background: #c0392b; color: #fff; border-color: #c0392b; }
+
+  /* ── Bottom nav ── */
+  .bottom-nav { background: #2c2c2c; padding: 16px 32px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 48px; }
+  .bottom-nav a { color: #ccc; text-decoration: none; font-size: 0.72rem; font-family: sans-serif; padding: 4px 10px; border-radius: 3px; transition: background 0.15s; }
+  .bottom-nav a:hover { background: #444; color: #fff; }
+  .bottom-nav a.active { background: #c0392b; color: #fff; }
+  .bottom-nav span.sep { color: #555; font-size: 0.7rem; font-family: sans-serif; padding: 4px 4px; }
+  .bottom-nav .bn-label { color: #666; font-size: 0.65rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>WORLD HEADLINE</h1>
+  <span class="subtitle">The Water Cooler — What the world is talking about this week</span>
+</header>
+
+<nav class="region-nav">
+  <a href="index.html">🏠 Home</a>
+  <span class="sep">|</span>
+  <a href="uk_press_today.html">🇬🇧 UK</a>
+  <a href="europe_press_today.html">🌍 Europe</a>
+  <span class="sep">|</span>
+  <a href="americas_press_today.html">🌎 Americas</a>
+  <a href="asia_press_today.html">🌏 Asia-Pacific</a>
+  <a href="africa_press_today.html">🌍 Africa</a>
+  <a href="middleeast_press_today.html">🕌 Middle East</a>
+  <span class="sep">|</span>
+  <a href="poles_apart.html">⚡ Poles Apart</a>
+  <a href="water_cooler.html" class="active">💬 Water Cooler</a>
+  <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
+</nav>
+<div class="spectrum-bar"></div>
+
+<div class="container">
+
+  <div class="wc-hero">
+    <h2>💬 The Water Cooler</h2>
+    <p class="wc-tagline">If you walked into an office in Tokyo, São Paulo, Helsinki, or Johannesburg this week — what would people actually be talking about? Not the headlines. The thing underneath the headlines.</p>
+    <p class="wc-note">Updated weekly · 14 countries · Week of 19 May 2026</p>
+  </div>
+
+  <div class="wc-section-title">What people are talking about this week</div>
+  <div class="wc-section-sub">Three conversations dominating each country right now</div>
+
+  <div class="wc-grid">
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇯🇵</div>
+        <div><div class="wc-country">Japan</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Whether Japan is really rearming — and what the neighbours think about it</div>
+      <div class="wc-item">The biggest pay rises in 30 years: why doesn't it feel like more money?</div>
+      <div class="wc-item">Trump's demands on the alliance and whether America can still be trusted</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇧🇷</div>
+        <div><div class="wc-country">Brazil</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">The Bolsonaro trial — justice or political theatre, depending who you ask</div>
+      <div class="wc-item">Lula's Amazon numbers: impressive stats, questionable on the Cerrado</div>
+      <div class="wc-item">US tariffs hitting Brazilian exports — who is Trump's trade war really for?</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇫🇮</div>
+        <div><div class="wc-country">Finland</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Two years in NATO — did it make Finland safer, or just more expensive?</div>
+      <div class="wc-item">The government's welfare cuts and who is actually bearing the cost</div>
+      <div class="wc-item">The 1,340km border with Russia and what it means to live next to it</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇩🇰</div>
+        <div><div class="wc-country">Denmark</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Trump and Greenland — a joke that doesn't feel funny when you live here</div>
+      <div class="wc-item">The immigration policy Denmark invented that the rest of Europe is now copying</div>
+      <div class="wc-item">Whether the 70% climate target is realistic when no one will touch the farmers</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇲🇾</div>
+        <div><div class="wc-country">Malaysia</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">The US-China trade war and which side Malaysia is supposed to be on</div>
+      <div class="wc-item">Anwar Ibrahim's unity government — is this reform or just a new arrangement?</div>
+      <div class="wc-item">Cost of living: the ringgit, subsidies, and the price of chicken</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇰🇷</div>
+        <div><div class="wc-country">South Korea</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">The martial law night — still processing what actually happened to the republic</div>
+      <div class="wc-item">Birth rate 0.72 — the world's lowest, and what it means for everyone's pension</div>
+      <div class="wc-item">North Korea supplying Russia — and the silence from Trump about it</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇵🇱</div>
+        <div><div class="wc-country">Poland</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Ukraine next door — fatigue is starting but fear of Russia is always underneath</div>
+      <div class="wc-item">Tusk vs the old PiS judiciary — the rule-of-law battle is not over</div>
+      <div class="wc-item">Poland's defence spending: the highest in NATO by GDP share, and rising</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇵🇹</div>
+        <div><div class="wc-country">Portugal</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Not being able to afford to live in the city you grew up in</div>
+      <div class="wc-item">Chega — where did this come from and is it going to keep growing?</div>
+      <div class="wc-item">Young Portuguese leaving for the UK and Switzerland — again</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇿🇦</div>
+        <div><div class="wc-country">South Africa</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Will the GNU hold? ANC and DA trading blows over the budget behind closed doors</div>
+      <div class="wc-item">300 days without load shedding — daring to believe the electricity nightmare might really be over</div>
+      <div class="wc-item">Jacob Zuma and the MK Party: how much of the country does he actually still speak for?</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇬🇭</div>
+        <div><div class="wc-country">Ghana</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Galamsey — illegal gold mining is still poisoning the rivers and nobody powerful enough to stop it</div>
+      <div class="wc-item">John Mahama's first 100 days: hope vs. the reality of an IMF programme that won't bend</div>
+      <div class="wc-item">Cocoa prices at record highs — why aren't farmers seeing the money?</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇮🇪</div>
+        <div><div class="wc-country">Ireland</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Housing — a generation locked out of ownership in Europe's fastest-growing economy, and no quick fix in sight</div>
+      <div class="wc-item">Immigration debate arrives in Ireland — the protests, the politics, and a question the country hasn't faced before</div>
+      <div class="wc-item">Corporation tax under pressure — will the golden goose survive OECD reform and Brussels ambitions?</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇮🇱</div>
+        <div><div class="wc-country">Israel</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Gaza ceasefire and hostage negotiations — when does the country finally exhale?</div>
+      <div class="wc-item">Judicial overhaul back on the coalition agenda — the protests haven't gone away</div>
+      <div class="wc-item">Economy contracting for the second year — Israelis abroad quietly asking if it's time to stay away</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇮🇳</div>
+        <div><div class="wc-country">India</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Pakistan border tensions — Operation Sindoor aftermath and whether the ceasefire holds</div>
+      <div class="wc-item">Rahul Gandhi and the INC revival — can the Opposition actually threaten BJP in 2029?</div>
+      <div class="wc-item">Record heat waves and water shortages — climate is finally an election issue, not just an activist one</div>
+    </div>
+
+    <div class="wc-card">
+      <div class="wc-header">
+        <div class="wc-flag">🇦🇷</div>
+        <div><div class="wc-country">Argentina</div><div class="wc-context">Week of 19 May 2026</div></div>
+      </div>
+      <div class="wc-item">Milei's chainsaw cuts — which public service is next and who bears the cost?</div>
+      <div class="wc-item">Inflation down on paper but prices still brutal — ordinary Argentines not yet feeling the win</div>
+      <div class="wc-item">IMF deal renewed — national sovereignty vs. the conditions that come with the money</div>
+    </div>
+
+  </div>
+
+  <div class="wc-hobbyhorses">
+    <h3>🌍 Regional Hobby Horses</h3>
+    <p class="hh-sub">The shared preoccupations that define each region — the debates that never quite go away</p>
+    <div class="hh-grid">
+      <div class="hh-region">
+        <div class="hh-region-name">🌨 Scandinavia & Nordics</div>
+        <div class="hh-topics">Welfare sustainability as populations age · The immigration consensus that the left finally joined · Institutional trust as a national competitive advantage · Ukraine fatigue vs. Russia anxiety living side by side</div>
+      </div>
+      <div class="hh-region">
+        <div class="hh-region-name">🌍 Western & Southern Europe</div>
+        <div class="hh-topics">The far-right surge that nobody predicted a decade ago · Housing as a generational crisis, not a market correction · NATO spending targets and who can actually afford them · The coherence of Brussels vs. the incoherence of member states</div>
+      </div>
+      <div class="hh-region">
+        <div class="hh-region-name">🌏 East Asia</div>
+        <div class="hh-topics">China's military posture and whether the US alliance is still reliable · Demographic collapse — ageing Japan, imploding Korean birth rate, one-child China legacy · Economic nationalism vs. export dependency</div>
+      </div>
+      <div class="hh-region">
+        <div class="hh-region-name">🌏 South-East Asia</div>
+        <div class="hh-topics">The US-China trade war and the impossible neutrality it demands · Corruption as the baseline political expectation · Development vs. democratic accountability — can you have both?</div>
+      </div>
+      <div class="hh-region">
+        <div class="hh-region-name">🌎 Latin America</div>
+        <div class="hh-topics">Inflation trauma — it happened before and could happen again · The pendulum between left populism and right populism with few stops in the centre · US influence that doesn't go away regardless of who's in the White House</div>
+      </div>
+      <div class="hh-region">
+        <div class="hh-region-name">🌍 Sub-Saharan Africa</div>
+        <div class="hh-topics">China's infrastructure deals vs. Western conditionality — who actually comes with fewer strings? · The post-colonial debt trap no-one wants to name directly · Youth unemployment as the continent's defining political pressure · Military coups normalising across the Sahel — and the anxiety spreading to neighbours</div>
+      </div>
+      <div class="hh-region">
+        <div class="hh-region-name">🕌 Middle East</div>
+        <div class="hh-topics">The question no democracy can comfortably answer: can you be liberal at home and illiberal in a conflict zone? · The Abraham Accords generation vs. the Gaza generation — two completely different political realities · What Iran's regional role means for everyone from Beirut to Riyadh · The secular-religious fault line that runs through every country in the region</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer-nav">
+    <a href="index.html">← Back to Home</a>
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to Top</button>
+  </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <span class="bn-label">Navigate:</span>
+  <a href="index.html">🏠 Home</a>
+  <span class="sep">|</span>
+  <a href="uk_press_today.html">🇬🇧 UK</a>
+  <a href="europe_press_today.html">🌍 Europe</a>
+  <a href="americas_press_today.html">🌎 Americas</a>
+  <a href="asia_press_today.html">🌏 Asia-Pacific</a>
+  <a href="africa_press_today.html">🌍 Africa</a>
+  <a href="middleeast_press_today.html">🕌 Middle East</a>
+  <span class="sep">|</span>
+  <a href="poles_apart.html">⚡ Poles Apart</a>
+  <a href="water_cooler.html" class="active">💬 Water Cooler</a>
+  <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
+</nav>
+</body>
+</html>
