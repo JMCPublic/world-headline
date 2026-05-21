@@ -22,8 +22,21 @@ import feedparser, anthropic
 
 # ── Date / Edition ────────────────────────────────────────────────────────────
 
-WEEK_OF      = datetime.date.today().strftime("%-d %B %Y")   # "2 June 2026"
+today        = datetime.date.today()
+WEEK_OF      = today.strftime("%-d %B %Y")                   # "2 June 2026"
 EDITION_STR  = f"Edition · Week of {WEEK_OF}"
+
+# Last Monday (today if today is Monday)
+days_since_monday = today.weekday()
+last_monday  = today - datetime.timedelta(days=days_since_monday)
+next_monday  = last_monday + datetime.timedelta(days=7)
+REFRESHED_STR = last_monday.strftime("Mon %-d %b %Y")        # "Mon 19 May 2026"
+NEXT_STR      = next_monday.strftime("Mon %-d %b %Y")        # "Mon 26 May 2026"
+EDITION_NOTICE = (
+    f"🗞️ Week of {last_monday.strftime('%-d %B %Y')} · "
+    f"Last refreshed: {REFRESHED_STR} · "
+    f"Next update: {NEXT_STR}"
+)
 
 # ── Paper registry ────────────────────────────────────────────────────────────
 # Each entry: name (must match exactly what's in the HTML's paper-name div),
@@ -255,8 +268,14 @@ RANK = "Lead" / "Second" / "Third". URL = original article link. DOMAIN = bare d
 import re, sys, datetime, textwrap, time, html as _html
 import feedparser, anthropic
 
-WEEK_OF     = datetime.date.today().strftime("%-d %B %Y")
-EDITION_STR = f"Edition - Week of {WEEK_OF}"
+_today2        = datetime.date.today()
+_last_mon      = _today2 - datetime.timedelta(days=_today2.weekday())
+_next_mon      = _last_mon + datetime.timedelta(days=7)
+WEEK_OF        = _last_mon.strftime("%-d %B %Y")
+EDITION_STR    = f"Edition · Week of {WEEK_OF}"
+EDITION_NOTICE = (f"🗞️ Week of {WEEK_OF} · "
+                  f"Last refreshed: {_last_mon.strftime('Mon %-d %b %Y')} · "
+                  f"Next update: {_next_mon.strftime('Mon %-d %b %Y')}")
 
 def fetch_rss(url, max_items=8):
     if not url:
@@ -322,7 +341,16 @@ def patch_stories(html, paper_name, new_stories_html):
     return html[:start] + new_block + html[end:], True
 
 def update_edition_tag(html, html_file):
-    return re.sub(r'<div class="edition-tag">[^<]+</div>', f'<div class="edition-tag">{EDITION_STR}</div>', html)
+    # Update per-country edition tags
+    html = re.sub(r'<div class="edition-tag">[^<]+</div>', f'<div class="edition-tag">{EDITION_STR}</div>', html)
+    # Update page-level edition notice
+    html = re.sub(
+        r'(<div class="[^"]*" id="pageEditionNotice"[^>]*>)[^<]*(</div>)',
+        rf'\g<1>{EDITION_NOTICE}\g<2>', html)
+    html = re.sub(
+        r'(<div class="page-edition-notice"[^>]*>)[^<]*(</div>)',
+        rf'\g<1>{EDITION_NOTICE}\g<2>', html)
+    return html
 
 def main():
     api_key = os.environ.get("ANTHROPIC_API_KEY")
