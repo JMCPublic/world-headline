@@ -103,6 +103,12 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
   .aoe-party:hover { z-index: 50; transform: translateX(-50%) scale(1.18); }
   .aoe-party.dimmed { opacity: 0.1; }
+  .party-pill-score { font-size: 0.42rem; font-weight: 400; opacity: 0.8; margin-left: 3px; letter-spacing: 0; }
+  .wpa-row-badge { display: inline-block; font-size: 0.48rem; font-family: sans-serif; font-weight: 700;
+    color: #7ec8e3; text-decoration: none; margin-left: 5px; vertical-align: middle;
+    border: 1px solid #7ec8e3; border-radius: 3px; padding: 0 3px; line-height: 1.5;
+    opacity: 0.85; white-space: nowrap; }
+  .wpa-row-badge:hover { opacity: 1; background: rgba(126,200,227,0.1); }
 
   /* ── Party hover tooltip ── */
   .party-tooltip { display: none; position: fixed; z-index: 9999;
@@ -288,6 +294,8 @@
 <button class="cpick-btn" data-country="italy">🇮🇹 Italy</button>
 <button class="cpick-btn" data-country="spain">🇪🇸 Spain</button>
 <button class="cpick-btn" data-country="portugal">🇵🇹 Portugal</button>
+<button class="cpick-btn" data-country="greece">🇬🇷 Greece</button>
+<button class="cpick-btn" data-country="turkey">🇹🇷 Turkey</button>
 <button class="cpick-btn" data-country="poland">🇵🇱 Poland</button>
 <button class="cpick-btn" data-country="ireland">🇮🇪 Ireland</button>
 <button class="cpick-btn" data-country="austria">🇦🇹 Austria</button>
@@ -305,8 +313,10 @@
 <button class="cpick-btn" data-country="argentina">🇦🇷 Argentina</button>
 <button class="cpick-btn" data-country="nigeria">🇳🇬 Nigeria</button>
 <button class="cpick-btn" data-country="kenya">🇰🇪 Kenya</button>
+<button class="cpick-btn" data-country="senegal">🇸🇳 Senegal</button>
 <button class="cpick-btn" data-country="colombia">🇨🇴 Colombia</button>
 <button class="cpick-btn" data-country="chile">🇨🇱 Chile</button>
+<button class="cpick-btn" data-country="peru">🇵🇪 Peru</button>
 <button class="cpick-btn" data-country="taiwan">🇹🇼 Taiwan</button>
 <button class="cpick-btn" data-country="philippines">🇵🇭 Philippines</button>
 <button class="cpick-btn" data-country="hungary">🇭🇺 Hungary</button>
@@ -402,6 +412,8 @@
     <div class="aoe-row" data-country="italy"><div class="aoe-cname">🇮🇹 Italy</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:30%;top:4px;" data-leader="Giuseppe Conte" data-status="opp" data-name="M5S">M5S</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:36%;top:26px;" data-leader="Elly Schlein" data-status="opp" data-name="PD">PD</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:64%;top:4px;" data-leader="Antonio Tajani" data-status="gov" data-name="Forza Italia">Forza Italia</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:76%;top:4px;" data-leader="Matteo Salvini" data-status="gov" data-name="Lega">Lega</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:83%;top:26px;" data-leader="Giorgia Meloni" data-status="gov" data-name="FdI (Meloni)">FdI (Meloni)</div></div></div>
     <div class="aoe-row" data-country="spain"><div class="aoe-cname">🇪🇸 Spain</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:22%;top:4px;" data-leader="Yolanda Díaz" data-status="gov" data-name="Sumar">Sumar</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:38%;top:4px;" data-leader="Pedro Sánchez" data-status="gov" data-name="PSOE">PSOE</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:65%;top:4px;" data-leader="Alberto Núñez Feijóo" data-status="opp" data-name="PP">PP</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:83%;top:4px;" data-leader="Santiago Abascal" data-status="opp" data-name="Vox">Vox</div></div></div>
     <div class="aoe-row" data-country="portugal"><div class="aoe-cname">🇵🇹 Portugal</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:18%;top:4px;" data-leader="Mariana Mortágua" data-status="opp" data-name="Left Bloc">Left Bloc</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:37%;top:4px;" data-leader="Pedro Nuno Santos" data-status="opp" data-name="PS">PS</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:63%;top:4px;" data-leader="Luís Montenegro" data-status="gov" data-name="PSD / AD">PSD / AD</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:83%;top:4px;" data-leader="André Ventura" data-status="opp" data-name="Chega">Chega</div></div></div>
+    <div class="aoe-row" data-country="greece"><div class="aoe-cname">🇬🇷 Greece</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="far-left" style="background:#922b21;left:10%;top:4px;" data-leader="Dimitris Koutsoumbas" data-status="opp" data-name="KKE">KKE</div><div class="aoe-party" data-lean="left" style="background:#2980b9;left:25%;top:4px;" data-leader="Stefanos Kasselakis" data-status="opp" data-name="SYRIZA">SYRIZA</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:40%;top:4px;" data-leader="Nikos Androulakis" data-status="opp" data-name="PASOK">PASOK</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:65%;top:4px;" data-leader="Kyriakos Mitsotakis" data-status="gov" data-name="New Democracy">New Democracy</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:76%;top:26px;" data-leader="Kyriakos Velopoulos" data-status="opp" data-name="Greek Solution">Greek Solution</div></div></div>
+    <div class="aoe-row" data-country="turkey"><div class="aoe-cname">🇹🇷 Turkey</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:20%;top:4px;" data-leader="Pervin Buldan / Tuncer Bakırhan" data-status="opp" data-name="HDP/DEM">HDP/DEM</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:38%;top:4px;" data-leader="Özgür Özel" data-status="opp" data-name="CHP">CHP</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:70%;top:4px;" data-leader="Recep Tayyip Erdoğan" data-status="gov" data-name="AKP">AKP</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:80%;top:26px;" data-leader="Devlet Bahçeli" data-status="gov" data-name="MHP">MHP</div></div></div>
     <div class="aoe-row" data-country="poland"><div class="aoe-cname">🇵🇱 Poland</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:27%;top:4px;" data-leader="Włodzimierz Czarzasty" data-status="gov" data-name="Lewica">Lewica</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:45%;top:4px;" data-leader="Donald Tusk" data-status="gov" data-name="KO (Tusk)">KO (Tusk)</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:73%;top:4px;" data-leader="Jarosław Kaczyński" data-status="opp" data-name="PiS">PiS</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:81%;top:26px;" data-leader="Sławomir Mentzen" data-status="opp" data-name="Confederation">Confederation</div></div></div>
     <div class="aoe-row" data-country="ireland"><div class="aoe-cname">🇮🇪 Ireland</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:25%;top:4px;" data-leader="Mary Lou McDonald" data-status="opp" data-name="Sinn Féin">Sinn Féin</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:37%;top:4px;" data-leader="Ivana Bacik" data-status="opp" data-name="Labour">Labour</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:50%;top:4px;" data-leader="Micheál Martin" data-status="gov" data-name="Fianna Fáil">Fianna Fáil</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:62%;top:4px;" data-leader="Simon Harris" data-status="gov" data-name="Fine Gael">Fine Gael</div></div></div>
     <div class="aoe-row" data-country="austria"><div class="aoe-cname">🇦🇹 Austria</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:32%;top:4px;" data-leader="Werner Kogler" data-status="opp" data-name="Greens">Greens</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:38%;top:26px;" data-leader="Andreas Babler" data-status="gov" data-name="SPÖ">SPÖ</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:48%;top:4px;" data-leader="Beate Meinl-Reisinger" data-status="gov" data-name="NEOS">NEOS</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:63%;top:26px;" data-leader="Christian Stocker" data-status="gov" data-name="ÖVP">ÖVP</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:82%;top:4px;" data-leader="Herbert Kickl" data-status="opp" data-name="FPÖ">FPÖ</div></div></div>
@@ -429,11 +441,13 @@
     <div class="aoe-row" data-country="india"><div class="aoe-cname">🇮🇳 India</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:22%;top:4px;" data-leader="M.A. Baby" data-status="opp" data-name="CPI(M)">CPI(M)</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:38%;top:4px;" data-leader="Rahul Gandhi / M. Kharge" data-status="opp" data-name="Congress">Congress</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:65%;top:4px;" data-leader="Narendra Modi" data-status="gov" data-name="BJP">BJP</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:79%;top:26px;" data-leader="Mohan Bhagwat" data-status="gov" data-name="RSS wing">RSS wing</div></div></div>
     <div class="aoe-region-header" data-region="southamerica">🌎 South America</div>
     <div class="aoe-row" data-country="chile"><div class="aoe-cname">🇨🇱 Chile</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:22%;top:4px;" data-leader="Gabriel Boric" data-status="gov" data-name="Frente Amplio">Frente Amplio</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:40%;top:26px;" data-leader="Carolina Tohá" data-status="gov" data-name="Concertación">Concertación</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:67%;top:4px;" data-leader="Evelyn Matthei" data-status="opp" data-name="Chile Vamos">Chile Vamos</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:84%;top:26px;" data-leader="José A. Kast" data-status="opp" data-name="Republicano">Republicano</div></div></div>
+    <div class="aoe-row" data-country="peru"><div class="aoe-cname">🇵🇪 Peru</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:18%;top:4px;" data-leader="Vladimir Cerrón" data-status="opp" data-name="Perú Libre">Perú Libre</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:40%;top:4px;" data-leader="César Acuña" data-status="opp" data-name="Alianza Progreso">Alianza Progreso</div><div class="aoe-party" data-lean="centre" style="background:#95a5a6;left:52%;top:26px;" data-leader="Dina Boluarte" data-status="gov" data-name="Boluarte/Govt">Boluarte/Govt</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:74%;top:4px;" data-leader="Keiko Fujimori" data-status="opp" data-name="Fuerza Popular">Fuerza Popular</div></div></div>
     <div class="aoe-row" data-country="colombia"><div class="aoe-cname">🇨🇴 Colombia</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:22%;top:4px;" data-leader="Gustavo Petro" data-status="gov" data-name="Pacto Histórico">Pacto Histórico</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:50%;top:4px;" data-leader="César Gaviria" data-status="opp" data-name="Partido Liberal">Partido Liberal</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:73%;top:4px;" data-leader="Álvaro Uribe" data-status="opp" data-name="Centro Democrático">Centro Democrático</div></div></div>
     <div class="aoe-row" data-country="argentina"><div class="aoe-cname">🇦🇷 Argentina</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:20%;top:4px;" data-leader="Cristina Fernández de Kirchner" data-status="opp" data-name="Kirchnerism">Kirchnerism</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:47%;top:4px;" data-leader="Sergio Massa" data-status="opp" data-name="PJ centre">PJ centre</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:63%;top:4px;" data-leader="Mauricio Macri" data-status="opp" data-name="PRO">PRO</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:87%;top:26px;" data-leader="Javier Milei" data-status="gov" data-name="Milei / LLA">Milei / LLA</div></div></div>
     <div class="aoe-region-header" data-region="africa">🌍 Africa</div>
     <div class="aoe-row" data-country="nigeria"><div class="aoe-cname">🇳🇬 Nigeria</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:42%;top:4px;" data-leader="Peter Obi" data-status="opp" data-name="Labour Party">Labour Party</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:46%;top:26px;" data-leader="Atiku Abubakar" data-status="opp" data-name="PDP">PDP</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:62%;top:4px;" data-leader="Bola Tinubu" data-status="gov" data-name="APC">APC</div></div></div>
     <div class="aoe-row" data-country="kenya"><div class="aoe-cname">🇰🇪 Kenya</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:37%;top:4px;" data-leader="Raila Odinga" data-status="opp" data-name="ODM">ODM</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:47%;top:26px;" data-leader="Kalonzo Musyoka" data-status="opp" data-name="Wiper">Wiper</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:64%;top:4px;" data-leader="William Ruto" data-status="gov" data-name="UDA">UDA</div></div></div>
+    <div class="aoe-row" data-country="senegal"><div class="aoe-cname">🇸🇳 Senegal</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:24%;top:4px;" data-leader="Bassirou Diomaye Faye / Ousmane Sonko" data-status="gov" data-name="Pastef">Pastef</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:52%;top:4px;" data-leader="Macky Sall" data-status="opp" data-name="Benno Yakaar">Benno Yakaar</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:66%;top:4px;" data-leader="Abdoulaye Wade" data-status="opp" data-name="PDS">PDS</div></div></div>
 
   </div>
 
@@ -708,6 +722,10 @@ const PARTY_FISCAL = {
   'Sumar':16, 'PSOE':38, 'PP':66, 'Vox':56,
   // Portugal
   'Left Bloc':14, 'PS':38, 'PSD / AD':64, 'Chega':58,
+  // Greece
+  'KKE':10, 'SYRIZA':28, 'PASOK':42, 'New Democracy':65, 'Greek Solution':76,
+  // Turkey
+  'HDP/DEM':22, 'CHP':42, 'AKP':68, 'MHP':72,
   // Poland
   'Lewica':28, 'KO (Tusk)':54, 'PiS':40, 'Confederation':76,
   // Ireland (Labour skipped — collision with UK Labour)
@@ -742,12 +760,20 @@ const PARTY_FISCAL = {
   'Labour Party':42, 'PDP':48, 'APC':56,
   // Kenya
   'ODM':40, 'Wiper':46, 'UDA':58,
+  // Senegal
+  'Pastef':30, 'Benno Yakaar':50, 'PDS':60,
+  // Senegal
+  'Pastef':26, 'Benno Yakaar':52, 'PDS':65,
   // Hungary
   'DK':36, 'Tisza':56, 'Fidesz':46,
   // Colombia
   'Pacto Histórico':20, 'Partido Liberal':48, 'Centro Democrático':70,
   // Chile
   'Frente Amplio':22, 'Concertación':40, 'Chile Vamos':66, 'Republicano':74,
+  // Peru
+  'Perú Libre':20, 'Alianza Progreso':46, 'Boluarte/Govt':52, 'Fuerza Popular':70,
+  // Peru
+  'Perú Libre':16, 'Alianza Progreso':44, 'Boluarte/Govt':54, 'Fuerza Popular':75,
   // Taiwan
   'DPP':46, 'TPP':56, 'KMT':54,
   // Philippines
@@ -779,6 +805,10 @@ const PARTY_SOCIAL = {
   'Sumar':14, 'PSOE':30, 'PP':62, 'Vox':84,
   // Portugal
   'Left Bloc':18, 'PS':32, 'PSD / AD':58, 'Chega':77,
+  // Greece
+  'KKE':18, 'SYRIZA':30, 'PASOK':46, 'New Democracy':58, 'Greek Solution':78,
+  // Turkey
+  'HDP/DEM':22, 'CHP':44, 'AKP':76, 'MHP':82,
   // Poland
   'Lewica':22, 'KO (Tusk)':42, 'PiS':82, 'Confederation':86,
   // Ireland (Labour skipped)
@@ -1011,6 +1041,10 @@ document.addEventListener('DOMContentLoaded', function() {
     'Sumar': 2022, 'PSOE': 1879, 'PP': 1989, 'Vox': 2013,
     // Portugal
     'Left Bloc': 1999, 'PS': 1973, 'PSD / AD': 1974, 'Chega': 2019,
+    // Greece
+    'KKE': 1918, 'SYRIZA': 2004, 'PASOK': 1974, 'New Democracy': 1974, 'Greek Solution': 2016,
+    // Turkey
+    'HDP/DEM': 2012, 'CHP': 1923, 'AKP': 2001, 'MHP': 1969,
     // Poland
     'Lewica': 2021, 'KO (Tusk)': 2018, 'PiS': 2001, 'Confederation': 2019,
     // Ireland (Labour skipped — collision with UK Labour above)
@@ -1045,12 +1079,16 @@ document.addEventListener('DOMContentLoaded', function() {
     'Labour Party': 2002, 'PDP': 1998, 'APC': 2013,
     // Kenya
     'ODM': 2005, 'Wiper': 2008, 'UDA': 2020,
+    // Senegal
+    'Pastef': 2014, 'Benno Yakaar': 2012, 'PDS': 1974,
     // Hungary
     'DK': 2011, 'Tisza': 2024, 'Fidesz': 1988,
     // Colombia
     'Pacto Histórico': 2021, 'Partido Liberal': 1848, 'Centro Democrático': 2013,
     // Chile
     'Frente Amplio': 2017, 'Concertación': 1988, 'Chile Vamos': 2015, 'Republicano': 2019,
+    // Peru
+    'Perú Libre': 2020, 'Alianza Progreso': 2001, 'Boluarte/Govt': 2022, 'Fuerza Popular': 2010,
     // Taiwan
     'DPP': 1986, 'TPP': 2019, 'KMT': 1919,
     // Philippines
@@ -1102,6 +1140,36 @@ document.addEventListener('DOMContentLoaded', function() {
     tip.style.left = x + 'px';
     tip.style.top  = y + 'px';
   }
+})();
+// ── Party pill score badges ──
+(function() {
+  document.querySelectorAll('.aoe-party').forEach(function(el) {
+    var styleStr = el.getAttribute('style') || '';
+    var lm = styleStr.match(/left:(\d+(?:\.\d+)?)%/);
+    if (!lm) return;
+    var pos = parseFloat(lm[1]);
+    var score = (pos / 10).toFixed(1);
+    var span = document.createElement('span');
+    span.className = 'party-pill-score';
+    span.textContent = score;
+    el.appendChild(span);
+  });
+})();
+// ── "When Parties Agree" row badges ──
+(function() {
+  var wpaCountries = ['united-kingdom','united-states','germany','australia','france','israel','japan','sweden'];
+  wpaCountries.forEach(function(c) {
+    var row = document.querySelector('.aoe-row[data-country="' + c + '"]');
+    if (!row) return;
+    var cname = row.querySelector('.aoe-cname');
+    if (!cname) return;
+    var a = document.createElement('a');
+    a.className = 'wpa-row-badge';
+    a.href = 'poles_apart.html#when-parties-agree';
+    a.title = 'Parties agree on at least one issue — see When Parties Agree (Poles Apart)';
+    a.textContent = '🤝 agrees';
+    cname.appendChild(a);
+  });
 })();
 // ── Country Similarity & Rankings ──
 (function() {
