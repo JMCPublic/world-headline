@@ -33,9 +33,9 @@ EDITION_STR  = f"Edition · Week of {WEEK_OF}"
 PAPERS = [
 
     # ── United Kingdom ────────────────────────────────────────────────────────
-    {"country":"uk",    "name":"The Observer",                   "lean":"Left",                   "html":"uk_press_today.html",        "rss":"https://www.theguardian.com/uk/rss"},
-    {"country":"uk",    "name":"The Sunday Times",               "lean":"Centre-right",           "html":"uk_press_today.html",        "rss":"https://www.thetimes.co.uk/rss"},
-    {"country":"uk",    "name":"Mail on Sunday",                 "lean":"Right",                  "html":"uk_press_today.html",        "rss":"https://www.dailymail.co.uk/articles.rss"},
+    {"country":"uk",    "name":"The Guardian",                   "lean":"Left",                   "html":"uk_press_today.html",        "rss":"https://www.theguardian.com/uk/rss"},
+    {"country":"uk",    "name":"The Times",                      "lean":"Centre-right",           "html":"uk_press_today.html",        "rss":"https://www.thetimes.co.uk/rss"},
+    {"country":"uk",    "name":"Daily Mail",                     "lean":"Right",                  "html":"uk_press_today.html",        "rss":"https://www.dailymail.co.uk/articles.rss"},
 
     # ── France ────────────────────────────────────────────────────────────────
     {"country":"france","name":"Libération",                     "lean":"Left",                   "html":"europe_press_today.html",    "rss":"https://www.liberation.fr/arc/outboundfeeds/rss/"},
