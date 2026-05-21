@@ -80,15 +80,19 @@
   .aoe-cname { width: 175px; min-width: 175px; font-size: 0.74rem; font-family: sans-serif; padding-top: 6px; color: #444; flex-shrink: 0; }
   .aoe-track {
     flex: 1; border-radius: 3px; position: relative; min-height: 30px;
-    /* swim-lane gridlines at 20%, 35%, 50%, 65%, 80% */
+    /* 1-unit grid lines every 10% (= 1.0 on scale) + zone boundaries at 35%/65% + bold centre at 50% */
     background:
-      linear-gradient(rgba(0,0,0,0.07) 0,rgba(0,0,0,0.07) 100%) 10% 0/1px 100% no-repeat,
-      linear-gradient(rgba(0,0,0,0.07) 0,rgba(0,0,0,0.07) 100%) 20% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.04) 0,rgba(0,0,0,0.04) 100%) 10% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.06) 0,rgba(0,0,0,0.06) 100%) 20% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.04) 0,rgba(0,0,0,0.04) 100%) 30% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.04) 0,rgba(0,0,0,0.04) 100%) 40% 0/1px 100% no-repeat,
       linear-gradient(rgba(0,0,0,0.12) 0,rgba(0,0,0,0.12) 100%) 35% 0/1px 100% no-repeat,
       linear-gradient(rgba(0,0,0,0.18) 0,rgba(0,0,0,0.18) 100%) 50% 0/2px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.04) 0,rgba(0,0,0,0.04) 100%) 60% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.04) 0,rgba(0,0,0,0.04) 100%) 70% 0/1px 100% no-repeat,
       linear-gradient(rgba(0,0,0,0.12) 0,rgba(0,0,0,0.12) 100%) 65% 0/1px 100% no-repeat,
-      linear-gradient(rgba(0,0,0,0.07) 0,rgba(0,0,0,0.07) 100%) 80% 0/1px 100% no-repeat,
-      linear-gradient(rgba(0,0,0,0.07) 0,rgba(0,0,0,0.07) 100%) 90% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.06) 0,rgba(0,0,0,0.06) 100%) 80% 0/1px 100% no-repeat,
+      linear-gradient(rgba(0,0,0,0.04) 0,rgba(0,0,0,0.04) 100%) 90% 0/1px 100% no-repeat,
       #ebebeb;
   }
   .aoe-party { position: absolute; height: 22px; border-radius: 3px;
@@ -149,6 +153,49 @@
   .bptb-bar-wrap { background: #1a1a1a; border-radius: 10px; height: 5px; overflow: hidden; }
   .bptb-bar { height: 5px; border-radius: 10px; transition: width 0.4s ease; }
 
+  /* ── View toggle bar ── */
+  .view-toggle-bar { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; align-items:center; }
+  .view-toggle-btn { font-size:0.73rem; font-family:sans-serif; padding:8px 20px; border-radius:4px; border:1px solid #ccc; cursor:pointer; background:#fff; color:#555; transition:all 0.15s; font-weight:600; }
+  .view-toggle-btn:hover { border-color:#888; color:#1a1a1a; }
+  .view-toggle-btn.active { background:#1a1a1a; color:#f5f3ee; border-color:#1a1a1a; }
+  .view-toggle-label { font-size:0.64rem; font-family:sans-serif; color:#aaa; margin-left:4px; font-style:italic; }
+  /* ── Compass view ── */
+  #compass-view { display:none; }
+  #compass-view.open { display:block; }
+  .compass-wrap { background:#fff; border:1px solid #e8e4dd; border-radius:8px; padding:16px 8px; overflow-x:auto; }
+  .compass-note { font-size:0.64rem; font-family:sans-serif; color:#999; margin-top:10px; text-align:center; line-height:1.7; }
+  .compass-note strong { color:#666; }
+
+  /* Country Similarity & Rankings panel */
+  .similarity-section { background: #1a1a1a; border-radius: 8px; padding: 22px 24px; margin: 24px 0; }
+  .similarity-section h3 { font-size: 0.8rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #7ec8e3; margin-bottom: 6px; }
+  .similarity-intro { font-size: 0.76rem; font-family: sans-serif; color: #ddd; margin-bottom: 16px; line-height: 1.5; }
+  .sim-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+  .sim-tab { font-size: 0.68rem; font-family: sans-serif; padding: 6px 14px; border-radius: 20px; border: 1px solid #444; cursor: pointer; background: #2c2c2c; color: #ccc; transition: all 0.15s; white-space: nowrap; }
+  .sim-tab:hover { border-color: #7ec8e3; color: #7ec8e3; }
+  .sim-tab.active { background: #7ec8e3; color: #1a1a1a; border-color: #7ec8e3; font-weight: 700; }
+  .sim-view { display: none; }
+  .sim-view.open { display: block; }
+  .sim-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; border-top: 1px solid #2a2a2a; }
+  .sim-rank { font-size: 0.68rem; font-family: sans-serif; color: #555; min-width: 20px; text-align: right; flex-shrink: 0; }
+  .sim-flag { font-size: 1rem; min-width: 22px; flex-shrink: 0; }
+  .sim-cname { font-size: 0.72rem; font-family: sans-serif; color: #ccc; min-width: 120px; flex-shrink: 0; }
+  .sim-bar-wrap { flex: 1; height: 10px; background: #2c2c2c; border-radius: 5px; position: relative; min-width: 0; }
+  .sim-range { position: absolute; top: 0; height: 100%; border-radius: 5px; opacity: 0.45; }
+  .sim-dot { position: absolute; top: 50%; width: 9px; height: 9px; border-radius: 50%; border: 2px solid #1a1a1a; transform: translate(-50%, -50%); }
+  .sim-score { font-size: 0.66rem; font-family: sans-serif; color: #888; min-width: 26px; text-align: right; flex-shrink: 0; }
+  .sim-picker { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+  .sim-country-btn { font-size: 0.62rem; font-family: sans-serif; padding: 4px 9px; border-radius: 12px; border: 1px solid #444; cursor: pointer; background: #2c2c2c; color: #bbb; transition: all 0.15s; white-space: nowrap; }
+  .sim-country-btn:hover { border-color: #7ec8e3; color: #7ec8e3; }
+  .sim-country-btn.selected { background: #7ec8e3; color: #1a1a1a; border-color: #7ec8e3; font-weight: 700; }
+  .sim-result-card { background: #2c2c2c; border-radius: 6px; padding: 13px 15px; margin-bottom: 8px; }
+  .sim-result-title { font-size: 0.72rem; font-family: sans-serif; color: #7ec8e3; font-weight: 700; margin-bottom: 10px; }
+  .sim-match { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-top: 1px solid #3a3a3a; font-size: 0.71rem; font-family: sans-serif; color: #ccc; }
+  .sim-match:first-of-type { border-top: none; }
+  .sim-match-why { color: #666; margin-left: auto; font-size: 0.64rem; text-align: right; max-width: 180px; }
+  .sim-most-diff { font-size: 0.64rem; color: #555; font-family: sans-serif; margin-top: 10px; }
+  .sim-axis-labels { display: flex; justify-content: space-between; font-size: 0.56rem; color: #555; font-family: sans-serif; margin-bottom: 4px; }
+
   @media (max-width: 600px) {
     .aoe-cname { width: 80px; min-width: 80px; font-size: 0.62rem; }
     .aoe-party { font-size: 0.46rem; padding: 0 3px; height: 18px; }
@@ -199,6 +246,7 @@
   <a href="axis_of_equal.html" class="active">⚖️ Axis of Equal</a>
   <span class="sep">|</span>
   <a href="#bptb-section">🌍 Best Place to Be</a>
+  <a href="#similarity-section">🔍 Country Comparison</a>
 </nav>
 <div class="top-spectrum"></div>
 
@@ -274,6 +322,23 @@
 
   </div>
 
+
+  <div class="view-toggle-bar">
+    <button class="view-toggle-btn active" id="viewLR">📊 Left-Right Spectrum</button>
+    <button class="view-toggle-btn" id="viewCompass">🧭 Political Compass</button>
+    <span class="view-toggle-label">Switch to see fiscal vs social positioning</span>
+  </div>
+
+  <div id="compass-view">
+    <div class="compass-wrap">
+      <svg id="compassSvg" viewBox="0 0 940 660" xmlns="http://www.w3.org/2000/svg" style="min-width:560px;width:100%;height:auto;display:block;"></svg>
+    </div>
+    <p class="compass-note">
+      <strong>X-axis:</strong> Economic — State economy / Tax &amp; spend (left) · Free market / Low tax (right)<br>
+      <strong>Y-axis:</strong> Social — Progressive / Liberal (top) · Traditional / Conservative (bottom)<br>
+      Larger dot = governing party &nbsp;·&nbsp; Smaller = opposition &nbsp;·&nbsp; Hover any dot for details
+    </p>
+  </div>
 
   <div class="aoe-legend">
     <div class="aoe-legend-item"><div class="aoe-legend-dot" style="background:#2980b9"></div>Left</div>
@@ -407,6 +472,39 @@
       <div class="bptb-list" id="bptb-list"></div>
     </div>
   </div>
+
+  <!-- ── Country Comparison ── -->
+  <div class="similarity-section" id="similarity-section">
+    <h3>🔍 Country Comparison</h3>
+    <div class="similarity-intro">How do countries compare on the political spectrum? All rankings are computed live from the party positions you see in the chart above — weighted to give governing parties slightly more influence over the national mean.</div>
+    <div class="sim-tabs">
+      <button class="sim-tab active" id="simTabSpectrum">📊 Spectrum Rankings</button>
+      <button class="sim-tab" id="simTabPolar">⚡ Polarisation</button>
+      <button class="sim-tab" id="simTabSimilar">🔗 Find Similar</button>
+    </div>
+    <div id="simViewSpectrum" class="sim-view open"></div>
+    <div id="simViewPolar" class="sim-view"></div>
+    <div id="simViewSimilar" class="sim-view"></div>
+  </div>
+
+
+  <details class="score-explainer">
+    <summary>How are party positions on the spectrum decided?</summary>
+    <div class="score-explainer-body">
+      Every party's position is an <strong>editorial assessment</strong> — not an algorithm. Positions are derived from a combination of:
+      <div class="se-row"><span class="se-label">📄 Party manifestos</span><span>What the party formally commits to in its official programme</span></div>
+      <div class="se-row"><span class="se-label">🗳️ Voting records</span><span>How the party actually votes in parliament on key economic and social legislation</span></div>
+      <div class="se-row"><span class="se-label">📰 Press coverage</span><span>How the party is positioned relative to others by independent journalists in its own country</span></div>
+      <div class="se-row"><span class="se-label">🌐 International comparisons</span><span>Cross-country calibration — ensuring a "centre-right" party in one country sits consistently relative to parties with similar positions elsewhere</span></div>
+      <br>
+      The scale runs <strong>0 → 10</strong>: 0 = furthest left (communist/statist), 5 = centre, 10 = furthest right (fascist/ultranationalist). Party positions are mapped to percentages internally (so position 4.4 = 44% from the left edge).
+      <br><br>
+      <strong>What this is not:</strong> These positions are not based on self-identification (parties routinely misdescribe themselves), polling of party supporters, or purely economic criteria. The scale captures the full left-right dimension including economic policy, social conservatism, and attitude to liberal democratic norms.
+      <br><br>
+      <em>Disagree with a placement? The positions are deliberately open to challenge — that's part of the point. The goal is honest comparison, not official endorsement of any position.</em>
+    </div>
+  </details>
+
 
   <details class="score-explainer">
     <summary>How is Best Place to Be scored?</summary>
@@ -582,6 +680,281 @@ document.querySelectorAll('.bptb-btn').forEach(function(btn) {
   });
 });
 
+// ── Political Compass — Fiscal & Social data ──
+// Fiscal: 0=full state economy, 100=pure free market
+// Social: 0=most progressive/liberal, 100=most traditional/conservative
+// Collisions skipped (same as PARTY_FOUNDED): Greens, Social Dems (Swe/Fin), Labour (UK/IE), SPD (DE/CZ)
+const PARTY_FISCAL = {
+  // UK
+  'Labour':40, 'Conservatives':66, 'Lib Dems':54, 'Reform UK':75,
+  // France
+  'LFI / NFP':16, 'Macron / Ren.':58, 'Les Rép.':68, 'RN':44,
+  // Germany (Greens skipped — collision with FI/AT/AU)
+  'Die Linke':12, 'SPD':38, 'CDU/CSU':64, 'AfD':46,
+  // Netherlands
+  'GL-PvdA':34, 'D66':56, 'VVD':74, 'PVV':44,
+  // Sweden (Social Dems skipped — collision with Finland)
+  'Left Party':14, 'Moderates':67, 'Sweden Dems':50,
+  // Norway
+  'Red Party':10, 'Labour (Ap)':40, 'Høyre':68, 'FrP':64,
+  // Finland (Social Dems + Greens skipped — collision)
+  'Left Alliance':14, 'NCP (Kok.)':66, 'Finns Party':52,
+  // Denmark
+  'Soc. Dems':42, 'Venstre':66, "People's Pty":50, 'New Right':72,
+  // Italy
+  'M5S':36, 'PD':38, 'Forza Italia':66, 'Lega':50, 'FdI (Meloni)':54,
+  // Spain
+  'Sumar':16, 'PSOE':38, 'PP':66, 'Vox':56,
+  // Portugal
+  'Left Bloc':14, 'PS':38, 'PSD / AD':64, 'Chega':58,
+  // Poland
+  'Lewica':28, 'KO (Tusk)':54, 'PiS':40, 'Confederation':76,
+  // Ireland (Labour skipped — collision with UK Labour)
+  'Sinn Féin':32, 'Fianna Fáil':54, 'Fine Gael':62,
+  // Austria (Greens skipped)
+  'SPÖ':32, 'NEOS':70, 'ÖVP':62, 'FPÖ':52,
+  // Czechia (SPD skipped — collision with German SPD)
+  'Pirates+STAN':50, 'ANO':44, 'SPOLU':65, 'AUTO':64,
+  // US
+  'Progressives':18, 'Democrats':42, 'Republicans':72, 'MAGA':56,
+  // Canada
+  'NDP':30, 'Liberals':48, 'Conservatives':70,
+  // Mexico
+  'Morena (PT)':28, 'PRI':52, 'PAN':66,
+  // Brazil
+  'PT (Lula)':28, 'MDB / centre':52, 'PL (Bolsonaro':62,
+  // Malaysia
+  'PKR / PH':44, 'BN / UMNO':56, 'PN / Bersatu':58, 'PAS':46,
+  // Australia (Greens skipped)
+  'Labor (ALP)':42, 'Lib-Nat Coal.':66,
+  // Japan
+  'CDP':40, 'Nippon Ishin':60, 'LDP':62, 'Nippon Kaigi':54,
+  // South Korea
+  'DP (Dems)':42, 'PPP':64,
+  // Israel
+  'Labour / Meretz':36, 'Yesh Atid':56, 'Likud':64, 'Ben-Gvir':52,
+  // India
+  'CPI(M)':10, 'Congress':40, 'BJP':54, 'RSS wing':44,
+  // Argentina
+  'Kirchnerism':18, 'PJ centre':42, 'PRO':66, 'Milei / LLA':90,
+  // Nigeria
+  'Labour Party':42, 'PDP':48, 'APC':56,
+  // Kenya
+  'ODM':40, 'Wiper':46, 'UDA':58,
+  // Hungary
+  'DK':36, 'Tisza':56, 'Fidesz':46,
+  // Colombia
+  'Pacto Histórico':20, 'Partido Liberal':48, 'Centro Democrático':70,
+  // Chile
+  'Frente Amplio':22, 'Concertación':40, 'Chile Vamos':66, 'Republicano':74,
+  // Taiwan
+  'DPP':46, 'TPP':56, 'KMT':54,
+  // Philippines
+  'Liberal Party (PH)':46, 'PFP':58, 'HNP':55,
+  // New Zealand
+  'NZ Greens':26, 'NZ Labour':40, 'National':66, 'ACT':82,
+};
+
+const PARTY_SOCIAL = {
+  // UK
+  'Labour':28, 'Conservatives':62, 'Lib Dems':20, 'Reform UK':75,
+  // France
+  'LFI / NFP':22, 'Macron / Ren.':44, 'Les Rép.':64, 'RN':77,
+  // Germany (Greens skipped)
+  'Die Linke':15, 'SPD':30, 'CDU/CSU':58, 'AfD':82,
+  // Netherlands
+  'GL-PvdA':22, 'D66':14, 'VVD':52, 'PVV':75,
+  // Sweden (Social Dems skipped)
+  'Left Party':18, 'Moderates':52, 'Sweden Dems':75,
+  // Norway
+  'Red Party':20, 'Labour (Ap)':32, 'Høyre':52, 'FrP':70,
+  // Finland (Social Dems + Greens skipped)
+  'Left Alliance':18, 'NCP (Kok.)':56, 'Finns Party':72,
+  // Denmark
+  'Soc. Dems':40, 'Venstre':56, "People's Pty":74, 'New Right':81,
+  // Italy
+  'M5S':36, 'PD':28, 'Forza Italia':62, 'Lega':75, 'FdI (Meloni)':81,
+  // Spain
+  'Sumar':14, 'PSOE':30, 'PP':62, 'Vox':84,
+  // Portugal
+  'Left Bloc':18, 'PS':32, 'PSD / AD':58, 'Chega':77,
+  // Poland
+  'Lewica':22, 'KO (Tusk)':42, 'PiS':82, 'Confederation':86,
+  // Ireland (Labour skipped)
+  'Sinn Féin':32, 'Fianna Fáil':52, 'Fine Gael':48,
+  // Austria (Greens skipped)
+  'SPÖ':30, 'NEOS':28, 'ÖVP':62, 'FPÖ':77,
+  // Czechia (SPD skipped)
+  'Pirates+STAN':25, 'ANO':46, 'SPOLU':56, 'AUTO':66,
+  // US
+  'Progressives':14, 'Democrats':30, 'Republicans':75, 'MAGA':84,
+  // Canada
+  'NDP':20, 'Liberals':32, 'Conservatives':64,
+  // Mexico
+  'Morena (PT)':36, 'PRI':56, 'PAN':66,
+  // Brazil
+  'PT (Lula)':30, 'MDB / centre':54, 'PL (Bolsonaro':77,
+  // Malaysia
+  'PKR / PH':44, 'BN / UMNO':66, 'PN / Bersatu':74, 'PAS':92,
+  // Australia (Greens skipped)
+  'Labor (ALP)':32, 'Lib-Nat Coal.':62,
+  // Japan
+  'CDP':36, 'Nippon Ishin':52, 'LDP':70, 'Nippon Kaigi':90,
+  // South Korea
+  'DP (Dems)':38, 'PPP':64,
+  // Israel
+  'Labour / Meretz':24, 'Yesh Atid':46, 'Likud':70, 'Ben-Gvir':92,
+  // India
+  'CPI(M)':28, 'Congress':42, 'BJP':74, 'RSS wing':92,
+  // Argentina
+  'Kirchnerism':30, 'PJ centre':52, 'PRO':58, 'Milei / LLA':60,
+  // Nigeria
+  'Labour Party':50, 'PDP':60, 'APC':64,
+  // Kenya
+  'ODM':46, 'Wiper':52, 'UDA':62,
+  // Hungary
+  'DK':28, 'Tisza':42, 'Fidesz':84,
+  // Colombia
+  'Pacto Histórico':28, 'Partido Liberal':50, 'Centro Democrático':70,
+  // Chile
+  'Frente Amplio':18, 'Concertación':38, 'Chile Vamos':64, 'Republicano':78,
+  // Taiwan
+  'DPP':36, 'TPP':44, 'KMT':64,
+  // Philippines
+  'Liberal Party (PH)':42, 'PFP':62, 'HNP':66,
+  // New Zealand
+  'NZ Greens':14, 'NZ Labour':28, 'National':58, 'ACT':44,
+};
+
+function renderCompass() {
+  var svg = document.getElementById('compassSvg');
+  if (!svg) return;
+  var W = 940, H = 660;
+  var PAD = { t:54, b:50, l:68, r:28 };
+  var CW = W - PAD.l - PAD.r;
+  var CH = H - PAD.t - PAD.b;
+
+  function fx(f) { return Math.round(PAD.l + (f / 100) * CW); }
+  function fy(s) { return Math.round(PAD.t + (s / 100) * CH); }
+
+  // Collect party data
+  var parties = [];
+  document.querySelectorAll('.aoe-party').forEach(function(el) {
+    var name = el.dataset.name || el.textContent.trim();
+    var fiscal = PARTY_FISCAL[name];
+    var social  = PARTY_SOCIAL[name];
+    if (fiscal === undefined || social === undefined) return;
+    var styleStr = el.getAttribute('style') || '';
+    var bgm = styleStr.match(/background:\s*(#[0-9a-fA-F]+)/);
+    var color = bgm ? bgm[1] : '#888';
+    var status = el.dataset.status || '';
+    parties.push({ name: name, fiscal: fiscal, social: social, color: color, status: status, el: el });
+  });
+
+  var s = '';
+
+  // Quadrant backgrounds
+  s += '<rect x="' + PAD.l + '" y="' + PAD.t + '" width="' + (CW/2) + '" height="' + (CH/2) + '" fill="#dbeeff" opacity="0.42"/>';
+  s += '<rect x="' + (PAD.l+CW/2) + '" y="' + PAD.t + '" width="' + (CW/2) + '" height="' + (CH/2) + '" fill="#d5f5e3" opacity="0.42"/>';
+  s += '<rect x="' + PAD.l + '" y="' + (PAD.t+CH/2) + '" width="' + (CW/2) + '" height="' + (CH/2) + '" fill="#fce4e4" opacity="0.42"/>';
+  s += '<rect x="' + (PAD.l+CW/2) + '" y="' + (PAD.t+CH/2) + '" width="' + (CW/2) + '" height="' + (CH/2) + '" fill="#fef9e7" opacity="0.42"/>';
+
+  // Dashed grid at 25/75
+  var gridPts = [25, 75];
+  gridPts.forEach(function(g) {
+    s += '<line x1="' + fx(g) + '" y1="' + PAD.t + '" x2="' + fx(g) + '" y2="' + (PAD.t+CH) + '" stroke="#ddd" stroke-width="0.8" stroke-dasharray="4,4"/>';
+    s += '<line x1="' + PAD.l + '" y1="' + fy(g) + '" x2="' + (PAD.l+CW) + '" y2="' + fy(g) + '" stroke="#ddd" stroke-width="0.8" stroke-dasharray="4,4"/>';
+  });
+
+  // Main axes
+  s += '<line x1="' + PAD.l + '" y1="' + fy(50) + '" x2="' + (PAD.l+CW) + '" y2="' + fy(50) + '" stroke="#bbb" stroke-width="1.6"/>';
+  s += '<line x1="' + fx(50) + '" y1="' + PAD.t + '" x2="' + fx(50) + '" y2="' + (PAD.t+CH) + '" stroke="#bbb" stroke-width="1.6"/>';
+
+  // Axis arrows
+  s += '<polygon points="' + (PAD.l+CW) + ',' + fy(50) + ' ' + (PAD.l+CW-7) + ',' + (fy(50)-4) + ' ' + (PAD.l+CW-7) + ',' + (fy(50)+4) + '" fill="#bbb"/>';
+  s += '<polygon points="' + fx(50) + ',' + PAD.t + ' ' + (fx(50)-4) + ',' + (PAD.t+7) + ' ' + (fx(50)+4) + ',' + (PAD.t+7) + '" fill="#bbb"/>';
+
+  // Quadrant labels
+  s += '<text x="' + (PAD.l+10) + '" y="' + (PAD.t+16) + '" font-family="sans-serif" font-size="9.5" fill="#2980b9" opacity="0.8" font-weight="700">PROGRESSIVE LEFT</text>';
+  s += '<text x="' + (PAD.l+CW/2+10) + '" y="' + (PAD.t+16) + '" font-family="sans-serif" font-size="9.5" fill="#27ae60" opacity="0.8" font-weight="700">PROGRESSIVE RIGHT</text>';
+  s += '<text x="' + (PAD.l+10) + '" y="' + (PAD.t+CH-8) + '" font-family="sans-serif" font-size="9.5" fill="#c0392b" opacity="0.8" font-weight="700">TRADITIONAL LEFT</text>';
+  s += '<text x="' + (PAD.l+CW/2+10) + '" y="' + (PAD.t+CH-8) + '" font-family="sans-serif" font-size="9.5" fill="#7b241c" opacity="0.8" font-weight="700">CONSERVATIVE RIGHT</text>';
+
+  // Axis edge labels
+  s += '<text x="' + PAD.l + '" y="' + (PAD.t-22) + '" font-family="sans-serif" font-size="10" fill="#555" font-weight="600">← State economy / Tax &amp; spend</text>';
+  s += '<text x="' + (PAD.l+CW) + '" y="' + (PAD.t-22) + '" font-family="sans-serif" font-size="10" fill="#555" font-weight="600" text-anchor="end">Free market / Low tax →</text>';
+  s += '<text x="' + (PAD.l+CW/2) + '" y="' + (PAD.t-8) + '" font-family="sans-serif" font-size="9" fill="#999" text-anchor="middle">← ECONOMIC →</text>';
+  s += '<text x="' + (PAD.l-8) + '" y="' + (PAD.t+12) + '" font-family="sans-serif" font-size="9" fill="#555" text-anchor="end" font-weight="600">Liberal ↑</text>';
+  s += '<text x="' + (PAD.l-8) + '" y="' + (PAD.t+CH) + '" font-family="sans-serif" font-size="9" fill="#555" text-anchor="end" font-weight="600">↓ Conservative</text>';
+  s += '<text transform="rotate(-90,' + (PAD.l-50) + ',' + (PAD.t+CH/2) + ')" x="' + (PAD.l-50) + '" y="' + (PAD.t+CH/2+4) + '" font-family="sans-serif" font-size="9" fill="#999" text-anchor="middle">SOCIAL</text>';
+
+  // Party labels (rendered under dots)
+  parties.forEach(function(p) {
+    var x = fx(p.fiscal);
+    var y = fy(p.social);
+    var short = p.name.length > 13 ? p.name.substring(0, 12) + '…' : p.name;
+    s += '<text x="' + x + '" y="' + (y-10) + '" font-family="sans-serif" font-size="7" fill="#333" text-anchor="middle" opacity="0.72">' + short + '</text>';
+  });
+
+  // Party dots
+  parties.forEach(function(p) {
+    var x = fx(p.fiscal);
+    var y = fy(p.social);
+    var r = p.status === 'gov' ? 7 : 5;
+    var sw = p.status === 'gov' ? '2.2' : '1.2';
+    var stroke = '#fff';
+    s += '<circle class="c-dot" cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + p.color + '" stroke="' + stroke + '" stroke-width="' + sw + '" opacity="0.88" data-pname="' + p.name.replace(/"/g, '&quot;') + '" style="cursor:default"/>';
+  });
+
+  svg.innerHTML = s;
+
+  // Hook up existing party tooltip via synthetic events
+  svg.querySelectorAll('circle.c-dot').forEach(function(circle) {
+    var name = circle.getAttribute('data-pname');
+    var partyEl = Array.from(document.querySelectorAll('.aoe-party')).find(function(e) {
+      return (e.dataset.name || e.textContent.trim()) === name;
+    });
+    if (!partyEl) return;
+    circle.addEventListener('mouseenter', function(e) {
+      partyEl.dispatchEvent(new MouseEvent('mouseenter', { clientX: e.clientX, clientY: e.clientY, bubbles: false }));
+    });
+    circle.addEventListener('mousemove', function(e) {
+      partyEl.dispatchEvent(new MouseEvent('mousemove', { clientX: e.clientX, clientY: e.clientY, bubbles: false }));
+    });
+    circle.addEventListener('mouseleave', function() {
+      partyEl.dispatchEvent(new MouseEvent('mouseleave', { bubbles: false }));
+    });
+  });
+}
+
+function switchView(mode) {
+  var lrBtn     = document.getElementById('viewLR');
+  var cpBtn     = document.getElementById('viewCompass');
+  var chart     = document.getElementById('aoe-chart');
+  var sticky    = document.querySelector('.aoe-sticky');
+  var legend    = document.querySelector('.aoe-legend');
+  var compass   = document.getElementById('compass-view');
+  if (mode === 'compass') {
+    lrBtn.classList.remove('active');
+    cpBtn.classList.add('active');
+    chart.style.display  = 'none';
+    sticky.style.display = 'none';
+    legend.style.display = 'none';
+    compass.classList.add('open');
+    renderCompass();
+  } else {
+    cpBtn.classList.remove('active');
+    lrBtn.classList.add('active');
+    chart.style.display  = '';
+    sticky.style.display = '';
+    legend.style.display = '';
+    compass.classList.remove('open');
+  }
+}
+
+document.getElementById('viewLR').addEventListener('click', function() { switchView('lr'); });
+document.getElementById('viewCompass').addEventListener('click', function() { switchView('compass'); });
+
 // ── Deep-link navigation ──
 document.addEventListener('DOMContentLoaded', function() {
   const hash = location.hash.slice(1);
@@ -723,6 +1096,176 @@ document.addEventListener('DOMContentLoaded', function() {
     tip.style.top  = y + 'px';
   }
 })();
+// ── Country Similarity & Rankings ──
+(function() {
+  function computeStats() {
+    var stats = {};
+    document.querySelectorAll('.aoe-row[data-country]').forEach(function(row) {
+      var country = row.dataset.country;
+      var parties = row.querySelectorAll('.aoe-party');
+      if (!parties.length) return;
+      var positions = [], govArr = [];
+      parties.forEach(function(p) {
+        positions.push(parseFloat(p.style.left) || 50);
+        govArr.push(p.dataset.status === 'gov');
+      });
+      // Gov-weighted mean
+      var wSum = 0, wTotal = 0;
+      positions.forEach(function(pos, i) {
+        var w = govArr[i] ? 1.5 : 1.0;
+        wSum += pos * w; wTotal += w;
+      });
+      var mean = wSum / wTotal;
+      var spread = Math.max.apply(null, positions) - Math.min.apply(null, positions);
+      var cname = row.querySelector('.aoe-cname').textContent.trim();
+      var spaceIdx = cname.indexOf(' ');
+      var flag = spaceIdx > 0 ? cname.substring(0, spaceIdx) : cname;
+      var name = spaceIdx > 0 ? cname.substring(spaceIdx + 1) : cname;
+      // Strip leading flag emoji if any (some have double)
+      name = name.replace(/^[\u{1F1E0}-\u{1F1FF}]{2}/u, '').trim();
+      stats[country] = { country: country, flag: flag, name: name, mean: mean,
+        spread: spread, min: Math.min.apply(null, positions), max: Math.max.apply(null, positions) };
+    });
+    return stats;
+  }
+
+  function barColor(mean) {
+    if (mean < 30) return '#2980b9';
+    if (mean < 45) return '#5dade2';
+    if (mean < 56) return '#27ae60';
+    if (mean < 68) return '#e67e22';
+    return '#c0392b';
+  }
+
+  function renderSpectrum(stats, el) {
+    var list = Object.values(stats).sort(function(a, b) { return a.mean - b.mean; });
+    var html = '<div class="sim-axis-labels"><span>← Communist (0)</span><span>Centre (5.0)</span><span>Fascist (10) →</span></div>';
+    list.forEach(function(c, i) {
+      var col = barColor(c.mean);
+      html += '<div class="sim-row">'
+        + '<span class="sim-rank">' + (i+1) + '</span>'
+        + '<span class="sim-flag">' + c.flag + '</span>'
+        + '<span class="sim-cname">' + c.name + '</span>'
+        + '<div class="sim-bar-wrap">'
+        +   '<div class="sim-range" style="left:' + c.min.toFixed(1) + '%;width:' + (c.max - c.min).toFixed(1) + '%;background:' + col + '"></div>'
+        +   '<div class="sim-dot" style="left:' + c.mean.toFixed(1) + '%;background:' + col + '"></div>'
+        + '</div>'
+        + '<span class="sim-score">' + (c.mean / 10).toFixed(2) + '</span>'
+        + '</div>';
+    });
+    el.innerHTML = html;
+  }
+
+  function renderPolar(stats, el) {
+    var list = Object.values(stats).sort(function(a, b) { return b.spread - a.spread; });
+    var maxSpread = list[0].spread;
+    var html = '<div style="font-size:0.61rem;color:#666;font-family:sans-serif;margin-bottom:8px;">Bar = gap between furthest-left and furthest-right party. Wide bar = more divided country.</div>';
+    list.forEach(function(c, i) {
+      var col = barColor(c.mean);
+      var barPct = (c.spread / maxSpread * 100).toFixed(1);
+      var medal = i === 0 ? ' ⚡' : (i === list.length - 1 ? ' 🕊️' : '');
+      html += '<div class="sim-row">'
+        + '<span class="sim-rank">' + (i+1) + '</span>'
+        + '<span class="sim-flag">' + c.flag + '</span>'
+        + '<span class="sim-cname">' + c.name + medal + '</span>'
+        + '<div class="sim-bar-wrap">'
+        +   '<div class="sim-range" style="left:0;width:' + barPct + '%;background:' + col + '"></div>'
+        + '</div>'
+        + '<span class="sim-score">' + (c.spread / 10).toFixed(1) + '</span>'
+        + '</div>';
+    });
+    el.innerHTML = html;
+  }
+
+  function renderSimilar(stats, el) {
+    var countries = Object.values(stats);
+    var html = '<div class="sim-picker">';
+    countries.sort(function(a, b) { return a.name.localeCompare(b.name); }).forEach(function(c) {
+      html += '<button class="sim-country-btn" data-key="' + c.country + '">' + c.flag + ' ' + c.name + '</button>';
+    });
+    html += '</div><div id="simMatchOut"></div>';
+    el.innerHTML = html;
+
+    el.querySelectorAll('.sim-country-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        el.querySelectorAll('.sim-country-btn').forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        showMatch(btn.dataset.key, stats);
+      });
+    });
+  }
+
+  function showMatch(key, stats) {
+    var base = stats[key];
+    if (!base) return;
+    var others = Object.values(stats).filter(function(c) { return c.country !== key; });
+    others.forEach(function(c) {
+      c._dist = Math.abs(c.mean - base.mean) * 1.0 + Math.abs(c.spread - base.spread) * 0.4;
+    });
+    others.sort(function(a, b) { return a._dist - b._dist; });
+    var top3 = others.slice(0, 3);
+    var bottom = others[others.length - 1];
+
+    var html = '<div class="sim-result-card"><div class="sim-result-title">'
+      + base.flag + ' ' + base.name + ' is most similar to:</div>';
+    top3.forEach(function(c, i) {
+      var meanDiff = Math.abs(c.mean - base.mean);
+      var spreadDiff = Math.abs(c.spread - base.spread);
+      var why = meanDiff < 2 ? 'Nearly identical political centre of gravity'
+               : meanDiff < 6 ? 'Similar overall lean on the spectrum'
+               : 'Comparable party range';
+      if (spreadDiff < 4) why += ' · same polarisation level';
+      html += '<div class="sim-match">'
+        + '<strong style="color:#7ec8e3;min-width:16px">' + (i+1) + '.</strong> '
+        + '<span>' + c.flag + ' ' + c.name + '</span>'
+        + '<span class="sim-match-why">' + why + '</span>'
+        + '</div>';
+    });
+    html += '</div>';
+    html += '<div class="sim-most-diff">Most different: ' + bottom.flag + ' ' + bottom.name
+          + ' — spectrum gap: ' + Math.abs(bottom.mean - base.mean).toFixed(0) + ' pts</div>';
+
+    document.getElementById('simMatchOut').innerHTML = html;
+  }
+
+  function init() {
+    var stats = computeStats();
+    if (!Object.keys(stats).length) return;
+
+    var tabs = [
+      { id: 'simTabSpectrum', view: 'simViewSpectrum', render: renderSpectrum },
+      { id: 'simTabPolar',    view: 'simViewPolar',    render: renderPolar },
+      { id: 'simTabSimilar',  view: 'simViewSimilar',  render: renderSimilar }
+    ];
+    var done = {};
+
+    // Render first tab immediately
+    renderSpectrum(stats, document.getElementById('simViewSpectrum'));
+    done['simViewSpectrum'] = true;
+
+    tabs.forEach(function(t) {
+      var btn = document.getElementById(t.id);
+      if (!btn) return;
+      btn.addEventListener('click', function() {
+        tabs.forEach(function(x) {
+          document.getElementById(x.id).classList.toggle('active', x.id === t.id);
+          document.getElementById(x.view).classList.toggle('open', x.view === t.view);
+        });
+        if (!done[t.view]) {
+          done[t.view] = true;
+          t.render(stats, document.getElementById(t.view));
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
 </script>
 
 <nav class="bottom-nav">

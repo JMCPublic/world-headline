@@ -798,14 +798,18 @@ document.querySelectorAll('.country-item, .tab-wrap').forEach(function(item) {
 // ── "New this week" badges ──
 (function() {
   var now = new Date();
-  document.querySelectorAll('a[data-added]').forEach(function(a) {
-    var added = new Date(a.getAttribute('data-added'));
+  // Handle both a[data-added] and parent div[data-added] > a
+  document.querySelectorAll('[data-added]').forEach(function(el) {
+    var added = new Date(el.getAttribute('data-added'));
     var days = (now - added) / (1000 * 60 * 60 * 24);
     if (days <= 7) {
-      var badge = document.createElement('span');
-      badge.className = 'new-badge';
-      badge.textContent = 'New';
-      a.appendChild(badge);
+      var target = el.tagName === 'A' ? el : el.querySelector('a');
+      if (target) {
+        var badge = document.createElement('span');
+        badge.className = 'new-badge';
+        badge.textContent = 'New';
+        target.appendChild(badge);
+      }
     }
   });
 })();
