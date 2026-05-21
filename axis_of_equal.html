@@ -103,7 +103,12 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
   .aoe-party:hover { z-index: 50; transform: translateX(-50%) scale(1.18); }
   .aoe-party.dimmed { opacity: 0.1; }
-  .party-pill-score { font-size: 0.42rem; font-weight: 400; opacity: 0.8; margin-left: 3px; letter-spacing: 0; }
+  /* ── Giscus comments wrapper ── */
+  .giscus-wrap { max-width: 860px; margin: 32px auto 0; padding: 0 16px; }
+  .giscus-wrap h3 { font-size: 0.72rem; font-family: sans-serif; font-weight: 700; color: #888;
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; border-top: 1px solid #e0ddd8;
+    padding-top: 18px; }
+.party-pill-score { font-size: 0.42rem; font-weight: 400; opacity: 0.8; margin-left: 3px; letter-spacing: 0; }
   .wpa-row-badge { display: inline-block; font-size: 0.48rem; font-family: sans-serif; font-weight: 700;
     color: #7ec8e3; text-decoration: none; margin-left: 5px; vertical-align: middle;
     border: 1px solid #7ec8e3; border-radius: 3px; padding: 0 3px; line-height: 1.5;
@@ -530,6 +535,26 @@
       A perfect match scores 100. Each point of distance costs 2.2 points. A party 45 points away scores 1; any further and the country drops off the list entirely.
     </div>
   </details>
+
+  <!-- ── Giscus discussion / comments ── -->
+  <div class="giscus-wrap" id="discuss">
+    <h3>💬 Challenge a position — join the discussion</h3>
+    <script src="https://giscus.app/client.js"
+      data-repo="jmcpublic/world-headline"
+      data-repo-id="R_kgDOSg7DEA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOSg7DEM4C9kND"
+      data-mapping="og:title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="en"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
 
   <p class="aoe-note">
     Positions are editorial assessments based on manifestos, stated positions, and voting records — not algorithmic.<br>
