@@ -109,6 +109,7 @@
     background: #1a1a1a; color: #f5f3ee; border-radius: 6px;
     padding: 10px 13px; width: 200px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.35); pointer-events: none; }
+  .pt-country { font-size: 0.61rem; font-family: sans-serif; color: #aaa; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
   .pt-name { font-size: 0.78rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
   .pt-leader { font-size: 0.7rem; color: #ccc; margin-bottom: 5px; font-family: sans-serif; }
   .pt-status { display: inline-block; font-size: 0.62rem; font-family: sans-serif; font-weight: 700;
@@ -967,6 +968,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- ── Party tooltip ── -->
 <div class="party-tooltip" id="partyTooltip">
+  <div class="pt-country" id="ptCountry"></div>
   <div class="pt-name" id="ptName"></div>
   <div class="pt-leader" id="ptLeader"></div>
   <div class="pt-status" id="ptStatus"></div>
@@ -982,6 +984,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const tipLeader = document.getElementById('ptLeader');
   const tipStatus = document.getElementById('ptStatus');
 
+  const tipCountry = document.getElementById('ptCountry');
   const tipScore   = document.getElementById('ptScore');
   const tipFounded = document.getElementById('ptFounded');
 
@@ -1058,6 +1061,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelectorAll('.aoe-party').forEach(function(el) {
     el.addEventListener('mouseenter', function(e) {
+      // Country from parent aoe-row
+      const parentRow = el.closest('.aoe-row[data-country]');
+      const cnameEl = parentRow ? parentRow.querySelector('.aoe-cname') : null;
+      tipCountry.textContent = cnameEl ? cnameEl.textContent.trim() : '';
       tipName.textContent   = el.dataset.name || el.textContent.trim();
       const leader = el.getAttribute('data-leader') || '';
       tipLeader.textContent = leader ? '\u{1F464} ' + leader : '';
