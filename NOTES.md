@@ -265,10 +265,26 @@ Poles Apart: Consensus Moments, Divergence Tracker, Cross-border Influence, When
 
 ---
 
+---
+
+### Session 9 — 22 May 2026
+**Theme: Saudi Arabia added, version backup created**
+
+- **Version_Before_WTMT.zip** saved to project folder — full snapshot of all 12 site files before What the Markets Think feature is built
+- **Saudi Arabia added** — full 10-step checklist (steps 5–8 N/A: correctly in AoE "out of spec" panel as no-parties monarchy):
+  - middleeast_press_today.html: Gulf tab activated, Gulf region panel created, Saudi Arabia with 3 papers — Arab News (English/Pro-reform), Saudi Gazette (Official/State-aligned), Asharq Al-Awsat (Pan-Arab/Royal-owned); 4 blind spots (Kafala, MBS succession, Vision 2030 contradictions, Yemen reckoning)
+  - resources.html: 3 rows added, count updated 132→135 newspapers / 44→45 countries
+  - water_cooler.html: wc-card + Weekly Pulse row added, hero updated 44→45 countries
+  - NOTES.md: checklist updated (step 9 = Water Cooler; step 10 = NOTES.md); Poles Apart note added
+- AoE "out of spec" note clarified: for non-party / authoritarian states, AoE steps 5–8 are replaced by confirming the country appears in the oos panel
+- All files to upload: middleeast_press_today.html, resources.html, water_cooler.html, NOTES.md, Version_Before_WTMT.zip
+
+---
+
 ## ⏭️ Next Session
 
 1. **Upload to GitHub** (files from this session)
-2. **Next countries**: Saudi Arabia, Egypt, Iran (press pages + full checklist)
-3. **Poles Apart** — expand country coverage beyond current ~15 countries
-4. **What the Markets Think** Phase 1 — implement currency panel using fawazahmed0 API
-5. Comments (#94) — design the shared discussion page (parked but not forgotten)
+2. **Next countries**: Egypt, Iran (press pages + full checklist; both harder — Egypt Arabic-primary, Iran Persian/restricted)
+3. **What the Markets Think Phase 1** — implement currency panel using fawazahmed0 API (already fully scoped, ready to build)
+4. **Poles Apart** — expand country coverage beyond current ~15 countries
+5. **Comments (#94)** — design the shared discussion page (parked but not forgotten)

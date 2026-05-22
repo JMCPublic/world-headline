@@ -126,7 +126,7 @@
 
   <h2 class="page-title">Resources & Attributions</h2>
   <p class="page-intro">
-    World Headline draws on <strong>129 newspapers</strong> across <strong>43 countries</strong>.
+    World Headline draws on <strong>135 newspapers</strong> across <strong>45 countries</strong>.
     All content is summarised and editorially framed — we link to the original source for every story.
     Newspaper names, mastheads, and published content remain the property of their respective publishers.
     This page lists every source we use, searchable by country or title.
@@ -166,7 +166,7 @@
   <div class="search-bar">
     <input type="text" id="searchInput" placeholder="Search by country or newspaper name..." oninput="filterTable()">
   </div>
-  <div class="count-note">Showing <span id="visibleCount">129</span> of 129 newspapers</div>
+  <div class="count-note">Showing <span id="visibleCount">135</span> of 135 newspapers</div>
 
   <table id="sourcesTable">
     <thead>
@@ -342,6 +342,14 @@
       <tr data-search="tanzania the citizen"><td class="country">🇹🇿 Tanzania</td><td class="paper"><a href="https://www.thecitizen.co.tz" target="_blank">The Citizen</a></td><td class="lean">Centre-left/Independent</td><td class="url"><a href="https://www.thecitizen.co.tz" target="_blank">thecitizen.co.tz</a></td></tr>
       <tr data-search="tanzania daily news"><td class="country">🇹🇿 Tanzania</td><td class="paper"><a href="https://www.dailynews.co.tz" target="_blank">Daily News</a></td><td class="lean">Centre/State-owned</td><td class="url"><a href="https://www.dailynews.co.tz" target="_blank">dailynews.co.tz</a></td></tr>
       <tr data-search="tanzania the guardian tanzania ipp media"><td class="country">🇹🇿 Tanzania</td><td class="paper"><a href="https://www.ippmedia.com" target="_blank">The Guardian Tanzania</a></td><td class="lean">Centre-right/Business</td><td class="url"><a href="https://www.ippmedia.com" target="_blank">ippmedia.com</a></td></tr>
+      <!-- ── Zimbabwe ── -->
+      <tr data-search="zimbabwe newsday newsday zimbabwe"><td class="country">🇿🇼 Zimbabwe</td><td class="paper"><a href="https://www.newsday.co.zw" target="_blank">NewsDay Zimbabwe</a></td><td class="lean">Centre-left/Independent</td><td class="url"><a href="https://www.newsday.co.zw" target="_blank">newsday.co.zw</a></td></tr>
+      <tr data-search="zimbabwe the herald herald"><td class="country">🇿🇼 Zimbabwe</td><td class="paper"><a href="https://www.herald.co.zw" target="_blank">The Herald</a></td><td class="lean">State/ZANU-PF aligned</td><td class="url"><a href="https://www.herald.co.zw" target="_blank">herald.co.zw</a></td></tr>
+      <tr data-search="zimbabwe the zimbabwe independent independent"><td class="country">🇿🇼 Zimbabwe</td><td class="paper"><a href="https://www.newsday.co.zw/theindependent" target="_blank">The Zimbabwe Independent</a></td><td class="lean">Centre-right/Business</td><td class="url"><a href="https://www.newsday.co.zw/theindependent" target="_blank">theindependent.co.zw</a></td></tr>
+      <!-- ── Saudi Arabia ── -->
+      <tr data-search="saudi arabia arab news arabnews"><td class="country">🇸🇦 Saudi Arabia</td><td class="paper"><a href="https://www.arabnews.com" target="_blank">Arab News</a></td><td class="lean">English / Pro-reform</td><td class="url"><a href="https://www.arabnews.com" target="_blank">arabnews.com</a></td></tr>
+      <tr data-search="saudi arabia saudi gazette saudigazette"><td class="country">🇸🇦 Saudi Arabia</td><td class="paper"><a href="https://www.saudigazette.com.sa" target="_blank">Saudi Gazette</a></td><td class="lean">Official / State-aligned</td><td class="url"><a href="https://www.saudigazette.com.sa" target="_blank">saudigazette.com.sa</a></td></tr>
+      <tr data-search="saudi arabia asharq al-awsat aawsat pan-arab"><td class="country">🇸🇦 Saudi Arabia</td><td class="paper"><a href="https://english.aawsat.com" target="_blank">Asharq Al-Awsat</a></td><td class="lean">Pan-Arab / Royal-owned</td><td class="url"><a href="https://english.aawsat.com" target="_blank">english.aawsat.com</a></td></tr>
       <!-- ── Lebanon ── -->
       <tr data-search="lebanon al-akhbar al akhbar"><td class="country">🇱🇧 Lebanon</td><td class="paper"><a href="https://al-akhbar.com" target="_blank">Al-Akhbar</a></td><td class="lean">Left/Pro-Resistance</td><td class="url"><a href="https://al-akhbar.com" target="_blank">al-akhbar.com</a></td></tr>
       <tr data-search="lebanon l'orient today lorient"><td class="country">🇱🇧 Lebanon</td><td class="paper"><a href="https://www.lorienttoday.com" target="_blank">L'Orient Today</a></td><td class="lean">Centre/Reform</td><td class="url"><a href="https://www.lorienttoday.com" target="_blank">lorienttoday.com</a></td></tr>
@@ -355,36 +363,4 @@
 
   <div class="attribution-note">
     <strong>Attribution notice:</strong> World Headline summarises and editorially frames content from the publications listed above.
-    All original reporting, journalism, and intellectual property remain with the respective publishers.
-    Story summaries are AI-generated interpretations based on publicly available RSS feeds and do not reproduce
-    verbatim text. Each story card links directly to the source article. World Headline is a non-commercial
-    personal project and does not monetise third-party content.
-  </div>
-
-  <div class="page-footer-nav">
-    <a href="index.html">← Back to Home</a>
-    <button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to Top</button>
-  </div>
-
-</div>
-
-<script>
-function filterTable() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const rows = document.querySelectorAll('#sourcesTable tbody tr');
-  let visible = 0;
-  rows.forEach(row => {
-    const text = row.getAttribute('data-search') + ' ' + row.textContent.toLowerCase();
-    if (text.includes(q)) {
-      row.classList.remove('hidden');
-      visible++;
-    } else {
-      row.classList.add('hidden');
-    }
-  });
-  document.getElementById('visibleCount').textContent = visible;
-}
-</script>
-
-</body>
-</html>
+    All original reporting, journalism, and 

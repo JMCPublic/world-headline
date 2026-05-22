@@ -142,7 +142,7 @@
 <div class="dashboard">
   <div class="tier1-tabs">
     <button class="tier1-tab active" onclick="showRegion('levant', this)">🕍 Levant</button>
-    <button class="tier1-tab soon">🌙 Gulf — Soon</button>
+    <button class="tier1-tab" onclick="showRegion('gulf', this)">🌙 Gulf</button>
     <button class="tier1-tab soon">🏜️ North Africa — Soon</button>
   </div>
 
@@ -562,6 +562,218 @@
       </div>
     </div><!-- end #levant-lebanon -->
   </div><!-- end #region-levant -->
+
+  <!-- ══════════════════════════════ GULF ══════════════════════════════ -->
+  <div id="region-gulf" class="region-panel">
+    <div class="tier2-tabs">
+      <div class="tab-wrap">
+        <button class="tier2-tab active" onclick="showCountry('gulf','saudi-arabia',this)">🇸🇦 Saudi Arabia</button>
+        <div class="country-stats">
+          <div class="cs-name">🇸🇦 Saudi Arabia</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Riyadh</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>36m (incl. ~40% expats)</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>No national elections</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Absolute Monarchy</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#7f8c8d;color:#fff">Al Saud</span></div>
+          <div class="cs-govt-detail">Al Saud royal family — absolute monarchy, no parties</div>
+          <div class="cs-leader">Crown Prince &amp; PM: Mohammed bin Salman (MBS) — effective ruler since 2017</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#7f8c8d;color:#fff">None permitted</span> Political parties are banned</div>
+          <div class="cs-opp-leader">Dissidents operate from exile (mainly Europe and US)</div>
+        </div>
+      </div>
+      <button class="tier2-tab soon">🇦🇪 UAE — Soon</button>
+      <button class="tier2-tab soon">🇶🇦 Qatar — Soon</button>
+    </div>
+
+    <div id="gulf-saudi-arabia" class="country-panel active">
+      <div class="country-title">🇸🇦 Saudi Arabia — Press This Week | الصحافة هذا الأسبوع</div>
+      <div class="papers">
+
+        <!-- Arab News — English / Vision 2030 -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean" style="background:#2471a3;color:#fff">◆ English / Pro-reform</div>
+            <div class="paper-name"><a href="https://www.arabnews.com" target="_blank">Arab News</a></div>
+            <div class="paper-desc">Circ. ~130,000 · Saudi Arabia's flagship English-language daily. Owned by Saudi Research and Media Group (SRMG), connected to the Al Saud royal family. The international face of Saudi Arabia's press: cosmopolitan in tone, enthusiastic about Vision 2030, read by diplomats, expats, and the international business community. Represents the "Saudi Arabia is changing" narrative.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Vision 2030 at the halfway mark: what's been built, what's been delayed, and what was always a mirage
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Arab News publishes its mid-point assessment of Vision 2030, the programme launched in 2016 to diversify Saudi Arabia away from oil by 2030. The paper highlights genuine progress — the entertainment sector, women in the workforce, NEOM groundwork, the Saudi Pro League's global signings. It largely sidesteps the harder questions: NEOM's $500bn budget has ballooned with no clear path to completion; the promised private-sector jobs haven't materialised at scale; and oil still accounts for over 60% of government revenue. Arab News frames the story as a journey not yet complete, rather than a plan running into structural reality.
+                <a href="https://www.arabnews.com" class="story-url" target="_blank">→ arabnews.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Saudi Arabia's Gaza position: threading the needle between the Arab street and Washington
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Arab News covers Saudi Arabia's carefully calibrated response to the Gaza war: public condemnation of civilian casualties, humanitarian aid pledges, and sustained calls for a ceasefire — while keeping back-channel lines to Washington and Tel Aviv intact. MBS had been close to a normalisation deal with Israel before October 7 derailed it; Arab News reflects the official position that normalisation remains a long-term strategic goal, but requires a Palestinian state pathway first. The paper's coverage carefully avoids the word "occupation" and frames Saudi diplomacy as constructive rather than complicit.
+                <a href="https://www.arabnews.com" class="story-url" target="_blank">→ arabnews.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Saudisation targets and the workforce gap: can Vision 2030 work without the workers?
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Saudi Arabia's economy runs on 13 million migrant workers who fill jobs many Saudi nationals don't want, won't take at offered wage rates, or lack the training for. Nitaqat (Saudisation) quotas require companies to hire Saudi employees, but compliance is often cosmetic — Saudi names on payrolls, foreign workers doing the jobs. Arab News covers the government's response: new training programmes, "human capital" initiatives, and upbeat statistics on Saudi female workforce participation, which has genuinely risen. The deeper structural problem — that the social contract of state employment and subsidies has not prepared a generation for private-sector work — goes unexamined.
+                <a href="https://www.arabnews.com" class="story-url" target="_blank">→ arabnews.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Vision 2030 progress narrative</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">SRMG / Al Saud royal family (ownership)</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Saudi Gazette — Official / State-aligned -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean" style="background:#7f8c8d;color:#fff">● Official / State-aligned</div>
+            <div class="paper-name"><a href="https://www.saudigazette.com.sa" target="_blank">Saudi Gazette</a></div>
+            <div class="paper-desc">Circ. ~100,000 · English-language daily published by Okaz Organisation for Press and Publication (government-linked). The traditional official voice in English: closer to the government line than Arab News, more conservative in tone, reflects the establishment view within the Vision 2030 framework. Read for what the government wants the English-reading world to know.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The Kingdom's counter-terrorism record: how Saudi Arabia became a global security partner
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Saudi Gazette covers the Kingdom's extensive security cooperation with Western governments — intelligence sharing, deradicalisation programmes, and counter-financing operations against extremist networks. The paper positions Saudi Arabia as an indispensable partner in global counter-terrorism, a framing the government has promoted aggressively since September 11. The historical context — that 15 of the 19 hijackers were Saudi, that Saudi religious institutions exported Salafi doctrines globally, and that state-linked actors have funded extremist movements from Bosnia to Indonesia — does not feature in this account.
+                <a href="https://www.saudigazette.com.sa" class="story-url" target="_blank">→ saudigazette.com.sa</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Saudi sports investment: building a nation, not washing its reputation
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Saudi Gazette defends the Kingdom's investment in golf (LIV Golf), football (Saudi Pro League signings of Ronaldo, Benzema, Neymar), boxing, Formula 1, and the 2034 World Cup as genuine nation-building: developing tourism infrastructure, growing Saudi youth participation in sport, and projecting a modern national image internationally. The paper dismisses "sportswashing" accusations as politically motivated Western hypocrisy. The argument that sport investment does not and cannot substitute for political reform or accountability for human rights abuses is not entertained.
+                <a href="https://www.saudigazette.com.sa" class="story-url" target="_blank">→ saudigazette.com.sa</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                OPEC+ production strategy: the Kingdom protecting its long-term energy interests
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Saudi Gazette covers the latest OPEC+ production decisions from Riyadh's perspective: output management as a responsible exercise of market stewardship, not price manipulation. Saudi Arabia has led supply cuts to support oil prices while managing its relationship with Russia (a fellow OPEC+ member despite being on opposing sides of the Ukraine war) and keeping dialogue open with consuming nations. The paper presents Saudi Aramco's record profits and sovereign wealth fund growth as validation of the strategy, without noting the impact of sustained high oil prices on the energy costs of developing economies.
+                <a href="https://www.saudigazette.com.sa" class="story-url" target="_blank">→ saudigazette.com.sa</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Saudi security &amp; counter-terrorism credentials</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Okaz Organisation / Government (direct state link)</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Asharq Al-Awsat — Pan-Arab / Royal-owned -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean" style="background:#6c3483;color:#fff">◆ Pan-Arab / Royal-owned</div>
+            <div class="paper-name"><a href="https://english.aawsat.com" target="_blank">Asharq Al-Awsat / الشرق الأوسط</a></div>
+            <div class="paper-desc">Circ. ~200,000+ across Arab world · The most prestigious pan-Arab newspaper. Founded 1978, published in London, owned by Saudi Research and Media Group (SRMG — Al Saud family interests). Read by political and intellectual elites from Rabat to Baghdad. Editorially more sophisticated than domestic Saudi papers — broader regional coverage, less parochial — but still within the constraints of royal family ownership.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The normalisation that wasn't: Saudi-Israeli talks and why October 7 changed the timeline but not the destination
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Asharq Al-Awsat traces the arc of Saudi-Israeli normalisation: the Abraham Accords framework that excluded the Saudis, MBS's careful signalling of openness, the Biden administration's active brokering, and October 7's sudden rupture of the process. The paper's regional correspondents report that back-channel contacts have never fully stopped, and that Saudi conditions — a credible Palestinian state pathway, US security guarantees, civilian nuclear technology — are still on the table as long-term asks. The paper frames normalisation as an inevitable regional shift, not a betrayal of Palestinian interests, though it notes this reading is fiercely contested across the Arab world.
+                <a href="https://english.aawsat.com" class="story-url" target="_blank">→ english.aawsat.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The new Arab order: Saudi regional leadership, Iranian recalculation, and the post-Gaza map
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Asharq Al-Awsat examines Saudi Arabia's repositioning as the indispensable power of a reconfigured Arab world: brokering the Saudi-Iranian rapprochement via China, running parallel tracks with Tehran and Washington, hosting summits, and attempting to build a regional security architecture that doesn't depend entirely on US engagement. The paper covers the Houthi threat to shipping in the Red Sea as both a security crisis and an example of Iran's diminished but still active capacity for regional disruption through proxies. Post-Gaza, the paper assesses who has gained and who has lost leverage.
+                <a href="https://english.aawsat.com" class="story-url" target="_blank">→ english.aawsat.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Yemen ceasefire: the Saudi-Iranian deal that held — and what comes next for a country in ruins
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Asharq Al-Awsat covers the evolution of the Yemen peace process following the 2023 Saudi-Iranian normalisation deal brokered in Beijing. Ceasefire lines have broadly held, prisoner exchanges have continued, and the UN-backed peace process has made halting progress. The paper covers Houthi Red Sea attacks — which resumed despite the ceasefire — as evidence of the limits of diplomatic arrangements that don't address underlying political structures. Coverage of Yemen's humanitarian catastrophe (400,000+ dead, cholera, famine) is more candid than in Saudi domestic media, though the Kingdom's own role in creating that catastrophe receives less scrutiny than it warrants.
+                <a href="https://english.aawsat.com" class="story-url" target="_blank">→ english.aawsat.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Arab regional power dynamics &amp; Saudi leadership</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">SRMG / Al Saud royal family (ownership)</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 Saudi Arabia's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">⛓️ <strong>The Kafala system and 13 million invisible workers:</strong> Saudi Arabia runs on the labour of roughly 13 million migrant workers — from South Asia, East Africa, and Southeast Asia — under a sponsorship system that ties workers to a single employer who controls their right to change jobs, exit the country, or seek legal redress. Passport confiscation, unpaid wages, physical abuse, and deaths in custody have been extensively documented by Human Rights Watch and Amnesty International. These workers build the towers, drive the cars, clean the hospitals, and raise the children of Saudi Arabia's middle and upper class. Their conditions are almost entirely absent from Saudi media and from most international coverage focused on Vision 2030's modernisation story.</div>
+        <div class="blind-spot-item">👑 <strong>The succession problem nobody will name:</strong> Mohammed bin Salman is Crown Prince and Prime Minister — the effective ruler of Saudi Arabia — but he is not king. His father, King Salman, is 89 and in uncertain health. The question of what happens when Salman dies — whether MBS becomes king smoothly, whether rival branches of the royal family accept this, and what it means for the institutional basis of MBS's power — is the central unspoken question in Saudi politics. No Saudi publication will explore it. Few international ones do either.</div>
+        <div class="blind-spot-item">🏗️ <strong>Vision 2030's structural contradiction:</strong> The programme requires a diverse private sector and a skilled Saudi workforce willing to take private-sector jobs. But Saudi Arabia's social contract is built on government employment, subsidies, and a welfare state funded by oil. The generation that needs to staff the private economy has been shaped by expectations of state employment at generous wages. Saudisation quotas produce compliance, not transformation: Saudi names on payrolls, foreign workers doing the work. This gap between ambition and social reality is Vision 2030's central unexamined challenge.</div>
+        <div class="blind-spot-item">💣 <strong>Yemen and the accountability that never came:</strong> Saudi Arabia led a coalition air campaign over Yemen from 2015 that killed hundreds of thousands of people, deliberately bombed civilian infrastructure including hospitals and water systems, and contributed to one of the world's worst humanitarian crises. The Saudi-Iranian deal paused the fighting. But no inquiry, no reckoning, and no honest public examination of what the war was actually for has taken place — in Saudi Arabia, in the West whose arms and intelligence made it possible, or in most international media.</div>
+      </div>
+    </div><!-- end #gulf-saudi-arabia -->
+  </div><!-- end #region-gulf -->
 
 </div><!-- end .dashboard -->
 
