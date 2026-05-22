@@ -363,7 +363,7 @@
 
   <div id="compass-view">
     <div class="compass-wrap">
-      <svg id="compassSvg" viewBox="0 0 940 660" xmlns="http://www.w3.org/2000/svg" style="min-width:560px;width:100%;height:auto;display:block;"></svg>
+      <svg id="compassSvg" viewBox="0 0 940 660" xmlns="http://www.w3.org/2000/svg" style="min-width:560px;width:100%;height:auto;display:block;pointer-events:all;"></svg>
     </div>
     <p class="compass-note">
       <strong>X-axis:</strong> Economic — State economy / Tax &amp; spend (left) · Free market / Low tax (right)<br>
@@ -1033,7 +1033,7 @@ function renderCompass() {
     var r = p.status === 'gov' ? 7 : 5;
     var sw = p.status === 'gov' ? '2.2' : '1.2';
     var stroke = '#fff';
-    s += '<circle class="c-dot" cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + p.color + '" stroke="' + stroke + '" stroke-width="' + sw + '" opacity="0.88" data-pname="' + p.name.replace(/"/g, '&quot;') + '" style="cursor:default"/>';
+    s += '<circle class="c-dot" cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + p.color + '" stroke="' + stroke + '" stroke-width="' + sw + '" opacity="0.88" data-pname="' + p.name.replace(/"/g, '&quot;') + '" style="cursor:pointer"/>';
   });
 
   svg.innerHTML = s;
