@@ -126,6 +126,20 @@
     padding: 6px 10px; border-radius: 4px; z-index: 200; pointer-events: none;
     width: 200px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
   .nav-tip-wrap:hover .nav-tip { display: block; }
+
+  /* ── Paper website hint ── */
+  .paper-name a { text-decoration: none; color: inherit; }
+  .paper-name a::after {
+    content: "↗ click to visit website";
+    display: block;
+    font-size: 0.58rem;
+    font-weight: 400;
+    color: #bbb;
+    font-family: sans-serif;
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+  .paper-name a:hover::after { color: #888; }
 </style>
 </head>
 <body>

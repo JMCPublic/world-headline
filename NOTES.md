@@ -119,7 +119,7 @@ Small collapsible panel below the paper cards, per country:
 - **Adding a new country — full checklist (every single time):**
   1. Press page: country tab + papers display left-to-right (not stacked)
   2. Press page: each paper card has a clickable link to its website
-  3. Press page: blind spot panel with 4 items
+  3. Press page: blind spot panel uses the **standard dark collapsible format** (`.blind-spot` class) — not the old expanded `.blind-spots` / `.blind-spot-item` format
   4. resources.html: add 3 rows, update count (newspapers + countries)
   5. axis_of_equal.html: add `aoe-row` with party pills and lean/leader/status data
   6. axis_of_equal.html: add party scores to `PARTY_FISCAL` and `PARTY_SOCIAL` (for compass)
@@ -284,7 +284,8 @@ Poles Apart: Consensus Moments, Divergence Tracker, Cross-border Influence, When
 ## ⏭️ Next Session
 
 1. **Upload to GitHub** (files from this session)
-2. **Next countries**: Egypt, Iran (press pages + full checklist; both harder — Egypt Arabic-primary, Iran Persian/restricted)
-3. **What the Markets Think Phase 1** — implement currency panel using fawazahmed0 API (already fully scoped, ready to build)
-4. **Poles Apart** — expand country coverage beyond current ~15 countries
-5. **Comments (#94)** — design the shared discussion page (parked but not forgotten)
+2. **Blind spot layout consistency** — Americas has a mix of old (`.blind-spots` / `.blind-spot-item`) and new (`.blind-spot` collapsible dark panel) formats. Convert all old-format countries across all press pages to the standard format. Affects: Brazil, Argentina, Colombia, Chile, Peru in Americas — check other pages too.
+3. **Next countries**: Egypt, Iran (press pages + full checklist; both harder — Egypt Arabic-primary, Iran Persian/restricted)
+4. **What the Markets Think Phase 1** — implement currency panel using fawazahmed0 API (already fully scoped, ready to build)
+5. **Poles Apart** — expand country coverage beyond current ~15 countries
+6. **Comments (#94)** — design the shared discussion page (parked but not forgotten)
