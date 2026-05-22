@@ -43,6 +43,8 @@
   .lean { font-size: 0.62rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 3px; }
   .lean-left { color: #2980b9; } .lean-centre { color: #27ae60; } .lean-right { color: #c0392b; }
   .paper-name { font-size: 0.9rem; font-weight: 700; color: #1a1a1a; }
+  .paper-name a { color: #1a1a1a; text-decoration: none; }
+  .paper-name a:hover { color: #c0392b; text-decoration: underline; }
   .paper-desc { font-size: 0.6rem; color: #999; font-family: sans-serif; margin-top: 2px; line-height: 1.4; }
   .stories { padding: 0 14px 12px; }
   .story { border-top: 1px solid #eee; padding: 8px 0; }
@@ -116,6 +118,7 @@
   <a href="poles_apart.html">⚡ Poles Apart</a>
   <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
+  <a href="resources.html">📋 Resources</a>
 </nav>
 
 <div class="top-panel">
@@ -166,7 +169,24 @@
           <div class="cs-opp-leader">Benny Gantz</div>
         </div>
       </div>
-      <button class="tier2-tab soon">🇱🇧 Lebanon — Soon</button>
+      <div class="tab-wrap">
+        <button class="tier2-tab" onclick="showCountry('levant','lebanon',this)">🇱🇧 Lebanon</button>
+        <div class="country-stats">
+          <div class="cs-name">🇱🇧 Lebanon</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Beirut</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>5.5m (+ ~1.5m Syrian refugees)</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Confessional proportional representation</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Parliamentary Republic (power-sharing)</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#27ae60">Centre / Reform</span></div>
+          <div class="cs-govt-detail">Cross-confessional reform coalition</div>
+          <div class="cs-leader">President: Joseph Aoun · PM: Nawaf Salam (since Jan 2025)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Political Forces</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#2980b9">Left / Resistance</span> Hezbollah + Amal (8 March bloc)</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> Lebanese Forces (Geagea) · Kataeb</div>
+        </div>
+      </div>
       <button class="tier2-tab soon">🇹🇷 Turkey — Soon</button>
     </div>
 
@@ -179,7 +199,7 @@
         <div class="paper">
           <div class="paper-header">
             <div class="lean lean-left">◀ Left / Progressive</div>
-            <div class="paper-name">Haaretz</div>
+            <div class="paper-name"><a href="https://www.haaretz.com" target="_blank">Haaretz</a></div>
             <div class="paper-desc">Israel's most internationally read daily. Liberal, anti-occupation, fiercely critical of Netanyahu. The paper the government hates most.</div>
           </div>
           <div class="stories">
@@ -236,7 +256,7 @@
         <div class="paper">
           <div class="paper-header">
             <div class="lean lean-centre">● Centre</div>
-            <div class="paper-name">Yedioth Ahronoth</div>
+            <div class="paper-name"><a href="https://www.ynet.co.il" target="_blank">Yedioth Ahronoth</a></div>
             <div class="paper-desc">Israel's highest-circulation print daily. Centrist-populist, once pro-Netanyahu, now sharply critical. Reflects mainstream Israeli public anxiety.</div>
           </div>
           <div class="stories">
@@ -293,7 +313,7 @@
         <div class="paper">
           <div class="paper-header">
             <div class="lean lean-right">▶ Right / Pro-Government</div>
-            <div class="paper-name">Israel Hayom</div>
+            <div class="paper-name"><a href="https://www.israelhayom.com" target="_blank">Israel Hayom</a></div>
             <div class="paper-desc">Israel's highest-circulation daily (free distribution). Founded by Sheldon Adelson. Firmly pro-Netanyahu, the paper the opposition calls "Bibiton" (Bibi's paper).</div>
           </div>
           <div class="stories">
@@ -355,6 +375,192 @@
         <div class="blind-spot-item">💻 <strong>Tech sector exodus:</strong> Hundreds of Israeli tech workers and startups have quietly relocated to Portugal, Cyprus, and the UK since 2023 — combining war risk, judicial uncertainty, and military reserve duty into a calculation that makes leaving rational. The long-term brain drain risk to Israel's innovation economy is a story almost no international outlet is tracking.</div>
       </div>
     </div><!-- end #levant-israel -->
+
+    <div id="levant-lebanon" class="country-panel">
+      <div class="country-title">🇱🇧 Lebanon — Press This Week</div>
+      <div class="papers">
+
+        <!-- Al-Akhbar — Left / Pro-Resistance -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-left">◀ Left / Pro-Resistance</div>
+            <div class="paper-name"><a href="https://al-akhbar.com" target="_blank">Al-Akhbar</a></div>
+            <div class="paper-desc">Arabic daily. Leftist, anti-Western, editorially aligned with the Axis of Resistance. The voice of Hezbollah's constituency and the broader anti-imperialist left.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Wounded but not defeated: the resistance rebuilds its position in the south
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Al-Akhbar pushes back against the narrative that Hezbollah's 2024 losses — including the death of Hassan Nasrallah — represent a permanent strategic defeat. The paper argues the organisation retains deep social roots, functioning civilian infrastructure, and political representation. It frames the ceasefire and reconstruction period as a regrouping, not a surrender, and is fiercely critical of any political process that would require formal disarmament.
+                <a href="https://al-akhbar.com" class="story-url" target="_blank">→ al-akhbar.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                IMF austerity: Lebanon must not let the financial elite off the hook again
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Al-Akhbar is the most consistent Lebanese voice arguing that the banking sector — whose owners engineered a Ponzi scheme that destroyed the savings of ordinary Lebanese — must bear the cost of restructuring, not depositors or public sector workers. The paper covers IMF reform negotiations with deep suspicion, arguing that Western-backed conditionality historically protects financial elites while imposing austerity on working people.
+                <a href="https://al-akhbar.com" class="story-url" target="_blank">→ al-akhbar.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                US and Israeli pressure on Beirut: the new government's sovereignty test
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Al-Akhbar frames the Aoun-Salam government's relationship with Washington and the Gulf states as a test of whether Lebanon can resist external diktat. The paper is particularly hostile to any US or Israeli conditions on reconstruction funding, and frames pressure to disarm Hezbollah as part of a regional agenda to eliminate the last effective armed force opposing Israeli expansion. Coverage is explicitly from the resistance bloc's perspective.
+                <a href="https://al-akhbar.com" class="story-url" target="_blank">→ al-akhbar.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Resistance &amp; anti-imperialism</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Hezbollah / 8 March bloc agenda</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- L'Orient Today — Centre / Reform -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre / Reform</div>
+            <div class="paper-name"><a href="https://www.lorienttoday.com" target="_blank">L'Orient Today</a></div>
+            <div class="paper-desc">English-language daily (sister to French L'Orient-Le Jour). Liberal, Francophone tradition, fiercely independent. The paper of Lebanon's reform movement and educated diaspora.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Can Aoun and Salam actually deliver? The reform moment Lebanon cannot afford to waste
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                L'Orient Today approaches the new government with cautious hope — the first competent, internationally respected leadership Lebanon has had in decades. The paper profiles Nawaf Salam's track record at the International Court of Justice and asks whether his diplomatic skills translate into the brutal domestic politics of confessional coalition management. It sets a clear benchmark: banking reform, electoral law, and genuine disarmament talks within 18 months.
+                <a href="https://www.lorienttoday.com" class="story-url" target="_blank">→ lorienttoday.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The banking sector's unpunished heist: will this government finally act?
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Over $100 billion in Lebanese depositors' savings has been effectively trapped or lost in a banking collapse that L'Orient Today has covered exhaustively. The paper names the bank owners and politically connected figures who transferred wealth abroad while ordinary Lebanese lost life savings. It presses the Salam government on whether it will push through the banking restructuring law that every previous government has blocked under pressure from the financial elite.
+                <a href="https://www.lorienttoday.com" class="story-url" target="_blank">→ lorienttoday.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Reconstruction in the south: who decides, who controls, and who gets the contracts?
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Billions in reconstruction pledges are flowing toward southern Lebanon. L'Orient Today asks the questions donors aren't asking: how will contracts be awarded, who will oversee the money, and will reconstruction reinforce Hezbollah's patronage networks or genuinely transfer to state institutions? The paper argues this is where the battle between the old Lebanon and the new one will actually be decided — not in political speeches.
+                <a href="https://www.lorienttoday.com" class="story-url" target="_blank">→ lorienttoday.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Banking reform &amp; accountability</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Banking sector elite / financial oligarchy</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- An-Nahar — Centre-right / Sovereignist -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-right">▶ Centre-right / Sovereignist</div>
+            <div class="paper-name"><a href="https://www.annahar.com" target="_blank">An-Nahar</a></div>
+            <div class="paper-desc">Arabic daily, founded 1933. One of Lebanon's oldest and most respected papers. Anti-Syrian, pro-sovereignty, historically aligned with the 14 March tradition. Champions the Lebanese state over all armed factions.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Disarming Hezbollah: the question every Lebanese politician must now answer
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                An-Nahar argues the window is open — Hezbollah weakened, a new president, an internationally respected PM, and genuine international pressure — but it won't stay open. The paper runs a series examining every major political leader's position on weapons outside the state and finds most still equivocating. Its editorial line is unambiguous: a state that tolerates a parallel armed force is not really a state, and this government's legitimacy depends on beginning a credible disarmament process.
+                <a href="https://www.annahar.com" class="story-url" target="_blank">→ annahar.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The Lebanese Army's moment: from UN peacekeeping to state-building
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                With President Joseph Aoun — himself the former army commander — in office, An-Nahar is enthusiastic about the Lebanese Armed Forces' expanded role. The paper profiles the army's deployment in the south and its gradual extension of state authority into areas that were Hezbollah-controlled. It covers the army as the only institution that has maintained credibility across confessional lines and argues it must now be given the resources and political backing to consolidate the state.
+                <a href="https://www.annahar.com" class="story-url" target="_blank">→ annahar.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The diaspora's moment: $8bn in remittances and a political constituency that wants its country back
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Lebanon's diaspora — estimated at 14 million people worldwide, dwarfing the domestic population — sends home around $8 billion annually and has been the financial lifeline through the economic collapse. An-Nahar covers the growing political engagement of diaspora communities in Europe, the Gulf, and the Americas who see the new government as their best chance to reclaim a functioning country. The paper profiles Lebanese professionals considering returning if reform holds.
+                <a href="https://www.annahar.com" class="story-url" target="_blank">→ annahar.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Sovereignty &amp; weapons outside the state</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Lebanese Armed Forces / President Aoun</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 Lebanon's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">🏦 <strong>The banking heist:</strong> Over $100 billion in Lebanese depositors' savings was effectively stolen through a state-sanctioned Ponzi scheme run by the commercial banks and Banque du Liban. The bank owners transferred wealth abroad while ordinary Lebanese lost everything. No senior banker has been prosecuted. This is one of the largest financial crimes in the modern Middle East and receives a fraction of the coverage it deserves.</div>
+        <div class="blind-spot-item">🕌 <strong>Confessionalism as the system:</strong> International coverage describes Lebanon's sectarian divisions as a problem to be solved. Lebanese scholars describe confessionalism as a deliberately maintained system that benefits every sectarian elite by preventing genuine accountability. Understanding this distinction — dysfunction as design, not accident — is essential to understanding why reform is so hard.</div>
+        <div class="blind-spot-item">🇸🇾 <strong>1.5 million Syrian refugees:</strong> Lebanon hosts the world's highest per-capita refugee population. The economic, social, and political pressures this creates — particularly in a collapsed economy — are enormous, and the path to resolution (Syrian return, local integration, third-country resettlement) is completely unclear. This story almost never appears in coverage focused on Lebanon's political elite.</div>
+        <div class="blind-spot-item">💥 <strong>The Beirut explosion's unfinished reckoning:</strong> The August 2020 port explosion killed over 200 people, injured 6,000, and displaced 300,000. Five years on, the judicial investigation has been repeatedly blocked by politicians using parliamentary immunity. No one has been held accountable. The families' ongoing legal fight is one of the most important stories in the Arab world — and one of the least covered.</div>
+      </div>
+    </div><!-- end #levant-lebanon -->
   </div><!-- end #region-levant -->
 
 </div><!-- end .dashboard -->
@@ -400,6 +606,7 @@ function toggleStory(el) {
   <a href="poles_apart.html">⚡ Poles Apart</a>
   <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
+  <a href="resources.html">📋 Resources</a>
 </nav>
 
 <script>

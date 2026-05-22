@@ -256,6 +256,7 @@
   <a href="poles_apart.html">⚡ Poles Apart</a>
   <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html" class="active">⚖️ Axis of Equal</a>
+  <a href="resources.html">📋 Resources</a>
   <span class="sep">|</span>
   <a href="#bptb-section">🌍 Best Place to Be</a>
   <a href="#similarity-section">🔍 Country Comparison</a>
@@ -588,6 +589,8 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         nudge.innerHTML = '💡 Showing <em>' + this.textContent + '</em> parties across all countries. Use <strong>Compare</strong> below to narrow to specific countries.';
       }
     }
+    // Re-render compass if it is currently open
+    if (document.getElementById('compass-view').classList.contains('open')) renderCompass();
   });
 });
 
@@ -639,6 +642,8 @@ document.getElementById('compare-btn').addEventListener('click', function() {
     'Comparing ' + selected.length + ' countr' + (selected.length===1?'y':'ies') + ' — click "Show all" to reset';
   document.getElementById('compare-status').style.color = '';
   compareMode = true;
+  // Re-render compass if it is currently open
+  if (document.getElementById('compass-view').classList.contains('open')) renderCompass();
 });
 
 document.getElementById('reset-btn').addEventListener('click', function() {
@@ -647,6 +652,8 @@ document.getElementById('reset-btn').addEventListener('click', function() {
   document.getElementById('compare-status').textContent = '';
   document.getElementById('compare-status').style.color = '';
   compareMode = false;
+  // Re-render compass if it is currently open
+  if (document.getElementById('compass-view').classList.contains('open')) renderCompass();
 });
 // ── Best Place to Be ──
 function getCountryParties() {
@@ -892,9 +899,28 @@ function renderCompass() {
   function fx(f) { return Math.round(PAD.l + (f / 100) * CW); }
   function fy(s) { return Math.round(PAD.t + (s / 100) * CH); }
 
-  // Collect party data
+  // Read active filters
+  var activeLeanBtn = document.querySelector('.filter-btn.active');
+  var activeLean = activeLeanBtn ? activeLeanBtn.dataset.lean : 'all';
+  var hiddenRows = document.querySelectorAll('.aoe-row.hidden');
+  var compareModeOn = hiddenRows.length > 0;
+  var visibleCountries = new Set();
+  if (compareModeOn) {
+    document.querySelectorAll('.aoe-row:not(.hidden)').forEach(function(row) {
+      if (row.dataset.country) visibleCountries.add(row.dataset.country);
+    });
+  }
+
+  // Collect party data — filtered by lean and country
   var parties = [];
   document.querySelectorAll('.aoe-party').forEach(function(el) {
+    // Country filter: skip parties from hidden (non-selected) countries
+    if (compareModeOn) {
+      var parentRow = el.closest('.aoe-row');
+      if (!parentRow || !visibleCountries.has(parentRow.dataset.country)) return;
+    }
+    // Lean filter: skip parties that don't match the active lean
+    if (activeLean !== 'all' && el.dataset.lean !== activeLean) return;
     var name = el.dataset.name || el.textContent.trim();
     var fiscal = PARTY_FISCAL[name];
     var social  = PARTY_SOCIAL[name];
@@ -1381,6 +1407,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <a href="poles_apart.html">⚡ Poles Apart</a>
   <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html" class="active">⚖️ Axis of Equal</a>
+  <a href="resources.html">📋 Resources</a>
 </nav>
 
 <script>
