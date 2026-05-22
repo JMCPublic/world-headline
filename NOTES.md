@@ -118,7 +118,7 @@ Small collapsible panel below the paper cards, per country:
 
 - **Adding a new country — full checklist (every single time):**
   1. Press page: country tab + papers display left-to-right (not stacked)
-  2. Press page: each paper card has a clickable link to its website
+  2. Press page: each paper card has a clickable link to its website — title is the hyperlink, with hint text below reading "↗ click the newspaper title to visit their website" (non-clickable, outside the anchor)
   3. Press page: blind spot panel uses the **standard dark collapsible format** (`.blind-spot` class) — not the old expanded `.blind-spots` / `.blind-spot-item` format
   4. resources.html: add 3 rows, update count (newspapers + countries)
   5. axis_of_equal.html: add `aoe-row` with party pills and lean/leader/status data

@@ -104,8 +104,8 @@
 
   /* ── Paper website hint ── */
   .paper-name a { text-decoration: none; color: inherit; }
-  .paper-name a::after {
-    content: "↗ click to visit website";
+  .paper-name:has(a)::after {
+    content: "↗ click the newspaper title to visit their website";
     display: block;
     font-size: 0.58rem;
     font-weight: 400;
@@ -113,8 +113,8 @@
     font-family: sans-serif;
     margin-top: 2px;
     letter-spacing: 0.02em;
+    pointer-events: none;
   }
-  .paper-name a:hover::after { color: #888; }
 </style>
 </head>
 <body>
