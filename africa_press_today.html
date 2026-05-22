@@ -785,7 +785,24 @@
           <div class="cs-opp-leader">Jacob Zuma</div>
         </div>
       </div>
-      <button class="tier2-tab soon">🇿🇼 Zimbabwe — Soon</button>
+      <div class="tab-wrap">
+        <button class="tier2-tab" onclick="showCountry('south','zimbabwe',this)">🇿🇼 Zimbabwe</button>
+        <div class="country-stats">
+          <div class="cs-name">🇿🇼 Zimbabwe</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Harare</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>16.5m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>First Past the Post</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Presidential Republic</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#c0392b;color:#fff">ZANU-PF</span></div>
+          <div class="cs-govt-detail">ZANU-PF — Zimbabwe African National Union (Patriotic Front)</div>
+          <div class="cs-leader">President: Emmerson Mnangagwa (since Nov 2017, re-elected 2023)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> CCC — Citizens Coalition for Change</div>
+          <div class="cs-opp-leader">Fragmented — Chamisa withdrew from politics, 2024</div>
+        </div>
+      </div>
       <div class="tab-wrap">
         <button class="tier2-tab" onclick="showCountry('south','botswana',this)">🇧🇼 Botswana</button>
         <div class="country-stats">
@@ -1177,6 +1194,192 @@
         <div class="blind-spot-item">🎗️ <strong>HIV/AIDS progress and fragility:</strong> Botswana once had the world's highest HIV prevalence. Its antiretroviral programme — one of Africa's earliest and most comprehensive — dramatically reduced mortality. But coverage gaps, stigma, and a young sexually active population mean the epidemic is not over. The success story has crowded out coverage of the ongoing challenge.</div>
       </div>
     </div><!-- end #south-botswana -->
+
+    <div id="south-zimbabwe" class="country-panel">
+      <div class="country-title">🇿🇼 Zimbabwe — Press This Week</div>
+      <div class="papers">
+
+        <!-- NewsDay — Centre-Left / Independent -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-left">◀ Centre-Left / Independent</div>
+            <div class="paper-name"><a href="https://www.newsday.co.zw" target="_blank">NewsDay Zimbabwe</a></div>
+            <div class="paper-desc">Circ. ~50,000 · Zimbabwe's most widely read independent daily. Critical of ZANU-PF, pro-reform. Published by Alpha Media Holdings — the paper the government wishes didn't exist.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Mnangagwa's third-term gamble: ZANU-PF is pushing the constitution to breaking point
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Zimbabwe's constitution sets a strict two-term limit for presidents. Emmerson Mnangagwa's first full term began in 2018 — meaning he should leave office in 2028. Instead, ZANU-PF has spent 2025 engineering constitutional amendments to extend his rule, suppress scrutiny, or claim the 2017 coup counted as a break resetting the clock. NewsDay documents the intimidation of MPs and civic voices who oppose the changes, and argues the move marks a decisive step toward one-man rule.
+                <a href="https://www.newsday.co.zw" class="story-url" target="_blank">→ newsday.co.zw</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The ZiG experiment: Zimbabwe's sixth currency in 30 years is already buckling
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                In April 2024, Zimbabwe introduced the Zimbabwe Gold (ZiG) — a currency backed by gold and foreign exchange reserves. It was presented as the solution to serial hyperinflation. NewsDay's economics team tracks its first year: parallel market premiums have re-emerged, fuel stations quietly prefer US dollars, and public sector workers continue to receive ZiG salaries worth less each month. The paper argues that no currency can succeed without the rule of law and an independent central bank — both still absent.
+                <a href="https://www.newsday.co.zw" class="story-url" target="_blank">→ newsday.co.zw</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Four million reasons the economy is failing: the diaspora is Zimbabwe's real safety net
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                More than four million Zimbabweans live abroad — in South Africa, the UK, the US, Australia, and beyond. Their remittances now exceed most government revenue lines and keep millions of families from destitution. NewsDay argues this is not a success story: it is the largest brain drain in sub-Saharan Africa, a structural verdict on a country that has failed its young and educated. Every doctor, engineer, and teacher who leaves is a policy failure the government prefers not to discuss.
+                <a href="https://www.newsday.co.zw" class="story-url" target="_blank">→ newsday.co.zw</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Democratic backsliding &amp; rule of law</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">ZANU-PF patronage networks</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Herald — State / Government-owned -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean" style="background:#7f8c8d;color:#fff">● State Media / ZANU-PF Aligned</div>
+            <div class="paper-name"><a href="https://www.herald.co.zw" target="_blank">The Herald</a></div>
+            <div class="paper-desc">Circ. ~45,000 · Zimbabwe's flagship state newspaper, published by Zimpapers (government-owned). The official voice of ZANU-PF since independence. Read for government positions — and for what the government wants you to think.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Vision 2030: President Mnangagwa inspects new infrastructure projects driving development
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Herald provides extensive coverage of President Mnangagwa's programme of road, dam, and public building projects under the Vision 2030 banner — the government's roadmap to upper-middle-income status. The paper frames the projects as evidence of ZANU-PF's development competence and patriotism. Independent economists note that many flagship projects are Chinese-financed loans at commercial rates, adding to a growing debt burden that receives little scrutiny in state media.
+                <a href="https://www.herald.co.zw" class="story-url" target="_blank">→ herald.co.zw</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Western sanctions: economic warfare dressed up as human rights
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Herald returns regularly to the theme of Western sanctions — framing US and EU targeted measures against senior ZANU-PF figures as a broader economic attack on Zimbabwe's sovereignty. The paper credits sanctions with much of the country's economic difficulty, positioning the government as a victim of external aggression rather than the author of its own policy failures. The sanctions — targeted at named individuals, not the economy — are rarely accurately characterised in state coverage.
+                <a href="https://www.herald.co.zw" class="story-url" target="_blank">→ herald.co.zw</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                ZiG stabilisation: Reserve Bank governor outlines measures to protect currency gains
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Herald's economic reporting on the ZiG currency presents the central bank's narrative: inflation is falling, reserves are building, and the currency is on a sound footing. Reports of parallel market premiums and dollarisation are absent. The paper's editorial line endorses the currency as a patriotic project and frames critics as agents of economic sabotage. Business readers rely on The Zimbabwe Independent for a more grounded picture of actual market conditions.
+                <a href="https://www.herald.co.zw" class="story-url" target="_blank">→ herald.co.zw</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Western sanctions &amp; sovereignty narrative</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Government / Zimpapers (direct state ownership)</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Zimbabwe Independent — Centre-Right / Business -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-right">▶ Centre-Right / Business</div>
+            <div class="paper-name"><a href="https://www.newsday.co.zw/theindependent" target="_blank">The Zimbabwe Independent</a></div>
+            <div class="paper-desc">Circ. ~20,000 · Zimbabwe's premier business weekly. Independent, market-oriented, forensically critical of corruption and cronyism. The paper the private sector and international investors read first.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Sanctions, cronies, and capital flight: what's really destroying Zimbabwe's investment climate
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Zimbabwe Independent publishes its annual investment climate assessment. The verdict is damning: property rights remain insecure 25 years after the land reform programme; the rule of law is subordinate to ZANU-PF interests; and a US-sanctioned first family involved in gold and diamond networks deters serious international capital. The paper argues that blaming Western sanctions is the government's most successful act of misdirection — the real deterrent is domestic policy and cronyism.
+                <a href="https://www.newsday.co.zw/theindependent" class="story-url" target="_blank">→ theindependent.co.zw</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                ZiG under pressure: a gold-backed currency cannot survive without institutional reform
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Independent's finance desk takes a rigorous look at the ZiG's first year. Findings: the parallel market premium, while lower than peak periods, has not disappeared; fuel and key imports are priced in US dollars; confidence in the new currency remains fragile because the institutional conditions for monetary credibility — an independent central bank, transparent reserves, rule of law — have not been created. The paper concludes the ZiG is Zimbabwe's sixth attempt to substitute a new currency for the institutional reforms that would actually fix the problem.
+                <a href="https://www.newsday.co.zw/theindependent" class="story-url" target="_blank">→ theindependent.co.zw</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Family business: the conflicts of interest at the heart of Zimbabwe's governance crisis
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Independent profiles the interlocking commercial interests of the Mnangagwa family. His son David serves as deputy finance minister while maintaining private business interests. His nephew Tongai is deputy tourism minister. His wife Auxillia was sanctioned by the US Treasury in 2024, alongside the President, for alleged involvement in illicit gold and diamond networks. The paper maps the patronage web and asks the question state media will not: where is the line between the state and the first family?
+                <a href="https://www.newsday.co.zw/theindependent" class="story-url" target="_blank">→ theindependent.co.zw</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Investment climate &amp; rule of law</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Business community &amp; diaspora investors</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 Zimbabwe's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">💸 <strong>The diaspora economy:</strong> More than four million Zimbabweans live abroad — in South Africa, the UK, the US, and Australia. Their remittances now constitute one of Zimbabwe's largest sources of foreign currency, quietly sustaining millions of families that government policy has failed. This structural reality — that Zimbabwe functions partly as a labour-export economy — is almost never framed as a policy failure or discussed as a long-term development question.</div>
+        <div class="blind-spot-item">🪙 <strong>The ZiG experiment:</strong> Zimbabwe introduced its sixth currency since 2000 in April 2024 — the Zimbabwe Gold (ZiG), backed by gold and foreign exchange reserves. International coverage treated it as a curiosity. The serious question — whether monetary reform can work without judicial independence, property rights, and an end to money-printing for political patronage — has barely been examined outside specialist economic publications.</div>
+        <div class="blind-spot-item">🌾 <strong>Land reform's 25-year aftermath:</strong> The forced seizure of white-owned commercial farms from 2000 onwards was one of the most widely reported events in African history. The 25-year aftermath — most redistributed farms significantly less productive, food imports replacing a former breadbasket, and neither the evicted former owners nor the new occupants having secure title — is almost never revisited internationally.</div>
+        <div class="blind-spot-item">⚔️ <strong>The Mnangagwa-Chiwenga succession war:</strong> The real political drama in Zimbabwe is not between ZANU-PF and an opposition it has largely crushed — it is the hidden power struggle inside ZANU-PF between President Mnangagwa and his Vice-President Constantino Chiwenga, the army general who made the 2017 coup possible. Both men want 2028, or beyond. This internal succession conflict drives more of Zimbabwe's day-to-day politics than anything the opposition does.</div>
+      </div>
+    </div><!-- end #south-zimbabwe -->
   </div><!-- end #region-south -->
 
   <!-- ═══════════════════════ EAST AFRICA ═══ -->
