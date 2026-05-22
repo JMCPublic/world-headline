@@ -571,7 +571,7 @@
     </div><!-- end #west-ghana -->
 
     <div id="west-senegal" class="country-panel">
-      <div class="country-title">🇸🇳 Senegal — La Presse d'Aujourd'hui</div>
+      <div class="country-title">🇸🇳 Senegal — La Presse Cette Semaine</div>
       <div class="papers">
 
         <!-- Le Soleil — Pro-government / Pan-Africanist -->
@@ -783,7 +783,24 @@
         </div>
       </div>
       <button class="tier2-tab soon">🇿🇼 Zimbabwe — Soon</button>
-      <button class="tier2-tab soon">🇧🇼 Botswana — Soon</button>
+      <div class="tab-wrap">
+        <button class="tier2-tab" onclick="showCountry('south','botswana',this)">🇧🇼 Botswana</button>
+        <div class="country-stats">
+          <div class="cs-name">🇧🇼 Botswana</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Gaborone</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>2.8m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>First Past the Post</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Presidential Republic</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div>
+          <div class="cs-govt-detail">UDC — Umbrella for Democratic Change</div>
+          <div class="cs-leader">President: Duma Boko (since Nov 2024)</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#e67e22">Centre Right</span> BDP — Botswana Democratic Party</div>
+          <div class="cs-opp-leader">Mokgweetsi Masisi (former president)</div>
+        </div>
+      </div>
     </div>
 
     <!-- SOUTH AFRICA -->
@@ -971,6 +988,192 @@
         <div class="blind-spot-item">💡 <strong>Rooftop solar revolution:</strong> Load shedding triggered an extraordinary private solar uptake — SA added more rooftop solar per capita than almost any country in the world in 2023–24. This clean energy transformation is happening organically, from the bottom up, and is largely invisible to international energy commentators.</div>
       </div>
     </div><!-- end #south-sa -->
+
+    <div id="south-botswana" class="country-panel">
+      <div class="country-title">🇧🇼 Botswana — Press This Week</div>
+      <div class="papers">
+
+        <!-- Mmegi — Left / Progressive -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-left">◀ Progressive / Independent</div>
+            <div class="paper-name">Mmegi</div>
+            <div class="paper-desc">Circ. ~35,000 · Botswana's most respected independent daily. Investigative, progressive, founded 1984. The paper the powerful read nervously.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                After 58 years, Botswana asks: what does democracy beyond the BDP actually look like?
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Duma Boko's UDC government arrived in November 2024 carrying enormous public goodwill — and an enormous task. Mmegi examines the first full year of post-BDP governance: the civil service still shaped by six decades of one-party culture, patronage networks slow to unwind, and a cabinet learning on the job. The paper is broadly sympathetic to the new government but impatient with the pace of institutional reform.
+                <a href="https://www.mmegi.bw" class="story-url" target="_blank">→ mmegi.bw</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Beyond diamonds: why Botswana's economic transformation can't wait
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Botswana's economy is 70% dependent on diamonds. Global demand is under structural pressure from lab-grown stones and changing luxury tastes. Mmegi argues that the Boko government's diversification agenda — targeting tourism, agriculture, and financial services — is the right direction but is moving far too slowly. The paper profiles young Botswanans who see no future and are leaving.
+                <a href="https://www.mmegi.bw" class="story-url" target="_blank">→ mmegi.bw</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Inequality in the miracle: Botswana's development model left most people behind
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Botswana is Africa's longest-running multi-party democracy and transformed itself from one of the world's poorest countries to upper-middle income in a generation. But Mmegi's data journalism team shows that wealth concentration is extreme — a small elite captured most of the diamond dividend. The paper calls for a serious reckoning with structural inequality before diversification can succeed.
+                <a href="https://www.mmegi.bw" class="story-url" target="_blank">→ mmegi.bw</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Democratic accountability &amp; institutional reform</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Diamond industry &amp; De Beers</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Voice — Centre / Popular -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre / Popular Independent</div>
+            <div class="paper-name">The Voice</div>
+            <div class="paper-desc">Circ. ~40,000 · Botswana's most widely read independent weekly. Accessible, populist, trusted by ordinary readers. Covers power and culture with equal energy.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                De Beers deal: what Botswana actually won — and what it gave up
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Botswana's renegotiated diamond sales agreement with De Beers — securing over 50% of stones sold through the state's Okavango Diamond Company — was hailed as a landmark for resource sovereignty. The Voice gives a balanced verdict: the headline numbers are good, but the fine print on pricing mechanisms and term lengths deserves more scrutiny. The paper asks whether ordinary Batswana will feel any difference in their daily lives.
+                <a href="https://www.thevoicebw.com" class="story-url" target="_blank">→ thevoicebw.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                The elephant problem: 130,000 animals, shrinking farmland, and a country divided
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Botswana is home to the world's largest elephant population — around 130,000 animals in a country of under 3 million people. Farmers in the north report destroyed crops, ruined livelihoods, and occasional deaths. The Voice covers the human side of the conservation debate that international media frames almost entirely through a wildlife lens. Botswana's decision to resume trophy hunting has divided the country and sparked international criticism it finds patronising.
+                <a href="https://www.thevoicebw.com" class="story-url" target="_blank">→ thevoicebw.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Boko's first year: the report card from ordinary Batswana
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Voice sent reporters to villages, taxi ranks and markets across Botswana to take the public temperature. The verdict is mixed: people are glad the BDP is gone and broadly like Duma Boko personally, but the cost of living hasn't improved, youth unemployment is still severe, and the sense that promises are moving slowly from rhetoric to reality is growing. The paper concludes the government has goodwill — but not unlimited time to spend it.
+                <a href="https://www.thevoicebw.com" class="story-url" target="_blank">→ thevoicebw.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Elephant-human conflict &amp; conservation</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">President Duma Boko</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botswana Gazette — Centre-right / Business -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-right">▶ Centre-right / Business</div>
+            <div class="paper-name">Botswana Gazette</div>
+            <div class="paper-desc">Circ. ~25,000 · Establishment-leaning independent weekly. Strong on business, investment, and economic policy. The paper the private sector reads.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Investment climate: building a post-diamond economy requires more than good intentions
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Botswana Gazette takes a hard look at whether the Boko government's investment climate reforms are credible to international capital. Regulatory clarity, land tenure reform, and reducing the civil service's role in the economy are identified as priorities. The paper argues that Botswana's reputation as Africa's most stable and corruption-free country is a genuine competitive asset — but one that can erode quickly if economic policy becomes inconsistent.
+                <a href="https://www.gazettebw.com" class="story-url" target="_blank">→ gazettebw.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Safari premium: Botswana's high-value, low-volume tourism model under pressure
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Botswana's tourism model is deliberately exclusive — high prices, limited visitor numbers, maximum environmental protection. The Gazette examines whether that model is sustainable as regional competitors (Zimbabwe, Zambia, Namibia) compete for the same luxury safari market. The paper profiles lodge operators calling for infrastructure investment and faster visa processing to maintain Botswana's premium positioning.
+                <a href="https://www.gazettebw.com" class="story-url" target="_blank">→ gazettebw.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Financial services hub: can Gaborone become southern Africa's next finance centre?
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Gazette has long championed Botswana's ambitions to become a regional financial services hub — leveraging political stability, strong institutions, and the Botswana Stock Exchange. With South Africa's instability and Zimbabwe's dysfunction, the opportunity is there. The paper profiles new fintech and asset management businesses establishing Gaborone operations and calls for tax incentives to accelerate the shift.
+                <a href="https://www.gazettebw.com" class="story-url" target="_blank">→ gazettebw.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Economic diversification &amp; investment climate</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">De Beers / diamond sector</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 Botswana's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">💎 <strong>Diamond dependency and the economic clock:</strong> Botswana built one of Africa's most remarkable development stories on diamonds. But De Beers' own projections suggest the major mines have 20–30 years of life left, and lab-grown diamonds are already eroding premium pricing. The question of what comes after barely registers internationally.</div>
+        <div class="blind-spot-item">🐘 <strong>The elephant-human conflict:</strong> International media covers Botswana's elephants as a conservation triumph. The 130,000 farmers in elephant corridors tell a different story — destroyed crops, ruined harvests, occasional deaths. The gap between global conservation sentiment and local lived reality is almost never reported honestly.</div>
+        <div class="blind-spot-item">🏹 <strong>San (Bushmen) land rights:</strong> The San people — one of humanity's oldest surviving cultures — have been repeatedly relocated from their ancestral lands in the Central Kalahari Game Reserve, ostensibly for conservation. Courts have sided with them repeatedly; implementation has been inconsistent. This slow-moving rights crisis receives almost no sustained international attention.</div>
+        <div class="blind-spot-item">🎗️ <strong>HIV/AIDS progress and fragility:</strong> Botswana once had the world's highest HIV prevalence. Its antiretroviral programme — one of Africa's earliest and most comprehensive — dramatically reduced mortality. But coverage gaps, stigma, and a young sexually active population mean the epidemic is not over. The success story has crowded out coverage of the ongoing challenge.</div>
+      </div>
+    </div><!-- end #south-botswana -->
   </div><!-- end #region-south -->
 
   <!-- ═══════════════════════ EAST AFRICA ═══ -->
@@ -995,7 +1198,24 @@
         </div>
       </div>
       <button class="tier2-tab soon">🇪🇹 Ethiopia — Soon</button>
-      <button class="tier2-tab soon">🇹🇿 Tanzania — Soon</button>
+      <div class="tab-wrap">
+        <button class="tier2-tab" onclick="showCountry('east','tanzania',this)">🇹🇿 Tanzania</button>
+        <div class="country-stats">
+          <div class="cs-name">🇹🇿 Tanzania</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Dodoma (official) · Dar es Salaam (commercial)</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>65m</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>First Past the Post (Presidential)</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Presidential Republic</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#27ae60">Centre</span></div>
+          <div class="cs-govt-detail">CCM — Chama Cha Mapinduzi</div>
+          <div class="cs-leader">President: Samia Suluhu Hassan</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Main Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#5dade2">Centre Left</span> Chadema — Party for Democracy and Progress</div>
+          <div class="cs-opp-leader">Freeman Mbowe</div>
+        </div>
+      </div>
     </div>
 
     <!-- KENYA -->
@@ -1184,6 +1404,192 @@
       </div>
     </div><!-- end #east-kenya -->
 
+
+    <div id="east-tanzania" class="country-panel">
+      <div class="country-title">🇹🇿 Tanzania — Press This Week</div>
+      <div class="papers">
+
+        <!-- The Citizen — Centre-left / Independent -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-left">◀ Centre-left / Independent</div>
+            <div class="paper-name">The Citizen</div>
+            <div class="paper-desc">Circ. ~50,000 · Tanzania's leading independent English daily. Critical, well-sourced, unafraid of the government. The paper serious Tanzanians read.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Samia's reform deficit: the democratic opening that hasn't fully opened
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                President Samia Suluhu Hassan came to power in 2021 promising to reverse John Magufuli's authoritarian drift — releasing political prisoners, allowing opposition rallies, and restoring press freedom. The Citizen's assessment is that the opening was real but partial. CCM's stranglehold on state institutions remains intact, the electoral playing field is still tilted, and journalists who push too hard still face harassment. Reform has been calibrated, not transformational.
+                <a href="https://www.thecitizen.co.tz" class="story-url" target="_blank">→ thecitizen.co.tz</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Dar es Salaam's housing crisis: a city growing faster than anyone can plan
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Dar es Salaam is one of Africa's fastest-growing cities — its population is expected to reach 10 million by 2030. The Citizen reports on a housing infrastructure crisis: informal settlements expanding faster than utilities can follow, land speculation pricing ordinary workers out of proximity to their jobs, and a planning apparatus that hasn't kept pace with the growth it was supposed to manage.
+                <a href="https://www.thecitizen.co.tz" class="story-url" target="_blank">→ thecitizen.co.tz</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                DRC refugees: Tanzania hosts a crisis the world has largely stopped covering
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Tanzania hosts over 300,000 refugees — primarily from DRC and Burundi — in camps in the west of the country. The Citizen reports on the funding shortfall from international donors, deteriorating camp conditions, and the political pressure from local communities who argue that resources flow to refugees while Tanzanian citizens in the same regions go without. A story of genuine humanitarian significance that gets almost no international coverage.
+                <a href="https://www.thecitizen.co.tz" class="story-url" target="_blank">→ thecitizen.co.tz</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Democratic accountability &amp; press freedom</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">CCM's institutional dominance</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daily News — Centre / State -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre">● Centre / State-owned</div>
+            <div class="paper-name">Daily News</div>
+            <div class="paper-desc">Circ. ~70,000 · Government-owned English daily. The official voice of the Tanzanian state. Widely read for what the government wants you to know.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                President Samia's five-year plan: the third-phase development agenda on track
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Daily News gives prominent coverage to the government's National Development Plan — presenting GDP growth, infrastructure investment, and social programme delivery in a consistently positive frame. The paper leads with ministerial statements about progress on roads, electricity, and water access in rural areas, framing development as an ongoing success story that international sceptics underestimate.
+                <a href="https://www.dailynews.co.tz" class="story-url" target="_blank">→ dailynews.co.tz</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Standard Gauge Railway extension: connecting Tanzania's interior to the coast
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Tanzania's Standard Gauge Railway — running from Dar es Salaam toward the Great Lakes region — is one of East Africa's largest infrastructure projects. The Daily News covers the latest construction milestones, emphasising the strategic significance of connecting landlocked Rwanda, Uganda, and DRC to the port of Dar es Salaam. The project is substantially Chinese-financed — a detail the paper contextualises positively as south-south cooperation.
+                <a href="https://www.dailynews.co.tz" class="story-url" target="_blank">→ dailynews.co.tz</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                EAC mediation: Tanzania's role in securing DRC peace talks
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Daily News covers President Samia's active role in East African Community diplomacy — particularly the ongoing DRC peace process, where Tanzania has hosted talks between the Congolese government and the M23 movement. The paper frames Tanzania as a responsible regional actor punching above its weight in African diplomacy, a narrative that serves both foreign policy and domestic legitimacy.
+                <a href="https://www.dailynews.co.tz" class="story-url" target="_blank">→ dailynews.co.tz</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Infrastructure &amp; development progress</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Government agenda / CCM</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Guardian Tanzania — Centre-right / Business -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean lean-centre-right">▶ Centre-right / Business</div>
+            <div class="paper-name">The Guardian Tanzania</div>
+            <div class="paper-desc">Circ. ~45,000 · IPP Media group. Independent, business-focused, establishment-leaning. Not affiliated with the UK Guardian. Tanzania's paper of record for commerce and investment.</div>
+          </div>
+          <div class="stories">
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Zanzibar's tourism boom: record arrivals, but who is actually benefiting?
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Zanzibar received record tourist arrivals in 2025 — over 700,000 visitors. The Guardian Tanzania looks at the business structure behind the boom: most high-end resorts are foreign-owned, local employment is concentrated in low-wage service roles, and land prices are pricing out local residents. The paper asks whether Zanzibar is building genuine prosperity or becoming a foreign-owned enclave attached to a Tanzanian island.
+                <a href="https://www.ippmedia.com" class="story-url" target="_blank">→ ippmedia.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Tanzania vs Kenya: the race to be East Africa's economic hub is getting competitive
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                The Guardian Tanzania profiles the intensifying competition between Dar es Salaam and Nairobi for regional business headquarters, logistics, and financial services. Tanzania's advantages — political stability, large domestic market, port access — are offset by Kenya's more developed financial ecosystem and tech infrastructure. The paper argues Tanzania is closing the gap faster than most analysts appreciate, but needs regulatory reform to capitalise on its momentum.
+                <a href="https://www.ippmedia.com" class="story-url" target="_blank">→ ippmedia.com</a>
+              </div>
+            </div>
+            <div class="story">
+              <div class="story-headline" onclick="toggleStory(this)">
+                Mobile money and fintech: Tanzania's growing digital economy punches above its weight
+                <span class="story-toggle">▼</span>
+              </div>
+              <div class="story-detail">
+                Tanzania's mobile money penetration is among the highest in Africa — M-Pesa, Tigo Pesa, and Airtel Money have driven financial inclusion to over 60% of adults. The Guardian Tanzania profiles the next generation of fintech startups building on that infrastructure and calls for a regulatory sandbox to accelerate innovation. The paper argues Tanzania has the foundations to rival Kenya's tech ecosystem if government gets out of the way.
+                <a href="https://www.ippmedia.com" class="story-url" target="_blank">→ ippmedia.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="trackers">
+            <div class="tracker-row">
+              <div class="tracker-label">Hobby Horse</div>
+              <div class="tracker-topic">Foreign investment &amp; economic competitiveness</div>
+              <div class="dots">
+                <div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber"></div><div class="dot amber-empty"></div>
+              </div>
+            </div>
+            <div class="tracker-row">
+              <div class="tracker-label">Undue Influence</div>
+              <div class="tracker-topic">Chinese investment &amp; SGR project</div>
+              <div class="dots">
+                <div class="dot purple"></div><div class="dot purple"></div><div class="dot purple"></div><div class="dot purple-empty"></div><div class="dot purple-empty"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spots">
+        <h4>🔦 Tanzania's Blind Spots — What the world misses</h4>
+        <div class="blind-spot-item">🏝️ <strong>Zanzibar's autonomy tension:</strong> Zanzibar is constitutionally a semi-autonomous region within Tanzania, with its own president, parliament, and laws. Periodic elections there are contested, sometimes violently. The underlying question — how much independence the islands actually have — is a permanent low-level constitutional crisis that barely registers in international coverage.</div>
+        <div class="blind-spot-item">🚂 <strong>The debt behind the railway:</strong> Tanzania's Standard Gauge Railway is genuinely transformative infrastructure. It is also substantially financed by Chinese loans at terms the government has never fully disclosed. The long-term debt implications — and what Tanzania has pledged as collateral — are almost never discussed in international coverage of the project.</div>
+        <div class="blind-spot-item">📜 <strong>Nyerere's long shadow:</strong> Julius Nyerere's ujamaa socialism — forced villagisation, nationalisation, one-party rule — shaped Tanzania's political economy in ways that persist today. The CCM is Nyerere's party. Understanding Tanzania without understanding ujamaa is like understanding Britain without the welfare state. This context is almost entirely absent from international coverage.</div>
+        <div class="blind-spot-item">🌿 <strong>Biodiversity under pressure:</strong> Tanzania contains some of the world's most significant wildlife ecosystems — the Serengeti, Ngorongoro, Selous. International coverage focuses on tourism and poaching. The deeper story — mining concessions encroaching on protected areas, climate change altering migration patterns, population growth pressing against park boundaries — gets almost no attention.</div>
+      </div>
+    </div><!-- end #east-tanzania -->
   </div><!-- end #region-east -->
 
 </div><!-- end .dashboard -->
