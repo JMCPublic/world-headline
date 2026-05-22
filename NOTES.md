@@ -7,11 +7,108 @@ Open in Notepad (or any text editor) to add your own notes any time.
 
 ## 💡 Ideas
 
-- **"What the Markets Think"** — weekly panel per country showing currency performance vs USD/EUR/GBP and bond market direction, framed against which party (L/C/R) is in government. Tagline: *"Hips and markets don't lie."* Data source TBD (Yahoo Finance or similar free API). Fits naturally into the weekly Monday automation.
+- **"What the Markets Think"** — weekly panel per country showing currency performance vs USD/EUR/GBP and bond market direction, framed against which party (L/C/R) is in government. Tagline: *"Hips and markets don't lie."* See full scoping note below.
 
 - **Weekend edition** — Observer, Mail on Sunday, Sunday Times as an alternative weekend view for the UK page. Currently using daily papers (Guardian/Daily Mail/Times) for the weekly Monday update. Weekend edition is a future concept.
 
-- **What the markets think** - left to right what did currency do vs dollar euro sterling - what is the bond market for that country doing - can be done every week - hips and markets don't lie.
+---
+
+---
+
+## 📊 What the Markets Think — API Scoping
+
+### The feature
+Each country press page gets a weekly panel showing:
+- Currency performance that week vs USD, EUR, and GBP
+- Bond market / interest rate direction (up / down / flat)
+- Framed against which party (left/centre/right) is in power
+- Updated every Monday by the existing GitHub Actions automation
+
+### Currency data — ✅ Fully solved, free, no key needed
+
+**Best option: fawazahmed0/exchange-api**
+- GitHub: github.com/fawazahmed0/exchange-api
+- Endpoint: `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json`
+- 200+ currencies including all 44 World Headline countries (ZWL, NGN, KES, GHS, etc.)
+- No API key. No registration. No rate limits. Served via jsDelivr CDN.
+- Daily updates. Historical data available: swap `@latest` for `@YYYY-MM-DD`
+- To get week-on-week change: fetch today's rate + last Monday's rate, calculate % change
+- Special case: Zimbabwe now uses ZiG (Zimbabwe Gold, introduced April 2024). ZiG may not appear as a standard currency code yet — show USD/ZWL or note "USD economy" as a flag
+
+**Runner-up: Frankfurter (api.frankfurter.dev)**
+- Free, no key, no rate limits, ECB-sourced
+- Limitation: only ~33 major currencies — misses most African, Middle Eastern, and some Asian currencies
+- Good fallback for European countries if primary source has issues
+
+### Bond yield data — ⚠️ Harder, no perfect free solution yet
+
+**What we actually need:** Weekly 10-year government bond yield for each country (the standard measure of sovereign borrowing cost / market confidence)
+
+**The honest picture:**
+- No truly free, no-key, comprehensive bond yield API exists for all 44 countries
+- The good services (Bloomberg, Refinitiv, CBonds) are paid
+- Trading Economics has the data (tradingeconomics.com/bonds) but no free API
+
+**Best available free options:**
+
+1. **World Bank API** (api.worldbank.org) — free, no key, covers central bank policy rates and lending rates for all countries. Not live bond yields, but a reasonable proxy for bond market direction. Updated quarterly not weekly — not ideal for the "this week" framing.
+
+2. **FRED API** (api.stlouisfed.org) — free with a free API key (no cost, just register). Excellent for US Treasuries and some international bonds. Limited coverage of emerging markets.
+
+3. **FinanceFlowAPI** — 200 free requests/month, covers 50+ countries, real-time bond yields. Enough for weekly automation (44 countries × 1 call/week = 44 calls/week = ~176/month — slightly over the free limit).
+
+4. **Scraping Trading Economics** — technically feasible but fragile; against their ToS.
+
+### Recommended build approach
+
+**Phase 1 (Build now):** Currency moves only
+- Use fawazahmed0 exchange API — completely free, zero setup, covers all countries
+- Show: local currency vs USD, EUR, GBP — weekly % change (Monday to Monday)
+- Simple visual: up arrow (green) / down arrow (red) / flat, with % figure
+- Add to weekly refresh script alongside existing story updates
+- Enough to launch the feature and it looks great
+
+**Phase 2 (add when ready):** Bond market — self-hosted data file approach
+- **Build our own `bond_data.json`** — a single file in the repo with bond yield for each country, updated manually (then eventually automatically)
+- Source the numbers weekly from tradingeconomics.com/bonds or investing.com/rates-bonds/world-government-bonds — both free to view, just not free to call as an API
+- The GitHub Actions refresh script reads `bond_data.json` and bakes the direction (up/flat/down) and yield % into each country's press page HTML — same pattern as story updates
+- This means zero API dependency, zero rate limits, zero cost — we own the data
+- Eventually: could write a scraper for the refresh script to auto-populate bond_data.json. Or just update it manually since bond yields don't move wildly week to week.
+- **Format for bond_data.json:**
+  ```json
+  {
+    "updated": "2026-05-26",
+    "yields": {
+      "united-kingdom": { "yield": 4.62, "change": +0.08, "direction": "up" },
+      "france":         { "yield": 3.41, "change": -0.02, "direction": "down" },
+      "zimbabwe":       { "yield": null, "note": "No sovereign bond market" }
+    }
+  }
+  ```
+
+### Currency codes for all 44 countries (for Phase 1)
+```
+UK: GBP | France/Germany/etc (Eurozone): EUR | Sweden: SEK | Norway: NOK | Denmark: DKK
+Finland: EUR | Poland: PLN | Czechia: CZK | Hungary: HUF | Turkey: TRY
+USA: USD | Canada: CAD | Mexico: MXN | Brazil: BRL | Argentina: ARS
+Colombia: COP | Chile: CLP | Peru: PEN | Malaysia: MYR | India: INR
+Philippines: PHP | Taiwan: TWD | South Korea: KRW | Japan: JPY | Australia: AUD | NZ: NZD
+Israel: ILS | Nigeria: NGN | Kenya: KES | Senegal: XOF | Ghana: GHS
+South Africa: ZAR | Botswana: BWP | Tanzania: TZS | Zimbabwe: USD/ZiG*
+Lebanon: LBP (note: Lebanon uses USD informally post-2019 crisis)
+Ireland: EUR | Portugal: EUR | Spain: EUR | Italy: EUR | Greece: EUR
+Austria: EUR | Netherlands: EUR
+```
+*Zimbabwe: Show USD since economy is effectively dollarised. The ZiG is too new for reliable API data.
+*Lebanon: Show LBP and note it alongside USD given the dual-currency reality post-2019 collapse.
+
+### Design concept
+Small collapsible panel below the paper cards, per country:
+```
+📈 Markets This Week  [▼ expand]
+  🇿🇦 ZAR vs USD  ▼ -1.2%   vs EUR  ▲ +0.3%   vs GBP  ▼ -0.8%
+  📊 SA 10yr bond: 9.4%  ▲ +0.1pp  [Govt: ANC/GNU — Centre-left]
+```
 
 ---
 
@@ -19,10 +116,19 @@ Open in Notepad (or any text editor) to add your own notes any time.
 
 - **Filenames stay as uk_press_today.html etc.** — don't rename them, it would break saved links. Only the visible display text says "Press This Week."
 
-- **Adding a new country — checklist:**
-  1. Papers display left-to-right across the page (not stacked)
-  2. Each paper card has a link to its website
-  3. resources.html updated with the new newspapers
+- **Adding a new country — full checklist (every single time):**
+  1. Press page: country tab + papers display left-to-right (not stacked)
+  2. Press page: each paper card has a clickable link to its website
+  3. Press page: blind spot panel with 4 items
+  4. resources.html: add 3 rows, update count (newspapers + countries)
+  5. axis_of_equal.html: add `aoe-row` with party pills and lean/leader/status data
+  6. axis_of_equal.html: add party scores to `PARTY_FISCAL` and `PARTY_SOCIAL` (for compass)
+  7. axis_of_equal.html: add `cpick-btn` in the country picker list
+  8. Best Place to Be: auto-updates once step 5 is done (reads live `aoe-row` elements — no manual step)
+  9. water_cooler.html: add wc-card (3 talking points) + Weekly Pulse table row (4 weeks of categorised topics)
+  10. NOTES.md: update session log
+
+- **Poles Apart — not a per-country checklist item.** Poles Apart is structured around analytical themes (coherence gap, playbooks, cross-border influence, consensus moments, divergence tracker, when-parties-agree), not individual country slots. It gets expanded separately as a content piece — typically a dedicated session once enough new countries have been added to make the expansion worthwhile. Currently covers ~15 countries; expand as a batch when adding a new region or after every 5–6 new countries.
 
 - **UK papers** are now Guardian (Left), Times (Centre-right), Daily Mail (Right) — the Sunday equivalents (Observer, Sunday Times, Mail on Sunday) are parked for a future weekend edition.
 
@@ -144,10 +250,25 @@ Poles Apart: Consensus Moments, Divergence Tracker, Cross-border Influence, When
 
 ---
 
+### Session 8 — 22 May 2026
+**Theme: Full pilots audit, Zimbabwe added, AoE completed, Water Cooler to 44 countries**
+
+- Full pilots audit run across all features: AoE ✅ 44/44, cpick ✅ 44/44, R&A ✅ 44/44, Water Cooler ❌ 14/44 → fixed this session
+- Zimbabwe added to africa_press_today.html: NewsDay (Centre-Left), The Herald (State/ZANU-PF), Zimbabwe Independent (Centre-Right)
+- resources.html updated: 129→132 newspapers, 43→44 countries (Zimbabwe rows added)
+- axis_of_equal.html: 6 missing countries added retroactively (Zimbabwe, South Africa, Ghana, Botswana, Tanzania, Lebanon) with aoe-rows, cpick-btns, PARTY_FISCAL & PARTY_SOCIAL data
+- AoE Political Compass filter bug fixed: lean filter + country compare filter now both work in compass view
+- Corrupt PARTY_FISCAL block fixed (social values had leaked in); Peru & Senegal PARTY_SOCIAL gaps fixed
+- **What the Markets Think** feature fully scoped: Phase 1 (currency, fawazahmed0 API, free/no-key), Phase 2 (self-hosted bond_data.json, worldgovernmentbonds.com as manual source). Full scoping note added to NOTES.md
+- **Water Cooler expanded from 14 → 44 countries**: 30 new wc-cards + 30 new Weekly Pulse table rows added for all missing countries (UK, France, Germany, Netherlands, Sweden, Norway, Italy, Spain, Greece, Turkey, Austria, Czechia, Hungary, USA, Canada, Mexico, Colombia, Chile, Peru, Philippines, Taiwan, Australia, New Zealand, Nigeria, Kenya, Senegal, Botswana, Tanzania, Zimbabwe, Lebanon)
+- All files uploaded to GitHub (pending — upload after this)
+
+---
+
 ## ⏭️ Next Session
 
 1. **Upload to GitHub** (files from this session)
-2. **Next country**: Zimbabwe (africa_press_today.html)
-3. **Then**: Saudi Arabia, Egypt, Iran
-4. Comments (#94) — design the shared discussion page (parked but not forgotten)
-5. "What the Markets Think" feature — start scoping data sources
+2. **Next countries**: Saudi Arabia, Egypt, Iran (press pages + full checklist)
+3. **Poles Apart** — expand country coverage beyond current ~15 countries
+4. **What the Markets Think** Phase 1 — implement currency panel using fawazahmed0 API
+5. Comments (#94) — design the shared discussion page (parked but not forgotten)
