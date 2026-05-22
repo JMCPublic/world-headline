@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources & Attributions — World Headline</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; background: #fafaf8; color: #1a1a1a; }
+
+  header { background: #1a1a1a; color: #f5f0e8; padding: 18px 24px; text-align: center; }
+  header h1 { font-size: 1.4rem; letter-spacing: 0.12em; font-weight: 700; }
+  header .subtitle { font-size: 0.75rem; color: #aaa; font-family: sans-serif; margin-top: 4px; }
+
+  nav.region-nav { background: #111; padding: 8px 16px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  nav.region-nav a { color: #ccc; text-decoration: none; font-size: 0.72rem; font-family: sans-serif; padding: 4px 8px; border-radius: 3px; }
+  nav.region-nav a:hover { color: #fff; background: #333; }
+
+  .spectrum-bar { height: 4px; background: linear-gradient(to right, #2980b9 0%, #27ae60 50%, #c0392b 100%); }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 32px 16px 64px; }
+
+  h2.page-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+  .page-intro { font-size: 0.82rem; font-family: sans-serif; color: #555; margin-bottom: 24px; line-height: 1.6; }
+
+  .search-bar { margin-bottom: 20px; }
+  .search-bar input {
+    width: 100%; padding: 9px 14px; font-size: 0.85rem; font-family: sans-serif;
+    border: 1px solid #ddd; border-radius: 4px; background: #fff; color: #1a1a1a;
+  }
+  .search-bar input:focus { outline: none; border-color: #2980b9; }
+
+  .region-heading {
+    font-family: sans-serif; font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em; color: #888;
+    margin: 28px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #e0ddd8;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+  thead th {
+    font-family: sans-serif; font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em; color: #999;
+    padding: 6px 10px; text-align: left; border-bottom: 1px solid #e0ddd8;
+  }
+  tbody tr { border-bottom: 1px solid #f0ede8; }
+  tbody tr:hover { background: #f5f2ec; }
+  tbody tr.hidden { display: none; }
+  td { padding: 8px 10px; font-size: 0.82rem; vertical-align: middle; }
+  td.country { font-family: sans-serif; color: #555; font-size: 0.78rem; }
+  td.lean { font-family: sans-serif; font-size: 0.72rem; color: #888; }
+  td.paper a { color: #2980b9; text-decoration: none; font-weight: 600; }
+  td.paper a:hover { text-decoration: underline; }
+  td.url a { color: #555; font-size: 0.75rem; font-family: sans-serif; text-decoration: none; }
+  td.url a:hover { color: #2980b9; text-decoration: underline; }
+
+  .attribution-note {
+    margin-top: 40px; padding: 16px 20px; background: #f5f2ec;
+    border-left: 3px solid #c0392b; font-size: 0.78rem; font-family: sans-serif;
+    color: #555; line-height: 1.7;
+  }
+  .attribution-note strong { color: #1a1a1a; }
+
+  .page-footer-nav { margin-top: 40px; display: flex; gap: 12px; justify-content: center; font-family: sans-serif; font-size: 0.78rem; }
+  .page-footer-nav a, .page-footer-nav button {
+    color: #2980b9; text-decoration: none; background: none; border: 1px solid #ddd;
+    padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 0.78rem;
+  }
+  .page-footer-nav a:hover, .page-footer-nav button:hover { background: #f0ede8; }
+
+  .count-note { font-family: sans-serif; font-size: 0.72rem; color: #999; margin-bottom: 16px; }
+  #visibleCount { font-weight: 700; color: #1a1a1a; }
+
+  .paywall-box {
+    margin-bottom: 24px; border: 1px solid #d0ccc5; border-radius: 6px;
+    background: #fff; font-family: sans-serif; overflow: hidden;
+  }
+  .paywall-box summary {
+    padding: 11px 16px; font-size: 0.8rem; font-weight: 700; color: #1a1a1a;
+    cursor: pointer; user-select: none; list-style: none; display: flex;
+    align-items: center; gap: 8px;
+  }
+  .paywall-box summary::-webkit-details-marker { display: none; }
+  .paywall-box summary::before { content: "▶"; font-size: 0.6rem; color: #888; transition: transform 0.2s; }
+  .paywall-box[open] summary::before { transform: rotate(90deg); }
+  .paywall-box summary .pw-label { flex: 1; }
+  .paywall-box summary .pw-tag {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #888; border: 1px solid #ddd;
+    padding: 2px 6px; border-radius: 3px;
+  }
+  .paywall-body { padding: 0 16px 16px; border-top: 1px solid #e8e5e0; }
+  .paywall-body p { font-size: 0.78rem; color: #555; line-height: 1.65; margin: 12px 0 8px; }
+  .paywall-body h4 {
+    font-size: 0.72rem; font-weight: 700; color: #1a1a1a; margin: 14px 0 4px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .paywall-body h4 span { font-weight: 400; color: #888; text-transform: none; letter-spacing: 0; margin-left: 6px; font-size: 0.7rem; }
+  .paywall-body ul { padding-left: 18px; margin: 0; }
+  .paywall-body ul li { font-size: 0.78rem; color: #555; line-height: 1.65; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌍 WORLD HEADLINE</h1>
+  <span class="subtitle">Resources & Attributions</span>
+</header>
+
+<nav class="region-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="uk_press_today.html">🇬🇧 UK</a>
+  <a href="europe_press_today.html">🌍 Europe</a>
+  <a href="americas_press_today.html">🌎 Americas</a>
+  <a href="asia_press_today.html">🌏 Asia-Pacific</a>
+  <a href="africa_press_today.html">🌍 Africa</a>
+  <a href="middleeast_press_today.html">🕌 Middle East</a>
+  <a href="poles_apart.html">⚡ Poles Apart</a>
+  <a href="water_cooler.html">💬 Water Cooler</a>
+  <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
+</nav>
+
+<div class="spectrum-bar"></div>
+
+<div class="container">
+
+  <h2 class="page-title">Resources & Attributions</h2>
+  <p class="page-intro">
+    World Headline draws on <strong>120 newspapers</strong> across <strong>40 countries</strong>.
+    All content is summarised and editorially framed — we link to the original source for every story.
+    Newspaper names, mastheads, and published content remain the property of their respective publishers.
+    This page lists every source we use, searchable by country or title.
+  </p>
+
+  <details class="paywall-box">
+    <summary>
+      <span class="pw-label">📰 Many of these papers are behind paywalls — here's how to access them</span>
+      <span class="pw-tag">Tips</span>
+    </summary>
+    <div class="paywall-body">
+      <p>Most major newspapers now charge for online access. The good news: there are several free and legitimate ways to read them.</p>
+
+      <h4>1. Library subscriptions <span>— best &amp; most reliable</span></h4>
+      <ul>
+        <li><strong>PressReader</strong> — free access to thousands of daily newspapers and magazines worldwide. Sign in with your library card details at pressreader.com.</li>
+        <li><strong>Historical archives</strong> — many libraries offer free digital access to databases like NewsBank or ProQuest. Check your local library website.</li>
+      </ul>
+
+      <h4>2. Search engine trick</h4>
+      <ul>
+        <li>Copy the exact headline of the paywalled article. Search for it on Google. Clicking the link directly from search results often bypasses the paywall.</li>
+      </ul>
+
+      <h4>3. Archive sites</h4>
+      <ul>
+        <li><strong>Internet Archive (Wayback Machine)</strong> — paste the URL of a paywalled article into web.archive.org to find a previously saved snapshot.</li>
+      </ul>
+
+      <h4>4. Direct support</h4>
+      <ul>
+        <li>If you read a paper regularly, consider subscribing. Many publications offer discounted introductory rates or "digital only" tiers at a fraction of the print price. Supporting independent journalism keeps it independent.</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search by country or newspaper name..." oninput="filterTable()">
+  </div>
+  <div class="count-note">Showing <span id="visibleCount">120</span> of 120 newspapers</div>
+
+  <table id="sourcesTable">
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th>Newspaper</th>
+        <th>Lean</th>
+        <th>Website</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- ── United Kingdom ── -->
+      <tr data-search="united kingdom uk the guardian"><td class="country">🇬🇧 United Kingdom</td><td class="paper"><a href="https://www.theguardian.com" target="_blank">The Guardian</a></td><td class="lean">Left</td><td class="url"><a href="https://www.theguardian.com" target="_blank">theguardian.com</a></td></tr>
+      <tr data-search="united kingdom uk the times"><td class="country">🇬🇧 United Kingdom</td><td class="paper"><a href="https://www.thetimes.co.uk" target="_blank">The Times</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.thetimes.co.uk" target="_blank">thetimes.co.uk</a></td></tr>
+      <tr data-search="united kingdom uk daily mail"><td class="country">🇬🇧 United Kingdom</td><td class="paper"><a href="https://www.dailymail.co.uk" target="_blank">Daily Mail</a></td><td class="lean">Right</td><td class="url"><a href="https://www.dailymail.co.uk" target="_blank">dailymail.co.uk</a></td></tr>
+      <!-- ── France ── -->
+      <tr data-search="france libération liberation"><td class="country">🇫🇷 France</td><td class="paper"><a href="https://www.liberation.fr" target="_blank">Libération</a></td><td class="lean">Left</td><td class="url"><a href="https://www.liberation.fr" target="_blank">liberation.fr</a></td></tr>
+      <tr data-search="france le monde"><td class="country">🇫🇷 France</td><td class="paper"><a href="https://www.lemonde.fr" target="_blank">Le Monde</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.lemonde.fr" target="_blank">lemonde.fr</a></td></tr>
+      <tr data-search="france le figaro"><td class="country">🇫🇷 France</td><td class="paper"><a href="https://www.lefigaro.fr" target="_blank">Le Figaro</a></td><td class="lean">Right</td><td class="url"><a href="https://www.lefigaro.fr" target="_blank">lefigaro.fr</a></td></tr>
+      <!-- ── Germany ── -->
+      <tr data-search="germany deutschland süddeutsche zeitung suddeutsche"><td class="country">🇩🇪 Germany</td><td class="paper"><a href="https://www.sueddeutsche.de" target="_blank">Süddeutsche Zeitung</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.sueddeutsche.de" target="_blank">sueddeutsche.de</a></td></tr>
+      <tr data-search="germany deutschland frankfurter allgemeine faz"><td class="country">🇩🇪 Germany</td><td class="paper"><a href="https://www.faz.net" target="_blank">Frankfurter Allgemeine</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.faz.net" target="_blank">faz.net</a></td></tr>
+      <tr data-search="germany deutschland bild"><td class="country">🇩🇪 Germany</td><td class="paper"><a href="https://www.bild.de" target="_blank">Bild</a></td><td class="lean">Right/Populist</td><td class="url"><a href="https://www.bild.de" target="_blank">bild.de</a></td></tr>
+      <!-- ── Netherlands ── -->
+      <tr data-search="netherlands holland de volkskrant"><td class="country">🇳🇱 Netherlands</td><td class="paper"><a href="https://www.volkskrant.nl" target="_blank">de Volkskrant</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.volkskrant.nl" target="_blank">volkskrant.nl</a></td></tr>
+      <tr data-search="netherlands holland nrc handelsblad"><td class="country">🇳🇱 Netherlands</td><td class="paper"><a href="https://www.nrc.nl" target="_blank">NRC Handelsblad</a></td><td class="lean">Liberal</td><td class="url"><a href="https://www.nrc.nl" target="_blank">nrc.nl</a></td></tr>
+      <tr data-search="netherlands holland de telegraaf"><td class="country">🇳🇱 Netherlands</td><td class="paper"><a href="https://www.telegraaf.nl" target="_blank">De Telegraaf</a></td><td class="lean">Right</td><td class="url"><a href="https://www.telegraaf.nl" target="_blank">telegraaf.nl</a></td></tr>
+      <!-- ── Ireland ── -->
+      <tr data-search="ireland irish examiner"><td class="country">🇮🇪 Ireland</td><td class="paper"><a href="https://www.irishexaminer.com" target="_blank">Irish Examiner</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.irishexaminer.com" target="_blank">irishexaminer.com</a></td></tr>
+      <tr data-search="ireland the irish times"><td class="country">🇮🇪 Ireland</td><td class="paper"><a href="https://www.irishtimes.com" target="_blank">The Irish Times</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.irishtimes.com" target="_blank">irishtimes.com</a></td></tr>
+      <tr data-search="ireland irish independent"><td class="country">🇮🇪 Ireland</td><td class="paper"><a href="https://www.independent.ie" target="_blank">Irish Independent</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.independent.ie" target="_blank">independent.ie</a></td></tr>
+      <!-- ── Sweden ── -->
+      <tr data-search="sweden sverige aftonbladet"><td class="country">🇸🇪 Sweden</td><td class="paper"><a href="https://www.aftonbladet.se" target="_blank">Aftonbladet</a></td><td class="lean">Left/Labour</td><td class="url"><a href="https://www.aftonbladet.se" target="_blank">aftonbladet.se</a></td></tr>
+      <tr data-search="sweden sverige dagens nyheter"><td class="country">🇸🇪 Sweden</td><td class="paper"><a href="https://www.dn.se" target="_blank">Dagens Nyheter</a></td><td class="lean">Liberal</td><td class="url"><a href="https://www.dn.se" target="_blank">dn.se</a></td></tr>
+      <tr data-search="sweden sverige svenska dagbladet"><td class="country">🇸🇪 Sweden</td><td class="paper"><a href="https://www.svd.se" target="_blank">Svenska Dagbladet</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.svd.se" target="_blank">svd.se</a></td></tr>
+      <!-- ── Norway ── -->
+      <tr data-search="norway norge dagbladet"><td class="country">🇳🇴 Norway</td><td class="paper"><a href="https://www.dagbladet.no" target="_blank">Dagbladet</a></td><td class="lean">Left/Liberal</td><td class="url"><a href="https://www.dagbladet.no" target="_blank">dagbladet.no</a></td></tr>
+      <tr data-search="norway norge aftenposten"><td class="country">🇳🇴 Norway</td><td class="paper"><a href="https://www.aftenposten.no" target="_blank">Aftenposten</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.aftenposten.no" target="_blank">aftenposten.no</a></td></tr>
+      <tr data-search="norway norge vg verdens gang"><td class="country">🇳🇴 Norway</td><td class="paper"><a href="https://www.vg.no" target="_blank">VG (Verdens Gang)</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.vg.no" target="_blank">vg.no</a></td></tr>
+      <!-- ── Denmark ── -->
+      <tr data-search="denmark danmark politiken"><td class="country">🇩🇰 Denmark</td><td class="paper"><a href="https://www.politiken.dk" target="_blank">Politiken</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.politiken.dk" target="_blank">politiken.dk</a></td></tr>
+      <tr data-search="denmark danmark berlingske"><td class="country">🇩🇰 Denmark</td><td class="paper"><a href="https://www.berlingske.dk" target="_blank">Berlingske</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.berlingske.dk" target="_blank">berlingske.dk</a></td></tr>
+      <tr data-search="denmark danmark jyllands-posten"><td class="country">🇩🇰 Denmark</td><td class="paper"><a href="https://www.jyllands-posten.dk" target="_blank">Jyllands-Posten</a></td><td class="lean">Right</td><td class="url"><a href="https://www.jyllands-posten.dk" target="_blank">jyllands-posten.dk</a></td></tr>
+      <!-- ── Finland ── -->
+      <tr data-search="finland suomi helsingin sanomat"><td class="country">🇫🇮 Finland</td><td class="paper"><a href="https://www.hs.fi" target="_blank">Helsingin Sanomat</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.hs.fi" target="_blank">hs.fi</a></td></tr>
+      <tr data-search="finland suomi kauppalehti"><td class="country">🇫🇮 Finland</td><td class="paper"><a href="https://www.kauppalehti.fi" target="_blank">Kauppalehti</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.kauppalehti.fi" target="_blank">kauppalehti.fi</a></td></tr>
+      <tr data-search="finland suomi iltalehti"><td class="country">🇫🇮 Finland</td><td class="paper"><a href="https://www.iltalehti.fi" target="_blank">Iltalehti</a></td><td class="lean">Centre-right/Populist</td><td class="url"><a href="https://www.iltalehti.fi" target="_blank">iltalehti.fi</a></td></tr>
+      <!-- ── Italy ── -->
+      <tr data-search="italy italia la repubblica"><td class="country">🇮🇹 Italy</td><td class="paper"><a href="https://www.repubblica.it" target="_blank">La Repubblica</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.repubblica.it" target="_blank">repubblica.it</a></td></tr>
+      <tr data-search="italy italia corriere della sera"><td class="country">🇮🇹 Italy</td><td class="paper"><a href="https://www.corriere.it" target="_blank">Corriere della Sera</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.corriere.it" target="_blank">corriere.it</a></td></tr>
+      <tr data-search="italy italia il giornale"><td class="country">🇮🇹 Italy</td><td class="paper"><a href="https://www.ilgiornale.it" target="_blank">Il Giornale</a></td><td class="lean">Right</td><td class="url"><a href="https://www.ilgiornale.it" target="_blank">ilgiornale.it</a></td></tr>
+      <!-- ── Spain ── -->
+      <tr data-search="spain españa el pais"><td class="country">🇪🇸 Spain</td><td class="paper"><a href="https://www.elpais.com" target="_blank">El País</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.elpais.com" target="_blank">elpais.com</a></td></tr>
+      <tr data-search="spain españa el mundo"><td class="country">🇪🇸 Spain</td><td class="paper"><a href="https://www.elmundo.es" target="_blank">El Mundo</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.elmundo.es" target="_blank">elmundo.es</a></td></tr>
+      <tr data-search="spain españa abc"><td class="country">🇪🇸 Spain</td><td class="paper"><a href="https://www.abc.es" target="_blank">ABC</a></td><td class="lean">Right</td><td class="url"><a href="https://www.abc.es" target="_blank">abc.es</a></td></tr>
+      <!-- ── Portugal ── -->
+      <tr data-search="portugal público publico"><td class="country">🇵🇹 Portugal</td><td class="paper"><a href="https://www.publico.pt" target="_blank">Público</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.publico.pt" target="_blank">publico.pt</a></td></tr>
+      <tr data-search="portugal jornal de noticias"><td class="country">🇵🇹 Portugal</td><td class="paper"><a href="https://www.jn.pt" target="_blank">Jornal de Notícias</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.jn.pt" target="_blank">jn.pt</a></td></tr>
+      <tr data-search="portugal observador"><td class="country">🇵🇹 Portugal</td><td class="paper"><a href="https://www.observador.pt" target="_blank">Observador</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.observador.pt" target="_blank">observador.pt</a></td></tr>
+      <!-- ── Greece ── -->
+      <tr data-search="greece efsyn efimerida ton syntakton"><td class="country">🇬🇷 Greece</td><td class="paper"><a href="https://www.efsyn.gr" target="_blank">Efimerida ton Syntakton (EfSyn)</a></td><td class="lean">Left</td><td class="url"><a href="https://www.efsyn.gr" target="_blank">efsyn.gr</a></td></tr>
+      <tr data-search="greece kathimerini"><td class="country">🇬🇷 Greece</td><td class="paper"><a href="https://www.kathimerini.gr" target="_blank">Kathimerini</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.kathimerini.gr" target="_blank">kathimerini.gr</a></td></tr>
+      <tr data-search="greece dimokratia"><td class="country">🇬🇷 Greece</td><td class="paper"><a href="https://www.dimokratianews.gr" target="_blank">Dimokratia</a></td><td class="lean">Right</td><td class="url"><a href="https://www.dimokratianews.gr" target="_blank">dimokratianews.gr</a></td></tr>
+      <!-- ── Turkey ── -->
+      <tr data-search="turkey türkiye cumhuriyet"><td class="country">🇹🇷 Turkey</td><td class="paper"><a href="https://www.cumhuriyet.com.tr" target="_blank">Cumhuriyet</a></td><td class="lean">Left/Secularist</td><td class="url"><a href="https://www.cumhuriyet.com.tr" target="_blank">cumhuriyet.com.tr</a></td></tr>
+      <tr data-search="turkey türkiye hurriyet hürriyet"><td class="country">🇹🇷 Turkey</td><td class="paper"><a href="https://www.hurriyet.com.tr" target="_blank">Hürriyet</a></td><td class="lean">Centre/Nationalist</td><td class="url"><a href="https://www.hurriyet.com.tr" target="_blank">hurriyet.com.tr</a></td></tr>
+      <tr data-search="turkey türkiye sabah"><td class="country">🇹🇷 Turkey</td><td class="paper"><a href="https://www.sabah.com.tr" target="_blank">Sabah</a></td><td class="lean">Pro-AKP/Right</td><td class="url"><a href="https://www.sabah.com.tr" target="_blank">sabah.com.tr</a></td></tr>
+      <!-- ── Poland ── -->
+      <tr data-search="poland polska gazeta wyborcza"><td class="country">🇵🇱 Poland</td><td class="paper"><a href="https://www.wyborcza.pl" target="_blank">Gazeta Wyborcza</a></td><td class="lean">Centre-left/Liberal</td><td class="url"><a href="https://www.wyborcza.pl" target="_blank">wyborcza.pl</a></td></tr>
+      <tr data-search="poland polska rzeczpospolita"><td class="country">🇵🇱 Poland</td><td class="paper"><a href="https://www.rp.pl" target="_blank">Rzeczpospolita</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.rp.pl" target="_blank">rp.pl</a></td></tr>
+      <tr data-search="poland polska gazeta polska codziennie"><td class="country">🇵🇱 Poland</td><td class="paper"><a href="https://www.gazetapolska.pl" target="_blank">Gazeta Polska Codziennie</a></td><td class="lean">Nationalist/PiS-aligned</td><td class="url"><a href="https://www.gazetapolska.pl" target="_blank">gazetapolska.pl</a></td></tr>
+      <!-- ── Czech Republic ── -->
+      <tr data-search="czech republic czechia deník n denik n"><td class="country">🇨🇿 Czech Republic</td><td class="paper"><a href="https://www.denikn.cz" target="_blank">Deník N</a></td><td class="lean">Liberal</td><td class="url"><a href="https://www.denikn.cz" target="_blank">denikn.cz</a></td></tr>
+      <tr data-search="czech republic czechia mf dnes idnes"><td class="country">🇨🇿 Czech Republic</td><td class="paper"><a href="https://www.idnes.cz" target="_blank">MF Dnes</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.idnes.cz" target="_blank">idnes.cz</a></td></tr>
+      <tr data-search="czech republic czechia právo pravo"><td class="country">🇨🇿 Czech Republic</td><td class="paper"><a href="https://www.pravo.cz" target="_blank">Právo</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.pravo.cz" target="_blank">pravo.cz</a></td></tr>
+      <!-- ── Hungary ── -->
+      <tr data-search="hungary magyarország telex"><td class="country">🇭🇺 Hungary</td><td class="paper"><a href="https://www.telex.hu" target="_blank">Telex</a></td><td class="lean">Independent/Liberal</td><td class="url"><a href="https://www.telex.hu" target="_blank">telex.hu</a></td></tr>
+      <tr data-search="hungary magyarország magyar hang"><td class="country">🇭🇺 Hungary</td><td class="paper"><a href="https://www.magyarhang.org" target="_blank">Magyar Hang</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.magyarhang.org" target="_blank">magyarhang.org</a></td></tr>
+      <tr data-search="hungary magyarország magyar nemzet"><td class="country">🇭🇺 Hungary</td><td class="paper"><a href="https://www.magyarnmezet.hu" target="_blank">Magyar Nemzet</a></td><td class="lean">Pro-Orbán/Right</td><td class="url"><a href="https://www.magyarnmezet.hu" target="_blank">magyarnmezet.hu</a></td></tr>
+      <!-- ── Austria ── -->
+      <tr data-search="austria österreich der standard"><td class="country">🇦🇹 Austria</td><td class="paper"><a href="https://www.derstandard.at" target="_blank">Der Standard</a></td><td class="lean">Liberal/Centre-left</td><td class="url"><a href="https://www.derstandard.at" target="_blank">derstandard.at</a></td></tr>
+      <tr data-search="austria österreich die presse"><td class="country">🇦🇹 Austria</td><td class="paper"><a href="https://www.diepresse.com" target="_blank">Die Presse</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.diepresse.com" target="_blank">diepresse.com</a></td></tr>
+      <tr data-search="austria österreich kronen zeitung krone"><td class="country">🇦🇹 Austria</td><td class="paper"><a href="https://www.krone.at" target="_blank">Kronen Zeitung</a></td><td class="lean">Populist/Right</td><td class="url"><a href="https://www.krone.at" target="_blank">krone.at</a></td></tr>
+      <!-- ── USA ── -->
+      <tr data-search="usa united states new york times nyt"><td class="country">🇺🇸 United States</td><td class="paper"><a href="https://www.nytimes.com" target="_blank">The New York Times</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.nytimes.com" target="_blank">nytimes.com</a></td></tr>
+      <tr data-search="usa united states usa today"><td class="country">🇺🇸 United States</td><td class="paper"><a href="https://www.usatoday.com" target="_blank">USA Today</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.usatoday.com" target="_blank">usatoday.com</a></td></tr>
+      <tr data-search="usa united states wall street journal wsj"><td class="country">🇺🇸 United States</td><td class="paper"><a href="https://www.wsj.com" target="_blank">Wall Street Journal</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.wsj.com" target="_blank">wsj.com</a></td></tr>
+      <!-- ── Canada ── -->
+      <tr data-search="canada toronto star"><td class="country">🇨🇦 Canada</td><td class="paper"><a href="https://www.thestar.com" target="_blank">Toronto Star</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.thestar.com" target="_blank">thestar.com</a></td></tr>
+      <tr data-search="canada the globe and mail"><td class="country">🇨🇦 Canada</td><td class="paper"><a href="https://www.theglobeandmail.com" target="_blank">The Globe and Mail</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.theglobeandmail.com" target="_blank">theglobeandmail.com</a></td></tr>
+      <tr data-search="canada national post"><td class="country">🇨🇦 Canada</td><td class="paper"><a href="https://www.nationalpost.com" target="_blank">National Post</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.nationalpost.com" target="_blank">nationalpost.com</a></td></tr>
+      <!-- ── Mexico ── -->
+      <tr data-search="mexico méxico la jornada"><td class="country">🇲🇽 Mexico</td><td class="paper"><a href="https://www.jornada.com.mx" target="_blank">La Jornada</a></td><td class="lean">Left</td><td class="url"><a href="https://www.jornada.com.mx" target="_blank">jornada.com.mx</a></td></tr>
+      <tr data-search="mexico méxico reforma"><td class="country">🇲🇽 Mexico</td><td class="paper"><a href="https://www.reforma.com" target="_blank">Reforma</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.reforma.com" target="_blank">reforma.com</a></td></tr>
+      <tr data-search="mexico méxico milenio"><td class="country">🇲🇽 Mexico</td><td class="paper"><a href="https://www.milenio.com" target="_blank">Milenio</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.milenio.com" target="_blank">milenio.com</a></td></tr>
+      <!-- ── Brazil ── -->
+      <tr data-search="brazil brasil folha de sao paulo"><td class="country">🇧🇷 Brazil</td><td class="paper"><a href="https://www.folha.uol.com.br" target="_blank">Folha de S.Paulo</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.folha.uol.com.br" target="_blank">folha.uol.com.br</a></td></tr>
+      <tr data-search="brazil brasil o globo"><td class="country">🇧🇷 Brazil</td><td class="paper"><a href="https://oglobo.globo.com" target="_blank">O Globo</a></td><td class="lean">Centre</td><td class="url"><a href="https://oglobo.globo.com" target="_blank">oglobo.globo.com</a></td></tr>
+      <tr data-search="brazil brasil o estado de sao paulo estadao"><td class="country">🇧🇷 Brazil</td><td class="paper"><a href="https://www.estadao.com.br" target="_blank">O Estado de S. Paulo</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.estadao.com.br" target="_blank">estadao.com.br</a></td></tr>
+      <!-- ── Argentina ── -->
+      <tr data-search="argentina página 12 pagina 12"><td class="country">🇦🇷 Argentina</td><td class="paper"><a href="https://www.pagina12.com.ar" target="_blank">Página 12</a></td><td class="lean">Left/Progressive</td><td class="url"><a href="https://www.pagina12.com.ar" target="_blank">pagina12.com.ar</a></td></tr>
+      <tr data-search="argentina clarín clarin"><td class="country">🇦🇷 Argentina</td><td class="paper"><a href="https://www.clarin.com" target="_blank">Clarín</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.clarin.com" target="_blank">clarin.com</a></td></tr>
+      <tr data-search="argentina la nación la nacion"><td class="country">🇦🇷 Argentina</td><td class="paper"><a href="https://www.lanacion.com.ar" target="_blank">La Nación</a></td><td class="lean">Right/Conservative</td><td class="url"><a href="https://www.lanacion.com.ar" target="_blank">lanacion.com.ar</a></td></tr>
+      <!-- ── Colombia ── -->
+      <tr data-search="colombia el espectador"><td class="country">🇨🇴 Colombia</td><td class="paper"><a href="https://www.elespectador.com" target="_blank">El Espectador</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.elespectador.com" target="_blank">elespectador.com</a></td></tr>
+      <tr data-search="colombia el tiempo"><td class="country">🇨🇴 Colombia</td><td class="paper"><a href="https://www.eltiempo.com" target="_blank">El Tiempo</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.eltiempo.com" target="_blank">eltiempo.com</a></td></tr>
+      <tr data-search="colombia semana"><td class="country">🇨🇴 Colombia</td><td class="paper"><a href="https://www.semana.com" target="_blank">Semana</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.semana.com" target="_blank">semana.com</a></td></tr>
+      <!-- ── Chile ── -->
+      <tr data-search="chile el mostrador"><td class="country">🇨🇱 Chile</td><td class="paper"><a href="https://www.elmostrador.cl" target="_blank">El Mostrador</a></td><td class="lean">Left/Progressive</td><td class="url"><a href="https://www.elmostrador.cl" target="_blank">elmostrador.cl</a></td></tr>
+      <tr data-search="chile la tercera"><td class="country">🇨🇱 Chile</td><td class="paper"><a href="https://www.latercera.com" target="_blank">La Tercera</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.latercera.com" target="_blank">latercera.com</a></td></tr>
+      <tr data-search="chile el mercurio emol"><td class="country">🇨🇱 Chile</td><td class="paper"><a href="https://www.emol.com" target="_blank">El Mercurio</a></td><td class="lean">Right/Conservative</td><td class="url"><a href="https://www.emol.com" target="_blank">emol.com</a></td></tr>
+      <!-- ── Peru ── -->
+      <tr data-search="peru perú la república la republica"><td class="country">🇵🇪 Peru</td><td class="paper"><a href="https://www.larepublica.pe" target="_blank">La República</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.larepublica.pe" target="_blank">larepublica.pe</a></td></tr>
+      <tr data-search="peru perú el comercio"><td class="country">🇵🇪 Peru</td><td class="paper"><a href="https://www.elcomercio.pe" target="_blank">El Comercio</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.elcomercio.pe" target="_blank">elcomercio.pe</a></td></tr>
+      <tr data-search="peru perú correo"><td class="country">🇵🇪 Peru</td><td class="paper"><a href="https://www.diariocorreo.pe" target="_blank">Correo</a></td><td class="lean">Right/Populist</td><td class="url"><a href="https://www.diariocorreo.pe" target="_blank">diariocorreo.pe</a></td></tr>
+      <!-- ── Japan ── -->
+      <tr data-search="japan nihon asahi shimbun"><td class="country">🇯🇵 Japan</td><td class="paper"><a href="https://www.asahi.com" target="_blank">Asahi Shimbun</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.asahi.com" target="_blank">asahi.com</a></td></tr>
+      <tr data-search="japan nihon yomiuri shimbun"><td class="country">🇯🇵 Japan</td><td class="paper"><a href="https://www.yomiuri.co.jp" target="_blank">Yomiuri Shimbun</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.yomiuri.co.jp" target="_blank">yomiuri.co.jp</a></td></tr>
+      <tr data-search="japan nihon sankei shimbun"><td class="country">🇯🇵 Japan</td><td class="paper"><a href="https://www.sankei.com" target="_blank">Sankei Shimbun</a></td><td class="lean">Right/Nationalist</td><td class="url"><a href="https://www.sankei.com" target="_blank">sankei.com</a></td></tr>
+      <!-- ── Taiwan ── -->
+      <tr data-search="taiwan liberty times"><td class="country">🇹🇼 Taiwan</td><td class="paper"><a href="https://www.ltn.com.tw" target="_blank">Liberty Times</a></td><td class="lean">Pro-independence/Left</td><td class="url"><a href="https://www.ltn.com.tw" target="_blank">ltn.com.tw</a></td></tr>
+      <tr data-search="taiwan the reporter 報導者"><td class="country">🇹🇼 Taiwan</td><td class="paper"><a href="https://www.twreporter.org" target="_blank">The Reporter</a></td><td class="lean">Independent/Investigative</td><td class="url"><a href="https://www.twreporter.org" target="_blank">twreporter.org</a></td></tr>
+      <tr data-search="taiwan united daily news 聯合報"><td class="country">🇹🇼 Taiwan</td><td class="paper"><a href="https://www.udn.com" target="_blank">United Daily News</a></td><td class="lean">KMT-leaning/Right</td><td class="url"><a href="https://www.udn.com" target="_blank">udn.com</a></td></tr>
+      <!-- ── South Korea ── -->
+      <tr data-search="south korea korean hankyoreh"><td class="country">🇰🇷 South Korea</td><td class="paper"><a href="https://www.hani.co.kr" target="_blank">Hankyoreh</a></td><td class="lean">Progressive/Left</td><td class="url"><a href="https://www.hani.co.kr" target="_blank">hani.co.kr</a></td></tr>
+      <tr data-search="south korea korean joongang ilbo"><td class="country">🇰🇷 South Korea</td><td class="paper"><a href="https://www.joongang.co.kr" target="_blank">JoongAng Ilbo</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.joongang.co.kr" target="_blank">joongang.co.kr</a></td></tr>
+      <tr data-search="south korea korean chosun ilbo"><td class="country">🇰🇷 South Korea</td><td class="paper"><a href="https://www.chosun.com" target="_blank">Chosun Ilbo</a></td><td class="lean">Conservative/Right</td><td class="url"><a href="https://www.chosun.com" target="_blank">chosun.com</a></td></tr>
+      <!-- ── Malaysia ── -->
+      <tr data-search="malaysia malaysiakini"><td class="country">🇲🇾 Malaysia</td><td class="paper"><a href="https://www.malaysiakini.com" target="_blank">Malaysiakini</a></td><td class="lean">Independent/Reform</td><td class="url"><a href="https://www.malaysiakini.com" target="_blank">malaysiakini.com</a></td></tr>
+      <tr data-search="malaysia the star"><td class="country">🇲🇾 Malaysia</td><td class="paper"><a href="https://www.thestar.com.my" target="_blank">The Star</a></td><td class="lean">Centre/MCA-linked</td><td class="url"><a href="https://www.thestar.com.my" target="_blank">thestar.com.my</a></td></tr>
+      <tr data-search="malaysia new straits times nst"><td class="country">🇲🇾 Malaysia</td><td class="paper"><a href="https://www.nst.com.my" target="_blank">New Straits Times</a></td><td class="lean">Pro-government</td><td class="url"><a href="https://www.nst.com.my" target="_blank">nst.com.my</a></td></tr>
+      <!-- ── India ── -->
+      <tr data-search="india the hindu"><td class="country">🇮🇳 India</td><td class="paper"><a href="https://www.thehindu.com" target="_blank">The Hindu</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.thehindu.com" target="_blank">thehindu.com</a></td></tr>
+      <tr data-search="india hindustan times"><td class="country">🇮🇳 India</td><td class="paper"><a href="https://www.hindustantimes.com" target="_blank">Hindustan Times</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.hindustantimes.com" target="_blank">hindustantimes.com</a></td></tr>
+      <tr data-search="india times of india toi"><td class="country">🇮🇳 India</td><td class="paper"><a href="https://www.timesofindia.indiatimes.com" target="_blank">Times of India</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.timesofindia.indiatimes.com" target="_blank">timesofindia.com</a></td></tr>
+      <!-- ── Philippines ── -->
+      <tr data-search="philippines rappler"><td class="country">🇵🇭 Philippines</td><td class="paper"><a href="https://www.rappler.com" target="_blank">Rappler</a></td><td class="lean">Independent/Progressive</td><td class="url"><a href="https://www.rappler.com" target="_blank">rappler.com</a></td></tr>
+      <tr data-search="philippines philippine daily inquirer"><td class="country">🇵🇭 Philippines</td><td class="paper"><a href="https://www.inquirer.net" target="_blank">Philippine Daily Inquirer</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.inquirer.net" target="_blank">inquirer.net</a></td></tr>
+      <tr data-search="philippines manila bulletin"><td class="country">🇵🇭 Philippines</td><td class="paper"><a href="https://www.mb.com.ph" target="_blank">Manila Bulletin</a></td><td class="lean">Conservative</td><td class="url"><a href="https://www.mb.com.ph" target="_blank">mb.com.ph</a></td></tr>
+      <!-- ── Australia ── -->
+      <tr data-search="australia sydney morning herald smh"><td class="country">🇦🇺 Australia</td><td class="paper"><a href="https://www.smh.com.au" target="_blank">Sydney Morning Herald</a></td><td class="lean">Centre-left</td><td class="url"><a href="https://www.smh.com.au" target="_blank">smh.com.au</a></td></tr>
+      <tr data-search="australia australian financial review afr"><td class="country">🇦🇺 Australia</td><td class="paper"><a href="https://www.afr.com" target="_blank">Australian Financial Review</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.afr.com" target="_blank">afr.com</a></td></tr>
+      <tr data-search="australia the australian"><td class="country">🇦🇺 Australia</td><td class="paper"><a href="https://www.theaustralian.com.au" target="_blank">The Australian</a></td><td class="lean">Right</td><td class="url"><a href="https://www.theaustralian.com.au" target="_blank">theaustralian.com.au</a></td></tr>
+      <!-- ── New Zealand ── -->
+      <tr data-search="new zealand nz the spinoff"><td class="country">🇳🇿 New Zealand</td><td class="paper"><a href="https://www.thespinoff.co.nz" target="_blank">The Spinoff</a></td><td class="lean">Progressive/Left</td><td class="url"><a href="https://www.thespinoff.co.nz" target="_blank">thespinoff.co.nz</a></td></tr>
+      <tr data-search="new zealand nz stuff dominion post"><td class="country">🇳🇿 New Zealand</td><td class="paper"><a href="https://www.stuff.co.nz" target="_blank">Stuff / Dominion Post</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.stuff.co.nz" target="_blank">stuff.co.nz</a></td></tr>
+      <tr data-search="new zealand nz nz herald"><td class="country">🇳🇿 New Zealand</td><td class="paper"><a href="https://www.nzherald.co.nz" target="_blank">NZ Herald</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.nzherald.co.nz" target="_blank">nzherald.co.nz</a></td></tr>
+      <!-- ── Nigeria ── -->
+      <tr data-search="nigeria the punch"><td class="country">🇳🇬 Nigeria</td><td class="paper"><a href="https://www.punchng.com" target="_blank">The Punch</a></td><td class="lean">Independent/Critical</td><td class="url"><a href="https://www.punchng.com" target="_blank">punchng.com</a></td></tr>
+      <tr data-search="nigeria vanguard"><td class="country">🇳🇬 Nigeria</td><td class="paper"><a href="https://www.vanguardngr.com" target="_blank">Vanguard</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.vanguardngr.com" target="_blank">vanguardngr.com</a></td></tr>
+      <tr data-search="nigeria thisday this day"><td class="country">🇳🇬 Nigeria</td><td class="paper"><a href="https://www.thisdaylive.com" target="_blank">ThisDay</a></td><td class="lean">Pro-establishment</td><td class="url"><a href="https://www.thisdaylive.com" target="_blank">thisdaylive.com</a></td></tr>
+      <!-- ── Ghana ── -->
+      <tr data-search="ghana the chronicle"><td class="country">🇬🇭 Ghana</td><td class="paper"><a href="https://www.thechronicle.com.gh" target="_blank">The Chronicle</a></td><td class="lean">Independent</td><td class="url"><a href="https://www.thechronicle.com.gh" target="_blank">thechronicle.com.gh</a></td></tr>
+      <tr data-search="ghana daily graphic"><td class="country">🇬🇭 Ghana</td><td class="paper"><a href="https://www.graphic.com.gh" target="_blank">Daily Graphic</a></td><td class="lean">Centre/State-linked</td><td class="url"><a href="https://www.graphic.com.gh" target="_blank">graphic.com.gh</a></td></tr>
+      <tr data-search="ghana daily guide"><td class="country">🇬🇭 Ghana</td><td class="paper"><a href="https://www.dailyguideafrica.com" target="_blank">Daily Guide</a></td><td class="lean">Centre-right/NPP</td><td class="url"><a href="https://www.dailyguideafrica.com" target="_blank">dailyguideafrica.com</a></td></tr>
+      <!-- ── Senegal ── -->
+      <tr data-search="senegal le soleil"><td class="country">🇸🇳 Senegal</td><td class="paper"><a href="https://www.lesoleil.sn" target="_blank">Le Soleil</a></td><td class="lean">Pro-government</td><td class="url"><a href="https://www.lesoleil.sn" target="_blank">lesoleil.sn</a></td></tr>
+      <tr data-search="senegal l'observateur lobservateur"><td class="country">🇸🇳 Senegal</td><td class="paper"><a href="https://www.lobservateur.sn" target="_blank">L'Observateur</a></td><td class="lean">Independent</td><td class="url"><a href="https://www.lobservateur.sn" target="_blank">lobservateur.sn</a></td></tr>
+      <tr data-search="senegal sud quotidien"><td class="country">🇸🇳 Senegal</td><td class="paper"><a href="https://www.sudonline.sn" target="_blank">Sud Quotidien</a></td><td class="lean">Independent/Critical</td><td class="url"><a href="https://www.sudonline.sn" target="_blank">sudonline.sn</a></td></tr>
+      <!-- ── South Africa ── -->
+      <tr data-search="south africa mail guardian"><td class="country">🇿🇦 South Africa</td><td class="paper"><a href="https://www.mg.co.za" target="_blank">Mail &amp; Guardian</a></td><td class="lean">Progressive/Left</td><td class="url"><a href="https://www.mg.co.za" target="_blank">mg.co.za</a></td></tr>
+      <tr data-search="south africa daily maverick"><td class="country">🇿🇦 South Africa</td><td class="paper"><a href="https://www.dailymaverick.co.za" target="_blank">Daily Maverick</a></td><td class="lean">Independent/Investigative</td><td class="url"><a href="https://www.dailymaverick.co.za" target="_blank">dailymaverick.co.za</a></td></tr>
+      <tr data-search="south africa the citizen"><td class="country">🇿🇦 South Africa</td><td class="paper"><a href="https://www.citizen.co.za" target="_blank">The Citizen</a></td><td class="lean">Centre-right</td><td class="url"><a href="https://www.citizen.co.za" target="_blank">citizen.co.za</a></td></tr>
+      <!-- ── Kenya ── -->
+      <tr data-search="kenya daily nation"><td class="country">🇰🇪 Kenya</td><td class="paper"><a href="https://www.nation.africa" target="_blank">Daily Nation</a></td><td class="lean">Independent/Centre</td><td class="url"><a href="https://www.nation.africa" target="_blank">nation.africa</a></td></tr>
+      <tr data-search="kenya the standard"><td class="country">🇰🇪 Kenya</td><td class="paper"><a href="https://www.standardmedia.co.ke" target="_blank">The Standard</a></td><td class="lean">Independent</td><td class="url"><a href="https://www.standardmedia.co.ke" target="_blank">standardmedia.co.ke</a></td></tr>
+      <tr data-search="kenya business daily"><td class="country">🇰🇪 Kenya</td><td class="paper"><a href="https://www.businessdailyafrica.com" target="_blank">Business Daily</a></td><td class="lean">Business/Centre-right</td><td class="url"><a href="https://www.businessdailyafrica.com" target="_blank">businessdailyafrica.com</a></td></tr>
+      <!-- ── Israel ── -->
+      <tr data-search="israel haaretz"><td class="country">🇮🇱 Israel</td><td class="paper"><a href="https://www.haaretz.com" target="_blank">Haaretz</a></td><td class="lean">Left/Liberal</td><td class="url"><a href="https://www.haaretz.com" target="_blank">haaretz.com</a></td></tr>
+      <tr data-search="israel yedioth ahronoth ynet"><td class="country">🇮🇱 Israel</td><td class="paper"><a href="https://www.ynet.co.il" target="_blank">Yedioth Ahronoth</a></td><td class="lean">Centre</td><td class="url"><a href="https://www.ynet.co.il" target="_blank">ynet.co.il</a></td></tr>
+      <tr data-search="israel israel hayom"><td class="country">🇮🇱 Israel</td><td class="paper"><a href="https://www.israelhayom.com" target="_blank">Israel Hayom</a></td><td class="lean">Right/Pro-Netanyahu</td><td class="url"><a href="https://www.israelhayom.com" target="_blank">israelhayom.com</a></td></tr>
+    </tbody>
+  </table>
+
+  <div class="attribution-note">
+    <strong>Attribution notice:</strong> World Headline summarises and editorially frames content from the publications listed above.
+    All original reporting, journalism, and intellectual property remain with the respective publishers.
+    Story summaries are AI-generated interpretations based on publicly available RSS feeds and do not reproduce
+    verbatim text. Each story card links directly to the source article. World Headline is a non-commercial
+    personal project and does not monetise third-party content.
+  </div>
+
+  <div class="page-footer-nav">
+    <a href="index.html">← Back to Home</a>
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to Top</button>
+  </div>
+
+</div>
+
+<script>
+function filterTable() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const rows = document.querySelectorAll('#sourcesTable tbody tr');
+  let visible = 0;
+  rows.forEach(row => {
+    const text = row.getAttribute('data-search') + ' ' + row.textContent.toLowerCase();
+    if (text.includes(q)) {
+      row.classList.remove('hidden');
+      visible++;
+    } else {
+      row.classList.add('hidden');
+    }
+  });
+  document.getElementById('visibleCount').textContent = visible;
+}
+</script>
+
+</body>
+</html>
