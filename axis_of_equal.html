@@ -233,6 +233,14 @@
   .score-explainer-body .se-label { font-weight: 700; color: #555; min-width: 130px; }
   .lean-nudge { font-size: 0.66rem; font-family: sans-serif; color: #888; margin-top: 8px; min-height: 1.2em; transition: opacity 0.2s; }
   .lean-nudge strong { color: #555; }
+
+  /* ── Nav tooltip ── */
+  .nav-tip-wrap { position: relative; display: inline-block; }
+  .nav-tip { display: none; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: #1a1a1a; color: #f5f3ee; font-size: 0.65rem; font-family: sans-serif; line-height: 1.5;
+    padding: 6px 10px; border-radius: 4px; z-index: 200; pointer-events: none;
+    width: 200px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  .nav-tip-wrap:hover .nav-tip { display: block; }
 </style>
 </head>
 <body>
@@ -256,7 +264,8 @@
   <a href="poles_apart.html">⚡ Poles Apart</a>
   <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html" class="active">⚖️ Axis of Equal</a>
-  <a href="resources.html">📋 Resources</a>
+  <span class="sep">|</span>
+  <span class="nav-tip-wrap"><a href="resources.html">📋 Resources</a><span class="nav-tip">Every newspaper we use — 135 sources across 45 countries, searchable by name. Plus free paywall tips.</span></span>
   <span class="sep">|</span>
   <a href="#bptb-section">🌍 Best Place to Be</a>
   <a href="#similarity-section">🔍 Country Comparison</a>
@@ -315,11 +324,17 @@
 <button class="cpick-btn" data-country="japan">🇯🇵 Japan</button>
 <button class="cpick-btn" data-country="south-korea">🇰🇷 South Korea</button>
 <button class="cpick-btn" data-country="israel">🇮🇱 Israel</button>
+<button class="cpick-btn" data-country="lebanon">🇱🇧 Lebanon</button>
 <button class="cpick-btn" data-country="india">🇮🇳 India</button>
 <button class="cpick-btn" data-country="argentina">🇦🇷 Argentina</button>
 <button class="cpick-btn" data-country="nigeria">🇳🇬 Nigeria</button>
+<button class="cpick-btn" data-country="south-africa">🇿🇦 South Africa</button>
+<button class="cpick-btn" data-country="ghana">🇬🇭 Ghana</button>
 <button class="cpick-btn" data-country="kenya">🇰🇪 Kenya</button>
 <button class="cpick-btn" data-country="senegal">🇸🇳 Senegal</button>
+<button class="cpick-btn" data-country="zimbabwe">🇿🇼 Zimbabwe</button>
+<button class="cpick-btn" data-country="botswana">🇧🇼 Botswana</button>
+<button class="cpick-btn" data-country="tanzania">🇹🇿 Tanzania</button>
 <button class="cpick-btn" data-country="colombia">🇨🇴 Colombia</button>
 <button class="cpick-btn" data-country="chile">🇨🇱 Chile</button>
 <button class="cpick-btn" data-country="peru">🇵🇪 Peru</button>
@@ -442,6 +457,7 @@
     <div class="aoe-row" data-country="south-korea"><div class="aoe-cname">🇰🇷 South Korea</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:38%;top:4px;" data-leader="Lee Jae-myung" data-status="gov" data-name="DP (Dems)">DP (Dems)</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:65%;top:4px;" data-leader="Han Dong-hoon" data-status="opp" data-name="PPP">PPP</div></div></div>
 
     <div class="aoe-region-header" data-region="mideast">🕌 Middle East</div>
+    <div class="aoe-row" data-country="lebanon"><div class="aoe-cname">🇱🇧 Lebanon</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:28%;top:4px;" data-leader="Naim Qassem (Hezbollah)" data-status="opp" data-name="Hezbollah/Amal">Hezbollah/Amal</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:50%;top:26px;" data-leader="Nawaf Salam" data-status="gov" data-name="Reform Coalition">Reform Coalition</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:64%;top:4px;" data-leader="Samir Geagea" data-status="opp" data-name="Lebanese Forces">Lebanese Forces</div></div></div>
     <div class="aoe-row" data-country="israel"><div class="aoe-cname">🇮🇱 Israel</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:30%;top:4px;" data-leader="Yair Golan" data-status="opp" data-name="Labour / Meretz">Labour / Meretz</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:50%;top:4px;" data-leader="Yair Lapid" data-status="opp" data-name="Yesh Atid">Yesh Atid</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:72%;top:4px;" data-leader="Benjamin Netanyahu" data-status="gov" data-name="Likud">Likud</div><div class="aoe-party" data-lean="far-right" style="background:#7b241c;left:87%;top:26px;" data-leader="Itamar Ben-Gvir" data-status="gov" data-name="Ben-Gvir">Ben-Gvir</div></div></div>
     <div class="aoe-region-header" data-region="southasia">🌏 South Asia</div>
     <div class="aoe-row" data-country="india"><div class="aoe-cname">🇮🇳 India</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:22%;top:4px;" data-leader="M.A. Baby" data-status="opp" data-name="CPI(M)">CPI(M)</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:38%;top:4px;" data-leader="Rahul Gandhi / M. Kharge" data-status="opp" data-name="Congress">Congress</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:65%;top:4px;" data-leader="Narendra Modi" data-status="gov" data-name="BJP">BJP</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:79%;top:26px;" data-leader="Mohan Bhagwat" data-status="gov" data-name="RSS wing">RSS wing</div></div></div>
@@ -454,6 +470,11 @@
     <div class="aoe-row" data-country="nigeria"><div class="aoe-cname">🇳🇬 Nigeria</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:42%;top:4px;" data-leader="Peter Obi" data-status="opp" data-name="Labour Party">Labour Party</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:46%;top:26px;" data-leader="Atiku Abubakar" data-status="opp" data-name="PDP">PDP</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:62%;top:4px;" data-leader="Bola Tinubu" data-status="gov" data-name="APC">APC</div></div></div>
     <div class="aoe-row" data-country="kenya"><div class="aoe-cname">🇰🇪 Kenya</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:37%;top:4px;" data-leader="Raila Odinga" data-status="opp" data-name="ODM">ODM</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:47%;top:26px;" data-leader="Kalonzo Musyoka" data-status="opp" data-name="Wiper">Wiper</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:64%;top:4px;" data-leader="William Ruto" data-status="gov" data-name="UDA">UDA</div></div></div>
     <div class="aoe-row" data-country="senegal"><div class="aoe-cname">🇸🇳 Senegal</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:24%;top:4px;" data-leader="Bassirou Diomaye Faye / Ousmane Sonko" data-status="gov" data-name="Pastef">Pastef</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:52%;top:4px;" data-leader="Macky Sall" data-status="opp" data-name="Benno Yakaar">Benno Yakaar</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:66%;top:4px;" data-leader="Abdoulaye Wade" data-status="opp" data-name="PDS">PDS</div></div></div>
+    <div class="aoe-row" data-country="south-africa"><div class="aoe-cname">🇿🇦 South Africa</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#2980b9;left:18%;top:4px;" data-leader="Julius Malema" data-status="opp" data-name="EFF">EFF</div><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:40%;top:26px;" data-leader="Cyril Ramaphosa" data-status="gov" data-name="ANC">ANC</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:64%;top:4px;" data-leader="John Steenhuisen" data-status="gov" data-name="DA">DA</div></div></div>
+    <div class="aoe-row" data-country="ghana"><div class="aoe-cname">🇬🇭 Ghana</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:36%;top:4px;" data-leader="John Mahama" data-status="gov" data-name="NDC">NDC</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:62%;top:4px;" data-leader="Mahamudu Bawumia" data-status="opp" data-name="NPP">NPP</div></div></div>
+    <div class="aoe-row" data-country="zimbabwe"><div class="aoe-cname">🇿🇼 Zimbabwe</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:36%;top:4px;" data-leader="Fragmented (post-Chamisa)" data-status="opp" data-name="CCC">CCC</div><div class="aoe-party" data-lean="centre" style="background:#c0392b;left:50%;top:4px;" data-leader="Emmerson Mnangagwa" data-status="gov" data-name="ZANU-PF">ZANU-PF</div></div></div>
+    <div class="aoe-row" data-country="botswana"><div class="aoe-cname">🇧🇼 Botswana</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:40%;top:4px;" data-leader="Duma Boko" data-status="gov" data-name="UDC">UDC</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:62%;top:4px;" data-leader="Mokgweetsi Masisi" data-status="opp" data-name="BDP">BDP</div></div></div>
+    <div class="aoe-row" data-country="tanzania"><div class="aoe-cname">🇹🇿 Tanzania</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:34%;top:4px;" data-leader="Freeman Mbowe" data-status="opp" data-name="Chadema">Chadema</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:48%;top:4px;" data-leader="Samia Suluhu Hassan" data-status="gov" data-name="CCM">CCM</div></div></div>
 
   </div>
 
@@ -795,6 +816,18 @@ const PARTY_FISCAL = {
   'Pastef':30, 'Benno Yakaar':50, 'PDS':60,
   // Senegal
   'Pastef':26, 'Benno Yakaar':52, 'PDS':65,
+  // Zimbabwe
+  'CCC':40, 'ZANU-PF':46,
+  // South Africa
+  'EFF':18, 'ANC':42, 'DA':66,
+  // Ghana
+  'NDC':38, 'NPP':62,
+  // Botswana
+  'UDC':42, 'BDP':62,
+  // Tanzania
+  'Chadema':36, 'CCM':46,
+  // Lebanon
+  'Hezbollah/Amal':28, 'Reform Coalition':50, 'Lebanese Forces':62,
   // Hungary
   'DK':36, 'Tisza':56, 'Fidesz':46,
   // Colombia
@@ -886,6 +919,22 @@ const PARTY_SOCIAL = {
   'Liberal Party (PH)':42, 'PFP':62, 'HNP':66,
   // New Zealand
   'NZ Greens':14, 'NZ Labour':28, 'National':58, 'ACT':44,
+  // Peru
+  'Perú Libre':20, 'Alianza Progreso':50, 'Boluarte/Govt':64, 'Fuerza Popular':76,
+  // Senegal
+  'Pastef':36, 'Benno Yakaar':56, 'PDS':62,
+  // South Africa
+  'EFF':28, 'ANC':52, 'DA':44,
+  // Ghana
+  'NDC':56, 'NPP':62,
+  // Botswana
+  'UDC':44, 'BDP':58,
+  // Tanzania
+  'Chadema':40, 'CCM':66,
+  // Zimbabwe
+  'CCC':32, 'ZANU-PF':80,
+  // Lebanon
+  'Hezbollah/Amal':78, 'Reform Coalition':34, 'Lebanese Forces':62,
 };
 
 function renderCompass() {
@@ -1385,42 +1434,4 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-
-</script>
-
-<nav class="bottom-nav">
-  <span class="bn-label">Navigate:</span>
-  <a href="index.html">🏠 Home</a>
-  <span class="sep">|</span>
-  <a href="uk_press_today.html">🇬🇧 UK</a>
-  <a href="europe_press_today.html">🌍 Europe</a>
-  <a href="americas_press_today.html">🌎 Americas</a>
-  <a href="asia_press_today.html">🌏 Asia-Pacific</a>
-  <a href="africa_press_today.html">🌍 Africa</a>
-  <a href="middleeast_press_today.html">🕌 Middle East</a>
-  <span class="sep">|</span>
-  <a href="poles_apart.html">⚡ Poles Apart</a>
-  <a href="water_cooler.html">💬 Water Cooler</a>
-  <a href="axis_of_equal.html" class="active">⚖️ Axis of Equal</a>
-  <a href="resources.html">📋 Resources</a>
-</nav>
-
-<script>
-// ── Nav-tip viewport clamp ──
-document.querySelectorAll('.nav-tip-wrap').forEach(function(wrap) {
-  wrap.addEventListener('mouseenter', function() {
-    var tip = wrap.querySelector('.nav-tip');
-    if (!tip) return;
-    var wr = wrap.getBoundingClientRect();
-    var tw = 220;
-    // Too close to right edge?
-    if (wr.left + tw / 2 > window.innerWidth - 12) {
-      tip.style.left = 'auto'; tip.style.right = '0'; tip.style.transform = 'none';
-    }
-    // Too close to left edge?
-    else if (wr.right - 
+    document.addEventL

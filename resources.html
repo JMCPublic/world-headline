@@ -97,6 +97,14 @@
   .paywall-body h4 span { font-weight: 400; color: #888; text-transform: none; letter-spacing: 0; margin-left: 6px; font-size: 0.7rem; }
   .paywall-body ul { padding-left: 18px; margin: 0; }
   .paywall-body ul li { font-size: 0.78rem; color: #555; line-height: 1.65; margin-bottom: 4px; }
+
+  /* ── Nav tooltip ── */
+  .nav-tip-wrap { position: relative; display: inline-block; }
+  .nav-tip { display: none; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: #1a1a1a; color: #f5f3ee; font-size: 0.65rem; font-family: sans-serif; line-height: 1.5;
+    padding: 6px 10px; border-radius: 4px; z-index: 200; pointer-events: none;
+    width: 200px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  .nav-tip-wrap:hover .nav-tip { display: block; }
 </style>
 </head>
 <body>
@@ -117,7 +125,8 @@
   <a href="poles_apart.html">⚡ Poles Apart</a>
   <a href="water_cooler.html">💬 Water Cooler</a>
   <a href="axis_of_equal.html">⚖️ Axis of Equal</a>
-  <a href="resources.html">📋 Resources</a>
+  <span class="sep">|</span>
+  <span class="nav-tip-wrap"><a href="resources.html">📋 Resources</a><span class="nav-tip">Every newspaper we use — 135 sources across 45 countries, searchable by name. Plus free paywall tips.</span></span>
 </nav>
 
 <div class="spectrum-bar"></div>
