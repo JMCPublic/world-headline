@@ -1208,5 +1208,32 @@ document.querySelectorAll('.country-item, .tab-wrap').forEach(function(item) {
   });
 });
 </script>
+
+  <script>
+  /* Auto-edition date — always shows the correct week, no manual update needed */
+  (function() {
+    function updateEditionNotice() {
+      var el = document.getElementById('pageEditionNotice');
+      if (!el) return;
+      var now = new Date();
+      var dow = now.getDay(); // 0=Sun … 6=Sat
+      var daysBack = dow === 0 ? 6 : dow - 1;
+      var lastMon = new Date(now);
+      lastMon.setDate(now.getDate() - daysBack);
+      var nextMon = new Date(lastMon);
+      nextMon.setDate(lastMon.getDate() + 7);
+      var mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var d1 = lastMon.getDate() + ' ' + mo[lastMon.getMonth()] + ' ' + lastMon.getFullYear();
+      var d2 = 'Mon ' + lastMon.getDate() + ' ' + mo[lastMon.getMonth()] + ' ' + lastMon.getFullYear();
+      var d3 = 'Mon ' + nextMon.getDate() + ' ' + mo[nextMon.getMonth()] + ' ' + nextMon.getFullYear();
+      el.textContent = '\u{1F5DE}\uFE0F Week of ' + d1 + ' \u00B7 Last refreshed: ' + d2 + ' \u00B7 Next update: ' + d3;
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateEditionNotice);
+    } else {
+      updateEditionNotice();
+    }
+  })();
+  </script>
 </body>
 </html>
