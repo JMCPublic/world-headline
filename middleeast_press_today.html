@@ -63,10 +63,6 @@
   .dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid; }
   .dot.amber { background: #c8a951; border-color: #c8a951; } .dot.amber-empty { background: transparent; border-color: #ddd; }
   .dot.purple { background: #9b59b6; border-color: #9b59b6; } .dot.purple-empty { background: transparent; border-color: #ddd; }
-  .blind-spots { margin-top: 14px; background: #fffdf5; border: 1px solid #e8e0c0; border-radius: 4px; padding: 12px 16px; }
-  .blind-spots h4 { font-size: 0.65rem; color: #8B6914; letter-spacing: 2px; font-family: sans-serif; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
-  .blind-spot-item { font-size: 0.78rem; color: #555; padding: 5px 0; font-family: sans-serif; border-top: 1px solid #f0e8c0; line-height: 1.4; }
-  .blind-spot-item:first-of-type { border-top: none; }
   .stub-panel { background: #f9f7f4; border: 1px dashed #ccc; border-radius: 4px; padding: 30px; text-align: center; color: #999; font-family: sans-serif; }
   .stub-panel p { margin-top: 8px; font-size: 0.82rem; }
   @media (max-width: 760px) { .papers { grid-template-columns: 1fr; } .top3 { flex-direction: column; } .site-header h1 { font-size: 1.1rem; } }
@@ -115,6 +111,12 @@
     letter-spacing: 0.02em;
     pointer-events: none;
   }
+  .blind-spot { background: #1a1a1a; color: #f5f3ee; border-radius: 4px; padding: 16px 20px; margin-top: 6px; }
+  .blind-spot h3 { font-size: 0.66rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.12em; color: #e67e22; margin-bottom: 10px; }
+  .blind-items { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+  .blind-item { font-size: 0.76rem; font-family: sans-serif; line-height: 1.5; color: #ccc; }
+  .blind-item-title { font-size: 0.76rem; font-weight: 700; margin-bottom: 2px; color: #f5f3ee; }
+  .blind-item-desc { font-size: 0.66rem; color: #aaa; line-height: 1.4; font-family: sans-serif; }
 </style>
 </head>
 <body>
@@ -124,7 +126,7 @@
   <p>Levant · Gulf · North Africa — Left / Centre / Right</p>
 </div>
 <div class="spectrum-bar"></div>
-  <div class="page-edition-notice" id="pageEditionNotice">🗞️ Week of 18 May 2026 · Last refreshed: Mon 19 May 2026 · Next update: Mon 26 May 2026</div>
+  <div class="page-edition-notice" id="pageEditionNotice">🗞️ Week of 25 May 2026 · Last refreshed: Mon 25 May 2026 · Next update: Mon 1 Jun 2026</div>
 
 
 <nav class="region-nav">
@@ -391,12 +393,11 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 Israel's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">🕍 <strong>The ultra-Orthodox question:</strong> Israel's fastest-growing population group — Haredi Jews — largely does not serve in the military, does not participate in the formal economy, and receives state subsidies while secular Israelis carry the tax and defence burden. This internal social fracture is as consequential as any external conflict but almost never appears in international coverage of Israel.</div>
-        <div class="blind-spot-item">🌍 <strong>Israel's African and Mizrahi majority:</strong> Over half of Israeli Jews trace their origin to Middle Eastern and North African countries — not Europe. The Ashkenazi/Mizrahi cultural divide shapes Israeli politics profoundly, including why working-class Mizrahi voters back Netanyahu despite economic pressures. This dimension is almost entirely absent from Western coverage.</div>
-        <div class="blind-spot-item">💻 <strong>Tech sector exodus:</strong> Hundreds of Israeli tech workers and startups have quietly relocated to Portugal, Cyprus, and the UK since 2023 — combining war risk, judicial uncertainty, and military reserve duty into a calculation that makes leaving rational. The long-term brain drain risk to Israel's innovation economy is a story almost no international outlet is tracking.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Israel's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The ultra-Orthodox question</div><div class="blind-item-desc">Israel's fastest-growing population group — Haredi Jews — largely does not serve in the military, does not participate in the formal economy, and receives state subsidies while secular Israelis carry the tax and defence burden. This internal social fracture is as consequential as any external conflict but almost never appears in international coverage of Israel.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Israel's African and Mizrahi majority</div><div class="blind-item-desc">Over half of Israeli Jews trace their origin to Middle Eastern and North African countries — not Europe. The Ashkenazi/Mizrahi cultural divide shapes Israeli politics profoundly, including why working-class Mizrahi voters back Netanyahu despite economic pressures. This dimension is almost entirely absent from Western coverage.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Tech sector exodus</div><div class="blind-item-desc">Hundreds of Israeli tech workers and startups have quietly relocated to Portugal, Cyprus, and the UK since 2023 — combining war risk, judicial uncertainty, and military reserve duty into a calculation that makes leaving rational. The long-term brain drain risk to Israel's innovation economy is a story almost no international outlet is tracking.</div></div>
+      </div></div>
     </div><!-- end #levant-israel -->
 
     <div id="levant-lebanon" class="country-panel">
@@ -576,13 +577,12 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 Lebanon's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">🏦 <strong>The banking heist:</strong> Over $100 billion in Lebanese depositors' savings was effectively stolen through a state-sanctioned Ponzi scheme run by the commercial banks and Banque du Liban. The bank owners transferred wealth abroad while ordinary Lebanese lost everything. No senior banker has been prosecuted. This is one of the largest financial crimes in the modern Middle East and receives a fraction of the coverage it deserves.</div>
-        <div class="blind-spot-item">🕌 <strong>Confessionalism as the system:</strong> International coverage describes Lebanon's sectarian divisions as a problem to be solved. Lebanese scholars describe confessionalism as a deliberately maintained system that benefits every sectarian elite by preventing genuine accountability. Understanding this distinction — dysfunction as design, not accident — is essential to understanding why reform is so hard.</div>
-        <div class="blind-spot-item">🇸🇾 <strong>1.5 million Syrian refugees:</strong> Lebanon hosts the world's highest per-capita refugee population. The economic, social, and political pressures this creates — particularly in a collapsed economy — are enormous, and the path to resolution (Syrian return, local integration, third-country resettlement) is completely unclear. This story almost never appears in coverage focused on Lebanon's political elite.</div>
-        <div class="blind-spot-item">💥 <strong>The Beirut explosion's unfinished reckoning:</strong> The August 2020 port explosion killed over 200 people, injured 6,000, and displaced 300,000. Five years on, the judicial investigation has been repeatedly blocked by politicians using parliamentary immunity. No one has been held accountable. The families' ongoing legal fight is one of the most important stories in the Arab world — and one of the least covered.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Lebanon's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The banking heist</div><div class="blind-item-desc">Over $100 billion in Lebanese depositors' savings was effectively stolen through a state-sanctioned Ponzi scheme run by the commercial banks and Banque du Liban. The bank owners transferred wealth abroad while ordinary Lebanese lost everything. No senior banker has been prosecuted. This is one of the largest financial crimes in the modern Middle East and receives a fraction of the coverage it deserves.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Confessionalism as the system</div><div class="blind-item-desc">International coverage describes Lebanon's sectarian divisions as a problem to be solved. Lebanese scholars describe confessionalism as a deliberately maintained system that benefits every sectarian elite by preventing genuine accountability. Understanding this distinction — dysfunction as design, not accident — is essential to understanding why reform is so hard.</div></div>
+        <div class="blind-item"><div class="blind-item-title">1.5 million Syrian refugees</div><div class="blind-item-desc">Lebanon hosts the world's highest per-capita refugee population. The economic, social, and political pressures this creates — particularly in a collapsed economy — are enormous, and the path to resolution (Syrian return, local integration, third-country resettlement) is completely unclear. This story almost never appears in coverage focused on Lebanon's political elite.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The Beirut explosion's unfinished reckoning</div><div class="blind-item-desc">The August 2020 port explosion killed over 200 people, injured 6,000, and displaced 300,000. Five years on, the judicial investigation has been repeatedly blocked by politicians using parliamentary immunity. No one has been held accountable. The families' ongoing legal fight is one of the most important stories in the Arab world — and one of the least covered.</div></div>
+      </div></div>
     </div><!-- end #levant-lebanon -->
   </div><!-- end #region-levant -->
 
@@ -788,13 +788,12 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 Saudi Arabia's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">⛓️ <strong>The Kafala system and 13 million invisible workers:</strong> Saudi Arabia runs on the labour of roughly 13 million migrant workers — from South Asia, East Africa, and Southeast Asia — under a sponsorship system that ties workers to a single employer who controls their right to change jobs, exit the country, or seek legal redress. Passport confiscation, unpaid wages, physical abuse, and deaths in custody have been extensively documented by Human Rights Watch and Amnesty International. These workers build the towers, drive the cars, clean the hospitals, and raise the children of Saudi Arabia's middle and upper class. Their conditions are almost entirely absent from Saudi media and from most international coverage focused on Vision 2030's modernisation story.</div>
-        <div class="blind-spot-item">👑 <strong>The succession problem nobody will name:</strong> Mohammed bin Salman is Crown Prince and Prime Minister — the effective ruler of Saudi Arabia — but he is not king. His father, King Salman, is 89 and in uncertain health. The question of what happens when Salman dies — whether MBS becomes king smoothly, whether rival branches of the royal family accept this, and what it means for the institutional basis of MBS's power — is the central unspoken question in Saudi politics. No Saudi publication will explore it. Few international ones do either.</div>
-        <div class="blind-spot-item">🏗️ <strong>Vision 2030's structural contradiction:</strong> The programme requires a diverse private sector and a skilled Saudi workforce willing to take private-sector jobs. But Saudi Arabia's social contract is built on government employment, subsidies, and a welfare state funded by oil. The generation that needs to staff the private economy has been shaped by expectations of state employment at generous wages. Saudisation quotas produce compliance, not transformation: Saudi names on payrolls, foreign workers doing the work. This gap between ambition and social reality is Vision 2030's central unexamined challenge.</div>
-        <div class="blind-spot-item">💣 <strong>Yemen and the accountability that never came:</strong> Saudi Arabia led a coalition air campaign over Yemen from 2015 that killed hundreds of thousands of people, deliberately bombed civilian infrastructure including hospitals and water systems, and contributed to one of the world's worst humanitarian crises. The Saudi-Iranian deal paused the fighting. But no inquiry, no reckoning, and no honest public examination of what the war was actually for has taken place — in Saudi Arabia, in the West whose arms and intelligence made it possible, or in most international media.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Saudi Arabia's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The Kafala system and 13 million invisible workers</div><div class="blind-item-desc">Saudi Arabia runs on the labour of roughly 13 million migrant workers — from South Asia, East Africa, and Southeast Asia — under a sponsorship system that ties workers to a single employer who controls their right to change jobs, exit the country, or seek legal redress. Passport confiscation, unpaid wages, physical abuse, and deaths in custody have been extensively documented by Human Rights Watch and Amnesty International. These workers build the towers, drive the cars, clean the hospitals, and raise the children of Saudi Arabia's middle and upper class. Their conditions are almost entirely absent from Saudi media and from most international coverage focused on Vision 2030's modernisation story.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The succession problem nobody will name</div><div class="blind-item-desc">Mohammed bin Salman is Crown Prince and Prime Minister — the effective ruler of Saudi Arabia — but he is not king. His father, King Salman, is 89 and in uncertain health. The question of what happens when Salman dies — whether MBS becomes king smoothly, whether rival branches of the royal family accept this, and what it means for the institutional basis of MBS's power — is the central unspoken question in Saudi politics. No Saudi publication will explore it. Few international ones do either.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Vision 2030's structural contradiction</div><div class="blind-item-desc">The programme requires a diverse private sector and a skilled Saudi workforce willing to take private-sector jobs. But Saudi Arabia's social contract is built on government employment, subsidies, and a welfare state funded by oil. The generation that needs to staff the private economy has been shaped by expectations of state employment at generous wages. Saudisation quotas produce compliance, not transformation: Saudi names on payrolls, foreign workers doing the work. This gap between ambition and social reality is Vision 2030's central unexamined challenge.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Yemen and the accountability that never came</div><div class="blind-item-desc">Saudi Arabia led a coalition air campaign over Yemen from 2015 that killed hundreds of thousands of people, deliberately bombed civilian infrastructure including hospitals and water systems, and contributed to one of the world's worst humanitarian crises. The Saudi-Iranian deal paused the fighting. But no inquiry, no reckoning, and no honest public examination of what the war was actually for has taken place — in Saudi Arabia, in the West whose arms and intelligence made it possible, or in most international media.</div></div>
+      </div></div>
     </div><!-- end #gulf-saudi-arabia -->
   </div><!-- end #region-gulf -->
 

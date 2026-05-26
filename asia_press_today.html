@@ -110,13 +110,6 @@
   .dot.purple-empty { background: transparent; border-color: #ddd; }
 
   /* Blind spots */
-  .blind-spots { margin-top: 14px; background: #fffdf5; border: 1px solid #e8e0c0;
-    border-radius: 4px; padding: 12px 16px; }
-  .blind-spots h4 { font-size: 0.65rem; color: #8B6914; letter-spacing: 2px; font-family: sans-serif;
-    text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
-  .blind-spot-item { font-size: 0.78rem; color: #555; padding: 5px 0; font-family: sans-serif;
-    border-top: 1px solid #f0e8c0; line-height: 1.4; }
-  .blind-spot-item:first-of-type { border-top: none; }
 
   /* Stub */
   .stub-panel { background: #f9f7f4; border: 1px dashed #ccc; border-radius: 4px;
@@ -178,6 +171,12 @@
     letter-spacing: 0.02em;
     pointer-events: none;
   }
+  .blind-spot { background: #1a1a1a; color: #f5f3ee; border-radius: 4px; padding: 16px 20px; margin-top: 6px; }
+  .blind-spot h3 { font-size: 0.66rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.12em; color: #e67e22; margin-bottom: 10px; }
+  .blind-items { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+  .blind-item { font-size: 0.76rem; font-family: sans-serif; line-height: 1.5; color: #ccc; }
+  .blind-item-title { font-size: 0.76rem; font-weight: 700; margin-bottom: 2px; color: #f5f3ee; }
+  .blind-item-desc { font-size: 0.66rem; color: #aaa; line-height: 1.4; font-family: sans-serif; }
 </style>
 </head>
 <body>
@@ -205,7 +204,7 @@
 </nav>
 
 <div class="container">
-  <div class="page-edition-notice" id="pageEditionNotice">🗞️ Week of 18 May 2026 · Last refreshed: Mon 19 May 2026 · Next update: Mon 26 May 2026</div>
+  <div class="page-edition-notice" id="pageEditionNotice">🗞️ Week of 25 May 2026 · Last refreshed: Mon 25 May 2026 · Next update: Mon 1 Jun 2026</div>
 
 <div class="top-panel">
   <h2>🌏 Asia-Pacific — Top Stories This Week</h2>
@@ -241,7 +240,7 @@
       <div class="tab-wrap"><button class="tier2-tab" onclick="showCountry('east','korea',this)">🇰🇷 South Korea</button><div class="country-stats"><div class="cs-name">🇰🇷 South Korea</div><div class="cs-row"><span class="cs-icon">🏛</span><span>Seoul</span></div><div class="cs-row"><span class="cs-icon">👥</span><span>51.7m</span></div><div class="cs-row"><span class="cs-icon">🗳</span><span>Mixed (FPTP + PR)</span></div><div class="cs-row"><span class="cs-icon">⚖️</span><span>Republic (Presidential)</span></div><div class="cs-divider"></div><div class="cs-govt-label">Government <span class="cs-lean" style="background:#5dade2">Centre Left</span></div><div class="cs-govt-detail">Democratic Party — post-impeachment govt</div><div class="cs-leader">President: post-Yoon transition</div><div class="cs-divider"></div><div class="cs-opp-title">Main Opposition</div><div class="cs-opp"><span class="cs-lean" style="background:#c0392b">Right</span> PPP (People Power Party)</div><div class="cs-opp-leader">Yoon Suk-yeol (impeached) / Han Dong-hoon</div></div></div>
     </div>
     <div id="east-japan" class="country-panel active">
-      <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+      <div class="edition-tag">Edition 1 · Week of 25 May 2026</div>
       <h2 class="section-title">🇯🇵 Japan — 今週の日本の報道</h2>
       <div class="papers-grid">
         <div class="paper-card">
@@ -320,16 +319,15 @@
           </div>
         </div>
       </div>
-    </div>      <div class="blind-spots">
-        <h4>🔭 Japan's Blind Spots</h4>
-        <div class="blind-spot-item">👴 <strong>Demographic collapse in real time:</strong> Japan's population is shrinking and ageing faster than any large country in history. Towns are being abandoned, schools are closing, and the fiscal arithmetic of a society with more retirees than workers becomes more alarming each year. Japanese media covers this as a policy challenge; what gets less attention is the communities — rural, post-industrial — that are simply ceasing to exist.</div>
-        <div class="blind-spot-item">🏢 <strong>Corporate Japan's shadow:</strong> Japan's major corporations are covered in business pages globally. What's less examined is the dense web of keiretsu relationships, cross-shareholdings, and informal corporate governance norms that mean Japanese capitalism operates quite differently from the shareholder-value model. Reform efforts repeatedly founder on these invisible structures.</div>
-        <div class="blind-spot-item">🌏 <strong>Japan's foreign workers:</strong> Japan has quietly become a major immigration destination through "technical intern" and "specified skilled worker" visa categories that critics call indentured labour. Hundreds of thousands of Vietnamese, Filipino, and Indonesian workers sustain Japanese agriculture, construction, and care homes under conditions that rarely appear in mainstream coverage.</div>
-        <div class="blind-spot-item">⚛️ <strong>Nuclear restart and local democracy:</strong> Japan restarted nuclear reactors after Fukushima — a politically contentious process requiring approval from local governments whose communities live near plants. The gap between national energy policy (pro-restart) and the views of affected communities (deeply divided) is a democratic tension that gets lost in the global energy transition framing.</div>
-      </div>
+    </div>      <div class="blind-spot"><h3>🔭 Japan's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Demographic collapse in real time</div><div class="blind-item-desc">Japan's population is shrinking and ageing faster than any large country in history. Towns are being abandoned, schools are closing, and the fiscal arithmetic of a society with more retirees than workers becomes more alarming each year. Japanese media covers this as a policy challenge; what gets less attention is the communities — rural, post-industrial — that are simply ceasing to exist.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Corporate Japan's shadow</div><div class="blind-item-desc">Japan's major corporations are covered in business pages globally. What's less examined is the dense web of keiretsu relationships, cross-shareholdings, and informal corporate governance norms that mean Japanese capitalism operates quite differently from the shareholder-value model. Reform efforts repeatedly founder on these invisible structures.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Japan's foreign workers</div><div class="blind-item-desc">Japan has quietly become a major immigration destination through "technical intern" and "specified skilled worker" visa categories that critics call indentured labour. Hundreds of thousands of Vietnamese, Filipino, and Indonesian workers sustain Japanese agriculture, construction, and care homes under conditions that rarely appear in mainstream coverage.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Nuclear restart and local democracy</div><div class="blind-item-desc">Japan restarted nuclear reactors after Fukushima — a politically contentious process requiring approval from local governments whose communities live near plants. The gap between national energy policy (pro-restart) and the views of affected communities (deeply divided) is a democratic tension that gets lost in the global energy transition framing.</div></div>
+      </div></div>
 
     <div id="east-taiwan" class="country-panel">
-      <div class="edition-tag">Edition 1 · Week of 20 May 2026</div>
+      <div class="edition-tag">Edition 2 · Week of 25 May 2026</div>
       <h2 class="section-title">🇹🇼 Taiwan — 本週台灣媒體</h2>
       <div class="papers-grid">
         <div class="paper-card">
@@ -432,19 +430,18 @@
           <div class="trackers"><div class="tracker-block"><div class="tracker-label">📌 Hobby Horse (8 weeks)</div><div class="tracker-row"><div class="tracker-topic">Cross-strait relations &amp; KMT platform</div><div class="dots"><div class="dot hobby-filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="dot-count">1/8</div></div></div></div>
         </div>
       </div>
-    </div>      <div class="blind-spots">
-        <h4>🔭 Taiwan's Blind Spots</h4>
-        <div class="blind-spot-item">🏭 <strong>TSMC is not Taiwan:</strong> International coverage of Taiwan increasingly reduces it to a semiconductor story — TSMC, chip supply chains, the "silicon shield." This flattens a vibrant democracy of 23 million people into a geopolitical chess piece. Taiwan's internal politics, social movements, generational debates about identity, and relationship with its own history are largely invisible outside this framing.</div>
-        <div class="blind-spot-item">🏔️ <strong>Indigenous Taiwan:</strong> Taiwan has 16 officially recognised Indigenous peoples — Amis, Atayal, Paiwan, and others — distinct from the Hoklo and Hakka majorities. Their land rights, languages (several critically endangered), and political representation are a live domestic issue almost entirely absent from international coverage of Taiwan.</div>
-        <div class="blind-spot-item">🗳️ <strong>The KMT's China position is complicated:</strong> Western coverage tends to frame Taiwan's politics as pro-independence DPP vs. pro-Beijing KMT. The KMT's actual position — engagement and negotiation from a distinct Taiwanese identity — is more nuanced, and the party's internal divisions between genuine "one China" advocates and Taiwanese nationalists are rarely examined.</div>
-        <div class="blind-spot-item">💼 <strong>Economic interdependence across the strait:</strong> Despite cross-strait tensions, significant numbers of Taiwanese professionals work in mainland China — in tech, finance, and manufacturing. This complicated economic interdependence, which creates real human ties across the strait, is poorly captured by coverage that treats Taiwan-China relations as purely adversarial.</div>
-      </div>
+    </div>      <div class="blind-spot"><h3>🔭 Taiwan's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">TSMC is not Taiwan</div><div class="blind-item-desc">International coverage of Taiwan increasingly reduces it to a semiconductor story — TSMC, chip supply chains, the "silicon shield." This flattens a vibrant democracy of 23 million people into a geopolitical chess piece. Taiwan's internal politics, social movements, generational debates about identity, and relationship with its own history are largely invisible outside this framing.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Indigenous Taiwan</div><div class="blind-item-desc">Taiwan has 16 officially recognised Indigenous peoples — Amis, Atayal, Paiwan, and others — distinct from the Hoklo and Hakka majorities. Their land rights, languages (several critically endangered), and political representation are a live domestic issue almost entirely absent from international coverage of Taiwan.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The KMT's China position is complicated</div><div class="blind-item-desc">Western coverage tends to frame Taiwan's politics as pro-independence DPP vs. pro-Beijing KMT. The KMT's actual position — engagement and negotiation from a distinct Taiwanese identity — is more nuanced, and the party's internal divisions between genuine "one China" advocates and Taiwanese nationalists are rarely examined.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Economic interdependence across the strait</div><div class="blind-item-desc">Despite cross-strait tensions, significant numbers of Taiwanese professionals work in mainland China — in tech, finance, and manufacturing. This complicated economic interdependence, which creates real human ties across the strait, is poorly captured by coverage that treats Taiwan-China relations as purely adversarial.</div></div>
+      </div></div>
 
     <div id="east-china" class="country-panel">
       <div class="stub-panel">🇨🇳 <strong>China</strong><p>Coming soon — South China Morning Post (HK), Global Times, Caixin</p></div>
     </div>
     <div id="east-korea" class="country-panel">
-      <div class="edition-tag">Edition 1 · Week of 18 May 2026</div>
+      <div class="edition-tag">Edition 1 · Week of 25 May 2026</div>
       <h2 class="section-title">🇰🇷 South Korea — 이번 주 한국 언론</h2>
       <div class="papers-grid">
         <div class="paper-card">
@@ -522,13 +519,12 @@
             </div>
           </div>
         </div>
-      </div>      <div class="blind-spots">
-        <h4>🔭 South Korea's Blind Spots</h4>
-        <div class="blind-spot-item">📱 <strong>The chaebol's grip on everything:</strong> Samsung, Hyundai, LG, and SK collectively account for a majority of South Korea's exports and dominate the domestic economy in ways that have no equivalent in other wealthy democracies. The chaebol's political influence — through lobbying, media ownership, and the revolving door with government — shapes almost every major policy decision in ways that Korean and international business coverage systematically understates.</div>
-        <div class="blind-spot-item">🏠 <strong>Housing and the jeonse crisis:</strong> South Korea's unique jeonse rental system — large lump-sum deposits instead of monthly rent — created a housing bubble and a financial crisis when deposits couldn't be repaid. Hundreds of thousands of Koreans lost their deposits in 2022-24. This specifically Korean financial structure and its human consequences are almost never explained to international audiences.</div>
-        <div class="blind-spot-item">👶 <strong>The birth rate is not just a statistic:</strong> South Korea has the world's lowest fertility rate — around 0.7 — but coverage treats this as a demographic curiosity rather than examining why: crushing educational costs, a housing market that prices out young families, a corporate culture that expects 60-hour weeks, and deep gender inequality. Young Korean women are opting out of marriage and motherhood as a political act.</div>
-        <div class="blind-spot-item">🌏 <strong>North Korea beyond the nuclear programme:</strong> International coverage of North Korea focuses almost entirely on weapons and Kim Jong-un's political theatre. South Korean media covers the daily reality of defectors, the humanitarian situation of North Korean civilians, and the slow drift of North Korean society in ways that rarely reach international outlets. The 25 million people of North Korea are almost entirely invisible as human subjects.</div>
-      </div>
+      </div>      <div class="blind-spot"><h3>🔭 South Korea's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The chaebol's grip on everything</div><div class="blind-item-desc">Samsung, Hyundai, LG, and SK collectively account for a majority of South Korea's exports and dominate the domestic economy in ways that have no equivalent in other wealthy democracies. The chaebol's political influence — through lobbying, media ownership, and the revolving door with government — shapes almost every major policy decision in ways that Korean and international business coverage systematically understates.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Housing and the jeonse crisis</div><div class="blind-item-desc">South Korea's unique jeonse rental system — large lump-sum deposits instead of monthly rent — created a housing bubble and a financial crisis when deposits couldn't be repaid. Hundreds of thousands of Koreans lost their deposits in 2022-24. This specifically Korean financial structure and its human consequences are almost never explained to international audiences.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The birth rate is not just a statistic</div><div class="blind-item-desc">South Korea has the world's lowest fertility rate — around 0.7 — but coverage treats this as a demographic curiosity rather than examining why: crushing educational costs, a housing market that prices out young families, a corporate culture that expects 60-hour weeks, and deep gender inequality. Young Korean women are opting out of marriage and motherhood as a political act.</div></div>
+        <div class="blind-item"><div class="blind-item-title">North Korea beyond the nuclear programme</div><div class="blind-item-desc">International coverage of North Korea focuses almost entirely on weapons and Kim Jong-un's political theatre. South Korean media covers the daily reality of defectors, the humanitarian situation of North Korean civilians, and the slow drift of North Korean society in ways that rarely reach international outlets. The 25 million people of North Korea are almost entirely invisible as human subjects.</div></div>
+      </div></div>
 
     </div>
   </div>
@@ -725,13 +721,12 @@
 
       </div><!-- /papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 What Malaysian Papers Are Missing This Week</h4>
-        <div class="blind-spot-item">The Rohingya refugee crisis — 100,000+ in Malaysia, rarely covered sympathetically in any mainstream outlet</div>
-        <div class="blind-spot-item">Press freedom — Malaysia ranks 107th globally; self-censorship at The Star and NST goes unexamined</div>
-        <div class="blind-spot-item">LGBTQ+ rights — decriminalisation debate happening regionally but near-invisible in Malaysian English press</div>
-        <div class="blind-spot-item">Chinese Malaysian community politics — MCA's near-irrelevance and community anxieties underreported</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 What Malaysian Papers Are Missing This Week</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The Rohingya refugee crisis</div><div class="blind-item-desc">100,000+ in Malaysia, rarely covered sympathetically in any mainstream outlet</div></div>
+        <div class="blind-item"><div class="blind-item-title">Press freedom</div><div class="blind-item-desc">Malaysia ranks 107th globally; self-censorship at The Star and NST goes unexamined</div></div>
+        <div class="blind-item"><div class="blind-item-title">LGBTQ+ rights</div><div class="blind-item-desc">decriminalisation debate happening regionally but near-invisible in Malaysian English press</div></div>
+        <div class="blind-item"><div class="blind-item-title">Chinese Malaysian community politics</div><div class="blind-item-desc">MCA's near-irrelevance and community anxieties underreported</div></div>
+      </div></div>
     </div><!-- /malaysia -->
 
     <!-- Stubs for other SEA countries -->
@@ -818,12 +813,11 @@
           </div>
 
         </div>
-        <div class="blind-spots">
-          <h4>🔦 India's Blind Spots — What the world misses</h4>
-          <div class="blind-spot-item">🌾 <strong>The farmer:</strong> India's 600 million-plus people dependent on agriculture live in a world almost entirely invisible to the English-language press — including India's own. Crop failures, debt cycles, and the slow collapse of rural livelihoods are the defining stories of the country, but they rarely surface unless there's a protest dramatic enough to block a highway.</div>
-          <div class="blind-spot-item">🏙️ <strong>Caste in the city:</strong> International coverage of caste focuses on rural atrocities. The urban reality — caste discrimination in hiring, housing, dating, and social networks across India's booming cities — is almost never examined, despite being the lived experience of hundreds of millions of people.</div>
-          <div class="blind-spot-item">🗳️ <strong>The 2024 election surprise:</strong> Modi won a third term but lost his majority — a political earthquake that Indian media covered exhaustively and international outlets largely missed. The BJP's dependence on coalition partners is now a structural constraint on policy that shapes every decision, yet most foreign coverage still treats Modi as governing with unchecked authority.</div>
-        </div>
+        <div class="blind-spot"><h3>🔭 India's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The farmer</div><div class="blind-item-desc">India's 600 million-plus people dependent on agriculture live in a world almost entirely invisible to the English-language press — including India's own. Crop failures, debt cycles, and the slow collapse of rural livelihoods are the defining stories of the country, but they rarely surface unless there's a protest dramatic enough to block a highway.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Caste in the city</div><div class="blind-item-desc">International coverage of caste focuses on rural atrocities. The urban reality — caste discrimination in hiring, housing, dating, and social networks across India's booming cities — is almost never examined, despite being the lived experience of hundreds of millions of people.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The 2024 election surprise</div><div class="blind-item-desc">Modi won a third term but lost his majority — a political earthquake that Indian media covered exhaustively and international outlets largely missed. The BJP's dependence on coalition partners is now a structural constraint on policy that shapes every decision, yet most foreign coverage still treats Modi as governing with unchecked authority.</div></div>
+      </div></div>
     </div>
     <div id="sea-singapore" class="country-panel">
       <div class="stub-panel">🇸🇬 <strong>Singapore</strong><p>Coming soon — The Straits Times, Today, The Independent SG</p></div>
@@ -971,11 +965,10 @@
         </div>
 
       </div><!-- end .papers -->
-      <div class="blind-spots">
-        <h4>🔦 Philippines Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">🌊 <strong>Climate frontline, not climate story:</strong> The Philippines is one of the world's most typhoon-exposed nations — experiencing 20+ tropical cyclones a year. International coverage treats each storm as a disaster event. Filipinos experience it as a permanent condition of life that shapes everything from infrastructure investment to internal migration to why so many leave. The political economy of climate adaptation in a poor archipelago is one of the most important and under-covered stories in Asia.</div>
-        <div class="blind-spot-item">💸 <strong>The OFW diaspora as political actor:</strong> Ten million Filipinos abroad don't just send remittances — they vote. The diaspora vote has become a meaningful factor in Philippine elections, with OFW communities in the Gulf, Hong Kong, and Italy organised, opinionated, and increasingly powerful online. Their political views don't map neatly onto domestic Philippines — they're often more liberal on social issues, more hawkish on China, and more impatient with corruption than the domestic median.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Philippines Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Climate frontline, not climate story</div><div class="blind-item-desc">The Philippines is one of the world's most typhoon-exposed nations — experiencing 20+ tropical cyclones a year. International coverage treats each storm as a disaster event. Filipinos experience it as a permanent condition of life that shapes everything from infrastructure investment to internal migration to why so many leave. The political economy of climate adaptation in a poor archipelago is one of the most important and under-covered stories in Asia.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The OFW diaspora as political actor</div><div class="blind-item-desc">Ten million Filipinos abroad don't just send remittances — they vote. The diaspora vote has become a meaningful factor in Philippine elections, with OFW communities in the Gulf, Hong Kong, and Italy organised, opinionated, and increasingly powerful online. Their political views don't map neatly onto domestic Philippines — they're often more liberal on social issues, more hawkish on China, and more impatient with corruption than the domestic median.</div></div>
+      </div></div>
     </div>
   </div><!-- /region-sea -->
 
@@ -1167,13 +1160,12 @@
 
       </div><!-- /papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 What Australian Papers Are Missing This Week</h4>
-        <div class="blind-spot-item">Pacific Island climate displacement — existential threat to Australia's neighbours largely absent from domestic coverage</div>
-        <div class="blind-spot-item">Aged care reform — landmark legislation passed but follow-through on implementation rarely tracked</div>
-        <div class="blind-spot-item">First Nations deaths in custody — ongoing crisis underreported outside Indigenous specialist media</div>
-        <div class="blind-spot-item">Australia-China relationship nuance — still framed as binary (engagement vs. decoupling) rather than sector-by-sector complexity</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 What Australian Papers Are Missing This Week</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Pacific Island climate displacement</div><div class="blind-item-desc">existential threat to Australia's neighbours largely absent from domestic coverage</div></div>
+        <div class="blind-item"><div class="blind-item-title">Aged care reform</div><div class="blind-item-desc">landmark legislation passed but follow-through on implementation rarely tracked</div></div>
+        <div class="blind-item"><div class="blind-item-title">First Nations deaths in custody</div><div class="blind-item-desc">ongoing crisis underreported outside Indigenous specialist media</div></div>
+        <div class="blind-item"><div class="blind-item-title">Australia-China relationship nuance</div><div class="blind-item-desc">still framed as binary (engagement vs. decoupling) rather than sector-by-sector complexity</div></div>
+      </div></div>
     </div><!-- /australia -->
 
 <div id="pacific-newzealand" class="country-panel">
@@ -1350,12 +1342,11 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 New Zealand's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">🌊 <strong>Pacific leadership, not Pacific tourism:</strong> New Zealand's relationship with the Pacific Islands is covered internationally as a geography and climate story. Kiwis understand it as a geopolitical responsibility, a diaspora reality (more Pacific Islanders live in Auckland than in Suva or Nukuʻalofa), and a defining part of national identity that has no equivalent in European or North American political cultures.</div>
-        <div class="blind-spot-item">📜 <strong>The Treaty is not symbolic:</strong> International media treats the Treaty of Waitangi as a historical document. In New Zealand it is a live constitutional instrument invoked in courts, woven into legislation, and debated at every election. The 2024 hikoi was not a protest — it was a constitutional assertion. That distinction is almost never understood outside New Zealand.</div>
-        <div class="blind-spot-item">🏡 <strong>The housing crisis as a civilisational failure:</strong> New Zealand has some of the world's worst housing affordability despite being a small, wealthy country with vast land. This is not a market failure — it is a deliberate political choice by successive governments to protect existing homeowners. The social consequences — families in motels, young professionals emigrating — are profound and undercovered internationally.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 New Zealand's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Pacific leadership, not Pacific tourism</div><div class="blind-item-desc">New Zealand's relationship with the Pacific Islands is covered internationally as a geography and climate story. Kiwis understand it as a geopolitical responsibility, a diaspora reality (more Pacific Islanders live in Auckland than in Suva or Nukuʻalofa), and a defining part of national identity that has no equivalent in European or North American political cultures.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The Treaty is not symbolic</div><div class="blind-item-desc">International media treats the Treaty of Waitangi as a historical document. In New Zealand it is a live constitutional instrument invoked in courts, woven into legislation, and debated at every election. The 2024 hikoi was not a protest — it was a constitutional assertion. That distinction is almost never understood outside New Zealand.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The housing crisis as a civilisational failure</div><div class="blind-item-desc">New Zealand has some of the world's worst housing affordability despite being a small, wealthy country with vast land. This is not a market failure — it is a deliberate political choice by successive governments to protect existing homeowners. The social consequences — families in motels, young professionals emigrating — are profound and undercovered internationally.</div></div>
+      </div></div>
     </div>
   </div><!-- /region-pacific -->
 

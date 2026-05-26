@@ -109,13 +109,6 @@
   .dot.purple-empty { background: transparent; border-color: #ddd; }
 
   /* Blind spots */
-  .blind-spots { margin-top: 14px; background: #fffdf5; border: 1px solid #e8e0c0;
-    border-radius: 4px; padding: 12px 16px; }
-  .blind-spots h4 { font-size: 0.65rem; color: #8B6914; letter-spacing: 2px; font-family: sans-serif;
-    text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
-  .blind-spot-item { font-size: 0.78rem; color: #555; padding: 5px 0; font-family: sans-serif;
-    border-top: 1px solid #f0e8c0; line-height: 1.4; }
-  .blind-spot-item:first-of-type { border-top: none; }
 
   /* Stub */
   .stub-panel { background: #f9f7f4; border: 1px dashed #ccc; border-radius: 4px;
@@ -177,6 +170,12 @@
     letter-spacing: 0.02em;
     pointer-events: none;
   }
+  .blind-spot { background: #1a1a1a; color: #f5f3ee; border-radius: 4px; padding: 16px 20px; margin-top: 6px; }
+  .blind-spot h3 { font-size: 0.66rem; font-family: sans-serif; text-transform: uppercase; letter-spacing: 0.12em; color: #e67e22; margin-bottom: 10px; }
+  .blind-items { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+  .blind-item { font-size: 0.76rem; font-family: sans-serif; line-height: 1.5; color: #ccc; }
+  .blind-item-title { font-size: 0.76rem; font-weight: 700; margin-bottom: 2px; color: #f5f3ee; }
+  .blind-item-desc { font-size: 0.66rem; color: #aaa; line-height: 1.4; font-family: sans-serif; }
 </style>
 </head>
 <body>
@@ -186,7 +185,7 @@
   <p>West Africa · Southern Africa · East Africa — Left / Centre / Right</p>
 </div>
 <div class="spectrum-bar"></div>
-  <div class="page-edition-notice" id="pageEditionNotice">🗞️ Week of 18 May 2026 · Last refreshed: Mon 19 May 2026 · Next update: Mon 26 May 2026</div>
+  <div class="page-edition-notice" id="pageEditionNotice">🗞️ Week of 25 May 2026 · Last refreshed: Mon 25 May 2026 · Next update: Mon 1 Jun 2026</div>
 
 
 <nav class="region-nav">
@@ -402,12 +401,11 @@
 
       </div>
 
-      <div class="blind-spots">
-        <h4>🔦 Nigeria's Blind Spots</h4>
-        <div class="blind-spot-item">🌾 <strong>Herders-farmers conflict:</strong> The chronic violence between Fulani herdsmen and farming communities in the Middle Belt kills thousands annually but receives minimal sustained coverage relative to its scale. Ethnic and religious sensitivities make editors cautious, and the story rarely reaches international attention despite its enormous human cost.</div>
-        <div class="blind-spot-item">🛢️ <strong>Oil theft and elite capture:</strong> Nigeria loses an estimated 200,000 barrels per day to pipeline theft. The networks involved reach into the military and political class. Investigative reporting on this is rare; journalists who pursue it face serious risk — and the scale of the loss represents a structural drain on the Nigerian state.</div>
-        <div class="blind-spot-item">⚖️ <strong>LGBTQ+ rights and the criminalisation gap:</strong> Nigeria's Same-Sex Marriage Prohibition Act (2014) criminalises same-sex relationships with up to 14 years in prison. Press coverage is almost uniformly hostile; human rights dimensions are largely absent from mainstream reporting, and international coverage treats this as a side issue rather than a systematic rights emergency.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Nigeria's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Herders-farmers conflict</div><div class="blind-item-desc">The chronic violence between Fulani herdsmen and farming communities in the Middle Belt kills thousands annually but receives minimal sustained coverage relative to its scale. Ethnic and religious sensitivities make editors cautious, and the story rarely reaches international attention despite its enormous human cost.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Oil theft and elite capture</div><div class="blind-item-desc">Nigeria loses an estimated 200,000 barrels per day to pipeline theft. The networks involved reach into the military and political class. Investigative reporting on this is rare; journalists who pursue it face serious risk — and the scale of the loss represents a structural drain on the Nigerian state.</div></div>
+        <div class="blind-item"><div class="blind-item-title">LGBTQ+ rights and the criminalisation gap</div><div class="blind-item-desc">Nigeria's Same-Sex Marriage Prohibition Act (2014) criminalises same-sex relationships with up to 14 years in prison. Press coverage is almost uniformly hostile; human rights dimensions are largely absent from mainstream reporting, and international coverage treats this as a side issue rather than a systematic rights emergency.</div></div>
+      </div></div>
     </div>
 
     <!-- GHANA -->
@@ -588,12 +586,11 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 Ghana's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">🌊 <strong>Coastal erosion crisis:</strong> Ghana is losing up to 2 metres of coastline per year in some areas — entire fishing communities are relocating. Rarely makes international news despite being an accelerating climate emergency.</div>
-        <div class="blind-spot-item">🌍 <strong>Afrocontinental migration pressure:</strong> Ghana is both a source and destination country for West African migration. The internal dynamics — economic migrants from Mali and Burkina Faso fleeing instability — are reshaping Ghana's social fabric in ways the global press entirely overlooks.</div>
-        <div class="blind-spot-item">📱 <strong>Fintech leadership:</strong> Ghana is one of Africa's most advanced mobile money markets. The interoperability of its payment systems — allowing transfers across networks — is a model being studied globally, but the story rarely escapes the specialist press.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Ghana's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Coastal erosion crisis</div><div class="blind-item-desc">Ghana is losing up to 2 metres of coastline per year in some areas — entire fishing communities are relocating. Rarely makes international news despite being an accelerating climate emergency.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Afrocontinental migration pressure</div><div class="blind-item-desc">Ghana is both a source and destination country for West African migration. The internal dynamics — economic migrants from Mali and Burkina Faso fleeing instability — are reshaping Ghana's social fabric in ways the global press entirely overlooks.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Fintech leadership</div><div class="blind-item-desc">Ghana is one of Africa's most advanced mobile money markets. The interoperability of its payment systems — allowing transfers across networks — is a model being studied globally, but the story rarely escapes the specialist press.</div></div>
+      </div></div>
     </div><!-- end #west-ghana -->
 
     <div id="west-senegal" class="country-panel">
@@ -773,13 +770,12 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 Senegal's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">🛶 <strong>The pirogue crisis:</strong> Thousands of young Senegalese risk death annually crossing the Atlantic to Spain's Canary Islands. 2023–24 saw record crossings and drownings. This is one of West Africa's most urgent humanitarian stories and receives only episodic international coverage.</div>
-        <div class="blind-spot-item">🗳️ <strong>Senegal's democratic rupture:</strong> Senegal was held up for decades as West Africa's model democracy. The 2023–24 crisis — Sonko's prosecution, mass protests, internet shutdowns, and Sall's attempted electoral manipulation — shattered that narrative. The story behind the story is rarely told internationally.</div>
-        <div class="blind-spot-item">🛢️ <strong>First oil — and the resource curse question:</strong> Senegal began oil production in 2024. Whether it becomes a Norway or a Nigeria will be determined by institutional choices made now. The international press has covered the discovery; it has barely begun covering the governance question.</div>
-        <div class="blind-spot-item">🕌 <strong>The Mouride Brotherhood's political economy:</strong> Senegal's powerful Sufi Muslim brotherhoods — especially the Mourides, centred on the holy city of Touba — operate a parallel economy, command mass loyalty, and influence every election. This is invisible in Western coverage of Senegalese politics.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Senegal's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The pirogue crisis</div><div class="blind-item-desc">Thousands of young Senegalese risk death annually crossing the Atlantic to Spain's Canary Islands. 2023–24 saw record crossings and drownings. This is one of West Africa's most urgent humanitarian stories and receives only episodic international coverage.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Senegal's democratic rupture</div><div class="blind-item-desc">Senegal was held up for decades as West Africa's model democracy. The 2023–24 crisis — Sonko's prosecution, mass protests, internet shutdowns, and Sall's attempted electoral manipulation — shattered that narrative. The story behind the story is rarely told internationally.</div></div>
+        <div class="blind-item"><div class="blind-item-title">First oil — and the resource curse question</div><div class="blind-item-desc">Senegal began oil production in 2024. Whether it becomes a Norway or a Nigeria will be determined by institutional choices made now. The international press has covered the discovery; it has barely begun covering the governance question.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The Mouride Brotherhood's political economy</div><div class="blind-item-desc">Senegal's powerful Sufi Muslim brotherhoods — especially the Mourides, centred on the holy city of Touba — operate a parallel economy, command mass loyalty, and influence every election. This is invisible in Western coverage of Senegalese politics.</div></div>
+      </div></div>
     </div><!-- end #west-senegal -->
   </div><!-- end #region-west -->
 
@@ -1024,12 +1020,11 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 South Africa's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">🌊 <strong>Water crisis:</strong> Johannesburg — Africa's wealthiest city — regularly runs out of water due to crumbling infrastructure and an ageing Rand Water system. This is not a drought story; it's an infrastructure collapse story that the international press consistently undercoveres.</div>
-        <div class="blind-spot-item">🌍 <strong>SA as Africa's anchor democracy:</strong> South Africa's political trajectory matters far beyond its borders. If the GNU fails and ANC-populist alliances entrench, the ripple effects across Southern Africa will be significant — but the world's media covers SA as a local story, not a continental bellwether.</div>
-        <div class="blind-spot-item">💡 <strong>Rooftop solar revolution:</strong> Load shedding triggered an extraordinary private solar uptake — SA added more rooftop solar per capita than almost any country in the world in 2023–24. This clean energy transformation is happening organically, from the bottom up, and is largely invisible to international energy commentators.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 South Africa's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Water crisis</div><div class="blind-item-desc">Johannesburg — Africa's wealthiest city — regularly runs out of water due to crumbling infrastructure and an ageing Rand Water system. This is not a drought story; it's an infrastructure collapse story that the international press consistently undercoveres.</div></div>
+        <div class="blind-item"><div class="blind-item-title">SA as Africa's anchor democracy</div><div class="blind-item-desc">South Africa's political trajectory matters far beyond its borders. If the GNU fails and ANC-populist alliances entrench, the ripple effects across Southern Africa will be significant — but the world's media covers SA as a local story, not a continental bellwether.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Rooftop solar revolution</div><div class="blind-item-desc">Load shedding triggered an extraordinary private solar uptake — SA added more rooftop solar per capita than almost any country in the world in 2023–24. This clean energy transformation is happening organically, from the bottom up, and is largely invisible to international energy commentators.</div></div>
+      </div></div>
     </div><!-- end #south-sa -->
 
     <div id="south-botswana" class="country-panel">
@@ -1209,13 +1204,12 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 Botswana's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">💎 <strong>Diamond dependency and the economic clock:</strong> Botswana built one of Africa's most remarkable development stories on diamonds. But De Beers' own projections suggest the major mines have 20–30 years of life left, and lab-grown diamonds are already eroding premium pricing. The question of what comes after barely registers internationally.</div>
-        <div class="blind-spot-item">🐘 <strong>The elephant-human conflict:</strong> International media covers Botswana's elephants as a conservation triumph. The 130,000 farmers in elephant corridors tell a different story — destroyed crops, ruined harvests, occasional deaths. The gap between global conservation sentiment and local lived reality is almost never reported honestly.</div>
-        <div class="blind-spot-item">🏹 <strong>San (Bushmen) land rights:</strong> The San people — one of humanity's oldest surviving cultures — have been repeatedly relocated from their ancestral lands in the Central Kalahari Game Reserve, ostensibly for conservation. Courts have sided with them repeatedly; implementation has been inconsistent. This slow-moving rights crisis receives almost no sustained international attention.</div>
-        <div class="blind-spot-item">🎗️ <strong>HIV/AIDS progress and fragility:</strong> Botswana once had the world's highest HIV prevalence. Its antiretroviral programme — one of Africa's earliest and most comprehensive — dramatically reduced mortality. But coverage gaps, stigma, and a young sexually active population mean the epidemic is not over. The success story has crowded out coverage of the ongoing challenge.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Botswana's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Diamond dependency and the economic clock</div><div class="blind-item-desc">Botswana built one of Africa's most remarkable development stories on diamonds. But De Beers' own projections suggest the major mines have 20–30 years of life left, and lab-grown diamonds are already eroding premium pricing. The question of what comes after barely registers internationally.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The elephant-human conflict</div><div class="blind-item-desc">International media covers Botswana's elephants as a conservation triumph. The 130,000 farmers in elephant corridors tell a different story — destroyed crops, ruined harvests, occasional deaths. The gap between global conservation sentiment and local lived reality is almost never reported honestly.</div></div>
+        <div class="blind-item"><div class="blind-item-title">San (Bushmen) land rights</div><div class="blind-item-desc">The San people — one of humanity's oldest surviving cultures — have been repeatedly relocated from their ancestral lands in the Central Kalahari Game Reserve, ostensibly for conservation. Courts have sided with them repeatedly; implementation has been inconsistent. This slow-moving rights crisis receives almost no sustained international attention.</div></div>
+        <div class="blind-item"><div class="blind-item-title">HIV/AIDS progress and fragility</div><div class="blind-item-desc">Botswana once had the world's highest HIV prevalence. Its antiretroviral programme — one of Africa's earliest and most comprehensive — dramatically reduced mortality. But coverage gaps, stigma, and a young sexually active population mean the epidemic is not over. The success story has crowded out coverage of the ongoing challenge.</div></div>
+      </div></div>
     </div><!-- end #south-botswana -->
 
     <div id="south-zimbabwe" class="country-panel">
@@ -1395,13 +1389,12 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 Zimbabwe's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">💸 <strong>The diaspora economy:</strong> More than four million Zimbabweans live abroad — in South Africa, the UK, the US, and Australia. Their remittances now constitute one of Zimbabwe's largest sources of foreign currency, quietly sustaining millions of families that government policy has failed. This structural reality — that Zimbabwe functions partly as a labour-export economy — is almost never framed as a policy failure or discussed as a long-term development question.</div>
-        <div class="blind-spot-item">🪙 <strong>The ZiG experiment:</strong> Zimbabwe introduced its sixth currency since 2000 in April 2024 — the Zimbabwe Gold (ZiG), backed by gold and foreign exchange reserves. International coverage treated it as a curiosity. The serious question — whether monetary reform can work without judicial independence, property rights, and an end to money-printing for political patronage — has barely been examined outside specialist economic publications.</div>
-        <div class="blind-spot-item">🌾 <strong>Land reform's 25-year aftermath:</strong> The forced seizure of white-owned commercial farms from 2000 onwards was one of the most widely reported events in African history. The 25-year aftermath — most redistributed farms significantly less productive, food imports replacing a former breadbasket, and neither the evicted former owners nor the new occupants having secure title — is almost never revisited internationally.</div>
-        <div class="blind-spot-item">⚔️ <strong>The Mnangagwa-Chiwenga succession war:</strong> The real political drama in Zimbabwe is not between ZANU-PF and an opposition it has largely crushed — it is the hidden power struggle inside ZANU-PF between President Mnangagwa and his Vice-President Constantino Chiwenga, the army general who made the 2017 coup possible. Both men want 2028, or beyond. This internal succession conflict drives more of Zimbabwe's day-to-day politics than anything the opposition does.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Zimbabwe's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The diaspora economy</div><div class="blind-item-desc">More than four million Zimbabweans live abroad — in South Africa, the UK, the US, and Australia. Their remittances now constitute one of Zimbabwe's largest sources of foreign currency, quietly sustaining millions of families that government policy has failed. This structural reality — that Zimbabwe functions partly as a labour-export economy — is almost never framed as a policy failure or discussed as a long-term development question.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The ZiG experiment</div><div class="blind-item-desc">Zimbabwe introduced its sixth currency since 2000 in April 2024 — the Zimbabwe Gold (ZiG), backed by gold and foreign exchange reserves. International coverage treated it as a curiosity. The serious question — whether monetary reform can work without judicial independence, property rights, and an end to money-printing for political patronage — has barely been examined outside specialist economic publications.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Land reform's 25-year aftermath</div><div class="blind-item-desc">The forced seizure of white-owned commercial farms from 2000 onwards was one of the most widely reported events in African history. The 25-year aftermath — most redistributed farms significantly less productive, food imports replacing a former breadbasket, and neither the evicted former owners nor the new occupants having secure title — is almost never revisited internationally.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The Mnangagwa-Chiwenga succession war</div><div class="blind-item-desc">The real political drama in Zimbabwe is not between ZANU-PF and an opposition it has largely crushed — it is the hidden power struggle inside ZANU-PF between President Mnangagwa and his Vice-President Constantino Chiwenga, the army general who made the 2017 coup possible. Both men want 2028, or beyond. This internal succession conflict drives more of Zimbabwe's day-to-day politics than anything the opposition does.</div></div>
+      </div></div>
     </div><!-- end #south-zimbabwe -->
   </div><!-- end #region-south -->
 
@@ -1625,12 +1618,11 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 Kenya's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">📱 <strong>M-Pesa as infrastructure:</strong> Mobile money didn't just transform banking in Kenya — it became the operating system for the economy. Merchants, farmers, landlords and governments transact through it. The international tech press covers M-Pesa as a fintech story; Kenyans experience it as basic infrastructure. Its political economy — Safaricom's quasi-monopoly, its tax contribution, its role in protest movements — is rarely examined outside Kenya.</div>
-        <div class="blind-spot-item">🌊 <strong>The Gen Z generation as a political force:</strong> The June 2024 protests were not a one-off. They marked the emergence of a genuinely post-tribal, digitally-organised Kenyan youth vote that cut across ethnic lines for the first time in the country's history. International coverage treated this as a riot story. Kenyan media understands it as a generational political realignment whose implications will play out over decades.</div>
-        <div class="blind-spot-item">🌍 <strong>Raila Odinga's continental role:</strong> Odinga's installation as AU Commission Chairperson in 2025 gives Kenya direct influence over Africa's primary multilateral institution. The domestic political calculation — Ruto backing his rival's departure — is as interesting as the continental implications. Neither story gets the attention outside Kenya it deserves.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Kenya's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">M-Pesa as infrastructure</div><div class="blind-item-desc">Mobile money didn't just transform banking in Kenya — it became the operating system for the economy. Merchants, farmers, landlords and governments transact through it. The international tech press covers M-Pesa as a fintech story; Kenyans experience it as basic infrastructure. Its political economy — Safaricom's quasi-monopoly, its tax contribution, its role in protest movements — is rarely examined outside Kenya.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The Gen Z generation as a political force</div><div class="blind-item-desc">The June 2024 protests were not a one-off. They marked the emergence of a genuinely post-tribal, digitally-organised Kenyan youth vote that cut across ethnic lines for the first time in the country's history. International coverage treated this as a riot story. Kenyan media understands it as a generational political realignment whose implications will play out over decades.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Raila Odinga's continental role</div><div class="blind-item-desc">Odinga's installation as AU Commission Chairperson in 2025 gives Kenya direct influence over Africa's primary multilateral institution. The domestic political calculation — Ruto backing his rival's departure — is as interesting as the continental implications. Neither story gets the attention outside Kenya it deserves.</div></div>
+      </div></div>
     </div><!-- end #east-kenya -->
 
 
@@ -1811,13 +1803,12 @@
 
       </div><!-- end .papers -->
 
-      <div class="blind-spots">
-        <h4>🔦 Tanzania's Blind Spots — What the world misses</h4>
-        <div class="blind-spot-item">🏝️ <strong>Zanzibar's autonomy tension:</strong> Zanzibar is constitutionally a semi-autonomous region within Tanzania, with its own president, parliament, and laws. Periodic elections there are contested, sometimes violently. The underlying question — how much independence the islands actually have — is a permanent low-level constitutional crisis that barely registers in international coverage.</div>
-        <div class="blind-spot-item">🚂 <strong>The debt behind the railway:</strong> Tanzania's Standard Gauge Railway is genuinely transformative infrastructure. It is also substantially financed by Chinese loans at terms the government has never fully disclosed. The long-term debt implications — and what Tanzania has pledged as collateral — are almost never discussed in international coverage of the project.</div>
-        <div class="blind-spot-item">📜 <strong>Nyerere's long shadow:</strong> Julius Nyerere's ujamaa socialism — forced villagisation, nationalisation, one-party rule — shaped Tanzania's political economy in ways that persist today. The CCM is Nyerere's party. Understanding Tanzania without understanding ujamaa is like understanding Britain without the welfare state. This context is almost entirely absent from international coverage.</div>
-        <div class="blind-spot-item">🌿 <strong>Biodiversity under pressure:</strong> Tanzania contains some of the world's most significant wildlife ecosystems — the Serengeti, Ngorongoro, Selous. International coverage focuses on tourism and poaching. The deeper story — mining concessions encroaching on protected areas, climate change altering migration patterns, population growth pressing against park boundaries — gets almost no attention.</div>
-      </div>
+      <div class="blind-spot"><h3>🔭 Tanzania's Blind Spots — What the world misses</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">Zanzibar's autonomy tension</div><div class="blind-item-desc">Zanzibar is constitutionally a semi-autonomous region within Tanzania, with its own president, parliament, and laws. Periodic elections there are contested, sometimes violently. The underlying question — how much independence the islands actually have — is a permanent low-level constitutional crisis that barely registers in international coverage.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The debt behind the railway</div><div class="blind-item-desc">Tanzania's Standard Gauge Railway is genuinely transformative infrastructure. It is also substantially financed by Chinese loans at terms the government has never fully disclosed. The long-term debt implications — and what Tanzania has pledged as collateral — are almost never discussed in international coverage of the project.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Nyerere's long shadow</div><div class="blind-item-desc">Julius Nyerere's ujamaa socialism — forced villagisation, nationalisation, one-party rule — shaped Tanzania's political economy in ways that persist today. The CCM is Nyerere's party. Understanding Tanzania without understanding ujamaa is like understanding Britain without the welfare state. This context is almost entirely absent from international coverage.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Biodiversity under pressure</div><div class="blind-item-desc">Tanzania contains some of the world's most significant wildlife ecosystems — the Serengeti, Ngorongoro, Selous. International coverage focuses on tourism and poaching. The deeper story — mining concessions encroaching on protected areas, climate change altering migration patterns, population growth pressing against park boundaries — gets almost no attention.</div></div>
+      </div></div>
     </div><!-- end #east-tanzania -->
   </div><!-- end #region-east -->
 

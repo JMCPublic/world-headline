@@ -281,10 +281,20 @@ Poles Apart: Consensus Moments, Divergence Tracker, Cross-border Influence, When
 
 ---
 
+### Session 10 — 26 May 2026
+**Theme: McDonald's consistency — blind spots standardised, edition dates fixed**
+
+- **Edition dates fixed** on all 6 press pages: updated from "Week of 18 May 2026" → "Week of 25 May 2026 · Last refreshed: Mon 25 May 2026 · Next update: Mon 1 Jun 2026". Per-country edition tags updated to match.
+- **Blind spot format standardised across ALL pages** — 24 countries converted from old cream/light format (`.blind-spots` / `.blind-spot-item`) to the standard dark collapsible panel (`.blind-spot` / `.blind-items` / `.blind-item`). Pages fixed: americas (Brazil, Argentina, Colombia, Chile, Peru), asia (all 8: Japan, Taiwan, South Korea, Malaysia, India, Philippines + 2 more), africa (all 8: Nigeria, Ghana, Senegal, South Africa, Botswana, Zimbabwe, Tanzania, Kenya), middleeast (Israel, Lebanon, Saudi Arabia). UK and Europe were already correct.
+- Old blind-spot CSS (`.blind-spots`, `.blind-spot-item`) removed from Americas, Asia, Africa, Middle East stylesheets. New CSS added to Asia, Africa, Middle East.
+- Conversion handled programmatically — emoji parsing, `<strong>Title:</strong>` extraction, and " — " separator splitting all correctly handled.
+
+---
+
 ## ⏭️ Next Session
 
-1. **Upload to GitHub** (files from this session)
-2. **Blind spot layout consistency** — Americas has a mix of old (`.blind-spots` / `.blind-spot-item`) and new (`.blind-spot` collapsible dark panel) formats. Convert all old-format countries across all press pages to the standard format. Affects: Brazil, Argentina, Colombia, Chile, Peru in Americas — check other pages too.
+1. **Upload to GitHub** — all 6 press pages + NOTES.md
+2. **Add Botswana, Tanzania, Lebanon, Zimbabwe, Saudi Arabia to `scripts/refresh_stories.py`** — these 5 countries are missing from weekly automation and won't update on Mondays
 3. **Next countries**: Egypt, Iran (press pages + full checklist; both harder — Egypt Arabic-primary, Iran Persian/restricted)
 4. **What the Markets Think Phase 1** — implement currency panel using fawazahmed0 API (already fully scoped, ready to build)
 5. **Poles Apart** — expand country coverage beyond current ~15 countries
