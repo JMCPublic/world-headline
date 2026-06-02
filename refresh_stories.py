@@ -1,0 +1,397 @@
+#!/usr/bin/env python3
+"""
+World Headline — Weekly Story Refresh
+======================================
+Fetches RSS feeds for each newspaper, calls Claude API to summarise the top 3
+stories, and patches the relevant .html file in-place.
+
+Usage:
+  python scripts/refresh_stories.py              # refresh all papers
+  COUNTRY_FILTER=uk python scripts/refresh_stories.py  # one country only
+
+Required env var:
+  ANTHROPIC_API_KEY   — set as GitHub Secret "ANTHROPIC_API_KEY"
+Optional:
+  COUNTRY_FILTER      — limit to one country slug (e.g. "uk", "france")
+  DRY_RUN=1           — fetch + generate but don't write files (for testing)
+"""
+
+import os, re, sys, datetime, textwrap, time
+import html as _html
+import feedparser, anthropic
+
+# ── Date / Edition ────────────────────────────────────────────────────────────
+
+today        = datetime.date.today()
+WEEK_OF      = today.strftime("%-d %B %Y")                   # "2 June 2026"
+EDITION_STR  = f"Edition · Week of {WEEK_OF}"
+
+# Last Monday (today if today is Monday)
+days_since_monday = today.weekday()
+last_monday  = today - datetime.timedelta(days=days_since_monday)
+next_monday  = last_monday + datetime.timedelta(days=7)
+REFRESHED_STR = last_monday.strftime("Mon %-d %b %Y")        # "Mon 19 May 2026"
+NEXT_STR      = next_monday.strftime("Mon %-d %b %Y")        # "Mon 26 May 2026"
+EDITION_NOTICE = (
+    f"🗞️ Week of {last_monday.strftime('%-d %B %Y')} · "
+    f"Last refreshed: {REFRESHED_STR} · "
+    f"Next update: {NEXT_STR}"
+)
+
+# ── Paper registry ────────────────────────────────────────────────────────────
+# Each entry: name (must match exactly what's in the HTML's paper-name div),
+# html_file (relative to repo root), rss (empty string = skip / manual-only).
+# Claude gets the paper name + lean to frame its editorial voice.
+
+PAPERS = [
+
+    # ── United Kingdom ────────────────────────────────────────────────────────
+    {"country":"uk",    "name":"The Guardian",                   "lean":"Left",                   "html":"uk_press_today.html",        "rss":"https://www.theguardian.com/uk/rss"},
+    {"country":"uk",    "name":"The Times",                      "lean":"Centre-right",           "html":"uk_press_today.html",        "rss":"https://www.thetimes.co.uk/rss"},
+    {"country":"uk",    "name":"Daily Mail",                     "lean":"Right",                  "html":"uk_press_today.html",        "rss":"https://www.dailymail.co.uk/articles.rss"},
+
+    # ── France ────────────────────────────────────────────────────────────────
+    {"country":"france","name":"Libération",                     "lean":"Left",                   "html":"europe_press_today.html",    "rss":"https://www.liberation.fr/arc/outboundfeeds/rss/"},
+    {"country":"france","name":"Le Monde",                       "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://www.lemonde.fr/rss/une.xml"},
+    {"country":"france","name":"Le Figaro",                      "lean":"Centre-right",           "html":"europe_press_today.html",    "rss":"https://www.lefigaro.fr/rss/figaro_actualites.xml"},
+
+    # ── Germany ───────────────────────────────────────────────────────────────
+    {"country":"germany","name":"Süddeutsche Zeitung",           "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://rss.sueddeutsche.de/rss/Politik"},
+    {"country":"germany","name":"Frankfurter Allgemeine",        "lean":"Centre-right",           "html":"europe_press_today.html",    "rss":"https://www.faz.net/rss/aktuell/"},
+    {"country":"germany","name":"Bild",                          "lean":"Right/tabloid",          "html":"europe_press_today.html",    "rss":"https://www.bild.de/rssfeeds/rss3-20745882,feed=alles.bild.html"},
+
+    # ── Netherlands ───────────────────────────────────────────────────────────
+    {"country":"netherlands","name":"de Volkskrant",             "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://www.volkskrant.nl/nieuws-achtergrond/rss.xml"},
+    {"country":"netherlands","name":"NRC Handelsblad",           "lean":"Centre-liberal",         "html":"europe_press_today.html",    "rss":"https://www.nrc.nl/rss/"},
+    {"country":"netherlands","name":"De Telegraaf",              "lean":"Right",                  "html":"europe_press_today.html",    "rss":"https://www.telegraaf.nl/rss"},
+
+    # ── Ireland ───────────────────────────────────────────────────────────────
+    {"country":"ireland","name":"Irish Examiner",                "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://www.irishexaminer.com/feed/"},
+    {"country":"ireland","name":"The Irish Times",               "lean":"Centre",                 "html":"europe_press_today.html",    "rss":"https://www.irishtimes.com/cmlink/news-1.1319192"},
+    {"country":"ireland","name":"Irish Independent",             "lean":"Centre-right",           "html":"europe_press_today.html",    "rss":"https://www.independent.ie/feed/"},
+
+    # ── Sweden ────────────────────────────────────────────────────────────────
+    {"country":"sweden","name":"Aftonbladet",                    "lean":"Left/tabloid",           "html":"europe_press_today.html",    "rss":"https://rss.aftonbladet.se/rss2/small/pages/sections/senastenytt/"},
+    {"country":"sweden","name":"Dagens Nyheter",                 "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://www.dn.se/rss/"},
+    {"country":"sweden","name":"Svenska Dagbladet",              "lean":"Centre-right",           "html":"europe_press_today.html",    "rss":"https://www.svd.se/?service=rss"},
+
+    # ── Norway ────────────────────────────────────────────────────────────────
+    {"country":"norway","name":"Dagbladet",                      "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://www.dagbladet.no/"},
+    {"country":"norway","name":"Aftenposten",                    "lean":"Centre",                 "html":"europe_press_today.html",    "rss":"https://www.aftenposten.no/rss/"},
+    {"country":"norway","name":"VG (Verdens Gang)",              "lean":"Tabloid/centre",         "html":"europe_press_today.html",    "rss":"https://www.vg.no/rss/feed/"},
+
+    # ── Denmark ───────────────────────────────────────────────────────────────
+    {"country":"denmark","name":"Politiken",                     "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://politiken.dk/rss/"},
+    {"country":"denmark","name":"Berlingske",                    "lean":"Centre-right",           "html":"europe_press_today.html",    "rss":"https://www.berlingske.dk/rss/"},
+    {"country":"denmark","name":"Jyllands-Posten",               "lean":"Right",                  "html":"europe_press_today.html",    "rss":"https://jyllands-posten.dk/rss/"},
+
+    # ── Finland ───────────────────────────────────────────────────────────────
+    {"country":"finland","name":"Helsingin Sanomat",             "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://www.hs.fi/rss/tuoreimmat.xml"},
+    {"country":"finland","name":"Kauppalehti",                   "lean":"Business/centre",        "html":"europe_press_today.html",    "rss":"https://www.kauppalehti.fi/rss/uutiset/"},
+    {"country":"finland","name":"Iltalehti",                     "lean":"Tabloid/right",          "html":"europe_press_today.html",    "rss":"https://www.iltalehti.fi/rss.xml"},
+
+    # ── Italy ─────────────────────────────────────────────────────────────────
+    {"country":"italy","name":"La Repubblica",                   "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://www.repubblica.it/rss/homepage/rss2.0.xml"},
+    {"country":"italy","name":"Corriere della Sera",             "lean":"Centre",                 "html":"europe_press_today.html",    "rss":"https://xml2.corriere.it/rss/homepage.xml"},
+    {"country":"italy","name":"Il Giornale",                     "lean":"Right",                  "html":"europe_press_today.html",    "rss":"https://www.ilgiornale.it/rss.xml"},
+
+    # ── Spain ─────────────────────────────────────────────────────────────────
+    {"country":"spain","name":"El País",                         "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada"},
+    {"country":"spain","name":"El Mundo",                        "lean":"Centre-right",           "html":"europe_press_today.html",    "rss":"https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml"},
+    {"country":"spain","name":"ABC",                             "lean":"Right",                  "html":"europe_press_today.html",    "rss":"https://www.abc.es/rss/feeds/abcPortada.xml"},
+
+    # ── Portugal ──────────────────────────────────────────────────────────────
+    {"country":"portugal","name":"Público",                      "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://www.publico.pt/rss"},
+    {"country":"portugal","name":"Jornal de Notícias",           "lean":"Centre",                 "html":"europe_press_today.html",    "rss":"https://www.jn.pt/rss/"},
+    {"country":"portugal","name":"Observador",                   "lean":"Centre-right",           "html":"europe_press_today.html",    "rss":"https://observador.pt/feed/"},
+
+    # ── Greece ────────────────────────────────────────────────────────────────
+    {"country":"greece","name":"Efimerida ton Syntakton (EfSyn)","lean":"Left",                   "html":"europe_press_today.html",    "rss":""},  # Greek, no public English RSS
+    {"country":"greece","name":"Kathimerini",                    "lean":"Centre-right",           "html":"europe_press_today.html",    "rss":"https://www.ekathimerini.com/rss/"},
+    {"country":"greece","name":"Dimokratia",                     "lean":"Right/nationalist",      "html":"europe_press_today.html",    "rss":""},  # Greek, no public RSS
+
+    # ── Turkey ────────────────────────────────────────────────────────────────
+    {"country":"turkey","name":"Cumhuriyet",                     "lean":"Secular left",           "html":"europe_press_today.html",    "rss":""},  # Turkish, no reliable RSS
+    {"country":"turkey","name":"Hürriyet",                       "lean":"Centre",                 "html":"europe_press_today.html",    "rss":""},  # Turkish
+    {"country":"turkey","name":"Sabah",                          "lean":"Pro-government",         "html":"europe_press_today.html",    "rss":""},  # Turkish, government-aligned
+
+    # ── Poland ────────────────────────────────────────────────────────────────
+    {"country":"poland","name":"Gazeta Wyborcza",                "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":""},  # paywalled
+    {"country":"poland","name":"Rzeczpospolita",                 "lean":"Centre-right",           "html":"europe_press_today.html",    "rss":""},  # paywalled
+    {"country":"poland","name":"Gazeta Polska Codziennie",        "lean":"Right/nationalist",      "html":"europe_press_today.html",    "rss":""},  # no public RSS
+
+    # ── Czech Republic ────────────────────────────────────────────────────────
+    {"country":"czech","name":"Deník N",                         "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":""},  # paywalled
+    {"country":"czech","name":"MF Dnes",                         "lean":"Centre",                 "html":"europe_press_today.html",    "rss":""},  # no public RSS
+    {"country":"czech","name":"Právo",                           "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":""},  # no public RSS
+
+    # ── Austria ───────────────────────────────────────────────────────────────
+    {"country":"austria","name":"Der Standard",                  "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":"https://www.derstandard.at/rss"},
+    {"country":"austria","name":"Die Presse",                    "lean":"Centre-right",           "html":"europe_press_today.html",    "rss":""},  # paywalled
+    {"country":"austria","name":"Kronen Zeitung",                "lean":"Right/populist",         "html":"europe_press_today.html",    "rss":""},  # no public RSS
+
+    # ── Hungary ───────────────────────────────────────────────────────────────
+    {"country":"hungary","name":"Telex",                         "lean":"Independent/centre-left","html":"europe_press_today.html",    "rss":"https://telex.hu/rss"},
+    {"country":"hungary","name":"Magyar Hang",                   "lean":"Centre-left",            "html":"europe_press_today.html",    "rss":""},  # limited RSS
+    {"country":"hungary","name":"Magyar Nemzet",                 "lean":"Pro-Orbán/right",        "html":"europe_press_today.html",    "rss":""},  # no reliable RSS
+
+    # ── USA ───────────────────────────────────────────────────────────────────
+    {"country":"usa",   "name":"The New York Times",             "lean":"Centre-left",            "html":"americas_press_today.html",  "rss":"https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"},
+    {"country":"usa",   "name":"USA Today",                      "lean":"Centre",                 "html":"americas_press_today.html",  "rss":"https://rssfeeds.usatoday.com/usatoday-NewsTopStories"},
+    {"country":"usa",   "name":"Wall Street Journal",            "lean":"Centre-right",           "html":"americas_press_today.html",  "rss":"https://feeds.a.dj.com/rss/RSSWorldNews.xml"},
+
+    # ── Canada ────────────────────────────────────────────────────────────────
+    {"country":"canada","name":"Toronto Star",                   "lean":"Centre-left",            "html":"americas_press_today.html",  "rss":"https://www.thestar.com/search/?f=rss&t=article&c=news&s=start_time&sd=desc"},
+    {"country":"canada","name":"The Globe and Mail",             "lean":"Centre",                 "html":"americas_press_today.html",  "rss":"https://www.theglobeandmail.com/rss/articles/news/"},
+    {"country":"canada","name":"National Post",                  "lean":"Centre-right",           "html":"americas_press_today.html",  "rss":"https://nationalpost.com/feed/"},
+
+    # ── Mexico ────────────────────────────────────────────────────────────────
+    {"country":"mexico","name":"La Jornada",                     "lean":"Left",                   "html":"americas_press_today.html",  "rss":"https://www.jornada.com.mx/rss/edicion.xml"},
+    {"country":"mexico","name":"Reforma",                        "lean":"Centre-right",           "html":"americas_press_today.html",  "rss":""},  # no public RSS
+    {"country":"mexico","name":"Milenio",                        "lean":"Pro-government",         "html":"americas_press_today.html",  "rss":"https://www.milenio.com/rss"},
+
+    # ── Brazil ────────────────────────────────────────────────────────────────
+    {"country":"brazil","name":"Folha de S.Paulo",               "lean":"Centre-left",            "html":"americas_press_today.html",  "rss":"https://feeds.folha.uol.com.br/emcimadahora/rss091.xml"},
+    {"country":"brazil","name":"O Globo",                        "lean":"Centre",                 "html":"americas_press_today.html",  "rss":""},  # paywalled
+    {"country":"brazil","name":"O Estado de S. Paulo",           "lean":"Centre-right",           "html":"americas_press_today.html",  "rss":"https://www.estadao.com.br/feed/"},
+
+    # ── Argentina ─────────────────────────────────────────────────────────────
+    {"country":"argentina","name":"Página 12",                   "lean":"Left",                   "html":"americas_press_today.html",  "rss":"https://www.pagina12.com.ar/rss/portada"},
+    {"country":"argentina","name":"Clarín",                      "lean":"Centre-right",           "html":"americas_press_today.html",  "rss":""},  # paywalled
+    {"country":"argentina","name":"La Nación",                   "lean":"Centre-right",           "html":"americas_press_today.html",  "rss":"https://www.lanacion.com.ar/arc/outboundfeeds/rss/"},
+
+    # ── Colombia ──────────────────────────────────────────────────────────────
+    {"country":"colombia","name":"El Espectador",                "lean":"Left",                   "html":"americas_press_today.html",  "rss":"https://www.elespectador.com/feed/"},
+    {"country":"colombia","name":"El Tiempo",                    "lean":"Centre",                 "html":"americas_press_today.html",  "rss":""},  # paywalled
+    {"country":"colombia","name":"Semana",                       "lean":"Centre-right",           "html":"americas_press_today.html",  "rss":"https://www.semana.com/rss/"},
+
+    # ── Chile ─────────────────────────────────────────────────────────────────
+    {"country":"chile","name":"El Mostrador",                    "lean":"Left",                   "html":"americas_press_today.html",  "rss":"https://www.elmostrador.cl/feed/"},
+    {"country":"chile","name":"La Tercera",                      "lean":"Centre-right",           "html":"americas_press_today.html",  "rss":""},  # paywalled
+    {"country":"chile","name":"El Mercurio",                     "lean":"Right",                  "html":"americas_press_today.html",  "rss":""},  # paywalled
+
+    # ── Peru ──────────────────────────────────────────────────────────────────
+    {"country":"peru","name":"La República",                     "lean":"Left",                   "html":"americas_press_today.html",  "rss":"https://larepublica.pe/feed"},
+    {"country":"peru","name":"El Comercio",                      "lean":"Centre-right",           "html":"americas_press_today.html",  "rss":""},  # paywalled
+    {"country":"peru","name":"Correo",                           "lean":"Right/populist",         "html":"americas_press_today.html",  "rss":"https://diariocorreo.pe/feed/"},
+
+    # ── Japan ─────────────────────────────────────────────────────────────────
+    {"country":"japan", "name":"Asahi Shimbun",                  "lean":"Centre-left",            "html":"asia_press_today.html",      "rss":"https://www.asahi.com/rss/asahi/newsheadlines.rdf"},
+    {"country":"japan", "name":"Yomiuri Shimbun",                "lean":"Centre-right",           "html":"asia_press_today.html",      "rss":""},  # paywalled
+    {"country":"japan", "name":"Sankei Shimbun",                 "lean":"Right/nationalist",      "html":"asia_press_today.html",      "rss":"https://feeds.sankei.com/sankei/top-stories.rss"},
+
+    # ── Taiwan ────────────────────────────────────────────────────────────────
+    {"country":"taiwan","name":"Liberty Times (自由時報)",        "lean":"Centre-left",            "html":"asia_press_today.html",      "rss":""},  # Chinese language
+    {"country":"taiwan","name":"The Reporter (報導者)",           "lean":"Independent",            "html":"asia_press_today.html",      "rss":""},  # Chinese language
+    {"country":"taiwan","name":"United Daily News (聯合報)",      "lean":"Right/pro-KMT",          "html":"asia_press_today.html",      "rss":""},  # Chinese language
+
+    # ── South Korea ───────────────────────────────────────────────────────────
+    {"country":"south-korea","name":"Hankyoreh",                 "lean":"Left",                   "html":"asia_press_today.html",      "rss":"https://www.hani.co.kr/rss/"},
+    {"country":"south-korea","name":"JoongAng Ilbo",             "lean":"Centre-right",           "html":"asia_press_today.html",      "rss":""},
+    {"country":"south-korea","name":"Chosun Ilbo",               "lean":"Right",                  "html":"asia_press_today.html",      "rss":""},
+
+    # Malaysia
+    {"country":"malaysia","name":"Malaysiakini",                  "lean":"Left/opposition",        "html":"asia_press_today.html",      "rss":"https://www.malaysiakini.com/rss/news"},
+    {"country":"malaysia","name":"The Star",                      "lean":"Centre",                 "html":"asia_press_today.html",      "rss":"https://www.thestar.com.my/rss/news/nation"},
+    {"country":"malaysia","name":"New Straits Times",             "lean":"Pro-government",         "html":"asia_press_today.html",      "rss":"https://www.nst.com.my/news/feed"},
+
+    # India
+    {"country":"india", "name":"The Hindu",                       "lean":"Centre-left",            "html":"asia_press_today.html",      "rss":"https://www.thehindu.com/feeder/default.rss"},
+    {"country":"india", "name":"Hindustan Times",                 "lean":"Centre",                 "html":"asia_press_today.html",      "rss":"https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml"},
+    {"country":"india", "name":"Times of India",                  "lean":"Centre-right",           "html":"asia_press_today.html",      "rss":"https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms"},
+
+    # Philippines
+    {"country":"philippines","name":"Rappler",                    "lean":"Left/anti-Marcos",       "html":"asia_press_today.html",      "rss":"https://www.rappler.com/feed/"},
+    {"country":"philippines","name":"Philippine Daily Inquirer",  "lean":"Centre",                 "html":"asia_press_today.html",      "rss":"https://newsinfo.inquirer.net/feed"},
+    {"country":"philippines","name":"Manila Bulletin",            "lean":"Centre-right",           "html":"asia_press_today.html",      "rss":"https://mb.com.ph/feed"},
+
+    # Australia
+    {"country":"australia","name":"Sydney Morning Herald",        "lean":"Centre-left",            "html":"asia_press_today.html",      "rss":"https://www.smh.com.au/rss/feed.xml"},
+    {"country":"australia","name":"Australian Financial Review",  "lean":"Centre-right",           "html":"asia_press_today.html",      "rss":""},
+    {"country":"australia","name":"The Australian",               "lean":"Right",                  "html":"asia_press_today.html",      "rss":""},
+
+    # New Zealand
+    {"country":"new-zealand","name":"The Spinoff",                "lean":"Centre-left",            "html":"asia_press_today.html",      "rss":"https://thespinoff.co.nz/feed/"},
+    {"country":"new-zealand","name":"Stuff / Dominion Post",      "lean":"Centre",                 "html":"asia_press_today.html",      "rss":"https://www.stuff.co.nz/rss"},
+    {"country":"new-zealand","name":"NZ Herald",                  "lean":"Centre-right",           "html":"asia_press_today.html",      "rss":""},
+
+    # Israel
+    {"country":"israel","name":"Haaretz",                         "lean":"Left",                   "html":"middleeast_press_today.html","rss":"https://www.haaretz.com/cmlink/1.628765"},
+    {"country":"israel","name":"Yedioth Ahronoth",                "lean":"Centre",                 "html":"middleeast_press_today.html","rss":""},
+    {"country":"israel","name":"Israel Hayom",                    "lean":"Right / pro-Netanyahu",  "html":"middleeast_press_today.html","rss":""},
+
+    # Nigeria
+    {"country":"nigeria","name":"The Punch",                      "lean":"Independent",            "html":"africa_press_today.html",    "rss":"https://punchng.com/feed/"},
+    {"country":"nigeria","name":"Vanguard",                       "lean":"Independent",            "html":"africa_press_today.html",    "rss":"https://www.vanguardngr.com/feed/"},
+    {"country":"nigeria","name":"ThisDay",                        "lean":"Centre",                 "html":"africa_press_today.html",    "rss":"https://www.thisdaylive.com/feed/"},
+
+    # Ghana
+    {"country":"ghana","name":"The Chronicle",                    "lean":"Independent",            "html":"africa_press_today.html",    "rss":""},
+    {"country":"ghana","name":"Daily Graphic",                    "lean":"State-aligned",          "html":"africa_press_today.html",    "rss":""},
+    {"country":"ghana","name":"Daily Guide",                      "lean":"Centre-right",           "html":"africa_press_today.html",    "rss":""},
+
+    # Senegal
+    {"country":"senegal","name":"Le Soleil",                      "lean":"Pro-gov",                "html":"africa_press_today.html",    "rss":""},
+    {"country":"senegal","name":"L'Observateur",                 "lean":"Independent",            "html":"africa_press_today.html",    "rss":""},
+    {"country":"senegal","name":"Sud Quotidien",                  "lean":"Progressive",            "html":"africa_press_today.html",    "rss":""},
+
+    # South Africa
+    {"country":"south-africa","name":"Mail & Guardian",           "lean":"Left",                   "html":"africa_press_today.html",    "rss":"https://mg.co.za/feed/"},
+    {"country":"south-africa","name":"Daily Maverick",            "lean":"Centre-left",            "html":"africa_press_today.html",    "rss":"https://www.dailymaverick.co.za/feed/"},
+    {"country":"south-africa","name":"The Citizen",               "lean":"Centre-right",           "html":"africa_press_today.html",    "rss":"https://citizen.co.za/feed/"},
+
+    # Kenya
+    {"country":"kenya","name":"Daily Nation",                     "lean":"Centre-left",            "html":"africa_press_today.html",    "rss":"https://nation.africa/kenya/feed/"},
+    {"country":"kenya","name":"The Standard",                     "lean":"Centre",                 "html":"africa_press_today.html",    "rss":"https://www.standardmedia.co.ke/feed"},
+    {"country":"kenya","name":"Business Daily",                   "lean":"Business/centre",        "html":"africa_press_today.html",    "rss":""},
+
+    # Botswana
+    {"country":"botswana","name":"Mmegi",                         "lean":"Left/Progressive",       "html":"africa_press_today.html",    "rss":"https://www.mmegi.bw/feed/"},
+    {"country":"botswana","name":"The Voice",                     "lean":"Centre",                 "html":"africa_press_today.html",    "rss":"https://www.thevoicebw.com/feed/"},
+    {"country":"botswana","name":"Botswana Gazette",              "lean":"Centre-right",           "html":"africa_press_today.html",    "rss":""},
+
+    # Tanzania
+    {"country":"tanzania","name":"The Citizen Tanzania",          "lean":"Centre-left",            "html":"africa_press_today.html",    "rss":"https://www.thecitizen.co.tz/feed/"},
+    {"country":"tanzania","name":"Daily News",                    "lean":"Centre/State",           "html":"africa_press_today.html",    "rss":"https://www.dailynews.co.tz/feed/"},
+    {"country":"tanzania","name":"The Guardian Tanzania",         "lean":"Centre-right",           "html":"africa_press_today.html",    "rss":"https://www.ippmedia.com/feed/"},
+
+    # Zimbabwe
+    {"country":"zimbabwe","name":"NewsDay Zimbabwe",              "lean":"Centre-left",            "html":"africa_press_today.html",    "rss":"https://www.newsday.co.zw/feed/"},
+    {"country":"zimbabwe","name":"The Herald",                    "lean":"State/ZANU-PF",          "html":"africa_press_today.html",    "rss":"https://www.herald.co.zw/feed/"},
+    {"country":"zimbabwe","name":"The Zimbabwe Independent",      "lean":"Centre-right",           "html":"africa_press_today.html",    "rss":"https://www.newsday.co.zw/theindependent/feed/"},
+
+    # Lebanon
+    {"country":"lebanon","name":"Al-Akhbar",                      "lean":"Left/Hezbollah-aligned", "html":"middleeast_press_today.html","rss":"https://al-akhbar.com/feed/"},
+    {"country":"lebanon","name":"L'Orient Today",                 "lean":"Centre/Reform",          "html":"middleeast_press_today.html","rss":"https://www.lorienttoday.com/feed/"},
+    {"country":"lebanon","name":"An-Nahar",                       "lean":"Centre-right",           "html":"middleeast_press_today.html","rss":"https://www.annahar.com/feed/"},
+
+    # Saudi Arabia
+    {"country":"saudi-arabia","name":"Arab News",                 "lean":"Pro-reform/English",     "html":"middleeast_press_today.html","rss":"https://www.arabnews.com/rss.xml"},
+    {"country":"saudi-arabia","name":"Saudi Gazette",             "lean":"Official/State-aligned", "html":"middleeast_press_today.html","rss":"https://www.saudigazette.com.sa/feed/"},
+    {"country":"saudi-arabia","name":"Asharq Al-Awsat / الشرق الأوسط","lean":"Pan-Arab/Royal-owned","html":"middleeast_press_today.html","rss":"https://english.aawsat.com/rss.xml"},
+    # Egypt
+    {"country":"egypt","name":"Al-Ahram",                         "lean":"State/Pro-government",   "html":"middleeast_press_today.html","rss":"https://english.ahram.org.eg/Rss.aspx"},
+    {"country":"egypt","name":"Egypt Independent",                "lean":"Independent/Centre",     "html":"middleeast_press_today.html","rss":"https://egyptindependent.com/feed/"},
+    {"country":"egypt","name":"Mada Masr",                        "lean":"Independent/Critical",   "html":"middleeast_press_today.html","rss":"https://www.madamasr.com/en/feed/"},
+
+    # Iran
+    {"country":"iran","name":"Kayhan",                            "lean":"Hardline/State",         "html":"middleeast_press_today.html","rss":""},
+    {"country":"iran","name":"Shargh",                            "lean":"Reformist/Centre-left",  "html":"middleeast_press_today.html","rss":""},
+    {"country":"iran","name":"Iran International",                "lean":"Independent/London",     "html":"middleeast_press_today.html","rss":"https://www.iranintl.com/en/rss"},
+
+    # Belgium
+    {"country":"belgium","name":"De Morgen",                      "lean":"Left/Progressive",       "html":"europe_press_today.html",    "rss":"https://www.demorgen.be/rss.xml"},
+    {"country":"belgium","name":"Le Soir",                        "lean":"Centre-left/Liberal",    "html":"europe_press_today.html",    "rss":"https://www.lesoir.be/arc/outboundfeeds/rss/"},
+    {"country":"belgium","name":"Het Laatste Nieuws",             "lean":"Centre-right/Popular",   "html":"europe_press_today.html",    "rss":"https://www.hln.be/rss.xml"},
+]
+
+MODEL     = "claude-haiku-4-5-20251001"
+MAX_TOKENS = 1400
+RATE_LIMIT_SLEEP = 1.5
+
+SYSTEM_PROMPT = """You write story summaries for World Headline, a site showing how different
+newspapers cover news from their own political perspective.
+
+Given recent headlines/summaries from one newspaper, write exactly 3 story
+entries. Each must:
+- Headline: punchy analytical rephrase (not verbatim copy) -- 8-12 words
+- Tease: one sentence hook from this paper's editorial perspective
+- Detail: 2-4 sentences with context, written from this paper's angle -- accurate, not invented
+
+Output ONLY the 3 story HTML blocks, nothing else. Exact format:
+
+<div class="story" onclick="toggleStory(this)"><div class="story-rank">RANK</div><div class="story-headline">HEADLINE</div><div class="story-tease">TEASE</div><div class="story-detail">DETAIL<a class="story-url" href="URL" target="_blank" onclick="event.stopPropagation()">DOMAIN</a></div></div>
+
+RANK = "Lead" / "Second" / "Third". URL = original article link. DOMAIN = bare domain only."""
+
+import re, sys, datetime, textwrap, time, html as _html
+import feedparser, anthropic
+
+_today2        = datetime.date.today()
+_last_mon      = _today2 - datetime.timedelta(days=_today2.weekday())
+_next_mon      = _last_mon + datetime.timedelta(days=7)
+WEEK_OF        = _last_mon.strftime("%-d %B %Y")
+EDITION_STR    = f"Edition · Week of {WEEK_OF}"
+EDITION_NOTICE = (f"🗞️ Week of {WEEK_OF} · "
+                  f"Last refreshed: {_last_mon.strftime('Mon %-d %b %Y')} · "
+                  f"Next update: {_next_mon.strftime('Mon %-d %b %Y')}")
+
+def fetch_rss(url, max_items=8):
+    if not url:
+        return []
+    try:
+        feed = feedparser.parse(url)
+        items = []
+        for e in feed.entries[:max_items]:
+            summary = re.sub(r"<[^>]+>", "", e.get("summary", e.get("description", "")) or "")
+            items.append({"title": e.get("title","").strip(), "summary": summary.strip()[:400], "link": e.get("link","")})
+        return [i for i in items if i["title"]]
+    except Exception as ex:
+        print(f"  RSS error: {ex}")
+        return []
+
+def call_claude(paper_name, lean, country, items, client):
+    lines = []
+    for i, item in enumerate(items, 1):
+        lines.append(f"{i}. {item['title']}")
+        if item["summary"]:
+            lines.append(f"   {item['summary']}")
+        lines.append(f"   {item['link']}")
+    prompt = f"Newspaper: {paper_name}\nCountry: {country}\nPolitical lean: {lean}\n\nRecent headlines:\n" + "\n".join(lines) + "\n\nWrite the 3 story HTML blocks now."
+    msg = client.messages.create(model=MODEL, max_tokens=MAX_TOKENS, system=SYSTEM_PROMPT, messages=[{"role":"user","content":prompt}])
+    return msg.content[0].text.strip()
+
+def find_stories_block(html, paper_name):
+    needle = f'>{paper_name}<'
+    pos = html.find(needle)
+    if pos == -1:
+        encoded = _html.escape(paper_name)
+        if encoded != paper_name:
+            pos = html.find(f'>{encoded}<')
+    if pos == -1:
+        return None, None
+    stories_open = html.find('<div class="stories">', pos)
+    if stories_open == -1:
+        return None, None
+    p = stories_open + len('<div class="stories">')
+    depth = 1
+    end = None
+    while depth > 0 and p < len(html):
+        next_o = html.find('<div', p)
+        next_c = html.find('</div>', p)
+        if next_c == -1:
+            break
+        if next_o != -1 and next_o < next_c:
+            depth += 1; p = next_o + 4
+        else:
+            depth -= 1
+            if depth == 0:
+                end = next_c + len('</div>')
+            p = next_c + 6
+    if end is None:
+        return None, None
+    return stories_open, end
+
+def patch_stories(html, paper_name, new_stories_html):
+    start, end = find_stories_block(html, paper_name)
+    if start is None:
+        return html, False
+    new_block = '<div class="stories">\n            ' + new_stories_html + '\n          </div>'
+    return html[:start] + new_block + html[end:], True
+
+def update_edition_tag(html, html_file):
+    # Update per-country edition tags
+    html = re.sub(r'<div class="edition-tag">[^<]+</div>', f'<div class="edition-tag">{EDITION_STR}</div>', html)
+    # Update page-level edition notice
+    html = re.sub(
+        r'(<div class="[^"]*" id="pageEditionNotice"[^>]*>)[^<]*(</div>)',
+        rf'\g<1>{EDITION_NOTICE}\g<2>', html)
+    html = re.sub(
+        r'(<div class="page-edition-notice"[^>]*>)[^<]*(</div>)',
+        rf'\g<1>{EDITION_NOTICE}\g<2>', html)
+    return html
+
+def main():
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("ERROR: ANTHROPIC_API_KEY not set."
