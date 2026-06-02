@@ -244,6 +244,45 @@ PAPERS = [
     {"country":"kenya","name":"Daily Nation",                     "lean":"Centre-left",            "html":"africa_press_today.html",    "rss":"https://nation.africa/kenya/feed/"},
     {"country":"kenya","name":"The Standard",                     "lean":"Centre",                 "html":"africa_press_today.html",    "rss":"https://www.standardmedia.co.ke/feed"},
     {"country":"kenya","name":"Business Daily",                   "lean":"Business/centre",        "html":"africa_press_today.html",    "rss":""},
+
+    # Botswana
+    {"country":"botswana","name":"Mmegi",                         "lean":"Left/Progressive",       "html":"africa_press_today.html",    "rss":"https://www.mmegi.bw/feed/"},
+    {"country":"botswana","name":"The Voice",                     "lean":"Centre",                 "html":"africa_press_today.html",    "rss":"https://www.thevoicebw.com/feed/"},
+    {"country":"botswana","name":"Botswana Gazette",              "lean":"Centre-right",           "html":"africa_press_today.html",    "rss":""},
+
+    # Tanzania
+    {"country":"tanzania","name":"The Citizen Tanzania",          "lean":"Centre-left",            "html":"africa_press_today.html",    "rss":"https://www.thecitizen.co.tz/feed/"},
+    {"country":"tanzania","name":"Daily News",                    "lean":"Centre/State",           "html":"africa_press_today.html",    "rss":"https://www.dailynews.co.tz/feed/"},
+    {"country":"tanzania","name":"The Guardian Tanzania",         "lean":"Centre-right",           "html":"africa_press_today.html",    "rss":"https://www.ippmedia.com/feed/"},
+
+    # Zimbabwe
+    {"country":"zimbabwe","name":"NewsDay Zimbabwe",              "lean":"Centre-left",            "html":"africa_press_today.html",    "rss":"https://www.newsday.co.zw/feed/"},
+    {"country":"zimbabwe","name":"The Herald",                    "lean":"State/ZANU-PF",          "html":"africa_press_today.html",    "rss":"https://www.herald.co.zw/feed/"},
+    {"country":"zimbabwe","name":"The Zimbabwe Independent",      "lean":"Centre-right",           "html":"africa_press_today.html",    "rss":"https://www.newsday.co.zw/theindependent/feed/"},
+
+    # Lebanon
+    {"country":"lebanon","name":"Al-Akhbar",                      "lean":"Left/Hezbollah-aligned", "html":"middleeast_press_today.html","rss":"https://al-akhbar.com/feed/"},
+    {"country":"lebanon","name":"L'Orient Today",                 "lean":"Centre/Reform",          "html":"middleeast_press_today.html","rss":"https://www.lorienttoday.com/feed/"},
+    {"country":"lebanon","name":"An-Nahar",                       "lean":"Centre-right",           "html":"middleeast_press_today.html","rss":"https://www.annahar.com/feed/"},
+
+    # Saudi Arabia
+    {"country":"saudi-arabia","name":"Arab News",                 "lean":"Pro-reform/English",     "html":"middleeast_press_today.html","rss":"https://www.arabnews.com/rss.xml"},
+    {"country":"saudi-arabia","name":"Saudi Gazette",             "lean":"Official/State-aligned", "html":"middleeast_press_today.html","rss":"https://www.saudigazette.com.sa/feed/"},
+    {"country":"saudi-arabia","name":"Asharq Al-Awsat / الشرق الأوسط","lean":"Pan-Arab/Royal-owned","html":"middleeast_press_today.html","rss":"https://english.aawsat.com/rss.xml"},
+    # Egypt
+    {"country":"egypt","name":"Al-Ahram",                         "lean":"State/Pro-government",   "html":"middleeast_press_today.html","rss":"https://english.ahram.org.eg/Rss.aspx"},
+    {"country":"egypt","name":"Egypt Independent",                "lean":"Independent/Centre",     "html":"middleeast_press_today.html","rss":"https://egyptindependent.com/feed/"},
+    {"country":"egypt","name":"Mada Masr",                        "lean":"Independent/Critical",   "html":"middleeast_press_today.html","rss":"https://www.madamasr.com/en/feed/"},
+
+    # Iran
+    {"country":"iran","name":"Kayhan",                            "lean":"Hardline/State",         "html":"middleeast_press_today.html","rss":""},
+    {"country":"iran","name":"Shargh",                            "lean":"Reformist/Centre-left",  "html":"middleeast_press_today.html","rss":""},
+    {"country":"iran","name":"Iran International",                "lean":"Independent/London",     "html":"middleeast_press_today.html","rss":"https://www.iranintl.com/en/rss"},
+
+    # Belgium
+    {"country":"belgium","name":"De Morgen",                      "lean":"Left/Progressive",       "html":"europe_press_today.html",    "rss":"https://www.demorgen.be/rss.xml"},
+    {"country":"belgium","name":"Le Soir",                        "lean":"Centre-left/Liberal",    "html":"europe_press_today.html",    "rss":"https://www.lesoir.be/arc/outboundfeeds/rss/"},
+    {"country":"belgium","name":"Het Laatste Nieuws",             "lean":"Centre-right/Popular",   "html":"europe_press_today.html",    "rss":"https://www.hln.be/rss.xml"},
 ]
 
 MODEL     = "claude-haiku-4-5-20251001"
@@ -355,61 +394,4 @@ def update_edition_tag(html, html_file):
 def main():
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
-        print("ERROR: ANTHROPIC_API_KEY not set."); sys.exit(1)
-    dry_run = os.environ.get("DRY_RUN","0") == "1"
-    country_filter = os.environ.get("COUNTRY_FILTER","").strip().lower()
-    if dry_run:
-        print("DRY RUN -- no files will be written.")
-    client = anthropic.Anthropic(api_key=api_key)
-    papers = PAPERS
-    if country_filter:
-        papers = [p for p in PAPERS if p["country"] == country_filter]
-        if not papers:
-            print(f"ERROR: No papers for country '{country_filter}'."); sys.exit(1)
-    repo_root = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
-    loaded = {}
-    for p in papers:
-        path = os.path.join(repo_root, p["html"])
-        if path not in loaded and os.path.exists(path):
-            with open(path, encoding="utf-8") as f:
-                loaded[path] = f.read()
-    results = {"ok":0,"skipped":0,"failed":0}
-    for paper in papers:
-        print(f"\n{chr(45)*56}")
-        print(f"  {paper['country'].upper()} | {paper['name']} ({paper['lean']})")
-        if not paper["rss"]:
-            print("  SKIP  No RSS."); results["skipped"] += 1; continue
-        items = fetch_rss(paper["rss"])
-        if not items:
-            print("  WARN  No RSS items."); results["skipped"] += 1; continue
-        print(f"  {len(items)} items fetched")
-        try:
-            new_stories = call_claude(paper["name"], paper["lean"], paper["country"], items, client)
-            time.sleep(RATE_LIMIT_SLEEP)
-        except Exception as ex:
-            print(f"  ERROR Claude: {ex}"); results["failed"] += 1; continue
-        path = os.path.join(repo_root, paper["html"])
-        if path not in loaded:
-            print(f"  ERROR file not found"); results["failed"] += 1; continue
-        html, ok = patch_stories(loaded[path], paper["name"], new_stories)
-        if ok:
-            loaded[path] = html; print("  OK Patched."); results["ok"] += 1
-        else:
-            print(f"  ERROR anchor not found for {paper['name']}"); results["failed"] += 1
-    for path in loaded:
-        loaded[path] = update_edition_tag(loaded[path], os.path.basename(path))
-    print(f"\n{chr(61)*56}\nWriting files...")
-    for path, content in loaded.items():
-        opens = content.count("<div"); closes = content.count("</div>")
-        if opens != closes:
-            print(f"  WARN DIV MISMATCH {os.path.basename(path)} ({opens} vs {closes}) -- SKIP"); continue
-        if not dry_run:
-            with open(path,"w",encoding="utf-8") as f:
-                f.write(content)
-        print(f"  {'OK' if not dry_run else 'DRY'} {os.path.basename(path)}")
-    print(f"\nDone -- {results['ok']} patched / {results['skipped']} skipped / {results['failed']} failed")
-    if results["failed"] > 0:
-        sys.exit(1)
-
-if __name__ == "__main__":
-    main()
+        print("ERROR: ANTHROPIC_API_KEY not set."
