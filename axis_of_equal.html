@@ -473,7 +473,8 @@
     <div class="aoe-row" data-country="ghana"><div class="aoe-cname">🇬🇭 Ghana</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:36%;top:4px;" data-leader="John Mahama" data-status="gov" data-name="NDC">NDC</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:62%;top:4px;" data-leader="Mahamudu Bawumia" data-status="opp" data-name="NPP">NPP</div></div></div>
     <div class="aoe-row" data-country="zimbabwe"><div class="aoe-cname">🇿🇼 Zimbabwe</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:36%;top:4px;" data-leader="Fragmented (post-Chamisa)" data-status="opp" data-name="CCC">CCC</div><div class="aoe-party" data-lean="centre" style="background:#c0392b;left:50%;top:4px;" data-leader="Emmerson Mnangagwa" data-status="gov" data-name="ZANU-PF">ZANU-PF</div></div></div>
     <div class="aoe-row" data-country="botswana"><div class="aoe-cname">🇧🇼 Botswana</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:40%;top:4px;" data-leader="Duma Boko" data-status="gov" data-name="UDC">UDC</div><div class="aoe-party" data-lean="centre-right" style="background:#e67e22;left:62%;top:4px;" data-leader="Mokgweetsi Masisi" data-status="opp" data-name="BDP">BDP</div></div></div>
-    <div class="aoe-row" data-country="tanzania"><div class="aoe-cname">🇹🇿 Tanzania</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:34%;top:4px;" data-leader="Freeman Mbowe" data-status="opp" data-name="Chadema">Chadema</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:48%;top:4px;" data-leader="Samia Suluhu Hassan" data-status="gov" data-name="CCM">CCM</div></div></div>
+    <div class="aoe-row" data-country="tanzania"><div class="aoe-cname">🇹🇿 Tanzania</div><div class="aoe-track" style="height:30px"><div class="aoe-party" data-lean="centre-left" style="background:#5dade2;left:34%;top:4px;" data-leader="Freeman Mbowe" data-status="opp" data-name="Chadema">Chadema</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:48%;top:4px;" data-leader="Samia Suluhu Hassan" data-status="gov" data-name="CCM">CCM</div></div>
+    <div class="aoe-row" data-country="Belgium"><div class="aoe-cname">🇧🇪 Belgium</div><div class="aoe-track" style="height:52px"><div class="aoe-party" data-lean="left" style="background:#8e44ad;left:12%;top:4px;" data-leader="Raoul Hedebouw" data-status="opp" data-name="PTB/PVDA">PTB</div><div class="aoe-party" data-lean="left" style="background:#2980b9;left:24%;top:26px;" data-leader="Conner Rousseau" data-status="opp" data-name="Vooruit">Vooruit</div><div class="aoe-party" data-lean="left" style="background:#3498db;left:28%;top:4px;" data-leader="Paul Magnette" data-status="opp" data-name="Parti Socialiste">PS</div><div class="aoe-party" data-lean="centre" style="background:#27ae60;left:50%;top:4px;" data-leader="Maxime Prevot" data-status="gov" data-name="Les Engages">Eng.</div><div class="aoe-party" data-lean="right" style="background:#e67e22;left:66%;top:26px;" data-leader="Bart De Wever (PM)" data-status="gov" data-name="N-VA">N-VA</div><div class="aoe-party" data-lean="right" style="background:#f39c12;left:70%;top:4px;" data-leader="Georges-Louis Bouchez" data-status="gov" data-name="MR">MR</div><div class="aoe-party" data-lean="right" style="background:#c0392b;left:78%;top:26px;" data-leader="Tom Van Grieken" data-status="opp" data-name="Vlaams Belang">VB</div></div></div></div>
 
   </div>
 
@@ -510,6 +511,7 @@
       <span class="aoe-oos-tag">🇧🇾 Belarus — authoritarian</span>
       <span class="aoe-oos-tag">🇹🇲 Turkmenistan — one-party</span>
       <span class="aoe-oos-tag">🇪🇷 Eritrea — no elections</span>
+      <span class="aoe-oos-tag">🇪🇬 Egypt — military-backed state</span>
     </div>
   </div>
 
@@ -842,7 +844,8 @@ const PARTY_FISCAL = {
   // Philippines
   'Liberal Party (PH)':46, 'PFP':58, 'HNP':55,
   // New Zealand
-  'NZ Greens':26, 'NZ Labour':40, 'National':66, 'ACT':82,
+  'NZ Greens':26, 'NZ Labour':40, 'National':66, 'ACT':82,,
+  "PTB/PVDA": 1.8, "Vooruit": 3.2, "Parti Socialiste": 3.0, "Les Enages": 5.5, "N-VA": 7.0, "MR": 7.2, "Vlaams Belang": 6.0
 };
 
 const PARTY_SOCIAL = {
@@ -933,7 +936,8 @@ const PARTY_SOCIAL = {
   // Zimbabwe
   'CCC':32, 'ZANU-PF':80,
   // Lebanon
-  'Hezbollah/Amal':78, 'Reform Coalition':34, 'Lebanese Forces':62,
+  'Hezbollah/Amal':78, 'Reform Coalition':34, 'Lebanese Forces':62,,
+  "PTB/PVDA": 2.0, "Vooruit": 3.0, "Parti Socialiste": 2.8, "Les Enages": 5.0, "N-VA": 7.0, "MR": 6.0, "Vlaams Belang": 8.5
 };
 
 function renderCompass() {

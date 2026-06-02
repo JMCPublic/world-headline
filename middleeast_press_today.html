@@ -126,7 +126,7 @@
   <p>Levant · Gulf · North Africa — Left / Centre / Right</p>
 </div>
 <div class="spectrum-bar"></div>
-  <div class="page-edition-notice" id="pageEditionNotice">🗞️ Week of 1 June 2026 · Last refreshed: Mon 1 Jun 2026 · Next update: Mon 8 Jun 2026</div>
+  <div class="page-edition-notice" id="pageEditionNotice">🗞️ Week of 25 May 2026 · Last refreshed: Mon 25 May 2026 · Next update: Mon 1 Jun 2026</div>
 
 
 <nav class="region-nav">
@@ -168,7 +168,7 @@
   <div class="tier1-tabs">
     <button class="tier1-tab active" onclick="showRegion('levant', this)">🕍 Levant</button>
     <button class="tier1-tab" onclick="showRegion('gulf', this)">🌙 Gulf</button>
-    <button class="tier1-tab soon">🏜️ North Africa — Soon</button>
+    <button class="tier1-tab" onclick="showRegion('northafrica', this)">🏜️ North Africa</button>
   </div>
 
   <!-- ══════════════════════════════ LEVANT ══════════════════════════════ -->
@@ -607,6 +607,7 @@
           <div class="cs-opp-leader">Dissidents operate from exile (mainly Europe and US)</div>
         </div>
       </div>
+      <button class="tier2-tab" onclick="showCountry('gulf','iran',this)">🇮🇷 Iran</button>
       <button class="tier2-tab soon">🇦🇪 UAE — Soon</button>
       <button class="tier2-tab soon">🇶🇦 Qatar — Soon</button>
     </div>
@@ -795,7 +796,151 @@
         <div class="blind-item"><div class="blind-item-title">Yemen and the accountability that never came</div><div class="blind-item-desc">Saudi Arabia led a coalition air campaign over Yemen from 2015 that killed hundreds of thousands of people, deliberately bombed civilian infrastructure including hospitals and water systems, and contributed to one of the world's worst humanitarian crises. The Saudi-Iranian deal paused the fighting. But no inquiry, no reckoning, and no honest public examination of what the war was actually for has taken place — in Saudi Arabia, in the West whose arms and intelligence made it possible, or in most international media.</div></div>
       </div></div>
     </div><!-- end #gulf-saudi-arabia -->
+    <div id="gulf-iran" class="country-panel">
+      <div class="country-title">🇮🇷 Iran — Press This Week | مطبوعات این هفته</div>
+      <div class="papers">
+
+        <!-- Kayhan — Hardline / State -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean" style="background:#922b21;color:#fff">◆ Hardline / State</div>
+            <div class="paper-name"><a href="https://kayhan.ir" target="_blank">Kayhan</a></div>
+            <div class="paper-desc">Iran's most ideologically hardline major newspaper. Founded 1943, effectively state-controlled after 1979. Its editor is appointed directly by Supreme Leader Khamenei. Kayhan sets the ceiling of acceptable conservative discourse in the Islamic Republic — anti-Western, anti-Israel, supportive of the resistance axis and IRGC priorities. Not widely read by ordinary Iranians (who consider it regime propaganda) but closely monitored as a signal of hardliner intent.</div>
+          </div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Western sanctions exposed as strategic failure — Iran's economy adapts and endures</div><div class="story-tease">The pressure campaign has not broken the Republic.</div><div class="story-detail">Kayhan runs its recurring framing of Western sanctions as a failed strategy, citing continued oil exports via alternative channels, growing trade with China and Russia, and what it describes as the resilience of the Iranian people. The paper treats economic hardship not as a policy failure but as proof of external hostility and internal strength — a recurring editorial posture that insulates the government from domestic accountability for economic mismanagement.<a class="story-url" href="https://kayhan.ir" target="_blank" onclick="event.stopPropagation()">kayhan.ir</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Resistance axis holds firm — Houthis, Hezbollah regroup after setbacks</div><div class="story-tease">The front hasn't collapsed. Kayhan says it never will.</div><div class="story-detail">Kayhan covers Iran's proxy network through an explicitly ideological lens: the Houthis' continued Red Sea operations, Hezbollah's rebuilding after the 2024 war with Israel, and Iraqi militia activity are framed not as proxies but as organic resistance movements that Iran supports spiritually and materially. The paper is unapologetic about Iran's regional role and dismisses Western characterisations of it as destabilising.<a class="story-url" href="https://kayhan.ir" target="_blank" onclick="event.stopPropagation()">kayhan.ir</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Pezeshkian administration faces hardliner scrutiny over nuclear posture</div><div class="story-tease">Reform rhetoric meets revolutionary reality.</div><div class="story-detail">Kayhan signals scepticism toward President Pezeshkian's more diplomatic approach to nuclear negotiations, reflecting the hardliner camp's view that any engagement with the West risks conceding leverage without durable gain. The paper's editorials consistently position the IRGC and Supreme Leader's office as the true guarantors of national security — not elected governments that come and go.<a class="story-url" href="https://kayhan.ir" target="_blank" onclick="event.stopPropagation()">kayhan.ir</a></div></div>
+          </div>
+          <div class="hobby-horse"><h4>🏇 Kayhan's Hobby Horse</h4><p>Resistance to imperialism, sanctions as badge of honour, US and Israel as permanent enemies of the Islamic Republic.</p></div>
+        </div>
+
+        <!-- Shargh — Reformist / Centre-left -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean" style="background:#2471a3;color:#fff">◆ Reformist / Centre-left</div>
+            <div class="paper-name"><a href="https://www.sharghdaily.com" target="_blank">Shargh</a></div>
+            <div class="paper-desc">Iran's leading reformist daily, founded 2003. Shargh has been suspended multiple times by the judiciary for crossing political red lines — covering protests sympathetically, questioning official narratives, interviewing opposition figures. It exists in the narrow space the Islamic Republic permits for internal dissent: critical of government policy and corruption, but operating within the framework of the system rather than challenging its legitimacy. Its survival is a measure of what the system will tolerate at any given moment.</div>
+          </div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Pezeshkian's first year: real openings or managed expectations?</div><div class="story-tease">Reform voters are watching. The verdict is mixed.</div><div class="story-detail">Shargh assesses President Pezeshkian's first year in office, noting genuine steps toward more moderate rhetoric and some personnel changes toward technocrats. But the paper's analysts observe that structural constraints — Khamenei's veto power, IRGC influence over the economy, and the Guardian Council's filtering of political space — mean that reformist presidents consistently overpromise and underdeliver. The paper doesn't say this is Pezeshkian's fault; it's the system's design.<a class="story-url" href="https://www.sharghdaily.com" target="_blank" onclick="event.stopPropagation()">sharghdaily.com</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Iran's inflation crisis: official figures versus what the bazaar actually costs</div><div class="story-tease">The gap between statistics and lived reality is widening.</div><div class="story-detail">Shargh publishes an economic investigation comparing the Central Bank's official inflation data with price surveys from Tehran's Grand Bazaar and local markets. The paper's findings — that food inflation is running significantly higher than official figures — are reported in measured language, but the implicit message is clear: economic policy is failing ordinary Iranians while the IRGC's parallel economy insulates the regime from the consequences.<a class="story-url" href="https://www.sharghdaily.com" target="_blank" onclick="event.stopPropagation()">sharghdaily.com</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Families of 2022 protesters still waiting for answers — and justice</div><div class="story-tease">The Mahsa Amini uprising is not over for those who lost someone.</div><div class="story-detail">In careful but persistent coverage, Shargh follows the families of those killed or imprisoned during the 2022 "Woman, Life, Freedom" uprising. The paper reports on ongoing legal cases, families denied information about their children's deaths, and the failure of official investigations. This coverage is as close as a licensed Iranian publication can get to accountability journalism on the crackdown — and it runs real risks in doing so.<a class="story-url" href="https://www.sharghdaily.com" target="_blank" onclick="event.stopPropagation()">sharghdaily.com</a></div></div>
+          </div>
+          <div class="hobby-horse"><h4>🏇 Shargh's Hobby Horse</h4><p>Civil liberties within the Islamic Republic framework, political prisoner cases, economic transparency, the gap between reformist promises and structural constraints.</p></div>
+        </div>
+
+        <!-- Iran International — Independent / London-based -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean" style="background:#27ae60;color:#fff">◆ Independent / London-based</div>
+            <div class="paper-name"><a href="https://www.iranintl.com/en" target="_blank">Iran International</a></div>
+            <div class="paper-desc">London-based satellite and digital news outlet covering Iran in Farsi and English. Founded 2017, Iran International operates outside the Islamic Republic and publishes content that would be illegal inside Iran — detailed protest coverage, IRGC accountability reporting, and interviews with dissidents and exiles. The outlet is banned inside Iran and its journalists have been subject to Iranian assassination plots documented by UK intelligence. It is the most-watched independent Iranian news source for Iranians inside the country, accessed via VPN.</div>
+          </div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">IRGC commanders named in new sanctions designations — the accountability gap persists</div><div class="story-tease">The names are known. The assets are moved. The impunity continues.</div><div class="story-detail">Iran International names senior IRGC commanders newly designated under US and EU sanctions, with detailed reporting on their roles in the 2022 crackdown, proxy operations in Yemen and Iraq, and business interests held through front companies. The outlet's capacity to publish such specific accountability journalism — impossible inside Iran — illustrates the two-tier information environment in which Iranians live: official media for the government's version, diaspora and VPN-accessed outlets for everything else.<a class="story-url" href="https://www.iranintl.com/en" target="_blank" onclick="event.stopPropagation()">iranintl.com</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Water crisis accelerating: three provinces face acute shortage this summer</div><div class="story-tease">Iran's existential domestic crisis that the nuclear file has overshadowed for decades.</div><div class="story-detail">Iran International's environment correspondents report on the accelerating water crisis in three central and southeastern provinces, where groundwater depletion has reached critical levels and agricultural communities are abandoning land. Iran has over-extracted 97% of its renewable water resources; the crisis is demographic and civilisational in scale, but receives almost no international coverage relative to the nuclear programme. The Islamic Republic's water management has been catastrophic, a fact domestic media cannot report honestly.<a class="story-url" href="https://www.iranintl.com/en" target="_blank" onclick="event.stopPropagation()">iranintl.com</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Nuclear talks: what Pezeshkian can offer and what the Supreme Leader will never permit</div><div class="story-tease">The space between diplomatic possibility and structural constraint.</div><div class="story-detail">Iran International's diplomatic correspondents map the room available to Iran's new president in nuclear negotiations. Their analysis distinguishes between what Pezeshkian genuinely wants (a deal that lifts sanctions and revives the economy) and what Khamenei's red lines structurally prevent (full transparency, NPT compliance, limitations on enrichment above 60%). The piece concludes that the obstacle to a deal is not diplomatic will on either side but the Supreme Leader's calculation that the IRGC's nuclear leverage matters more than economic relief.<a class="story-url" href="https://www.iranintl.com/en" target="_blank" onclick="event.stopPropagation()">iranintl.com</a></div></div>
+          </div>
+          <div class="hobby-horse"><h4>🏇 Iran International's Hobby Horse</h4><p>IRGC accountability, 2022 protest aftermath, assassination plots against diaspora journalists, Iran's water and environmental crises.</p></div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spot"><h3>🔭 Iran's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The IRGC's economic empire</div><div class="blind-item-desc">The Islamic Revolutionary Guard Corps controls an estimated 40–60% of the Iranian economy through foundations (bonyads), shell companies, and front businesses in construction, telecoms, oil, and import/export. This parallel economy operates outside normal oversight, is not taxed through conventional channels, and insulates the military-political establishment from the consequences of the sanctions crisis that devastates ordinary Iranians. Iranian state media never reports on it honestly; Western coverage focuses on the IRGC's military role and almost never on its domestic economic dominance.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The 2022 uprising's unfinished reckoning</div><div class="blind-item-desc">The "Woman, Life, Freedom" uprising following Mahsa Amini's death in custody in September 2022 was the most serious domestic challenge to the Islamic Republic since 1979. Over 500 people were executed or killed; thousands were imprisoned and tortured. International attention faded within months. The systematic crackdown — ongoing arrests, show trials, families intimidated into silence — continues with almost no sustained foreign coverage. The uprising's core demands — women's rights, political freedom, economic justice — remain entirely unaddressed.</div></div>
+        <div class="blind-item"><div class="blind-item-title">Iran's water and environmental catastrophe</div><div class="blind-item-desc">Iran has overexploited over 90% of its renewable water resources. Dozens of cities face acute seasonal water shortages. Lake Urmia — once the sixth-largest salt lake in the world — has shrunk by 90%. Entire farming regions in the centre and southeast are being abandoned, triggering internal migration to already-overcrowded cities. This is a civilisational crisis unfolding in slow motion, but the nuclear file consumes virtually all Western analytical and journalistic bandwidth on Iran.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The managed elections and the youth disconnect</div><div class="blind-item-desc">Iran holds elections, but the Guardian Council vets all candidates — routinely disqualifying thousands, including all serious reformists and any challenger deemed insufficiently loyal to the Supreme Leader. The result is formally democratic machinery producing substantively unrepresentative governments. Over 60% of Iran's population is under 30; turnout among young Iranians has collapsed as successive election cycles have failed to produce meaningful change. The gap between the Islamic Republic's self-presentation as a democracy and its actual political architecture is almost never explained clearly to international audiences.</div></div>
+      </div></div>
+
+    </div><!-- end #gulf-iran -->
   </div><!-- end #region-gulf -->
+
+  <div id="region-northafrica" class="region-panel">
+    <div class="tier2-tabs">
+      <div class="tab-wrap">
+        <button class="tier2-tab active" onclick="showCountry('northafrica','egypt',this)">🇪🇬 Egypt</button>
+        <div class="country-stats">
+          <div class="cs-name">🇪🇬 Egypt</div>
+          <div class="cs-row"><span class="cs-icon">🏛</span><span>Cairo</span></div>
+          <div class="cs-row"><span class="cs-icon">👥</span><span>105 million</span></div>
+          <div class="cs-row"><span class="cs-icon">🗳</span><span>Managed elections</span></div>
+          <div class="cs-row"><span class="cs-icon">⚖️</span><span>Military-backed presidency</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-govt-label">Government <span class="cs-lean" style="background:#7f8c8d;color:#fff">Sisi/Military</span></div>
+          <div class="cs-govt-detail">President Abdel Fattah el-Sisi — military-backed, in power since 2014</div>
+          <div class="cs-leader">PM: Mostafa Madbouly · Real power: Sisi and the military establishment</div>
+          <div class="cs-divider"></div>
+          <div class="cs-opp-title">Opposition</div>
+          <div class="cs-opp"><span class="cs-lean" style="background:#7f8c8d;color:#fff">Suppressed</span> 60,000+ political prisoners estimated</div>
+          <div class="cs-opp-leader">Independent press operates under severe restrictions; Mada Masr frequently blocked</div>
+        </div>
+      </div>
+      <button class="tier2-tab soon">🇲🇦 Morocco — Soon</button>
+      <button class="tier2-tab soon">🇹🇳 Tunisia — Soon</button>
+    </div>
+
+    <div id="northafrica-egypt" class="country-panel active">
+      <div class="country-title">🇪🇬 Egypt — Press This Week | الصحافة هذا الأسبوع</div>
+      <div class="papers">
+
+        <!-- Al-Ahram — State / Pro-government -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean" style="background:#7f8c8d;color:#fff">◆ State / Pro-government</div>
+            <div class="paper-name"><a href="https://english.ahram.org.eg" target="_blank">Al-Ahram</a></div>
+            <div class="paper-desc">One of the world's oldest continuously published newspapers, founded 1875. Al-Ahram (الأهرام, "The Pyramids") is Egypt's paper of record — state-owned, government-aligned, and editorially subject to presidential authority. It is required reading for understanding the official Egyptian narrative on any given week. What it emphasises, minimises, and omits tells you more about Egyptian power than what it actually says. Publishes in Arabic (main) and English (Al-Ahram Weekly/Online).</div>
+          </div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Sisi meets Gulf leaders — Egypt's strategic positioning as regional stabiliser</div><div class="story-tease">Cairo as the indispensable address in a turbulent neighbourhood.</div><div class="story-detail">Al-Ahram covers President Sisi's regional diplomacy extensively, framing Egypt's role as the essential Arab moderate — mediating in Gaza, stabilising the Libyan borderlands, and maintaining a cold peace with Israel that no other Arab state could sustain under current pressures. The paper's coverage of regional summits emphasises Egypt's leadership rather than its leverage-seeking; the gap between Egypt's influence and its economic dependence on Gulf states is not examined.<a class="story-url" href="https://english.ahram.org.eg" target="_blank" onclick="event.stopPropagation()">english.ahram.org.eg</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">IMF reforms on track — Egypt's economic transformation gains international recognition</div><div class="story-tease">The official line: restructuring is working.</div><div class="story-detail">Al-Ahram covers Egypt's IMF programme through the lens of official success — currency stabilisation, rising foreign reserves, and renewed investor confidence. The paper does not examine what structural adjustment has meant for ordinary Egyptians: food subsidies cut, utility prices tripled, and inflation that eroded 40% of real wages in two years. The human cost of the IMF deal is present in the country's streets; it is absent from Al-Ahram's economic coverage.<a class="story-url" href="https://english.ahram.org.eg" target="_blank" onclick="event.stopPropagation()">english.ahram.org.eg</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">Grand Egyptian Museum opens new galleries — cultural soft power as national project</div><div class="story-tease">Ancient glory for a government that prefers history to the present tense.</div><div class="story-detail">Al-Ahram devotes prominent coverage to the Grand Egyptian Museum, Egypt's flagship cultural infrastructure project near the Giza pyramids. The paper frames heritage investment as evidence of civilisational continuity and state capability. The GEM is genuinely impressive and significant; Al-Ahram's coverage of it is also functionally useful as a displacement of attention from political economy stories it cannot report.<a class="story-url" href="https://english.ahram.org.eg" target="_blank" onclick="event.stopPropagation()">english.ahram.org.eg</a></div></div>
+          </div>
+          <div class="hobby-horse"><h4>🏇 Al-Ahram's Hobby Horse</h4><p>Egypt as indispensable regional stabiliser, Sisi's diplomatic achievements, ancient heritage as national identity anchor, economic reform as progress story.</p></div>
+        </div>
+
+        <!-- Egypt Independent — Independent / Centre -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean" style="background:#2471a3;color:#fff">◆ Independent / Centre</div>
+            <div class="paper-name"><a href="https://egyptindependent.com" target="_blank">Egypt Independent</a></div>
+            <div class="paper-desc">English-language digital outlet, arm of the Al-Masry Al-Youm group — Egypt's largest independent Arabic newspaper. Egypt Independent occupies a careful middle ground: more willing than state media to report on economic hardship, social tensions, and legal cases involving activists, but operating within the constraints of Egyptian press law, which makes critical reporting of the military or president a serious legal risk. Its English-language operation gives it marginally more latitude than its Arabic parent.</div>
+          </div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">Egyptian pound stabilises — but households say prices tell a different story</div><div class="story-tease">The macro indicators are improving. The micro reality is not.</div><div class="story-detail">Egypt Independent covers the gap between Egypt's improving macroeconomic headline numbers and the lived experience of middle-class and working-class Egyptians. Currency stabilisation has been real; the IMF has released tranches; Gulf money has flowed in. But consumer prices remain 2.5x what they were in 2021, wage growth has not kept pace, and the informal economy — Egypt's actual economic shock absorber — is under severe strain. This is reporting Al-Ahram will not do.<a class="story-url" href="https://egyptindependent.com" target="_blank" onclick="event.stopPropagation()">egyptindependent.com</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Gaza's Rafah crossing: Egypt's impossible position between Israel, Hamas, and the international community</div><div class="story-tease">Cairo controls the gate. Nobody agrees who should walk through it.</div><div class="story-detail">Egypt Independent covers Egypt's management of the Rafah crossing with nuance that state media cannot. The paper reports on the tensions between Egypt's ceasefire mediation role, its security concerns about Gaza's armed groups, international pressure to allow more humanitarian access, and its bilateral relationship with Israel — which has required Egypt to cooperate with the very siege it publicly condemns. Egypt's position is structurally impossible; Egypt Independent is one of the few Egyptian outlets willing to describe the contradiction.<a class="story-url" href="https://egyptindependent.com" target="_blank" onclick="event.stopPropagation()">egyptindependent.com</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">GERD talks resume — Ethiopia's dam fills again as Egypt's red lines remain unenforceable</div><div class="story-tease">A civilisational threat that diplomacy has not resolved and military options cannot solve.</div><div class="story-detail">Egypt Independent covers the latest round of GERD negotiations between Egypt, Sudan, and Ethiopia over the Grand Ethiopian Renaissance Dam. The paper notes that the dam has been filling for years regardless of Egyptian objections, that international mediation has produced no binding agreement, and that Egypt's leverage — economic and military — is less than its rhetoric suggests. For a country of 105 million people dependent on a single river, the stakes could not be higher, and the diplomatic record could not be more sobering.<a class="story-url" href="https://egyptindependent.com" target="_blank" onclick="event.stopPropagation()">egyptindependent.com</a></div></div>
+          </div>
+          <div class="hobby-horse"><h4>🏇 Egypt Independent's Hobby Horse</h4><p>GERD water security, the gap between official economic data and household reality, Egypt's Gaza mediation role and its contradictions.</p></div>
+        </div>
+
+        <!-- Mada Masr — Independent / Critical -->
+        <div class="paper">
+          <div class="paper-header">
+            <div class="lean" style="background:#8e44ad;color:#fff">◆ Independent / Critical</div>
+            <div class="paper-name"><a href="https://www.madamasr.com/en" target="_blank">Mada Masr</a></div>
+            <div class="paper-desc">Egypt's most important independent investigative outlet, founded 2013. Mada Masr publishes the journalism that no licensed Egyptian outlet will touch: political prisoner cases, security force abuses, military business interests, corruption in state institutions. Its website is blocked inside Egypt; its journalists work under constant legal pressure. Several have been detained. It is accessed inside Egypt via VPN and read internationally by anyone who needs to understand the Egypt that official sources will not describe. Its continued existence is itself a form of resistance.</div>
+          </div>
+          <div class="stories">
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Lead</div><div class="story-headline">60,000 political prisoners: the human cost of Egypt's security state</div><div class="story-tease">The number the government doesn't publish. The reality Egyptian media cannot report.</div><div class="story-detail">Mada Masr publishes its latest documentation of Egypt's political detention crisis — an estimated 60,000 people held on political grounds, including journalists, academics, lawyers, and activists. The paper provides individual case documentation, details conditions in facilities like Badr Prison, and tracks the legal mechanisms — emergency law, counter-terrorism statutes, contempt of court charges — used to hold critics indefinitely. This is the most important journalism being produced about Egypt and it is only accessible to Egyptians via VPN.<a class="story-url" href="https://www.madamasr.com/en" target="_blank" onclick="event.stopPropagation()">madamasr.com</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Second</div><div class="story-headline">Military-owned companies hold 40% of Egypt's new urban construction — and pay no tax</div><div class="story-tease">The Egyptian Armed Forces are also Egypt's largest property developer.</div><div class="story-detail">Mada Masr investigates the military's expanding role in Egypt's domestic economy — the largest single actor in new urban construction, operating through entities like the Arab Organisation for Industrialisation and the National Service Projects Organisation. Military-affiliated companies win contracts without competitive tendering and operate outside civilian tax and regulatory frameworks. This parallel economy, which Sisi has expanded dramatically since 2014, is never reported by any licensed Egyptian outlet.<a class="story-url" href="https://www.madamasr.com/en" target="_blank" onclick="event.stopPropagation()">madamasr.com</a></div></div>
+            <div class="story" onclick="toggleStory(this)"><div class="story-rank">Third</div><div class="story-headline">The Sinai insurgency that Egypt's media pretends does not exist</div><div class="story-tease">A decade of counterinsurgency. No independent coverage permitted.</div><div class="story-detail">Mada Masr documents what it can of Egypt's ongoing counterinsurgency in North Sinai against IS-affiliate Wilayat Sinai. Thousands of civilians have been displaced; whole villages razed as part of military buffer-zone creation; documented extrajudicial killings. Egyptian media is strictly prohibited from reporting on Sinai military operations independently; the military's communiqués — which claim consistent success — are the only domestic source. The Sinai story is one of the most significant suppressed conflicts in the Arab world.<a class="story-url" href="https://www.madamasr.com/en" target="_blank" onclick="event.stopPropagation()">madamasr.com</a></div></div>
+          </div>
+          <div class="hobby-horse"><h4>🏇 Mada Masr's Hobby Horse</h4><p>Political prisoners by name and case, military economic interests, Sinai conflict, press freedom, the gap between Egypt's international image and its domestic reality.</p></div>
+        </div>
+
+      </div><!-- end .papers -->
+
+      <div class="blind-spot"><h3>🔭 Egypt's Blind Spots</h3><div class="blind-items">
+        <div class="blind-item"><div class="blind-item-title">The GERD water crisis — existential, unresolved</div><div class="blind-item-desc">Ethiopia's Grand Ethiopian Renaissance Dam on the Blue Nile threatens Egypt's water share from the river on which 105 million Egyptians depend for 97% of their fresh water. The dam has been filling for years. International mediation has produced no binding agreement. Egypt cannot afford war with Ethiopia and cannot afford to lose the water. This is a civilisational-scale crisis that Egyptian state media covers only through the lens of diplomatic optimism, and international media covers only episodically as a geopolitical story rather than a human one.</div></div>
+        <div class="blind-item"><div class="blind-item-title">60,000 political prisoners</div><div class="blind-item-desc">Egypt holds an estimated 60,000 political prisoners — journalists, academics, lawyers, activists, former politicians from across the spectrum including liberals, Islamists, and leftists. Conditions in facilities like Badr Prison involve prolonged solitary confinement, denial of medical care, and documented torture. This is the largest political detention crisis in the Arab world. It is systematically ignored by Egyptian state media, underreported by international outlets, and largely absent from Western governments' public diplomacy with Cairo.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The military's domestic economic empire</div><div class="blind-item-desc">The Egyptian Armed Forces have become the country's largest single economic actor — dominant in construction, hospitality, fuel, food processing, and new urban development. Military-affiliated companies operate outside civilian tax law and competitive tendering. Sisi has expanded this dramatically since 2014. The result is a state-within-a-state that crowds out private investment, distorts the economy, and cannot be reported honestly by any licensed outlet inside Egypt. The IMF's structural adjustment programme largely avoids confronting it.</div></div>
+        <div class="blind-item"><div class="blind-item-title">The Sinai insurgency</div><div class="blind-item-desc">Egypt has fought an ongoing counterinsurgency in North Sinai against Wilayat Sinai (Islamic State affiliate) since 2013. Thousands of civilians have been displaced; documented human rights violations include extrajudicial killings and village demolitions. Egyptian media is banned from reporting independently; all coverage is through military communiqués. The conflict kills soldiers and civilians regularly and has transformed North Sinai into one of the most restricted regions in the world — yet receives a fraction of the international attention given to conflicts of comparable scale elsewhere.</div></div>
+      </div></div>
+
+    </div><!-- end #northafrica-egypt -->
+  </div><!-- end #region-northafrica -->
 
 </div><!-- end .dashboard -->
 

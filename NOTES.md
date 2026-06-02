@@ -291,11 +291,23 @@ Poles Apart: Consensus Moments, Divergence Tracker, Cross-border Influence, When
 
 ---
 
+### Session 11 — 2 Jun 2026
+**Theme: Automation fixed, 3 new countries (Egypt, Iran, Belgium), 5 added to refresh script**
+
+- **Automation diagnosed and fixed**: Two bugs stopped Weekly Story Refresh on May 25 + Jun 1. (1) UK HTML still said "The Sunday Times" — script looked for "The Times". Fixed paper-name div + updated meta/lean/stories. (2) Austria's stories container used `class="stories-list"` — script looks for `class="stories"`. Fixed with global replace in europe_press_today.html. Anchor audit: 80→94→101/101 papers findable.
+- **5 missing countries added to refresh script**: Botswana, Tanzania, Lebanon, Zimbabwe, Saudi Arabia now in PAPERS list (15 new entries). Tanzania naming collision fixed: "The Citizen" → "The Citizen Tanzania" in both HTML and script.
+- **Egypt added** — full 10-step checklist. North Africa tab activated in middleeast_press_today.html. Papers: Al-Ahram (State/Pro-government), Egypt Independent (Independent/Centre), Mada Masr (Independent/Critical). Egypt → AoE OOS panel. Resources + Water Cooler updated.
+- **Iran added** — full 10-step checklist. Added to Gulf tab in middleeast_press_today.html. Papers: Kayhan (Hardline/State), Shargh (Reformist), Iran International (Independent/London). Iran already in AoE OOS panel. Resources + Water Cooler updated.
+- **Belgium added** — full 10-step checklist. "Coming Soon" placeholder replaced in europe_press_today.html. Papers: De Morgen (Left/Flemish), Le Soir (Centre-left/French), Het Laatste Nieuws (Right/Flemish). AoE row added with 7 parties (PTB, Vooruit, PS, Les Engagés, N-VA, MR, Vlaams Belang). Resources + Water Cooler updated.
+- **Counts**: Resources now 144 sources / 48 countries. Refresh script covers 101 papers.
+- **Auto-edition JS**: Added to all 6 press pages — displays correct week automatically from browser clock, never stale.
+
+---
+
 ## ⏭️ Next Session
 
-1. **Upload to GitHub** — all 6 press pages + NOTES.md
-2. **Add Botswana, Tanzania, Lebanon, Zimbabwe, Saudi Arabia to `scripts/refresh_stories.py`** — these 5 countries are missing from weekly automation and won't update on Mondays
-3. **Next countries**: Egypt, Iran (press pages + full checklist; both harder — Egypt Arabic-primary, Iran Persian/restricted)
-4. **What the Markets Think Phase 1** — implement currency panel using fawazahmed0 API (already fully scoped, ready to build)
-5. **Poles Apart** — expand country coverage beyond current ~15 countries
-6. **Comments (#94)** — design the shared discussion page (parked but not forgotten)
+1. **Upload to GitHub** — all changed files (list below)
+2. **What the Markets Think Phase 1** — implement currency panel using fawazahmed0 API (fully scoped, ready to build)
+3. **Poles Apart** — expand country coverage beyond current ~15 countries
+4. **Comments (#94)** — design the shared discussion page (parked but not forgotten)
+5. **Belgium** — note: AoE PARTY_FISCAL/SOCIAL compass data uses placeholder party names ("Les Enages" typo) — fix when building compass data properly
