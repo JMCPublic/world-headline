@@ -306,8 +306,9 @@ Poles Apart: Consensus Moments, Divergence Tracker, Cross-border Influence, When
 
 ## ⏭️ Next Session
 
-1. **Upload to GitHub** — all changed files (list below)
-2. **What the Markets Think Phase 1** — implement currency panel using fawazahmed0 API (fully scoped, ready to build)
-3. **Poles Apart** — expand country coverage beyond current ~15 countries
-4. **Comments (#94)** — design the shared discussion page (parked but not forgotten)
-5. **Belgium** — note: AoE PARTY_FISCAL/SOCIAL compass data uses placeholder party names ("Les Enages" typo) — fix when building compass data properly
+1. **Homepage LIVE/SOON badges** — index.html needs updating. Countries now live but still showing SOON: Lebanon, Saudi Arabia, Egypt, Iran, Philippines, Taiwan, Belgium. Do a full audit of all homepage country entries vs what press pages actually exist.
+2. **Axis of Equal consistency audit** — Belgium row was added but needs checking on the live site. Also audit all AoE region groupings (ASIA-PACIFIC, MIDDLE EAST, SOUTH ASIA, SOUTH AMERICA etc.) for completeness and consistency — any countries showing on the chart that are missing from region labels or vice versa.
+3. **What the Markets Think Phase 1** — implement currency panel using fawazahmed0 API (fully scoped, ready to build)
+4. **Poles Apart** — expand country coverage beyond current ~15 countries
+5. **Comments (#94)** — design the shared discussion page (parked but not forgotten)
+6. **Belgium AoE compass data** — PARTY_FISCAL/SOCIAL has typo "Les Enages" → fix to "Les Engagés"
