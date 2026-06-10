@@ -394,4 +394,120 @@ def update_edition_tag(html, html_file):
 def main():
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
-        print("ERROR: ANTHROPIC_API_KEY not set."
+        print("ERROR: ANTHROPIC_API_KEY not set.")
+        sys.exit(1)
+
+    client        = anthropic.Anthropic(api_key=api_key)
+    country_filter = os.environ.get("COUNTRY_FILTER", "").lower().strip()
+    dry_run        = os.environ.get("DRY_RUN", "").strip() == "1"
+
+    if dry_run:
+        print("DRY RUN — files will not be written.")
+
+    # ── Load all HTML files into memory ───────────────────────────────────────
+    html_cache = {}
+    for p in PAPERS:
+        f = p["html"]
+        if f not in html_cache:
+            if not os.path.exists(f):
+                print(f"WARNING: HTML file not found: {f}")
+                html_cache[f] = None
+                continue
+            with open(f, encoding="utf-8") as fh:
+                html_cache[f] = fh.read()
+
+    results = {"ok": 0, "failed": 0, "skipped": 0}
+    failed_papers = []
+
+    # ── Process each paper ────────────────────────────────────────────────────
+    for p in PAPERS:
+        country = p["country"]
+        name    = p["name"]
+        lean    = p["lean"]
+        rss     = p.get("rss", "")
+        html_file = p["html"]
+
+        if country_filter and country != country_filter:
+            continue
+
+        if not rss:
+            results["skipped"] += 1
+            print(f"  SKIP  {name} (no RSS)")
+            continue
+
+        content = html_cache.get(html_file)
+        if content is None:
+            print(f"  FAIL  {name} — HTML file missing: {html_file}")
+            results["failed"] += 1
+            failed_papers.append(name)
+            continue
+
+        # Check anchor exists before fetching RSS
+        start, end = find_stories_block(content, name)
+        if start is None:
+            print(f"  FAIL  {name} — anchor not found in {html_file}")
+            results["failed"] += 1
+            failed_papers.append(name)
+            continue
+
+        print(f"  ...   {name} — fetching RSS")
+        items = fetch_rss(rss)
+        if not items:
+            print(f"  FAIL  {name} — no RSS items retrieved")
+            results["failed"] += 1
+            failed_papers.append(name)
+            continue
+
+        print(f"  ...   {name} — calling Claude ({len(items)} items)")
+        try:
+            new_stories = call_claude(name, lean, country, items, client)
+        except Exception as ex:
+            print(f"  FAIL  {name} — Claude error: {ex}")
+            results["failed"] += 1
+            failed_papers.append(name)
+            continue
+
+        patched, ok = patch_stories(content, name, new_stories)
+        if not ok:
+            print(f"  FAIL  {name} — patch_stories returned False")
+            results["failed"] += 1
+            failed_papers.append(name)
+            continue
+
+        html_cache[html_file] = patched
+        results["ok"] += 1
+        print(f"  OK    {name}")
+        time.sleep(RATE_LIMIT_SLEEP)
+
+    # ── Update edition tags in all loaded files ────────────────────────────────
+    for f in list(html_cache.keys()):
+        if html_cache[f] is not None:
+            html_cache[f] = update_edition_tag(html_cache[f], f)
+
+    # ── DIV balance check + write files ───────────────────────────────────────
+    if not dry_run:
+        for f, content in html_cache.items():
+            if content is None:
+                continue
+            opens  = content.count('<div')
+            closes = content.count('</div>')
+            if opens != closes:
+                print(f"  WARN  {f} — DIV mismatch ({opens} open vs {closes} close) — NOT writing")
+                continue
+            with open(f, "w", encoding="utf-8") as fh:
+                fh.write(content)
+            print(f"  WROTE {f}")
+
+    # ── Summary ───────────────────────────────────────────────────────────────
+    print(f"\n{'='*50}")
+    print(f"Results: {results['ok']} OK  |  {results['failed']} FAILED  |  {results['skipped']} SKIPPED (no RSS)")
+    if failed_papers:
+        print(f"Failed papers: {', '.join(failed_papers)}")
+    print(f"{'='*50}")
+
+    if results["failed"] > 0:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
