@@ -2,19 +2,25 @@ name: Weekly Story Refresh
 
 on:
   schedule:
+    # Every Monday at 06:00 UTC
     - cron: '0 6 * * 1'
   workflow_dispatch:
+    # Also allow manual trigger from GitHub Actions tab
     inputs:
       country:
-        description: 'Country slug to refresh (leave blank for all)'
+        description: 'Limit refresh to one country slug (e.g. "uk", "france") — leave blank for all'
         required: false
         default: ''
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to commit updated HTML back to repo
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -22,18 +28,28 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install anthropic feedparser
+        run: |
+          pip install anthropic feedparser requests beautifulsoup4 lxml
 
-      - name: Run refresh script
+      - name: Run story refresh
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          COUNTRY_FILTER: ${{ inputs.country }}
+          COUNTRY_FILTER: ${{ github.event.inputs.country }}
         run: python scripts/refresh_stories.py
 
-      - name: Commit changes
+      - name: Validate site integrity
+        run: python scripts/validate_site.py
+
+      - name: Commit updated files
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "World Headline Bot"
+          git config user.email "bot@world-headline.pages"
           git add -A
-          git diff --cached --quiet || git commit -m "Weekly story refresh $(date +'%Y-%m-%d')"
-          git push
+          # Only commit if there are actual changes
+          git diff --staged --quiet || git commit -m "🗞️ Weekly story refresh — $(date -u '+%d %b %Y')"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
